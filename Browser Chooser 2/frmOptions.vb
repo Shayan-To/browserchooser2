@@ -596,11 +596,25 @@
         Dim lResult As Boolean = False
         Dim lAPIResult As Boolean = WinAPIs.SystemParametersInfo(WinAPIs.SPI_GETSCREENREADER, 0, lResult, 0)
         Dim lMessage As String
+        Dim lSubMessage As String = ""
 
         lMessage = "Result of WinAPIs.SystemParametersInfo(SPI_GETSCREENREADER): " + lAPIResult.ToString + vbCrLf
         lMessage = lMessage + "SPI_GETSCREENREADER: " + lResult.ToString + vbCrLf
         lMessage = lMessage + "AERO Status: " + Utility.IsAeroEnabled.ToString + vbCrLf
-        lMessage = lMessage + "IsAdmin: " + Utility.IsAdminMode.ToString
+        lMessage = lMessage + "IsAdmin: " + Utility.IsAdminMode.ToString + vbCrLf
+        lMessage = lMessage + StrDup(50, "-") + vbCrLf
+        lMessage = lMessage + "URL: " + StartupLauncher.URL + vbCrLf
+        For Each lSup As Guid In StartupLauncher.SupportingBrowsers
+            'find this browser in the list
+            For Each lBRowser As Browser In gSettings.Browsers
+                If lBRowser.GUID = lSup Then
+                    lSubMessage = lSubMessage + ", " + lBRowser.Name
+                End If
+            Next
+        Next
+
+        lMessage = lMessage + "Supporting Browsers: " + lSubMessage + vbCrLf
+
 
         MessageBox.Show(lMessage, "Diagnotic message", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
