@@ -71,7 +71,7 @@ Public Class StartupLauncher
             Next
         ElseIf aParts.isProtocol = TriState.False Then 'is extention            
             For Each lFileType In gSettings.FileTypes
-                If lFileType.Extention = aParts.Extention Then
+                If lFileType.Extention.ToLower() = aParts.Extention.ToLower() Then
                     For Each lBrowser As Browser In gSettings.Browsers
                         If lFileType.SupportingBrowsers.Contains(lBrowser.GUID) Then
                             mSupportingBrowsers.Add(lBrowser.GUID)

@@ -197,11 +197,13 @@ Public Class DefaultBrowser
         CreateAssociations(Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\", True))
     End Sub
 
-    Public Shared Sub MakeDefault(ByVal aScope As DefaultBrowser.Scope, Optional ByVal aForce8 As Boolean = False, Optional ByVal aShowMessage As Boolean = True)
+    Public Shared Sub MakeDefault(ByVal aScope As DefaultBrowser.Scope, Optional ByVal aForce8 As Boolean = False, Optional ByVal aShowMessage As Boolean = True, Optional aDoSingle As String = "", Optional abIsProtocol As Boolean = False)
         If Utility.IsRunningPost8 = False And aForce8 = False Then
             'upto windows 7 - default programs / SPAD
             Dim lMaster As RegistryKey
-
+            If aDoSingle <> "" Then
+                Debug.Print("FIXME: Add DoSingle for Windows 7 and older")
+            End If
             If aScope = DefaultBrowser.Scope.sGlobal Then
                 lMaster = Registry.LocalMachine
             Else
@@ -231,34 +233,40 @@ Public Class DefaultBrowser
             'SHChangeNotify(SHChangeNotifyEventID.SHCNE_ASSOCCHANGED, SHChangeNotifyFlags.SHCNF_DWORD Or SHChangeNotifyFlags.SHCNF_FLUSH, Nothing, Nothing)
         Else
             'cause the open with dialog to open, if canceled go to advanced dialog
-            'NOTE THAT THIS SECTION IS NOT WINDOWS XP SAFE, you should never come here on windows XP, but still.
-            'NOTE 2: Scope is irrelevent on Windows 8 - it is all user.
-            'Dim lOpenAsInfo As New WinAPIs.OPENASINFO
-            'lOpenAsInfo.cszFile = "HTTP" 'testing
-            'lOpenAsInfo.cszClass = ""
-            'lOpenAsInfo.OPEN_AS_INFO_FLAGS = WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_URL_PROTOCOL Or WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_FORCE_REGISTRATION Or WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_REGISTER_EXT
-            'Dim lResult As Integer = WinAPIs.SHOpenWithDialog(IntPtr.Zero, lOpenAsInfo)
-
-            'If lResult = WinAPIs.ERROR_CANCELLED Then
-            'show the dialog
-            If aShowMessage = True Then
-                If MessageBox.Show("In order to become the default for any system component, you must use Windows' Set Programs Association screen. In that screen, click on 'Select All' and then Save. Do you want to open this screen?", "Windows 8+ Instructions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-                    Exit Sub
+            If aDoSingle <> "" Then
+                'NOTE THAT THIS SECTION IS NOT WINDOWS XP SAFE, you should never come here on windows XP, but still.
+                'NOTE 2: Scope is irrelevent on Windows 8 - it is all user.
+                Dim lOpenAsInfo As New WinAPIs.OPENASINFO
+                lOpenAsInfo.cszFile = aDoSingle.ToUpper() 'testing
+                lOpenAsInfo.cszClass = ""
+                If abIsProtocol = True Then
+                    lOpenAsInfo.OPEN_AS_INFO_FLAGS = WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_URL_PROTOCOL Or WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_FORCE_REGISTRATION Or WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_REGISTER_EXT
+                Else
+                    lOpenAsInfo.OPEN_AS_INFO_FLAGS = WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_FORCE_REGISTRATION Or WinAPIs.OPEN_AS_INFO_FLAGS.OAIF_REGISTER_EXT
                 End If
+                Dim lResult As Integer = WinAPIs.SHOpenWithDialog(IntPtr.Zero, lOpenAsInfo)
+            Else
+                'If lResult = WinAPIs.ERROR_CANCELLED Then
+                'show the dialog
+                If aShowMessage = True Then
+                    If MessageBox.Show("In order to become the default for any system component, you must use Windows' Set Programs Association screen. In that screen, click on 'Select All' and then Save. Do you want to open this screen?", "Windows 8+ Instructions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                        Exit Sub
+                    End If
+                End If
+
+                frmOptions.TopMost = False
+                Dim aa = New WinAPIExtras.ApplicationAssociationRegistrationUI
+                Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistrationUI)
+                iaa.LaunchAdvancedAssociationUI(mAppName)
             End If
+                'Else
+                '    Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
+                '    SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
 
-            frmOptions.TopMost = False
-            Dim aa = New WinAPIExtras.ApplicationAssociationRegistrationUI
-            Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistrationUI)
-            iaa.LaunchAdvancedAssociationUI(mAppName)
-            'Else
-            '    Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
-            '    SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
-
-            '    'try user scope
-            '    'DoUserScope(Registry.CurrentUser)
-            'End If
-        End If
+                '    'try user scope
+                '    'DoUserScope(Registry.CurrentUser)
+                'End If
+            End If
     End Sub
 
     Public Shared Sub CheckIfIsDefault()

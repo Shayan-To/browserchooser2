@@ -10,13 +10,14 @@
     Private mLastProtocolID As Integer
     Private mLastFileTypeID As Integer
     Private mA11YSettings As frmAccessibilitySettings.A11YSettings
+    Private mbDirty As Boolean = False
 
 #Region "Bottom Control Buttons"
     Private Sub cmdHelp_Click(sender As System.Object, e As System.EventArgs) Handles cmdHelp.Click
         Try
-            Process.Start("https://browserchooser2.codeplex.com/documentation")
+            Process.Start("https://bitbucket.org/gmyx/browserchooser2/wiki/Home")
         Catch ex As Exception
-            MsgBox("Help file not found!" & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+            MsgBox("Help page cannot be reached!" & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
 
@@ -115,6 +116,9 @@
             'also save updated protocols and filetypes
             mProtocols = lNewBrowser.Protocols
             mFileTypes = lNewBrowser.FileTypes
+
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
         End If
     End Sub
 
@@ -123,6 +127,9 @@
             If MessageBox.Show("Are you sure you want delete the " + lstBrowsers.SelectedItems(0).Text + " entry?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                 mBrowser.Remove(CInt(lstBrowsers.SelectedItems(0).Tag))
                 lstBrowsers.Items.Remove(lstBrowsers.SelectedItems(0))
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -141,6 +148,9 @@
                 'also save updated protocols and filetypes
                 mProtocols = lNewBrowser.Protocols
                 mFileTypes = lNewBrowser.FileTypes
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -191,12 +201,14 @@
 
     Private Sub frmOptions_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If e.CloseReason = CloseReason.UserClosing Then
-            Dim lResult As DialogResult = MessageBox.Show("Do you want to save your settings?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            If mbDirty = True Then
+                Dim lResult As DialogResult = MessageBox.Show("Do you want to save your settings?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-            If lResult = Windows.Forms.DialogResult.Yes Then
-                DoSave()
-            ElseIf lResult = Windows.Forms.DialogResult.Cancel Then
-                e.Cancel = True
+                If lResult = Windows.Forms.DialogResult.Yes Then
+                    DoSave()
+                ElseIf lResult = Windows.Forms.DialogResult.Cancel Then
+                    e.Cancel = True
+                End If
             End If
         End If
     End Sub
@@ -228,7 +240,14 @@
             chkCheckDefaultOnLaunch.Enabled = False
             chkCheckDefaultOnLaunch.Checked = False
             cmdMakeDefault.Enabled = False
+
+            'also remove the single file associations - win10 disabled that too
+            cmdOpenDefaultForFile.Visible = False
+            cmdOpenDefaultForProtocol.Visible = False
         End If
+
+        'indicate that the screen is NOT dirty and DOES NOT need to be saved
+        mbDirty = False
     End Sub
 
     Private Sub frmOptions_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
@@ -307,6 +326,9 @@
         If chkAdvanced.Checked = False Then
             HideAdvancedPages()
         End If
+
+        'indicate that the screen is NOT dirty and DOES NOT need to be saved
+        mbDirty = False
     End Sub
 #End Region
 
@@ -322,6 +344,9 @@
             llsiItem.SubItems.Add(lNewURL.Browser.Name)
             llsiItem.Tag = mLastURLID + 1
             mLastURLID += 1
+
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
         End If
     End Sub
 
@@ -335,6 +360,9 @@
                 mURLs(CInt(lstURLs.SelectedItems(0).Tag)) = lNewURL
                 lstURLs.SelectedItems(0).Text = lNewURL.URL
                 lstURLs.SelectedItems(0).SubItems(1).Text = lNewURL.Browser.Name
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -344,6 +372,9 @@
             If MessageBox.Show("Are you sure you want delete the " + lstURLs.SelectedItems(0).Text + " entry?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
                 mURLs.Remove(CInt(lstURLs.SelectedItems(0).Tag))
                 lstURLs.Items.Remove(lstURLs.SelectedItems(0))
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -363,6 +394,9 @@
             mLastProtocolID += 1
 
             mProtocolsAreDirty = True
+
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
         End If
     End Sub
 
@@ -378,6 +412,9 @@
                 lstProtocols.SelectedItems(0).SubItems(1).Text = lProtocol.Header
 
                 mProtocolsAreDirty = True
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -389,6 +426,9 @@
                 lstProtocols.Items.Remove(lstProtocols.SelectedItems(0))
 
                 mProtocolsAreDirty = True
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -408,6 +448,9 @@
             mLastFileTypeID += 1
 
             mFileTypesAreDirty = True
+
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
         End If
     End Sub
 
@@ -423,6 +466,9 @@
                 lstFiletypes.SelectedItems(0).SubItems(1).Text = lFileType.Extention
 
                 mFileTypesAreDirty = True
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -434,6 +480,9 @@
                 lstFiletypes.Items.Remove(lstFiletypes.SelectedItems(0))
 
                 mFileTypesAreDirty = True
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -469,9 +518,18 @@
 
     Private Sub MakeDefault()
         If rbScopeUser.Checked = True Then
-            DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser, aShowMessage:=False)
+            DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser)
         Else
             Utility.LaunchAdminMode(Utility.ListOfCommands.MakeDefault)
+        End If
+    End Sub
+
+    Private Sub MakeDefaultSingle(aItem As String, abIsProtocol As Boolean)
+        If rbScopeUser.Checked = True Then
+            DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser, aDoSingle:=aItem, abIsProtocol:=abIsProtocol)
+        Else
+            Debug.Print("FIXME: Admin does not yet support default single")
+            Utility.LaunchAdminMode(Utility.ListOfCommands.MakeDefault) 'admin does not yet support this branch
         End If
     End Sub
 
@@ -516,6 +574,9 @@
             If lCategories.Contains(lBrowser.Value.Category) = False Then
                 lCategories.Add(lBrowser.Value.Category)
                 lstCategories.Items.Add(lBrowser.Value.Category)
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         Next
     End Sub
@@ -602,6 +663,9 @@
             Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name)
             llsiItem.Tag = mBrowser.Count - 1
         Next
+
+        'indicate that the screen is dirty and needs to be saved
+        mbDirty = True
     End Sub
 
     Private Sub SwapURLS(ByVal aFirst As Integer, ByVal aSecond As Integer)
@@ -627,6 +691,9 @@
 
                 'repeat for the internal list of urls
                 SwapURLS(lTag, lOtherTag)
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -645,6 +712,9 @@
 
                 'repeat for the internal list of urls
                 SwapURLS(lTag, lOtherTag)
+
+                'indicate that the screen is dirty and needs to be saved
+                mbDirty = True
             End If
         End If
     End Sub
@@ -652,6 +722,24 @@
     Private Sub cmdAccessiblitySettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAccessiblitySettings.Click
         If frmAccessibilitySettings.ShowSettings(mA11YSettings) = True Then
             mA11YSettings = frmAccessibilitySettings.GetSettings
+
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
+        End If
+    End Sub
+
+    Public Sub DetectDirty(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
+        chkShowURLs.CheckedChanged, chkAutoCheckUpdate.CheckedChanged, chkPortableMode.CheckedChanged, chkRevealShortURLs.CheckedChanged, chkAdvanced.CheckedChanged, _
+        nudDelayBeforeAutoload.ValueChanged, nudWidth.ValueChanged, nudHeight.ValueChanged, _
+        txtOptionsShortcut.TextChanged, txtMessage.TextChanged, txtSeperator.TextChanged
+
+        'indicate that the screen is dirty and needs to be saved
+        mbDirty = True
+    End Sub
+
+    Private Sub cmdOpenDefaultForFile_Click(sender As System.Object, e As System.EventArgs) Handles cmdOpenDefaultForFile.Click
+        If lstFiletypes.SelectedItems.Count > 0 Then
+            MakeDefaultSingle(String.Format(".{0}", lstFiletypes.SelectedItems(0).Text), False)
         End If
     End Sub
 End Class

@@ -43,6 +43,7 @@ Partial Class frmOptions
         Me.chURL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.chBrowser = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabProtocols = New System.Windows.Forms.TabPage()
+        Me.cmdOpenDefaultForProtocol = New System.Windows.Forms.Button()
         Me.cmdDeleteProtocol = New System.Windows.Forms.Button()
         Me.cmdEditProtocol = New System.Windows.Forms.Button()
         Me.cmdAddProtocol = New System.Windows.Forms.Button()
@@ -50,6 +51,7 @@ Partial Class frmOptions
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabFileTypes = New System.Windows.Forms.TabPage()
+        Me.cmdOpenDefaultForFile = New System.Windows.Forms.Button()
         Me.cmdDeleteFileType = New System.Windows.Forms.Button()
         Me.cmdEditFileType = New System.Windows.Forms.Button()
         Me.cmdAddFileType = New System.Windows.Forms.Button()
@@ -81,6 +83,8 @@ Partial Class frmOptions
         Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkShowURLs = New System.Windows.Forms.CheckBox()
         Me.tabDefaultBrowser = New System.Windows.Forms.TabPage()
+        Me.txtWarnWin10 = New System.Windows.Forms.TextBox()
+        Me.lblWarnWin10 = New System.Windows.Forms.Label()
         Me.txtWarnWin8 = New System.Windows.Forms.TextBox()
         Me.lblWarnWin8 = New System.Windows.Forms.Label()
         Me.grpScope = New System.Windows.Forms.GroupBox()
@@ -92,8 +96,6 @@ Partial Class frmOptions
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
-        Me.lblWarnWin10 = New System.Windows.Forms.Label()
-        Me.txtWarnWin10 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -300,6 +302,7 @@ Partial Class frmOptions
         '
         'tabProtocols
         '
+        Me.tabProtocols.Controls.Add(Me.cmdOpenDefaultForProtocol)
         Me.tabProtocols.Controls.Add(Me.cmdDeleteProtocol)
         Me.tabProtocols.Controls.Add(Me.cmdEditProtocol)
         Me.tabProtocols.Controls.Add(Me.cmdAddProtocol)
@@ -310,6 +313,15 @@ Partial Class frmOptions
         Me.tabProtocols.TabIndex = 5
         Me.tabProtocols.Text = "Protocols"
         Me.tabProtocols.UseVisualStyleBackColor = True
+        '
+        'cmdOpenDefaultForProtocol
+        '
+        Me.cmdOpenDefaultForProtocol.Location = New System.Drawing.Point(6, 93)
+        Me.cmdOpenDefaultForProtocol.Name = "cmdOpenDefaultForProtocol"
+        Me.cmdOpenDefaultForProtocol.Size = New System.Drawing.Size(75, 36)
+        Me.cmdOpenDefaultForProtocol.TabIndex = 5
+        Me.cmdOpenDefaultForProtocol.Text = "Select Default App"
+        Me.cmdOpenDefaultForProtocol.UseVisualStyleBackColor = True
         '
         'cmdDeleteProtocol
         '
@@ -362,6 +374,7 @@ Partial Class frmOptions
         '
         'tabFileTypes
         '
+        Me.tabFileTypes.Controls.Add(Me.cmdOpenDefaultForFile)
         Me.tabFileTypes.Controls.Add(Me.cmdDeleteFileType)
         Me.tabFileTypes.Controls.Add(Me.cmdEditFileType)
         Me.tabFileTypes.Controls.Add(Me.cmdAddFileType)
@@ -372,6 +385,15 @@ Partial Class frmOptions
         Me.tabFileTypes.TabIndex = 6
         Me.tabFileTypes.Text = "File Types"
         Me.tabFileTypes.UseVisualStyleBackColor = True
+        '
+        'cmdOpenDefaultForFile
+        '
+        Me.cmdOpenDefaultForFile.Location = New System.Drawing.Point(6, 93)
+        Me.cmdOpenDefaultForFile.Name = "cmdOpenDefaultForFile"
+        Me.cmdOpenDefaultForFile.Size = New System.Drawing.Size(75, 36)
+        Me.cmdOpenDefaultForFile.TabIndex = 4
+        Me.cmdOpenDefaultForFile.Text = "Select Default App"
+        Me.cmdOpenDefaultForFile.UseVisualStyleBackColor = True
         '
         'cmdDeleteFileType
         '
@@ -680,6 +702,29 @@ Partial Class frmOptions
         Me.tabDefaultBrowser.Text = "Default Browser"
         Me.tabDefaultBrowser.UseVisualStyleBackColor = True
         '
+        'txtWarnWin10
+        '
+        Me.txtWarnWin10.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtWarnWin10.Location = New System.Drawing.Point(220, 70)
+        Me.txtWarnWin10.Multiline = True
+        Me.txtWarnWin10.Name = "txtWarnWin10"
+        Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
+        Me.txtWarnWin10.TabIndex = 7
+        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to to open the dialog that would allow you t" & _
+    "o manually grant default browser status."
+        Me.txtWarnWin10.Visible = False
+        '
+        'lblWarnWin10
+        '
+        Me.lblWarnWin10.AutoSize = True
+        Me.lblWarnWin10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWarnWin10.Location = New System.Drawing.Point(217, 55)
+        Me.lblWarnWin10.Name = "lblWarnWin10"
+        Me.lblWarnWin10.Size = New System.Drawing.Size(195, 13)
+        Me.lblWarnWin10.TabIndex = 6
+        Me.lblWarnWin10.Text = "* Note for users of Windows 10+:"
+        Me.lblWarnWin10.Visible = False
+        '
         'txtWarnWin8
         '
         Me.txtWarnWin8.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -793,29 +838,6 @@ Partial Class frmOptions
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
-        'lblWarnWin10
-        '
-        Me.lblWarnWin10.AutoSize = True
-        Me.lblWarnWin10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWarnWin10.Location = New System.Drawing.Point(217, 55)
-        Me.lblWarnWin10.Name = "lblWarnWin10"
-        Me.lblWarnWin10.Size = New System.Drawing.Size(195, 13)
-        Me.lblWarnWin10.TabIndex = 6
-        Me.lblWarnWin10.Text = "* Note for users of Windows 10+:"
-        Me.lblWarnWin10.Visible = False
-        '
-        'txtWarnWin10
-        '
-        Me.txtWarnWin10.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtWarnWin10.Location = New System.Drawing.Point(220, 70)
-        Me.txtWarnWin10.Multiline = True
-        Me.txtWarnWin10.Name = "txtWarnWin10"
-        Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
-        Me.txtWarnWin10.TabIndex = 7
-        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to to open the dialog that would allow you t" & _
-    "o manually grant default browser status."
-        Me.txtWarnWin10.Visible = False
-        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -927,4 +949,6 @@ Partial Class frmOptions
     Friend WithEvents cmdAccessiblitySettings As System.Windows.Forms.Button
     Friend WithEvents txtWarnWin10 As System.Windows.Forms.TextBox
     Friend WithEvents lblWarnWin10 As System.Windows.Forms.Label
+    Friend WithEvents cmdOpenDefaultForProtocol As System.Windows.Forms.Button
+    Friend WithEvents cmdOpenDefaultForFile As System.Windows.Forms.Button
 End Class
