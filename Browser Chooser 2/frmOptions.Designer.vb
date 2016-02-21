@@ -92,6 +92,8 @@ Partial Class frmOptions
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.lblWarnWin10 = New System.Windows.Forms.Label()
+        Me.txtWarnWin10 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -663,6 +665,8 @@ Partial Class frmOptions
         '
         'tabDefaultBrowser
         '
+        Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin10)
+        Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin10)
         Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin8)
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin8)
         Me.tabDefaultBrowser.Controls.Add(Me.grpScope)
@@ -679,21 +683,21 @@ Partial Class frmOptions
         'txtWarnWin8
         '
         Me.txtWarnWin8.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtWarnWin8.Location = New System.Drawing.Point(220, 83)
+        Me.txtWarnWin8.Location = New System.Drawing.Point(220, 68)
         Me.txtWarnWin8.Multiline = True
         Me.txtWarnWin8.Name = "txtWarnWin8"
         Me.txtWarnWin8.Size = New System.Drawing.Size(178, 88)
         Me.txtWarnWin8.TabIndex = 5
         Me.txtWarnWin8.Text = "Microsoft no longer allows a program to automatically gain default status of eith" & _
-            "er a a protocol (Browser) or Filetypes. You must manually grant them using the M" & _
-            "ake Default Button."
+    "er a a protocol (Browser) or Filetypes. You must manually grant them using the M" & _
+    "ake Default Button."
         Me.txtWarnWin8.Visible = False
         '
         'lblWarnWin8
         '
         Me.lblWarnWin8.AutoSize = True
         Me.lblWarnWin8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWarnWin8.Location = New System.Drawing.Point(217, 64)
+        Me.lblWarnWin8.Location = New System.Drawing.Point(217, 55)
         Me.lblWarnWin8.Name = "lblWarnWin8"
         Me.lblWarnWin8.Size = New System.Drawing.Size(188, 13)
         Me.lblWarnWin8.TabIndex = 4
@@ -788,6 +792,29 @@ Partial Class frmOptions
         Me.cmdCancel.TabIndex = 3
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
+        '
+        'lblWarnWin10
+        '
+        Me.lblWarnWin10.AutoSize = True
+        Me.lblWarnWin10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWarnWin10.Location = New System.Drawing.Point(217, 55)
+        Me.lblWarnWin10.Name = "lblWarnWin10"
+        Me.lblWarnWin10.Size = New System.Drawing.Size(195, 13)
+        Me.lblWarnWin10.TabIndex = 6
+        Me.lblWarnWin10.Text = "* Note for users of Windows 10+:"
+        Me.lblWarnWin10.Visible = False
+        '
+        'txtWarnWin10
+        '
+        Me.txtWarnWin10.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtWarnWin10.Location = New System.Drawing.Point(220, 70)
+        Me.txtWarnWin10.Multiline = True
+        Me.txtWarnWin10.Name = "txtWarnWin10"
+        Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
+        Me.txtWarnWin10.TabIndex = 7
+        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to to open the dialog that would allow you t" & _
+    "o manually grant default browser status."
+        Me.txtWarnWin10.Visible = False
         '
         'frmOptions
         '
@@ -898,4 +925,6 @@ Partial Class frmOptions
     Friend WithEvents cmdMoveDownAutoURL As System.Windows.Forms.Button
     Friend WithEvents cmdMoveUpAutoURL As System.Windows.Forms.Button
     Friend WithEvents cmdAccessiblitySettings As System.Windows.Forms.Button
+    Friend WithEvents txtWarnWin10 As System.Windows.Forms.TextBox
+    Friend WithEvents lblWarnWin10 As System.Windows.Forms.Label
 End Class

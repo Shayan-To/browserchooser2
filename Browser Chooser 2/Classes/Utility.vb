@@ -36,11 +36,14 @@ Public Class Utility
 
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio
     ' it has only been signed.
+    ' OSVersionInfo comes from http://www.codeproject.com/Articles/73000/Getting-Operating-System-Version-Info-Even-for-Win. it has not been modifyed
 
     Public Shared mFileNames As New Dictionary(Of EmbededDLLs, String) From {{EmbededDLLs.SHDocVw, "Interop.SHDocVw.dll"},
-                                                                             {EmbededDLLs.TAFactory_IconPack, "TAFactory.IconPack.dll"}}
+                                                                             {EmbededDLLs.TAFactory_IconPack, "TAFactory.IconPack.dll"},
+                                                                             {EmbededDLLs.OSVersionInfo, "OSVersionInfo.dll"}}
     Private Shared mbLoadedDLLs As New Dictionary(Of EmbededDLLs, Boolean) From {{EmbededDLLs.SHDocVw, False},
-                                                                             {EmbededDLLs.TAFactory_IconPack, False}}
+                                                                             {EmbededDLLs.TAFactory_IconPack, False},
+                                                                             {EmbededDLLs.OSVersionInfo, False}}
 
     Public Shared KeyCodeValues As New Dictionary(Of Keys, Integer) From { _
         {Keys.NumPad1, 1}, _
@@ -67,6 +70,7 @@ Public Class Utility
     Public Enum EmbededDLLs
         SHDocVw
         TAFactory_IconPack
+        OSVersionInfo
     End Enum
 
     Public Shared Function SafeMessagebox(ByVal text As String, ByVal caption As String,
@@ -87,10 +91,19 @@ Public Class Utility
     End Function
 
     Public Shared Function IsRunningPost8() As Boolean
-        If Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor >= 2 Then
+        If JCS.OSVersionInfo.MajorVersion = 6 And JCS.OSVersionInfo.MinorVersion >= 2 Then
             Return True
-        ElseIf Environment.OSVersion.Version.Major >= 7 Then
+        ElseIf JCS.OSVersionInfo.MajorVersion >= 7 Then
             Return True 'does not yet exists, future proffing I guess
+        Else
+            Return False
+        End If
+    End Function
+
+    'bloody hell MS - why make this so hard? Yet another API that no longer works.
+    Public Shared Function IsRunningPost10() As Boolean
+        If JCS.OSVersionInfo.MajorVersion >= 10 Then
+            Return True
         Else
             Return False
         End If

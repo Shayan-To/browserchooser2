@@ -217,6 +217,18 @@
             chkCheckDefaultOnLaunch.Enabled = False
             chkCheckDefaultOnLaunch.Checked = False
         End If
+
+        If Utility.IsRunningPost10 = True Then
+            rbScopeUser.Checked = True
+            grpScope.Enabled = False
+
+            cmdMakeDefault.Text = "Make Default*"
+            lblWarnWin10.Visible = True
+            txtWarnWin10.Visible = True
+            chkCheckDefaultOnLaunch.Enabled = False
+            chkCheckDefaultOnLaunch.Checked = False
+            cmdMakeDefault.Enabled = False
+        End If
     End Sub
 
     Private Sub frmOptions_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
@@ -590,34 +602,6 @@
             Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name)
             llsiItem.Tag = mBrowser.Count - 1
         Next
-    End Sub
-
-    Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.DoubleClick
-        Dim lResult As Boolean = False
-        Dim lAPIResult As Boolean = WinAPIs.SystemParametersInfo(WinAPIs.SPI_GETSCREENREADER, 0, lResult, 0)
-        Dim lMessage As String
-        Dim lSubMessage As String = ""
-
-        lMessage = "Result of WinAPIs.SystemParametersInfo(SPI_GETSCREENREADER): " + lAPIResult.ToString + vbCrLf
-        lMessage = lMessage + "SPI_GETSCREENREADER: " + lResult.ToString + vbCrLf
-        lMessage = lMessage + "AERO Status: " + Utility.IsAeroEnabled.ToString + vbCrLf
-        lMessage = lMessage + "IsAdmin: " + Utility.IsAdminMode.ToString + vbCrLf
-        lMessage = lMessage + StrDup(50, "-") + vbCrLf
-        lMessage = lMessage + "URL: " + StartupLauncher.URL + vbCrLf
-        For Each lSup As Guid In StartupLauncher.SupportingBrowsers
-            'find this browser in the list
-            For Each lBRowser As Browser In gSettings.Browsers
-                If lBRowser.GUID = lSup Then
-                    lSubMessage = lSubMessage + ", " + lBRowser.Name
-                End If
-            Next
-        Next
-
-        lMessage = lMessage + "Supporting Browsers: " + lSubMessage + vbCrLf
-
-
-        MessageBox.Show(lMessage, "Diagnotic message", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
     End Sub
 
     Private Sub SwapURLS(ByVal aFirst As Integer, ByVal aSecond As Integer)

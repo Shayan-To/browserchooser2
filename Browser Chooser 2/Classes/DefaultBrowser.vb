@@ -34,7 +34,8 @@ Public Class DefaultBrowser
         'oftware\Microsoft\Windows\CurrentVersion\App Paths
         Dim lKey As RegistryKey = aROOT.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\App Paths", RegistryKeyPermissionCheck.ReadWriteSubTree)
         Dim lSubKey As RegistryKey = lKey.CreateSubKey(mCanonical, RegistryKeyPermissionCheck.ReadWriteSubTree)
-        lSubKey.SetValue("", My.Application.Info.DirectoryPath & mCanonical, RegistryValueKind.String)
+        lSubKey.SetValue("", String.Format("{0}\{1}", My.Application.Info.DirectoryPath, mCanonical), RegistryValueKind.String)
+        lSubKey.SetValue("Path", My.Application.Info.DirectoryPath, RegistryValueKind.String)
         lSubKey.SetValue("UseUrl", 1, RegistryValueKind.DWord)
     End Sub
 

@@ -35,6 +35,7 @@ Partial Class frmAbout
         Me.LabelVersion = New System.Windows.Forms.Label()
         Me.LabelCopyright = New System.Windows.Forms.Label()
         Me.llLicense = New System.Windows.Forms.LinkLabel()
+        Me.cmdDiagnotics = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -96,10 +97,11 @@ Partial Class frmAbout
         Me.txtAttributions.Multiline = True
         Me.txtAttributions.Name = "txtAttributions"
         Me.txtAttributions.ReadOnly = True
-        Me.txtAttributions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtAttributions.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtAttributions.Size = New System.Drawing.Size(390, 85)
         Me.txtAttributions.TabIndex = 5
         Me.txtAttributions.Text = "Attributions:"
+        Me.txtAttributions.WordWrap = False
         '
         'LabelProductName
         '
@@ -138,12 +140,22 @@ Partial Class frmAbout
         Me.llLicense.TabStop = True
         Me.llLicense.Text = "browserchooser2.codeplex.com/license"
         '
+        'cmdDiagnotics
+        '
+        Me.cmdDiagnotics.Location = New System.Drawing.Point(12, 477)
+        Me.cmdDiagnotics.Name = "cmdDiagnotics"
+        Me.cmdDiagnotics.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDiagnotics.TabIndex = 12
+        Me.cmdDiagnotics.Text = "Diagnotics"
+        Me.cmdDiagnotics.UseVisualStyleBackColor = True
+        '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.OKButton
         Me.ClientSize = New System.Drawing.Size(414, 512)
+        Me.Controls.Add(Me.cmdDiagnotics)
         Me.Controls.Add(Me.llLicense)
         Me.Controls.Add(Me.LabelCopyright)
         Me.Controls.Add(Me.LabelVersion)
@@ -179,5 +191,6 @@ Partial Class frmAbout
     Friend WithEvents LabelVersion As System.Windows.Forms.Label
     Friend WithEvents LabelCopyright As System.Windows.Forms.Label
     Friend WithEvents llLicense As System.Windows.Forms.LinkLabel
+    Friend WithEvents cmdDiagnotics As System.Windows.Forms.Button
 
 End Class

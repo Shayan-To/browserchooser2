@@ -293,6 +293,10 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OSVersionInfo">
+      <HintPath>Resources\OSVersionInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -481,7 +485,9 @@
     <None Include="Resources\bclogo.ico" />
     <None Include="Resources\bclogo1.ico" />
     <None Include="Resources\browserchooser.png" />
-    <None Include="My Project\app.manifest" />
+    <None Include="My Project\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\BrowserChooser3.ico" />
     <None Include="Resources\128.png" />
     <None Include="Resources\122.png" />
@@ -560,6 +566,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\paste_and_close_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\OSVersionInfo.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
