@@ -50,6 +50,11 @@ Public Class DefaultBrowser
             """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
         lKey.CreateSubKey("shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
 
+        'file types
+        For Each lFileType As FileType In gSettings.FileTypes
+            aROOT.CreateSubKey(String.Format(".{0}\OpenWithProgIds", lFileType.Extention)).SetValue(mFileAssociations, RegistryValueKind.String)
+        Next
+
         'url accociations
         lKey = aROOT.CreateSubKey(mURLAssociations)
         lKey.SetValue("", mCanonical, RegistryValueKind.String)
@@ -125,7 +130,7 @@ Public Class DefaultBrowser
         'PArt 2: now onto default programs. from http://msdn.microsoft.com/en-us/library/windows/desktop/cc144154%28v=vs.85%29.aspx
         If aScope = Scope.sGlobal Then
             CreateCapabilities(Registry.LocalMachine)
-            CreateAssociations(Registry.ClassesRoot) 'should work witout admin, need to test
+            CreateAssociations(Registry.ClassesRoot) 'should work witout admin, need to test - it does
         End If
 
         CreateCapabilities(Registry.CurrentUser)
