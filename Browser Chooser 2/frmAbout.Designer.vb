@@ -68,7 +68,7 @@ Partial Class frmAbout
         Me.llHome.Size = New System.Drawing.Size(157, 13)
         Me.llHome.TabIndex = 2
         Me.llHome.TabStop = True
-        Me.llHome.Text = "browserchooser2.codeplex.com"
+        Me.llHome.Text = "browserchooser2.com"
         '
         'txtContributors
         '
@@ -138,7 +138,7 @@ Partial Class frmAbout
         Me.llLicense.Size = New System.Drawing.Size(195, 13)
         Me.llLicense.TabIndex = 11
         Me.llLicense.TabStop = True
-        Me.llLicense.Text = "browserchooser2.codeplex.com/license"
+        Me.llLicense.Text = "https://bitbucket.org/gmyx/browserchooser2/wiki/MSPL"
         '
         'cmdDiagnotics
         '

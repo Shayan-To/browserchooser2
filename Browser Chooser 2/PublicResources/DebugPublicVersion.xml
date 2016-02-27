@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <versionInfo>
   <id>B1</id>  
-  <download><![CDATA[https://www.codeplex.com/Download/Release?ProjectName=browserchooser2&DownloadId=1474907&FileTime=130821403052770000&Build=21028]]></download>
-  <releaseinfo>https://browserchooser2.codeplex.com/releases/view/612590</releaseinfo>
+  <download><![CDATA[http://browserchooser2.com/debug/Browser Chooser 2.exe]]></download>
+  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Beta1</releaseinfo>
   <details>
     New Features:
     * Added Detect Browsers to add remove screen
@@ -31,7 +31,7 @@
     * GeekDrop_com: For suggesting icon scalling and many other items
     * sakima: For suggesting the new keyboard naviagtion and many other items
 
-    The [url:documentation|https://browserchooser2.codeplex.com/documentation] has been increased. While not yet complete it is covering the main screen and the configuration screen. The add / edit screens will be added later.
+    The [url:documentation|https://bitbucket.org/gmyx/browserchooser2/wiki/Documentation] has been increased. While not yet complete it is covering the main screen and the configuration screen. The add / edit screens will be added later.
 
     Special thanks to all for testing and proving great feedback!
   </details>

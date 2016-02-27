@@ -35,6 +35,8 @@ Partial Class frmAddEditBrowser
         Me.cmdTargetBrowse = New System.Windows.Forms.Button()
         Me.txtTarget = New System.Windows.Forms.TextBox()
         Me.grpImage = New System.Windows.Forms.GroupBox()
+        Me.nudScale = New System.Windows.Forms.NumericUpDown()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.btnViewAvailable = New System.Windows.Forms.Button()
         Me.nudIconIndex = New System.Windows.Forms.NumericUpDown()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -57,16 +59,15 @@ Partial Class frmAddEditBrowser
         Me.cmdShowProtocols = New System.Windows.Forms.Button()
         Me.cmdShowExtentions = New System.Windows.Forms.Button()
         Me.lstSupportedProps = New System.Windows.Forms.ListView()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.nudScale = New System.Windows.Forms.NumericUpDown()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.grpTarget.SuspendLayout()
         Me.grpImage.SuspendLayout()
+        CType(Me.nudScale, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconIndex, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPosition.SuspendLayout()
         CType(Me.nudY, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpHotkey.SuspendLayout()
-        CType(Me.nudScale, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtName
@@ -117,6 +118,7 @@ Partial Class frmAddEditBrowser
         '
         'grpTarget
         '
+        Me.grpTarget.Controls.Add(Me.CheckBox1)
         Me.grpTarget.Controls.Add(Me.Label9)
         Me.grpTarget.Controls.Add(Me.txtArguments)
         Me.grpTarget.Controls.Add(Me.chkIEBehaviour)
@@ -198,6 +200,25 @@ Partial Class frmAddEditBrowser
         Me.grpImage.TabIndex = 7
         Me.grpImage.TabStop = False
         Me.grpImage.Text = "Image (Optional)"
+        '
+        'nudScale
+        '
+        Me.nudScale.DecimalPlaces = 2
+        Me.nudScale.Increment = New Decimal(New Integer() {25, 0, 0, 131072})
+        Me.nudScale.Location = New System.Drawing.Point(266, 46)
+        Me.nudScale.Name = "nudScale"
+        Me.nudScale.Size = New System.Drawing.Size(120, 20)
+        Me.nudScale.TabIndex = 9
+        Me.nudScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(220, 48)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(40, 13)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Scale :"
         '
         'btnViewAvailable
         '
@@ -394,24 +415,15 @@ Partial Class frmAddEditBrowser
         Me.lstSupportedProps.UseCompatibleStateImageBehavior = False
         Me.lstSupportedProps.View = System.Windows.Forms.View.Details
         '
-        'Label8
+        'CheckBox1
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(220, 48)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(40, 13)
-        Me.Label8.TabIndex = 7
-        Me.Label8.Text = "Scale :"
-        '
-        'nudScale
-        '
-        Me.nudScale.DecimalPlaces = 2
-        Me.nudScale.Increment = New Decimal(New Integer() {25, 0, 0, 131072})
-        Me.nudScale.Location = New System.Drawing.Point(266, 46)
-        Me.nudScale.Name = "nudScale"
-        Me.nudScale.Size = New System.Drawing.Size(120, 20)
-        Me.nudScale.TabIndex = 9
-        Me.nudScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(212, 45)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(68, 17)
+        Me.CheckBox1.TabIndex = 6
+        Me.CheckBox1.Text = "Is Edge?"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'frmAddEditBrowser
         '
@@ -446,6 +458,7 @@ Partial Class frmAddEditBrowser
         Me.grpTarget.PerformLayout()
         Me.grpImage.ResumeLayout(False)
         Me.grpImage.PerformLayout()
+        CType(Me.nudScale, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIconIndex, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPosition.ResumeLayout(False)
         Me.grpPosition.PerformLayout()
@@ -453,7 +466,6 @@ Partial Class frmAddEditBrowser
         CType(Me.nudX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpHotkey.ResumeLayout(False)
         Me.grpHotkey.PerformLayout()
-        CType(Me.nudScale, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -495,4 +507,5 @@ Partial Class frmAddEditBrowser
     Friend WithEvents lstSupportedProps As System.Windows.Forms.ListView
     Friend WithEvents nudScale As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 End Class

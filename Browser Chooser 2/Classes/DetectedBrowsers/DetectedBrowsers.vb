@@ -4,7 +4,7 @@ Imports System.Threading
 
 <Serializable()> _
 Public Class DetectedBrowsers
-    Private Const UpdateFile As String = "https://browserchooser2.svn.codeplex.com/svn/Browser%20Chooser%202/PublicResources/DetectedBrowsers.xml"
+    Private Const UpdateFile As String = "https://browserchooser2.com/app/DetectedBrowsers.xml"
     Public ListOfKnownBrowsers As List(Of BrowserDefinition)
 
     Public Shared Function DoBrowserDetection() As List(Of Browser) 'ByVal aSettings As Settings)
@@ -125,6 +125,7 @@ Public Class DetectedBrowsers
         lEdge.Name = "Edge"
         lEdge.InstallPath = New List(Of String)
         lEdge.InstallPath.Add("C:\Windows\SystemApps\Microsoft.MicrosoftEdge")
+        lEdge.IsEdge = True
         lEdge.HasWilcardEndingToPath = True
         lEdge.IsIE = False ' important - is IE is used for opening tabs in IE since the process is different
         lListOfKnownBrowsers.Add(lEdge)
@@ -243,6 +244,42 @@ Public Class DetectedBrowsers
         lVivaldi.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
         lVivaldi.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Vivaldi\Application\vivaldi.exe"})
         lListOfKnownBrowsers.Add(lVivaldi)
+
+        '*** new browsers below 
+
+        'Avant
+
+        'Seamonkey
+
+        'Waterfox
+
+        'Maxthon
+
+        'QupZilla
+
+        'Pale Moon (Firefox fork) (maybe have 32 and 64 bit variants)
+        Dim lPaleMoon As New BrowserDefinition
+        lPaleMoon.Name = "Pale Moon"
+        lPaleMoon.InstallPath = New List(Of String)
+        lPaleMoon.InstallPath.Add("C:\Program Files\Vivaldi\Application\vivaldi.exe")
+        lPaleMoon.InstallPath.Add("C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe")
+        'add user mode
+        lPaleMoon.SupportsNonAdmin = True
+        lPaleMoon.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lPaleMoon.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Vivaldi\Application\vivaldi.exe"})
+        lListOfKnownBrowsers.Add(lPaleMoon)
+
+        'Torch  - by request (codeplex issue #1129)
+        Dim lTorch As New BrowserDefinition
+        lTorch.Name = "Torch"
+        lTorch.InstallPath = New List(Of String)
+        lTorch.InstallPath.Add("C:\Program Files\Vivaldi\Application\vivaldi.exe")
+        lTorch.InstallPath.Add("C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe")
+        'add user mode
+        lTorch.SupportsNonAdmin = True
+        lTorch.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lTorch.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Vivaldi\Application\vivaldi.exe"})
+        lListOfKnownBrowsers.Add(lTorch)
 
         lDetectedBrowsers.ListOfKnownBrowsers = lListOfKnownBrowsers
 

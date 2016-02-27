@@ -73,7 +73,7 @@ Public Class DefaultBrowser
             'write out our values
             lKey.CreateSubKey("Capabilities").SetValue("ApplicationName", mAppName, RegistryValueKind.String)
             lKey.CreateSubKey("Capabilities").SetValue("ApplicationIcon", Application.ExecutablePath & ",0", RegistryValueKind.String)
-            lKey.CreateSubKey("Capabilities").SetValue("ApplicationDescription", "Small application that let's you choose what browser to open with a provided url. https://browserchooser2.codeplex.com", RegistryValueKind.String)
+            lKey.CreateSubKey("Capabilities").SetValue("ApplicationDescription", "Small application that let's you choose what browser to open with a provided url. https://browserchooser2.com", RegistryValueKind.String)
 
             'file types
             For Each lFileType As FileType In gSettings.FileTypes

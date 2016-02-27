@@ -3,8 +3,8 @@
 Public Class Updator
     Private Shared mThread As Thread
 
-    Private Const UpdateFile As String = "https://browserchooser2.svn.codeplex.com/svn/Browser%20Chooser%202/PublicResources/PublicVersion.xml"
-    Private Const DebugUpdateFile As String = "https://browserchooser2.svn.codeplex.com/svn/Browser%20Chooser%202/PublicResources/DebugPublicVersion.xml"
+    Private Const UpdateFile As String = "https://browserchooser2.com/app/PublicVersion.xml"
+    Private Const DebugUpdateFile As String = "https://browserchooser2.com/app/DebugPublicVersion.xml"
 
     Private Structure intUpdateFile
         Public id As String
