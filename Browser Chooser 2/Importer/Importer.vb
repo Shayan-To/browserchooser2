@@ -18,7 +18,7 @@ Public Class Importer
 
             'convert URLs into new format
             For Each lLegacyURL As String In lLegacyBrowser.Urls
-                Dim lNewURL As New URL(lLegacyURL, lNewBrowser, False, 0, CheckState.Indeterminate)
+                Dim lNewURL As New URL(lLegacyURL, False, 0, CheckState.Indeterminate, lNewBrowser.GUID)
                 gSettings.URLs.Add(lNewURL)
             Next
         Next

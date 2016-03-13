@@ -114,22 +114,22 @@ Module modStart
                 If MatchURLs(lURL.URL, aURL) Then
                     'load that browser
                     If lURL.DelayTime = 0 And lURL.AutoLoad = True Then
-                        lBrowser = lURL.Browser
+                        lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
                         Exit For
 
                     ElseIf lURL.DelayTime = -1 Then
                         'look at system setting
                         If gSettings.DefaultDelay <= 0 Then
-                            lBrowser = lURL.Browser
+                            lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
                             Exit For
                         Else
                             'launch mainscreen with delay
-                            lBrowser = lURL.Browser
+                            lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
                             lDelay = gSettings.DefaultDelay
                         End If
                     Else
                         'launch mainscreen with delay
-                        lBrowser = lURL.Browser
+                        lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
                         lDelay = lURL.DelayTime
                     End If
                 End If

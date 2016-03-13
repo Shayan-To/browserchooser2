@@ -29,7 +29,7 @@
         'populate screen
         PopulateBrowsers(aBrowsers)
         txtURL.Text = aURL.URL
-        cmbBrowser.Text = aURL.Browser.Name
+        cmbBrowser.Text = Utility.GetBrowserByGUID(aURL.Guid).Name
         chkAutoLoad.Checked = aURL.AutoLoad
         chkShowURL.CheckState = aURL.ShowURL
         nudDelay.Value = aURL.DelayTime
@@ -44,10 +44,11 @@
         Dim lOut As New URL
 
         lOut.URL = txtURL.Text
-        lOut.Browser = DirectCast(cmbBrowser.SelectedItem, Browser)
+        'lOut.Browser = DirectCast(cmbBrowser.SelectedItem, Browser)
         lOut.AutoLoad = chkAutoLoad.Checked
         lOut.ShowURL = chkShowURL.CheckState
         lOut.DelayTime = CInt(nudDelay.Value)
+        lOut.Guid = DirectCast(cmbBrowser.SelectedItem, Browser).GUID
 
         Return lOut
     End Function

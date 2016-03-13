@@ -206,9 +206,7 @@ Public Class DefaultBrowser
         If Utility.IsRunningPost8 = False And aForce8 = False Then
             'upto windows 7 - default programs / SPAD
             Dim lMaster As RegistryKey
-            If aDoSingle <> "" Then
-                Debug.Print("FIXME: Add DoSingle for Windows 7 and older")
-            End If
+
             If aScope = DefaultBrowser.Scope.sGlobal Then
                 lMaster = Registry.LocalMachine
             Else
@@ -220,16 +218,31 @@ Public Class DefaultBrowser
 
             'windows XP only 
             If Utility.IsRunningXP = True Or aScope = Scope.sUser Then
+                If aDoSingle <> "" Then
+                    Debug.Print("FIXME: Add DoSingle for Windows XP and user mode for Windows 7")
+                End If
                 DoUserScope(lMaster)
 
             Else
-                'using a com call here to set the file associations
-                Dim aa = New WinAPIExtras.ApplicationAssociationRegistration
-                Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistration)
-                'If aScope = Scope.sUser Then
-                'Else
-                iaa.SetAppAsDefaultAll(mAppName) 'seems to only work  only on hklm
-                'End If
+                If aDoSingle <> "" Then
+                    'using a com call here to set the file associations
+                    Dim aa = New WinAPIExtras.ApplicationAssociationRegistration
+                    Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistration)
+
+                    If abIsProtocol = True Then
+                        iaa.SetAppAsDefault(mAppName, aDoSingle, ASSOCIATIONTYPE.AT_URLPROTOCOL) 'seems to only work  only on hklm
+                    Else
+                        iaa.SetAppAsDefault(mAppName, aDoSingle, ASSOCIATIONTYPE.AT_FILEEXTENSION) 'seems to only work  only on hklm
+                    End If
+                Else
+                    'using a com call here to set the file associations
+                    Dim aa = New WinAPIExtras.ApplicationAssociationRegistration
+                    Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistration)
+                    'If aScope = Scope.sUser Then
+                    'Else
+                    iaa.SetAppAsDefaultAll(mAppName) 'seems to only work  only on hklm
+                    'End If
+                End If
             End If
 
             'as per MS docs, broadcast the change

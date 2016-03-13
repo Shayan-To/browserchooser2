@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Small app that let's you choose what browser to open a url in. Visit my website for more information.")> 
 <Assembly: AssemblyCompany("Browser Chooser 2")> 
 <Assembly: AssemblyProduct("Browser Chooser 2")> 
-<Assembly: AssemblyCopyright("Copyright © 2015")> 
+<Assembly: AssemblyCopyright("Copyright © 2016")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 

@@ -299,7 +299,8 @@ Public Class frmMain
         If StartupLauncher.Delay <> 0 Then
             Me.Height = Me.Height + 1 'for some reason, needs 1 extra pixel to fit the top box.
             tmrDelay.Enabled = True
-            chkAutoOpen.Text = "Automaticly open " & StartupLauncher.Browser.Name & " in " & StartupLauncher.Delay & " seconds."
+            'chkAutoOpen.Text = "Automaticly open " & StartupLauncher.Browser.Name & " in " & StartupLauncher.Delay & " seconds."
+            chkAutoOpen.Text = String.Format("Automaticly open {0} in {1} seconds.", StartupLauncher.Browser.Name, StartupLauncher.Delay)
 
             'add auto start
             chkAutoOpen.Checked = True

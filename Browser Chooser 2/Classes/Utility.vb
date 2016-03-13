@@ -319,7 +319,21 @@ Public Class Utility
             'End If
 
             If aTerminate = True Then
-                End 'not clean, will do for now
+                lProcess = Nothing
+
+                Dim lFormsToClose As New List(Of Form)
+
+                'build list of forms to close
+                For Each lForm As Form In Application.OpenForms
+                    lFormsToClose.Add(lForm) 'cannot close here, causes a colleciton has changed error.
+                Next
+
+                'close forms found above
+                For Each lForm As Form In lFormsToClose
+                    lForm.Close()
+                Next
+
+                'End 'not clean, will do for now
             End If
 
             Return True
@@ -434,5 +448,15 @@ Public Class Utility
 
         ' Display the result.
         Return bm_dest
+    End Function
+
+    Public Shared Function GetBrowserByGUID(aGUID As Guid) As Browser
+        For Each lBrowser As Browser In gSettings.Browsers
+            If lBrowser.GUID = aGUID Then
+                Return lBrowser
+            End If
+        Next
+
+        Return Nothing
     End Function
 End Class

@@ -272,7 +272,7 @@
             mURLs.Add(mURLs.Count, DirectCast(lURL.Clone, URL))
 
             llsiItem = lstURLs.Items.Add(lURL.URL)
-            llsiItem.SubItems.Add(lURL.Browser.Name)
+            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lURL.Guid).Name)
             llsiItem.Tag = mURLs.Count - 1
         Next
         mLastURLID = mURLs.Count - 1
@@ -341,7 +341,7 @@
             Dim lNewURL As URL = lfrmAdd.GetData
             mURLs.Add(mLastURLID + 1, lNewURL)
             Dim llsiItem As ListViewItem = lstURLs.Items.Add(lNewURL.URL)
-            llsiItem.SubItems.Add(lNewURL.Browser.Name)
+            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lNewURL.Guid).Name)
             llsiItem.Tag = mLastURLID + 1
             mLastURLID += 1
 
@@ -359,7 +359,7 @@
                 Dim lNewURL As URL = lfrmAdd.GetData
                 mURLs(CInt(lstURLs.SelectedItems(0).Tag)) = lNewURL
                 lstURLs.SelectedItems(0).Text = lNewURL.URL
-                lstURLs.SelectedItems(0).SubItems(1).Text = lNewURL.Browser.Name
+                lstURLs.SelectedItems(0).SubItems(1).Text = Utility.GetBrowserByGUID(lNewURL.Guid).Name
 
                 'indicate that the screen is dirty and needs to be saved
                 mbDirty = True

@@ -250,6 +250,16 @@ Public Class DetectedBrowsers
         'Avant
 
         'Seamonkey
+        Dim lSeamonkey As New BrowserDefinition
+        lSeamonkey.Name = "Seamonkey"
+        lSeamonkey.InstallPath = New List(Of String)
+        lSeamonkey.InstallPath.Add("C:\Program Files\SeaMonkey\seamonkey.exe")
+        lSeamonkey.InstallPath.Add("C:\Program Files (x86)\SeaMonkey\seamonkey.exe")
+        'add user mode
+        lSeamonkey.SupportsNonAdmin = True
+        lSeamonkey.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lSeamonkey.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "SeaMonkey\seamonkey.exe"})
+        lListOfKnownBrowsers.Add(lSeamonkey)
 
         'Waterfox
 
@@ -261,12 +271,12 @@ Public Class DetectedBrowsers
         Dim lPaleMoon As New BrowserDefinition
         lPaleMoon.Name = "Pale Moon"
         lPaleMoon.InstallPath = New List(Of String)
-        lPaleMoon.InstallPath.Add("C:\Program Files\Vivaldi\Application\vivaldi.exe")
-        lPaleMoon.InstallPath.Add("C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe")
+        lPaleMoon.InstallPath.Add("C:\Program Files\Pale Moon\palemoon.exe")
+        lPaleMoon.InstallPath.Add("C:\Program Files (x86)\Pale Moon\palemoon.exe")
         'add user mode
         lPaleMoon.SupportsNonAdmin = True
         lPaleMoon.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
-        lPaleMoon.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Vivaldi\Application\vivaldi.exe"})
+        lPaleMoon.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Pale Moon\palemoon.exe"})
         lListOfKnownBrowsers.Add(lPaleMoon)
 
         'Torch  - by request (codeplex issue #1129)
