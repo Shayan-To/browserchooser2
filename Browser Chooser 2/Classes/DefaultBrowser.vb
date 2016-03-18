@@ -7,6 +7,8 @@ Imports Browser_Chooser_2.WinAPIs
 Imports Browser_Chooser_2.WinAPIExtras
 Imports System.Security.AccessControl
 
+'windows 10 control panel solution from https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/7aa1dedd-7016-4093-a5d2-d2e3658f6414/how-to-start-windows-store-control-panel-from-desktop-app?forum=windowsgeneraldevelopmentissues
+
 Public Class DefaultBrowser
     Private Const mBC2KeyName As String = "SOFTWARE\Clients\StartMenuInternet\Browser Chooser 2.exe"
     Private Const mCanonical As String = "Browser Chooser 2.exe"
@@ -249,6 +251,26 @@ Public Class DefaultBrowser
             Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
             SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
             'SHChangeNotify(SHChangeNotifyEventID.SHCNE_ASSOCCHANGED, SHChangeNotifyFlags.SHCNF_DWORD Or SHChangeNotifyFlags.SHCNF_FLUSH, Nothing, Nothing)
+        ElseIf Utility.IsRunningPost10 = True Then
+            'scan registry keys for immersivecontrolpanel
+            Dim lKey As RegistryKey = Registry.ClassesRoot.OpenSubKey("ActivatableClasses\Package")
+
+            For Each lItem As String In lKey.GetSubKeyNames
+
+                If InStr(lItem, "windows.immersivecontrolpanel") > 0 Then
+                    'this is the one we want
+                    Debug.Print(lItem)
+                    Dim appUserModelId As String = Microsoft.Win32.Registry.GetValue(
+                                String.Format("HKEY_CLASSES_ROOT\ActivatableClasses\Package\{0}\Server\microsoft.windows.immersivecontrolpanel",
+                                lItem), "AppUserModelId", String.Empty).ToString
+                    Debug.Print(appUserModelId)
+                    Dim pid As UInteger
+                    'Dim result As UInteger = 
+                    Dim aa = New ApplicationActivationManager.ApplicationActivationManager
+                    Dim iaa = DirectCast(aa, ApplicationActivationManager.IApplicationActivationManager)
+                    iaa.ActivateApplication(appUserModelId, "page=SettingsPageAppsDefaults", ApplicationActivationManager.ActivateOptions.None, pid)
+                End If
+            Next
         Else
             'cause the open with dialog to open, if canceled go to advanced dialog
             If aDoSingle <> "" Then
@@ -277,14 +299,14 @@ Public Class DefaultBrowser
                 Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistrationUI)
                 iaa.LaunchAdvancedAssociationUI(mAppName)
             End If
-                'Else
-                '    Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
-                '    SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
+            'Else
+            '    Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
+            '    SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
 
-                '    'try user scope
-                '    'DoUserScope(Registry.CurrentUser)
-                'End If
-            End If
+            '    'try user scope
+            '    'DoUserScope(Registry.CurrentUser)
+            'End If
+        End If
     End Sub
 
     Public Shared Sub CheckIfIsDefault()

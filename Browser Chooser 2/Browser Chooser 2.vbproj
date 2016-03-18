@@ -329,6 +329,7 @@
     <Compile Include="Classes\DetectedBrowsers\BrowserDefinition.vb" />
     <Compile Include="Classes\DetectedBrowsers\DetectedBrowsers.vb" />
     <Compile Include="Classes\FileType.vb" />
+    <Compile Include="Classes\IApplicationActivationManager.vb" />
     <Compile Include="Classes\Protocol.vb" />
     <Compile Include="Classes\Updator.vb" />
     <Compile Include="Classes\WinAPIExtras.vb" />

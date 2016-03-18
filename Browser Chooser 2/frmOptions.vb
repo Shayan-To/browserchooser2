@@ -239,7 +239,7 @@
             txtWarnWin10.Visible = True
             chkCheckDefaultOnLaunch.Enabled = False
             chkCheckDefaultOnLaunch.Checked = False
-            cmdMakeDefault.Enabled = False
+            'cmdMakeDefault.Enabled = False
 
             'also remove the single file associations - win10 disabled that too
             cmdOpenDefaultForFile.Visible = False
