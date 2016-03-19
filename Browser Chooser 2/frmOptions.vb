@@ -740,6 +740,23 @@
         End If
     End Sub
 
+#Region "Auto-URL Drag and Drop"
+    Private mbURLMouseDown As Boolean = False
+    Private mDragHighlight As ListViewItem
+
+    Private Sub RebuildAutoURLs()
+        'could be lenghty if long list
+        Dim lOut As New SortedDictionary(Of Integer, URL)
+
+        For Each lItem As ListViewItem In lstURLs.Items
+            Dim lOldItem As URL = mURLs(DirectCast(lItem.Tag, Integer))
+            lOut.Add(lItem.Index, lOldItem)
+        Next
+
+        mURLs = lOut
+        mbDirty = True
+    End Sub
+
     Private Sub lstURLs_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles lstURLs.DragDrop
         Dim myItem As ListViewItem = DirectCast(e.Data.GetData("System.Windows.Forms.ListViewItem"), ListViewItem)
         Dim lIndex As Integer = myItem.Index
@@ -756,18 +773,12 @@
 
                 'move to top
                 lstURLs.Items.Insert(0, myItem)
-
-                'repeat for the internal list of urls
-                SwapURLS(0, myItem.Index - 1)
             Else
                 'remove the item
                 lstURLs.Items.Remove(myItem)
 
                 'move to bottom
                 lstURLs.Items.Insert(lstURLs.Items.Count, myItem)
-
-                'repeat for the internal list of urls
-                SwapURLS(lstURLs.Items.Count - 1, lIndex)
             End If
         Else
 
@@ -779,16 +790,20 @@
 
                 'add item at this location
                 lstURLs.Items.Insert(lResult.Item.Index, myItem)
-
-                'repeat for the internal list of urls
-                SwapURLS(lOldIndex - 1, lIndex)
             End If
         End If
+
+        'rebuild internal list of urls
+        RebuildAutoURLs()
+
+        'remove highlight
+        If IsNothing(mDragHighlight) = False Then
+            mDragHighlight.BackColor = System.Drawing.SystemColors.Window
+        End If
+
+        mDragHighlight = lResult.Item
     End Sub
 
-    Private mbURLMouseDown As Boolean = False
-
-    Private mDragHighlight As ListViewItem
     Private Sub lstURLs_DragEnter(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles lstURLs.DragEnter
         If e.Data.GetDataPresent("System.Windows.Forms.ListViewItem") Then
             e.Effect = DragDropEffects.Move
@@ -807,6 +822,7 @@
         'add a border
         If IsNothing(lResult.Item) = False Then
             If IsNothing(mDragHighlight) = True Then
+
                 lResult.Item.BackColor = System.Drawing.SystemColors.Highlight
                 mDragHighlight = lResult.Item
             Else
@@ -822,6 +838,16 @@
         End If
         mDragHighlight = lResult.Item
     End Sub
+
+    'to change in b3 perhaps
+    'Private Sub lstURLs_DrawItem(sender As Object, e As System.Windows.Forms.DrawListViewItemEventArgs) Handles lstURLs.DrawItem
+    '    If IsNothing(mDragHighlight) = False Then
+    '        If e.Item.Text = mDragHighlight.Text Then
+    '            'add a top border
+    '            e.DrawBackground()
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub lstURLs_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseDown
         If lstURLs.SelectedItems.Count > 0 Then
@@ -841,5 +867,6 @@
     Private Sub lstURLs_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseUp
         mbURLMouseDown = False
     End Sub
+#End Region
 
 End Class

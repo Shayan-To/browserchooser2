@@ -247,9 +247,19 @@ Public Class DetectedBrowsers
 
         '*** new browsers below 
 
-        'Avant
+        'Avant - user mode assumed location
+        Dim lAvant As New BrowserDefinition
+        lAvant.Name = "Avant"
+        lAvant.InstallPath = New List(Of String)
+        lAvant.InstallPath.Add("C:\Program Files\Avant Browser\avant.exe")
+        lAvant.InstallPath.Add("C:\Program Files (x86)\Avant Browser\avant.exe")
+        'add user mode
+        lAvant.SupportsNonAdmin = True
+        lAvant.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lAvant.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Avant Browser\avant.exe"})
+        lListOfKnownBrowsers.Add(lAvant)
 
-        'Seamonkey
+        'Seamonkey - user mode assumed location
         Dim lSeamonkey As New BrowserDefinition
         lSeamonkey.Name = "Seamonkey"
         lSeamonkey.InstallPath = New List(Of String)
@@ -261,11 +271,42 @@ Public Class DetectedBrowsers
         lSeamonkey.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "SeaMonkey\seamonkey.exe"})
         lListOfKnownBrowsers.Add(lSeamonkey)
 
-        'Waterfox
+        'Waterfox - user mode assumed location
+        Dim lWaterfox As New BrowserDefinition
+        lWaterfox.Name = "Waterfox"
+        lWaterfox.InstallPath = New List(Of String)
+        lWaterfox.InstallPath.Add("C:\Program Files\Waterfox\waterfox.exe")
+        lWaterfox.InstallPath.Add("C:\Program Files (x86)\Waterfox\waterfox.exe")
+        'add user mode
+        lWaterfox.SupportsNonAdmin = True
+        lWaterfox.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lWaterfox.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Waterfox\waterfox.exe"})
+        lListOfKnownBrowsers.Add(lWaterfox)
 
         'Maxthon
+        '"C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe"
+        Dim lMaxthon As New BrowserDefinition
+        lMaxthon.Name = "Maxthon"
+        lMaxthon.InstallPath = New List(Of String)
+        lMaxthon.InstallPath.Add("C:\Program Files\Maxthon\Bin\Maxthon.exe")
+        lMaxthon.InstallPath.Add("C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe")
+        'add user mode
+        lMaxthon.SupportsNonAdmin = True
+        lMaxthon.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lMaxthon.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Maxthon\Bin\Maxthon.exe"})
+        lListOfKnownBrowsers.Add(lMaxthon)
 
         'QupZilla
+        Dim lQupZilla As New BrowserDefinition
+        lQupZilla.Name = "QupZilla"
+        lQupZilla.InstallPath = New List(Of String)
+        lQupZilla.InstallPath.Add("C:\Program Files\QupZilla\qupzilla.exee")
+        lQupZilla.InstallPath.Add("C:\Program Files (x86)\QupZilla\qupzilla.exe")
+        'add user mode
+        lQupZilla.SupportsNonAdmin = True
+        lQupZilla.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
+        lQupZilla.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "QupZilla\qupzilla.exe"})
+        lListOfKnownBrowsers.Add(lQupZilla)
 
         'Pale Moon (Firefox fork) (maybe have 32 and 64 bit variants)
         Dim lPaleMoon As New BrowserDefinition
@@ -279,16 +320,16 @@ Public Class DetectedBrowsers
         lPaleMoon.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Pale Moon\palemoon.exe"})
         lListOfKnownBrowsers.Add(lPaleMoon)
 
-        'Torch  - by request (codeplex issue #1129)
+        'Torch  - by request (codeplex issue #1129) - does not appear to touch program files, but we will still scan it just in case
         Dim lTorch As New BrowserDefinition
         lTorch.Name = "Torch"
         lTorch.InstallPath = New List(Of String)
-        lTorch.InstallPath.Add("C:\Program Files\Vivaldi\Application\vivaldi.exe")
-        lTorch.InstallPath.Add("C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe")
+        lTorch.InstallPath.Add("C:\Program Files\Torch\Application\torch.exe")
+        lTorch.InstallPath.Add("C:\Program Files (x86)\Torch\Application\torch.exe")
         'add user mode
         lTorch.SupportsNonAdmin = True
         lTorch.NonAdminInstallPath = New List(Of BrowserDefinition.NonAdminPath)
-        lTorch.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Vivaldi\Application\vivaldi.exe"})
+        lTorch.NonAdminInstallPath.Add(New BrowserDefinition.NonAdminPath With {.SpecialFolder = BrowserDefinition.NonAdminPath.SpecialFolders.LocalApplicationPath, .FinalSection = "Torch\Application\torch.exe"})
         lListOfKnownBrowsers.Add(lTorch)
 
         lDetectedBrowsers.ListOfKnownBrowsers = lListOfKnownBrowsers
