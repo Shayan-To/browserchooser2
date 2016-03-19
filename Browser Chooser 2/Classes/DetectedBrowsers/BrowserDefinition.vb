@@ -24,10 +24,12 @@ Public Class BrowserDefinition
 
 
     Public Name As String
+    Public FolderName As String 'to be used only if whilecard ending is true
+    Public AlternativeExecution As String 'to be used only if universal - how to start it
     Public InstallPath As List(Of String)
     Public ExecutePath As List(Of String)
     Public IsIE As Boolean = False
-    Public IsEdge As Boolean = False 'must launch differently
+    Public IsUniversalApp As Boolean = False 'must launch differently
     Public SupportsNonAdmin As Boolean = False
     Public NonAdminInstallPath As List(Of NonAdminPath)
     Public DefaultIconIndex As Integer = 0

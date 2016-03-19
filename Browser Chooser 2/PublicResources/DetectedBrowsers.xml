@@ -7,18 +7,20 @@
         <string>C:\Program Files\Internet Explorer\iexplore.exe</string>
       </InstallPath>
       <IsIE>true</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>false</SupportsNonAdmin>
       <DefaultIconIndex>0</DefaultIconIndex>
       <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
     </BrowserDefinition>
     <BrowserDefinition>
       <Name>Edge</Name>
+      <FolderName>Microsoft.MicrosoftEdge</FolderName>
+      <AlternativeExecution>C:\Windows\explorer.exe microsoft-edge:</AlternativeExecution>
       <InstallPath>
-        <string>C:\Windows\SystemApps\Microsoft.MicrosoftEdge</string>
+        <string>C:\Windows\SystemApps</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>true</IsEdge>
+      <IsUniversalApp>true</IsUniversalApp>
       <SupportsNonAdmin>false</SupportsNonAdmin>
       <DefaultIconIndex>0</DefaultIconIndex>
       <HasWilcardEndingToPath>true</HasWilcardEndingToPath>
@@ -30,7 +32,7 @@
         <string>C:\Program Files (x86)\Mozilla Firefox\firefox.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -48,7 +50,7 @@
         <string>C:\Program Files (x86)\Firefox Developer Edition\firefox.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -66,7 +68,7 @@
         <string>C:\Program Files (x86)\Nightly\firefox.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -84,7 +86,7 @@
         <string>C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -102,7 +104,7 @@
         <string>C:\Program Files (x86)\Google\Chrome SxS\Application\chrome.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -120,7 +122,7 @@
         <string>C:\Program Files (x86)\Opera\launcher.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -138,7 +140,7 @@
         <string>C:\Program Files (x86)\Opera beta\launcher.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -156,7 +158,7 @@
         <string>C:\Program Files (x86)\Opera developer\launcher.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -174,7 +176,7 @@
         <string>C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -192,7 +194,7 @@
         <string>C:\Program Files (x86)\Avant Browser\avant.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -210,7 +212,7 @@
         <string>C:\Program Files (x86)\SeaMonkey\seamonkey.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -228,7 +230,7 @@
         <string>C:\Program Files (x86)\Waterfox\waterfox.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -246,7 +248,7 @@
         <string>C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -264,7 +266,7 @@
         <string>C:\Program Files (x86)\QupZilla\qupzilla.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -282,7 +284,7 @@
         <string>C:\Program Files (x86)\Pale Moon\palemoon.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>
@@ -300,7 +302,7 @@
         <string>C:\Program Files (x86)\Torch\Application\torch.exe</string>
       </InstallPath>
       <IsIE>false</IsIE>
-      <IsEdge>false</IsEdge>
+      <IsUniversalApp>false</IsUniversalApp>
       <SupportsNonAdmin>true</SupportsNonAdmin>
       <NonAdminInstallPath>
         <NonAdminPath>

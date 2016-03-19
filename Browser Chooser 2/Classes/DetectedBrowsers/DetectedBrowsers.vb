@@ -49,21 +49,47 @@ Public Class DetectedBrowsers
                 Dim lPosX As Integer = 1
                 For Each lDefinition As BrowserDefinition In DetectedBrowsers.ListOfKnownBrowsers
                     For Each lPath As String In lDefinition.InstallPath
-                        If My.Computer.FileSystem.FileExists(lPath) = True Then
-                            Dim lNewBrowser As New Browser
-                            lNewBrowser.Name = lDefinition.Name
-                            lNewBrowser.Target = lPath
-                            lNewBrowser.IsIE = lDefinition.IsIE
-                            lNewBrowser.Category = Utility.DEFAULT_CATEGORY
-                            lNewBrowser.Image = "(Extract)"
-                            lNewBrowser.PosX = lPosX
-                            lNewBrowser.PosY = 1
-                            lNewBrowser.GUID = Guid.NewGuid
-                            lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
 
-                            lOut.Add(lNewBrowser)
+                        If lDefinition.HasWilcardEndingToPath = True Then
+                            Dim lFiles As String() = IO.Directory.GetFiles(lPath)
 
-                            lPosX = lPosX + 1 ' it will be up to the caller to determine final position
+                            For Each lItem As String In lFiles
+                                If lItem.StartsWith(lDefinition.FolderName) = True Then
+                                    'found it - get full path
+                                    Dim lNewBrowser As New Browser
+                                    lNewBrowser.Name = lDefinition.Name
+                                    lNewBrowser.Target = lDefinition.AlternativeExecution
+                                    lNewBrowser.IsIE = False 'cannot be true
+                                    lNewBrowser.Category = Utility.DEFAULT_CATEGORY
+                                    lNewBrowser.Image = "(Extract)" ' To be be fixed
+                                    lNewBrowser.PosX = lPosX
+                                    lNewBrowser.PosY = 1
+                                    lNewBrowser.GUID = Guid.NewGuid
+                                    lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+
+                                    lOut.Add(lNewBrowser)
+
+                                    lPosX = lPosX + 1 ' it will be up to the caller to determine final position
+                                End If
+                            Next
+
+                        Else
+                            If My.Computer.FileSystem.FileExists(lPath) = True Then
+                                Dim lNewBrowser As New Browser
+                                lNewBrowser.Name = lDefinition.Name
+                                lNewBrowser.Target = lPath
+                                lNewBrowser.IsIE = lDefinition.IsIE
+                                lNewBrowser.Category = Utility.DEFAULT_CATEGORY
+                                lNewBrowser.Image = "(Extract)"
+                                lNewBrowser.PosX = lPosX
+                                lNewBrowser.PosY = 1
+                                lNewBrowser.GUID = Guid.NewGuid
+                                lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+
+                                lOut.Add(lNewBrowser)
+
+                                lPosX = lPosX + 1 ' it will be up to the caller to determine final position
+                            End If
                         End If
                     Next
 
@@ -124,8 +150,10 @@ Public Class DetectedBrowsers
         Dim lEdge As New BrowserDefinition
         lEdge.Name = "Edge"
         lEdge.InstallPath = New List(Of String)
-        lEdge.InstallPath.Add("C:\Windows\SystemApps\Microsoft.MicrosoftEdge")
-        lEdge.IsEdge = True
+        lEdge.InstallPath.Add("C:\Windows\SystemApps")
+        lEdge.FolderName = "Microsoft.MicrosoftEdge"
+        lEdge.AlternativeExecution = "C:\Windows\explorer.exe microsoft-edge:"
+        lEdge.IsUniversalApp = True
         lEdge.HasWilcardEndingToPath = True
         lEdge.IsIE = False ' important - is IE is used for opening tabs in IE since the process is different
         lListOfKnownBrowsers.Add(lEdge)
