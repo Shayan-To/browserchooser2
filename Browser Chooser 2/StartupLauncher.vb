@@ -131,17 +131,19 @@ Public Class StartupLauncher
 #Region "ShortURL deshortening"
     Private Shared mWorker As System.Threading.Thread
     Private Shared Sub mWorker_DoWork()
-        Dim lRequest As WebRequest
+        Dim lRequest As HttpWebRequest
         Dim lResponse As WebResponse = Nothing
         Try
-            lRequest = WebRequest.Create(mURL)
+            lRequest = DirectCast(WebRequest.Create(mURL), HttpWebRequest)
+            lRequest.UserAgent = gSettings.UserAgent
             lRequest.Method = WebRequestMethods.Http.Head
             lResponse = lRequest.GetResponse
 
             mURL = lResponse.ResponseUri.ToString
         Catch ex As WebException
             Try
-                lRequest = WebRequest.Create(mURL)
+                lRequest = DirectCast(WebRequest.Create(mURL), HttpWebRequest)
+                lRequest.UserAgent = gSettings.UserAgent
                 lRequest.Method = WebRequestMethods.Http.Get
                 lResponse = lRequest.GetResponse
             Catch

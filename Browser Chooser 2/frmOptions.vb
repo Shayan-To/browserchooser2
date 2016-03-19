@@ -73,6 +73,9 @@
         gSettings.DefaultDelay = CInt(nudDelayBeforeAutoload.Value)
         gSettings.Seperator = txtSeperator.Text
 
+        'more settings
+        gSettings.UserAgent = txtUserAgent.Text
+
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
         gSettings.ShowFocus = mA11YSettings.ShowFocus
@@ -316,6 +319,10 @@
         nudDelayBeforeAutoload.Value = gSettings.DefaultDelay
         txtSeperator.Text = gSettings.Seperator
 
+        'more settings
+        txtUserAgent.Text = gSettings.UserAgent
+
+        'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings
         mA11YSettings.AccessibleRendering = gSettings.AccessibleRendering
         mA11YSettings.ShowFocus = gSettings.ShowFocus
@@ -728,7 +735,8 @@
     Public Sub DetectDirty(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
         chkShowURLs.CheckedChanged, chkAutoCheckUpdate.CheckedChanged, chkPortableMode.CheckedChanged, chkRevealShortURLs.CheckedChanged, chkAdvanced.CheckedChanged, _
         nudDelayBeforeAutoload.ValueChanged, nudWidth.ValueChanged, nudHeight.ValueChanged, _
-        txtOptionsShortcut.TextChanged, txtMessage.TextChanged, txtSeperator.TextChanged
+        txtOptionsShortcut.TextChanged, txtMessage.TextChanged, txtSeperator.TextChanged, _
+        txtUserAgent.TextChanged
 
         'indicate that the screen is dirty and needs to be saved
         mbDirty = True

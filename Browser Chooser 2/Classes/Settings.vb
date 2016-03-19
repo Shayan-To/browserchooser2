@@ -29,6 +29,7 @@ Public Class Settings
     Public AccessibleRendering As Boolean 'true only if a screen reader is detected
     Public ShowFocus As Boolean 'determines if we show the black box around the main screen elements
     Public UseAreo As Boolean = True ' incase the user prefers not to have the fancy background
+    Public UserAgent As String = "Mozilla/5.0"
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
 
 

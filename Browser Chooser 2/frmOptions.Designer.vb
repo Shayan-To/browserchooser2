@@ -96,6 +96,9 @@ Partial Class frmOptions
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.tabMoreSettings = New System.Windows.Forms.TabPage()
+        Me.txtUserAgent = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -110,6 +113,7 @@ Partial Class frmOptions
         CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabDefaultBrowser.SuspendLayout()
         Me.grpScope.SuspendLayout()
+        Me.tabMoreSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -130,6 +134,7 @@ Partial Class frmOptions
         Me.tabSettings.Controls.Add(Me.tabFileTypes)
         Me.tabSettings.Controls.Add(Me.tabCategories)
         Me.tabSettings.Controls.Add(Me.tabOtherSettings)
+        Me.tabSettings.Controls.Add(Me.tabMoreSettings)
         Me.tabSettings.Controls.Add(Me.tabDefaultBrowser)
         Me.tabSettings.Location = New System.Drawing.Point(179, 12)
         Me.tabSettings.Name = "tabSettings"
@@ -841,6 +846,33 @@ Partial Class frmOptions
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
+        'tabMoreSettings
+        '
+        Me.tabMoreSettings.Controls.Add(Me.txtUserAgent)
+        Me.tabMoreSettings.Controls.Add(Me.Label8)
+        Me.tabMoreSettings.Location = New System.Drawing.Point(4, 22)
+        Me.tabMoreSettings.Name = "tabMoreSettings"
+        Me.tabMoreSettings.Size = New System.Drawing.Size(439, 230)
+        Me.tabMoreSettings.TabIndex = 8
+        Me.tabMoreSettings.Text = "More Settings"
+        Me.tabMoreSettings.UseVisualStyleBackColor = True
+        '
+        'txtUserAgent
+        '
+        Me.txtUserAgent.Location = New System.Drawing.Point(159, 3)
+        Me.txtUserAgent.Name = "txtUserAgent"
+        Me.txtUserAgent.Size = New System.Drawing.Size(277, 20)
+        Me.txtUserAgent.TabIndex = 16
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(110, 13)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "User Agent To Send :"
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -878,6 +910,8 @@ Partial Class frmOptions
         Me.tabDefaultBrowser.PerformLayout()
         Me.grpScope.ResumeLayout(False)
         Me.grpScope.PerformLayout()
+        Me.tabMoreSettings.ResumeLayout(False)
+        Me.tabMoreSettings.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -955,4 +989,7 @@ Partial Class frmOptions
     Friend WithEvents cmdOpenDefaultForProtocol As System.Windows.Forms.Button
     Friend WithEvents cmdOpenDefaultForFile As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents tabMoreSettings As System.Windows.Forms.TabPage
+    Friend WithEvents txtUserAgent As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class
