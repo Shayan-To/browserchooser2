@@ -288,11 +288,11 @@ Public Class DefaultBrowser
             Else
                 'If lResult = WinAPIs.ERROR_CANCELLED Then
                 'show the dialog
-                If aShowMessage = True Then
-                    If MessageBox.Show("In order to become the default for any system component, you must use Windows' Set Programs Association screen. In that screen, click on 'Select All' and then Save. Do you want to open this screen?", "Windows 8+ Instructions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-                        Exit Sub
-                    End If
-                End If
+                'If aShowMessage = True Then
+                '    If MessageBox.Show("In order to become the default for any system component, you must use Windows' Set Programs Association screen. In that screen, click on 'Select All' and then Save. Do you want to open this screen?", "Windows 8+ Instructions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                '        Exit Sub
+                '    End If
+                'End If
 
                 frmOptions.TopMost = False
                 Dim aa = New WinAPIExtras.ApplicationAssociationRegistrationUI

@@ -223,9 +223,9 @@
             rbScopeUser.Checked = True
             grpScope.Enabled = False
 
-            cmdMakeDefault.Text = "Make Default*"
+            cmdMakeDefault.Text = "Show Defaults Dialog*"
             lblWarnWin8.Visible = True
-            txtWarnWin8.Visible = True
+            txtWarnWin10.Visible = True
             chkCheckDefaultOnLaunch.Enabled = False
             chkCheckDefaultOnLaunch.Checked = False
         End If
@@ -239,7 +239,7 @@
             txtWarnWin10.Visible = True
             chkCheckDefaultOnLaunch.Enabled = False
             chkCheckDefaultOnLaunch.Checked = False
-            'cmdMakeDefault.Enabled = False
+            cmdMakeDefault.Text = "Show Defaults Dialog*"
 
             'also remove the single file associations - win10 disabled that too
             cmdOpenDefaultForFile.Visible = False
@@ -574,9 +574,6 @@
             If lCategories.Contains(lBrowser.Value.Category) = False Then
                 lCategories.Add(lBrowser.Value.Category)
                 lstCategories.Items.Add(lBrowser.Value.Category)
-
-                'indicate that the screen is dirty and needs to be saved
-                mbDirty = True
             End If
         Next
     End Sub
@@ -742,4 +739,107 @@
             MakeDefaultSingle(String.Format(".{0}", lstFiletypes.SelectedItems(0).Text), False)
         End If
     End Sub
+
+    Private Sub lstURLs_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles lstURLs.DragDrop
+        Dim myItem As ListViewItem = DirectCast(e.Data.GetData("System.Windows.Forms.ListViewItem"), ListViewItem)
+        Dim lIndex As Integer = myItem.Index
+
+        'get target position - x and y are relative to screen
+        Dim a As Point = lstURLs.PointToClient(New Point(e.X, e.Y))
+        Dim lResult As ListViewHitTestInfo = lstURLs.HitTest(a.X, a.Y)
+
+        'if lresult is nothing, check if we moved to top or bototm
+        If IsNothing(lResult.Item) = True Then
+            If a.X < 0 Then
+                'remove the item
+                lstURLs.Items.Remove(myItem)
+
+                'move to top
+                lstURLs.Items.Insert(0, myItem)
+
+                'repeat for the internal list of urls
+                SwapURLS(0, myItem.Index - 1)
+            Else
+                'remove the item
+                lstURLs.Items.Remove(myItem)
+
+                'move to bottom
+                lstURLs.Items.Insert(lstURLs.Items.Count, myItem)
+
+                'repeat for the internal list of urls
+                SwapURLS(lstURLs.Items.Count - 1, lIndex)
+            End If
+        Else
+
+            'check to make sure wer not jus tmoving item on itself
+            If lResult.Item.Text <> myItem.Text Then
+                Dim lOldIndex As Integer = lResult.Item.Index
+                'remove the item
+                lstURLs.Items.Remove(myItem)
+
+                'add item at this location
+                lstURLs.Items.Insert(lResult.Item.Index, myItem)
+
+                'repeat for the internal list of urls
+                SwapURLS(lOldIndex - 1, lIndex)
+            End If
+        End If
+    End Sub
+
+    Private mbURLMouseDown As Boolean = False
+
+    Private mDragHighlight As ListViewItem
+    Private Sub lstURLs_DragEnter(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles lstURLs.DragEnter
+        If e.Data.GetDataPresent("System.Windows.Forms.ListViewItem") Then
+            e.Effect = DragDropEffects.Move
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+
+        mDragHighlight = Nothing
+    End Sub
+
+    Private Sub lstURLs_DragOver(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles lstURLs.DragOver
+        'get target position - x and y are relative to screen
+        Dim a As Point = lstURLs.PointToClient(New Point(e.X, e.Y))
+        Dim lResult As ListViewHitTestInfo = lstURLs.HitTest(a.X, a.Y)
+
+        'add a border
+        If IsNothing(lResult.Item) = False Then
+            If IsNothing(mDragHighlight) = True Then
+                lResult.Item.BackColor = System.Drawing.SystemColors.Highlight
+                mDragHighlight = lResult.Item
+            Else
+                If mDragHighlight.Text <> lResult.Item.Text Then
+                    mDragHighlight.BackColor = System.Drawing.SystemColors.Window
+                End If
+                lResult.Item.BackColor = System.Drawing.SystemColors.Highlight
+            End If
+        Else
+            If IsNothing(mDragHighlight) = False Then
+                mDragHighlight.BackColor = System.Drawing.SystemColors.Window
+            End If
+        End If
+        mDragHighlight = lResult.Item
+    End Sub
+
+    Private Sub lstURLs_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseDown
+        If lstURLs.SelectedItems.Count > 0 Then
+            mbURLMouseDown = True
+        End If
+
+        Dim lResult As ListViewHitTestInfo = lstURLs.HitTest(e.X, e.Y)
+        Debug.Print(String.Format("lResult success = {0}, x = {1}, y = {2}", Not IsNothing(lResult.Item), e.X, e.Y))
+    End Sub
+
+    Private Sub lstURLs_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseMove
+        If mbURLMouseDown = True Then
+            lstURLs.DoDragDrop(New DataObject("System.Windows.Forms.ListViewItem", lstURLs.SelectedItems(0)), DragDropEffects.Move)
+        End If
+    End Sub
+
+    Private Sub lstURLs_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseUp
+        mbURLMouseDown = False
+    End Sub
+
 End Class

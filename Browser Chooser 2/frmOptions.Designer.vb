@@ -34,6 +34,7 @@ Partial Class frmOptions
         Me.chName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.chAssociatedProtocols = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabAutoURLs = New System.Windows.Forms.TabPage()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.cmdMoveDownAutoURL = New System.Windows.Forms.Button()
         Me.cmdMoveUpAutoURL = New System.Windows.Forms.Button()
         Me.cmdAutoURLDelete = New System.Windows.Forms.Button()
@@ -83,9 +84,7 @@ Partial Class frmOptions
         Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkShowURLs = New System.Windows.Forms.CheckBox()
         Me.tabDefaultBrowser = New System.Windows.Forms.TabPage()
-        Me.txtWarnWin10 = New System.Windows.Forms.TextBox()
         Me.lblWarnWin10 = New System.Windows.Forms.Label()
-        Me.txtWarnWin8 = New System.Windows.Forms.TextBox()
         Me.lblWarnWin8 = New System.Windows.Forms.Label()
         Me.grpScope = New System.Windows.Forms.GroupBox()
         Me.rbScopeSystem = New System.Windows.Forms.RadioButton()
@@ -93,6 +92,7 @@ Partial Class frmOptions
         Me.chkCheckDefaultOnLaunch = New System.Windows.Forms.CheckBox()
         Me.cmdMakeDefault = New System.Windows.Forms.Button()
         Me.cmdAddToDefault = New System.Windows.Forms.Button()
+        Me.txtWarnWin10 = New System.Windows.Forms.TextBox()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -201,6 +201,7 @@ Partial Class frmOptions
         'lstBrowsers
         '
         Me.lstBrowsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chName, Me.chAssociatedProtocols})
+        Me.lstBrowsers.FullRowSelect = True
         Me.lstBrowsers.HideSelection = False
         Me.lstBrowsers.Location = New System.Drawing.Point(87, 6)
         Me.lstBrowsers.MultiSelect = False
@@ -222,6 +223,7 @@ Partial Class frmOptions
         '
         'tabAutoURLs
         '
+        Me.tabAutoURLs.Controls.Add(Me.Label7)
         Me.tabAutoURLs.Controls.Add(Me.cmdMoveDownAutoURL)
         Me.tabAutoURLs.Controls.Add(Me.cmdMoveUpAutoURL)
         Me.tabAutoURLs.Controls.Add(Me.cmdAutoURLDelete)
@@ -234,6 +236,15 @@ Partial Class frmOptions
         Me.tabAutoURLs.TabIndex = 3
         Me.tabAutoURLs.Text = "Auto-URLs"
         Me.tabAutoURLs.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(87, 206)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(279, 13)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Auto-URLs are processed in order that they are displayed."
         '
         'cmdMoveDownAutoURL
         '
@@ -282,10 +293,12 @@ Partial Class frmOptions
         '
         'lstURLs
         '
+        Me.lstURLs.AllowDrop = True
         Me.lstURLs.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chURL, Me.chBrowser})
+        Me.lstURLs.FullRowSelect = True
         Me.lstURLs.Location = New System.Drawing.Point(87, 6)
         Me.lstURLs.Name = "lstURLs"
-        Me.lstURLs.Size = New System.Drawing.Size(346, 218)
+        Me.lstURLs.Size = New System.Drawing.Size(346, 195)
         Me.lstURLs.TabIndex = 5
         Me.lstURLs.UseCompatibleStateImageBehavior = False
         Me.lstURLs.View = System.Windows.Forms.View.Details
@@ -353,6 +366,7 @@ Partial Class frmOptions
         'lstProtocols
         '
         Me.lstProtocols.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader3})
+        Me.lstProtocols.FullRowSelect = True
         Me.lstProtocols.HideSelection = False
         Me.lstProtocols.Location = New System.Drawing.Point(87, 6)
         Me.lstProtocols.MultiSelect = False
@@ -425,6 +439,7 @@ Partial Class frmOptions
         'lstFiletypes
         '
         Me.lstFiletypes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
+        Me.lstFiletypes.FullRowSelect = True
         Me.lstFiletypes.HideSelection = False
         Me.lstFiletypes.Location = New System.Drawing.Point(87, 6)
         Me.lstFiletypes.MultiSelect = False
@@ -452,6 +467,7 @@ Partial Class frmOptions
         'lstCategories
         '
         Me.lstCategories.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
+        Me.lstCategories.FullRowSelect = True
         Me.lstCategories.HideSelection = False
         Me.lstCategories.Location = New System.Drawing.Point(3, 6)
         Me.lstCategories.MultiSelect = False
@@ -687,32 +703,19 @@ Partial Class frmOptions
         '
         'tabDefaultBrowser
         '
-        Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin10)
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin10)
-        Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin8)
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin8)
         Me.tabDefaultBrowser.Controls.Add(Me.grpScope)
         Me.tabDefaultBrowser.Controls.Add(Me.chkCheckDefaultOnLaunch)
         Me.tabDefaultBrowser.Controls.Add(Me.cmdMakeDefault)
         Me.tabDefaultBrowser.Controls.Add(Me.cmdAddToDefault)
+        Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin10)
         Me.tabDefaultBrowser.Location = New System.Drawing.Point(4, 22)
         Me.tabDefaultBrowser.Name = "tabDefaultBrowser"
         Me.tabDefaultBrowser.Size = New System.Drawing.Size(439, 230)
         Me.tabDefaultBrowser.TabIndex = 4
         Me.tabDefaultBrowser.Text = "Default Browser"
         Me.tabDefaultBrowser.UseVisualStyleBackColor = True
-        '
-        'txtWarnWin10
-        '
-        Me.txtWarnWin10.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtWarnWin10.Location = New System.Drawing.Point(220, 70)
-        Me.txtWarnWin10.Multiline = True
-        Me.txtWarnWin10.Name = "txtWarnWin10"
-        Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
-        Me.txtWarnWin10.TabIndex = 7
-        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to to open the dialog that would allow you t" & _
-    "o manually grant default browser status."
-        Me.txtWarnWin10.Visible = False
         '
         'lblWarnWin10
         '
@@ -724,19 +727,6 @@ Partial Class frmOptions
         Me.lblWarnWin10.TabIndex = 6
         Me.lblWarnWin10.Text = "* Note for users of Windows 10+:"
         Me.lblWarnWin10.Visible = False
-        '
-        'txtWarnWin8
-        '
-        Me.txtWarnWin8.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtWarnWin8.Location = New System.Drawing.Point(220, 68)
-        Me.txtWarnWin8.Multiline = True
-        Me.txtWarnWin8.Name = "txtWarnWin8"
-        Me.txtWarnWin8.Size = New System.Drawing.Size(178, 88)
-        Me.txtWarnWin8.TabIndex = 5
-        Me.txtWarnWin8.Text = "Microsoft no longer allows a program to automatically gain default status of eith" & _
-    "er a a protocol (Browser) or Filetypes. You must manually grant them using the M" & _
-    "ake Default Button."
-        Me.txtWarnWin8.Visible = False
         '
         'lblWarnWin8
         '
@@ -810,6 +800,19 @@ Partial Class frmOptions
         Me.cmdAddToDefault.Text = "Add to Default Programs"
         Me.cmdAddToDefault.UseVisualStyleBackColor = True
         '
+        'txtWarnWin10
+        '
+        Me.txtWarnWin10.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtWarnWin10.Location = New System.Drawing.Point(220, 70)
+        Me.txtWarnWin10.Multiline = True
+        Me.txtWarnWin10.Name = "txtWarnWin10"
+        Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
+        Me.txtWarnWin10.TabIndex = 7
+        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to automatically gain default status of eith" & _
+    "er a a protocol (Browser) or Filetypes.  You must manully assign them via the De" & _
+    "faults App Applet."
+        Me.txtWarnWin10.Visible = False
+        '
         'cmdSave
         '
         Me.cmdSave.Location = New System.Drawing.Point(385, 274)
@@ -860,6 +863,7 @@ Partial Class frmOptions
         Me.tabSettings.ResumeLayout(False)
         Me.tabBrowsers.ResumeLayout(False)
         Me.tabAutoURLs.ResumeLayout(False)
+        Me.tabAutoURLs.PerformLayout()
         Me.tabProtocols.ResumeLayout(False)
         Me.tabFileTypes.ResumeLayout(False)
         Me.tabCategories.ResumeLayout(False)
@@ -938,7 +942,6 @@ Partial Class frmOptions
     Friend WithEvents tabCategories As System.Windows.Forms.TabPage
     Friend WithEvents lstCategories As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents txtWarnWin8 As System.Windows.Forms.TextBox
     Friend WithEvents lblWarnWin8 As System.Windows.Forms.Label
     Friend WithEvents cmdBrowserClone As System.Windows.Forms.Button
     Friend WithEvents cmdDetectBrowsers As System.Windows.Forms.Button
@@ -951,4 +954,5 @@ Partial Class frmOptions
     Friend WithEvents lblWarnWin10 As System.Windows.Forms.Label
     Friend WithEvents cmdOpenDefaultForProtocol As System.Windows.Forms.Button
     Friend WithEvents cmdOpenDefaultForFile As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class

@@ -3,6 +3,8 @@ Imports System.IO
 Imports System.Reflection
 Imports Browser_Chooser_2.WinAPIs
 Imports System.Security.Principal
+Imports System
+Imports System.Management
 
 Public Class Utility
     Public Const DEFAULT_CATEGORY As String = "Browsers"
@@ -312,10 +314,14 @@ Public Class Utility
             Else
                 lProcess = Process.Start(strBrowser, aTarget.Arguments)
             End If
-            'Dim lID As Integer = lProcess.Id
+            Dim lID As Integer = lProcess.Id
 
-            'lProcess.WaitForInputIdle()
-            'AppActivate(lID)
+            lProcess.WaitForInputIdle()
+            If lProcess.HasExited = False Then
+                'bring this one foward - else we have no way to reliably know when it went
+                AppActivate(lID)
+            End If
+
             'End If
 
             If aTerminate = True Then

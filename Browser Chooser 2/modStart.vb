@@ -132,6 +132,8 @@ Module modStart
                         lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
                         lDelay = lURL.DelayTime
                     End If
+
+                    Exit For 'first match - look into a stop processing rule (that would be on by default)
                 End If
             Next
         End If
