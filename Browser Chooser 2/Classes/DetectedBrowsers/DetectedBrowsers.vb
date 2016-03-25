@@ -7,7 +7,7 @@ Public Class DetectedBrowsers
     Private Const UpdateFile As String = "https://browserchooser2.com/app/DetectedBrowsers.xml"
     Public ListOfKnownBrowsers As List(Of BrowserDefinition)
 
-    Private Shared Sub GetLocalfile(aLocal As String)
+    Private Shared Sub GetLocalfile(ByVal aLocal As String)
         'write the local detection file to the provided file
         'export from self
         Dim writeRes As New FileStream(aLocal, FileMode.Create)
@@ -62,21 +62,29 @@ Public Class DetectedBrowsers
                     For Each lPath As String In lDefinition.InstallPath
 
                         If lDefinition.HasWilcardEndingToPath = True Then
-                            Dim lFiles As String() = IO.Directory.GetFiles(lPath)
+                            Dim lFiles As String() = IO.Directory.GetDirectories(lPath)
+
 
                             For Each lItem As String In lFiles
-                                If lItem.StartsWith(lDefinition.FolderName) = True Then
+                                If lItem.StartsWith(String.Format("{0}\{1}", lPath, lDefinition.FolderName)) = True Then
                                     'found it - get full path
                                     Dim lNewBrowser As New Browser
                                     lNewBrowser.Name = lDefinition.Name
-                                    lNewBrowser.Target = lDefinition.AlternativeExecution
+                                    lNewBrowser.Target = lDefinition.AlternativeExecution.Path
+                                    lNewBrowser.Arguments = lDefinition.AlternativeExecution.Arguments
                                     lNewBrowser.IsIE = False 'cannot be true
                                     lNewBrowser.Category = Utility.DEFAULT_CATEGORY
                                     lNewBrowser.Image = "(Extract)" ' To be be fixed
                                     lNewBrowser.PosX = lPosX
                                     lNewBrowser.PosY = 1
                                     lNewBrowser.GUID = Guid.NewGuid
-                                    lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+
+                                    If lDefinition.DefaultIconPath <> "" Then
+                                        lNewBrowser.Image = "(Custom)"
+                                        lNewBrowser.CustomImagePath = String.Format("{0}\{1}", lItem, lDefinition.DefaultIconPath)
+                                    Else
+                                        lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+                                    End If
 
                                     lOut.Add(lNewBrowser)
 
@@ -95,7 +103,14 @@ Public Class DetectedBrowsers
                                 lNewBrowser.PosX = lPosX
                                 lNewBrowser.PosY = 1
                                 lNewBrowser.GUID = Guid.NewGuid
-                                lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+
+                                If lDefinition.DefaultIconPath <> "" Then
+                                    lNewBrowser.Image = "(Custom)"
+                                    lNewBrowser.CustomImagePath = lDefinition.DefaultIconPath
+                                Else
+                                    lNewBrowser.IconIndex = lDefinition.DefaultIconIndex
+                                End If
+
 
                                 lOut.Add(lNewBrowser)
 
@@ -163,7 +178,8 @@ Public Class DetectedBrowsers
         lEdge.InstallPath = New List(Of String)
         lEdge.InstallPath.Add("C:\Windows\SystemApps")
         lEdge.FolderName = "Microsoft.MicrosoftEdge"
-        lEdge.AlternativeExecution = "C:\Windows\explorer.exe microsoft-edge:"
+        lEdge.AlternativeExecution = New BrowserDefinition.AlternativeExecutionDetails("C:\Windows\explorer.exe", "microsoft-edge:")
+        lEdge.DefaultIconPath = "Assets\MicrosoftEdgeSquare44x44.targetsize-64_altform-unplated.png" 'because of wild card above - this is relative
         lEdge.IsUniversalApp = True
         lEdge.HasWilcardEndingToPath = True
         lEdge.IsIE = False ' important - is IE is used for opening tabs in IE since the process is different

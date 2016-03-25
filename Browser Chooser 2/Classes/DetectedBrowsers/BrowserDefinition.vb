@@ -21,11 +21,19 @@ Public Class BrowserDefinition
         End Function
     End Class
 
+    Public Structure AlternativeExecutionDetails
+        Public Path As String
+        Public Arguments As String
 
+        Sub New(ByVal aPath As String, ByVal aArguments As String)
+            Me.Path = aPath
+            Me.Arguments = aArguments
+        End Sub
+    End Structure
 
     Public Name As String
     Public FolderName As String 'to be used only if whilecard ending is true
-    Public AlternativeExecution As String 'to be used only if universal - how to start it
+    Public AlternativeExecution As AlternativeExecutionDetails 'to be used only if universal - how to start it
     Public InstallPath As List(Of String)
     Public ExecutePath As List(Of String)
     Public IsIE As Boolean = False
@@ -33,5 +41,6 @@ Public Class BrowserDefinition
     Public SupportsNonAdmin As Boolean = False
     Public NonAdminInstallPath As List(Of NonAdminPath)
     Public DefaultIconIndex As Integer = 0
+    Public DefaultIconPath As String = "" ' overrides icon index
     Public HasWilcardEndingToPath As Boolean = False ' for use with MS edge and other Metro based broswers
 End Class

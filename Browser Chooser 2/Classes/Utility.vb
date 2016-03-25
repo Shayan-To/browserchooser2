@@ -319,7 +319,11 @@ Public Class Utility
             lProcess.WaitForInputIdle()
             If lProcess.HasExited = False Then
                 'bring this one foward - else we have no way to reliably know when it went
-                AppActivate(lID)
+                Try
+                    AppActivate(lID)
+                Catch ex As Exception
+                    'do nothing - this just means that the process is gone.
+                End Try
             End If
 
             'End If
