@@ -30,6 +30,7 @@ Public Class Settings
     Public ShowFocus As Boolean 'determines if we show the black box around the main screen elements
     Public UseAreo As Boolean = True ' incase the user prefers not to have the fancy background
     Public UserAgent As String = "Mozilla/5.0"
+    Public DownloadDetectionFile As Boolean = True
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
 
 

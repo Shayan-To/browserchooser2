@@ -75,6 +75,7 @@
 
         'more settings
         gSettings.UserAgent = txtUserAgent.Text
+        gSettings.DownloadDetectionFile = chkDownloadDetectionfile.Checked
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -321,6 +322,7 @@
 
         'more settings
         txtUserAgent.Text = gSettings.UserAgent
+        chkDownloadDetectionfile.Checked = gSettings.DownloadDetectionFile
 
         'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings

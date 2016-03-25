@@ -83,6 +83,9 @@ Partial Class frmOptions
         Me.chkPortableMode = New System.Windows.Forms.CheckBox()
         Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkShowURLs = New System.Windows.Forms.CheckBox()
+        Me.tabMoreSettings = New System.Windows.Forms.TabPage()
+        Me.txtUserAgent = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.tabDefaultBrowser = New System.Windows.Forms.TabPage()
         Me.lblWarnWin10 = New System.Windows.Forms.Label()
         Me.lblWarnWin8 = New System.Windows.Forms.Label()
@@ -96,9 +99,7 @@ Partial Class frmOptions
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
-        Me.tabMoreSettings = New System.Windows.Forms.TabPage()
-        Me.txtUserAgent = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.chkDownloadDetectionfile = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -111,9 +112,9 @@ Partial Class frmOptions
         CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabMoreSettings.SuspendLayout()
         Me.tabDefaultBrowser.SuspendLayout()
         Me.grpScope.SuspendLayout()
-        Me.tabMoreSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -706,6 +707,34 @@ Partial Class frmOptions
         Me.chkShowURLs.Text = "Show &URLs in User Interface"
         Me.chkShowURLs.UseVisualStyleBackColor = True
         '
+        'tabMoreSettings
+        '
+        Me.tabMoreSettings.Controls.Add(Me.chkDownloadDetectionfile)
+        Me.tabMoreSettings.Controls.Add(Me.txtUserAgent)
+        Me.tabMoreSettings.Controls.Add(Me.Label8)
+        Me.tabMoreSettings.Location = New System.Drawing.Point(4, 22)
+        Me.tabMoreSettings.Name = "tabMoreSettings"
+        Me.tabMoreSettings.Size = New System.Drawing.Size(439, 230)
+        Me.tabMoreSettings.TabIndex = 8
+        Me.tabMoreSettings.Text = "More Settings"
+        Me.tabMoreSettings.UseVisualStyleBackColor = True
+        '
+        'txtUserAgent
+        '
+        Me.txtUserAgent.Location = New System.Drawing.Point(159, 3)
+        Me.txtUserAgent.Name = "txtUserAgent"
+        Me.txtUserAgent.Size = New System.Drawing.Size(277, 20)
+        Me.txtUserAgent.TabIndex = 16
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(110, 13)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "User Agent To Send :"
+        '
         'tabDefaultBrowser
         '
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin10)
@@ -846,32 +875,15 @@ Partial Class frmOptions
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
-        'tabMoreSettings
+        'chkDownloadDetectionfile
         '
-        Me.tabMoreSettings.Controls.Add(Me.txtUserAgent)
-        Me.tabMoreSettings.Controls.Add(Me.Label8)
-        Me.tabMoreSettings.Location = New System.Drawing.Point(4, 22)
-        Me.tabMoreSettings.Name = "tabMoreSettings"
-        Me.tabMoreSettings.Size = New System.Drawing.Size(439, 230)
-        Me.tabMoreSettings.TabIndex = 8
-        Me.tabMoreSettings.Text = "More Settings"
-        Me.tabMoreSettings.UseVisualStyleBackColor = True
-        '
-        'txtUserAgent
-        '
-        Me.txtUserAgent.Location = New System.Drawing.Point(159, 3)
-        Me.txtUserAgent.Name = "txtUserAgent"
-        Me.txtUserAgent.Size = New System.Drawing.Size(277, 20)
-        Me.txtUserAgent.TabIndex = 16
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 3)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(110, 13)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "User Agent To Send :"
+        Me.chkDownloadDetectionfile.AutoSize = True
+        Me.chkDownloadDetectionfile.Location = New System.Drawing.Point(6, 29)
+        Me.chkDownloadDetectionfile.Name = "chkDownloadDetectionfile"
+        Me.chkDownloadDetectionfile.Size = New System.Drawing.Size(271, 17)
+        Me.chkDownloadDetectionfile.TabIndex = 17
+        Me.chkDownloadDetectionfile.Text = "&Download Detection file from BrowserChooser2.com"
+        Me.chkDownloadDetectionfile.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -906,12 +918,12 @@ Partial Class frmOptions
         CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabMoreSettings.ResumeLayout(False)
+        Me.tabMoreSettings.PerformLayout()
         Me.tabDefaultBrowser.ResumeLayout(False)
         Me.tabDefaultBrowser.PerformLayout()
         Me.grpScope.ResumeLayout(False)
         Me.grpScope.PerformLayout()
-        Me.tabMoreSettings.ResumeLayout(False)
-        Me.tabMoreSettings.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -992,4 +1004,5 @@ Partial Class frmOptions
     Friend WithEvents tabMoreSettings As System.Windows.Forms.TabPage
     Friend WithEvents txtUserAgent As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents chkDownloadDetectionfile As System.Windows.Forms.CheckBox
 End Class

@@ -7,6 +7,15 @@ Public Class DetectedBrowsers
     Private Const UpdateFile As String = "https://browserchooser2.com/app/DetectedBrowsers.xml"
     Public ListOfKnownBrowsers As List(Of BrowserDefinition)
 
+    Private Shared Sub GetLocalfile(aLocal As String)
+        'write the local detection file to the provided file
+        'export from self
+        Dim writeRes As New FileStream(aLocal, FileMode.Create)
+        Dim binWrite As New BinaryWriter(writeRes)
+        binWrite.Write(My.Resources.DetectedBrowsers)
+        binWrite.Close()
+    End Sub
+
     Public Shared Function DoBrowserDetection() As List(Of Browser) 'ByVal aSettings As Settings)
         'load an xml file form internet, if that fails, use self
         Dim serializer As New XmlSerializer(GetType(DetectedBrowsers))
@@ -15,13 +24,15 @@ Public Class DetectedBrowsers
         Dim lOut As New List(Of Browser)
 #If CONFIG <> "Debug Local Detection File" Then
         Try
-            My.Computer.Network.DownloadFile(UpdateFile, lLocal, "", "", False, 5000, True)
+            If gSettings.DownloadDetectionFile = True Then
+                My.Computer.Network.DownloadFile(UpdateFile, lLocal, "", "", False, 5000, True)
+            Else
+                'export from self
+                GetLocalfile(lLocal)
+            End If
         Catch ex As Exception
             'export from self
-            Dim writeRes As New FileStream(lLocal, FileMode.Create)
-            Dim binWrite As New BinaryWriter(writeRes)
-            binWrite.Write(My.Resources.DetectedBrowsers)
-            binWrite.Close()
+            GetLocalfile(lLocal)
         End Try
 #Else
         'export from self
