@@ -19,6 +19,10 @@ Public Class Settings
     Public URLs As List(Of URL)
     Public Width As Integer
     Public Height As Integer
+    Public IconWidth As Integer = 75
+    Public IconHeight As Integer = 80
+    Public IconGapWidth As Integer = 0
+    Public IconGapHeight As Integer = 0
     Public OptionsShortcut As Char = "O"c
     Public DefaultMessage As String = "Choose a Browser"
     Public DefaultDelay As Integer = 0

@@ -164,11 +164,15 @@ Public Class frmMain
         Dim lBrowser As Browser
         Dim lToolTipText As String = ""
 
+        'set size of stub to chosen selection
+        btnAppStub.Height = gSettings.IconHeight
+        btnAppStub.Width = gSettings.IconWidth
+
         'resize form to fit x and y
-        Dim lSpaceX As Integer = btnAppStub.Width * gSettings.Width
+        Dim lSpaceX As Integer = (btnAppStub.Width + gSettings.IconGapWidth) * gSettings.Width
         Me.Width = lSpaceX + (btnAppStub.Left * 2)
 
-        Dim lSpaceY As Integer = btnAppStub.Height * gSettings.Height
+        Dim lSpaceY As Integer = (btnAppStub.Height + gSettings.IconGapHeight) * gSettings.Height
         Dim lBorderSpace As Integer = Me.Height - chkAutoClose.Height - chkAutoClose.Top
         Me.Height = lSpaceY + chkAutoClose.Height + lBorderSpace + 6 '6 gives just enough space for the custom focus box
 
@@ -186,8 +190,8 @@ Public Class frmMain
                 End If
 
                 With lControls(lIndex)
-                    .Top = btnAppStub.Top + ((lBrowser.PosY - 1) * btnAppStub.Height) ' + spacing
-                    .Left = btnAppStub.Left + ((lBrowser.PosX - 1) * btnAppStub.Width) ' + spacing
+                    .Top = btnAppStub.Top + ((lBrowser.PosY - 1) * btnAppStub.Height) + CInt(IIf(lBrowser.PosY = 1, 0, gSettings.IconGapHeight)) ' + spacing
+                    .Left = btnAppStub.Left + ((lBrowser.PosX - 1) * btnAppStub.Width) + CInt(IIf(lBrowser.PosX = 1, 0, gSettings.IconGapWidth)) ' + spacing
                     .Height = btnAppStub.Height
                     .Width = btnAppStub.Width
                     .Image = SetImage(lBrowser)
@@ -198,6 +202,7 @@ Public Class frmMain
                     .Tag = lIndex
                     .ShowFocusBox = gSettings.ShowFocus
                     .TabIndex = lBrowser.PosY * gSettings.Width + lBrowser.PosX
+                    .BringToFront()
 
                     'disable tabbing withing the buttons (to be handled by arrow keys)
                     If lIndex = 0 Then

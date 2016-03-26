@@ -68,8 +68,6 @@ Partial Class frmOptions
         Me.chkAdvanced = New System.Windows.Forms.CheckBox()
         Me.txtMessage = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtOptionsShortcut = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -84,6 +82,7 @@ Partial Class frmOptions
         Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkShowURLs = New System.Windows.Forms.CheckBox()
         Me.tabMoreSettings = New System.Windows.Forms.TabPage()
+        Me.chkDownloadDetectionfile = New System.Windows.Forms.CheckBox()
         Me.txtUserAgent = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.tabDefaultBrowser = New System.Windows.Forms.TabPage()
@@ -99,7 +98,18 @@ Partial Class frmOptions
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
-        Me.chkDownloadDetectionfile = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtOptionsShortcut = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.nudIconSizeHeight = New System.Windows.Forms.NumericUpDown()
+        Me.nudIconSizeWidth = New System.Windows.Forms.NumericUpDown()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.nudIconGapHeight = New System.Windows.Forms.NumericUpDown()
+        Me.nudIconGapWidth = New System.Windows.Forms.NumericUpDown()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -115,6 +125,12 @@ Partial Class frmOptions
         Me.tabMoreSettings.SuspendLayout()
         Me.tabDefaultBrowser.SuspendLayout()
         Me.grpScope.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.nudIconGapHeight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudIconGapWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -497,7 +513,6 @@ Partial Class frmOptions
         Me.tabOtherSettings.Controls.Add(Me.txtMessage)
         Me.tabOtherSettings.Controls.Add(Me.Label5)
         Me.tabOtherSettings.Controls.Add(Me.txtOptionsShortcut)
-        Me.tabOtherSettings.Controls.Add(Me.Label4)
         Me.tabOtherSettings.Controls.Add(Me.GroupBox1)
         Me.tabOtherSettings.Controls.Add(Me.cmdImport)
         Me.tabOtherSettings.Controls.Add(Me.Label1)
@@ -507,6 +522,7 @@ Partial Class frmOptions
         Me.tabOtherSettings.Controls.Add(Me.chkPortableMode)
         Me.tabOtherSettings.Controls.Add(Me.chkRevealShortURLs)
         Me.tabOtherSettings.Controls.Add(Me.chkShowURLs)
+        Me.tabOtherSettings.Controls.Add(Me.Label4)
         Me.tabOtherSettings.Location = New System.Drawing.Point(4, 22)
         Me.tabOtherSettings.Name = "tabOtherSettings"
         Me.tabOtherSettings.Size = New System.Drawing.Size(439, 230)
@@ -564,23 +580,6 @@ Partial Class frmOptions
         Me.Label5.Size = New System.Drawing.Size(131, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Message on main screen :"
-        '
-        'txtOptionsShortcut
-        '
-        Me.txtOptionsShortcut.Location = New System.Drawing.Point(159, 128)
-        Me.txtOptionsShortcut.MaxLength = 1
-        Me.txtOptionsShortcut.Name = "txtOptionsShortcut"
-        Me.txtOptionsShortcut.Size = New System.Drawing.Size(100, 20)
-        Me.txtOptionsShortcut.TabIndex = 12
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 131)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(156, 13)
-        Me.Label4.TabIndex = 11
-        Me.Label4.Text = "Hotkey to open Options dialog :"
         '
         'GroupBox1
         '
@@ -709,6 +708,8 @@ Partial Class frmOptions
         '
         'tabMoreSettings
         '
+        Me.tabMoreSettings.Controls.Add(Me.GroupBox3)
+        Me.tabMoreSettings.Controls.Add(Me.GroupBox2)
         Me.tabMoreSettings.Controls.Add(Me.chkDownloadDetectionfile)
         Me.tabMoreSettings.Controls.Add(Me.txtUserAgent)
         Me.tabMoreSettings.Controls.Add(Me.Label8)
@@ -718,6 +719,16 @@ Partial Class frmOptions
         Me.tabMoreSettings.TabIndex = 8
         Me.tabMoreSettings.Text = "More Settings"
         Me.tabMoreSettings.UseVisualStyleBackColor = True
+        '
+        'chkDownloadDetectionfile
+        '
+        Me.chkDownloadDetectionfile.AutoSize = True
+        Me.chkDownloadDetectionfile.Location = New System.Drawing.Point(6, 29)
+        Me.chkDownloadDetectionfile.Name = "chkDownloadDetectionfile"
+        Me.chkDownloadDetectionfile.Size = New System.Drawing.Size(271, 17)
+        Me.chkDownloadDetectionfile.TabIndex = 17
+        Me.chkDownloadDetectionfile.Text = "&Download Detection file from BrowserChooser2.com"
+        Me.chkDownloadDetectionfile.UseVisualStyleBackColor = True
         '
         'txtUserAgent
         '
@@ -729,7 +740,7 @@ Partial Class frmOptions
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 3)
+        Me.Label8.Location = New System.Drawing.Point(3, 6)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(110, 13)
         Me.Label8.TabIndex = 15
@@ -875,15 +886,120 @@ Partial Class frmOptions
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
-        'chkDownloadDetectionfile
+        'Label4
         '
-        Me.chkDownloadDetectionfile.AutoSize = True
-        Me.chkDownloadDetectionfile.Location = New System.Drawing.Point(6, 29)
-        Me.chkDownloadDetectionfile.Name = "chkDownloadDetectionfile"
-        Me.chkDownloadDetectionfile.Size = New System.Drawing.Size(271, 17)
-        Me.chkDownloadDetectionfile.TabIndex = 17
-        Me.chkDownloadDetectionfile.Text = "&Download Detection file from BrowserChooser2.com"
-        Me.chkDownloadDetectionfile.UseVisualStyleBackColor = True
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(3, 131)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(156, 13)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Hotkey to open Options dialog :"
+        '
+        'txtOptionsShortcut
+        '
+        Me.txtOptionsShortcut.Location = New System.Drawing.Point(159, 128)
+        Me.txtOptionsShortcut.MaxLength = 1
+        Me.txtOptionsShortcut.Name = "txtOptionsShortcut"
+        Me.txtOptionsShortcut.Size = New System.Drawing.Size(100, 20)
+        Me.txtOptionsShortcut.TabIndex = 12
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.nudIconSizeHeight)
+        Me.GroupBox2.Controls.Add(Me.nudIconSizeWidth)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 52)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(263, 47)
+        Me.GroupBox2.TabIndex = 18
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Size of icons in grid"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(149, 18)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(44, 13)
+        Me.Label9.TabIndex = 2
+        Me.Label9.Text = "Height :"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 20)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(41, 13)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Width :"
+        '
+        'nudIconSizeHeight
+        '
+        Me.nudIconSizeHeight.Location = New System.Drawing.Point(193, 16)
+        Me.nudIconSizeHeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudIconSizeHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudIconSizeHeight.Name = "nudIconSizeHeight"
+        Me.nudIconSizeHeight.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconSizeHeight.TabIndex = 3
+        Me.nudIconSizeHeight.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        '
+        'nudIconSizeWidth
+        '
+        Me.nudIconSizeWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconSizeWidth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudIconSizeWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudIconSizeWidth.Name = "nudIconSizeWidth"
+        Me.nudIconSizeWidth.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconSizeWidth.TabIndex = 1
+        Me.nudIconSizeWidth.Value = New Decimal(New Integer() {75, 0, 0, 0})
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.nudIconGapHeight)
+        Me.GroupBox3.Controls.Add(Me.nudIconGapWidth)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 105)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(263, 47)
+        Me.GroupBox3.TabIndex = 19
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Gap Size between icons in grid (can be negative)"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(149, 18)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(44, 13)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "Height :"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(6, 20)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(41, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Width :"
+        '
+        'nudIconGapHeight
+        '
+        Me.nudIconGapHeight.Location = New System.Drawing.Point(193, 16)
+        Me.nudIconGapHeight.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
+        Me.nudIconGapHeight.Name = "nudIconGapHeight"
+        Me.nudIconGapHeight.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconGapHeight.TabIndex = 3
+        '
+        'nudIconGapWidth
+        '
+        Me.nudIconGapWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconGapWidth.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
+        Me.nudIconGapWidth.Name = "nudIconGapWidth"
+        Me.nudIconGapWidth.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconGapWidth.TabIndex = 1
         '
         'frmOptions
         '
@@ -924,6 +1040,14 @@ Partial Class frmOptions
         Me.tabDefaultBrowser.PerformLayout()
         Me.grpScope.ResumeLayout(False)
         Me.grpScope.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        CType(Me.nudIconGapHeight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudIconGapWidth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -957,8 +1081,6 @@ Partial Class frmOptions
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents nudHeight As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudWidth As System.Windows.Forms.NumericUpDown
-    Friend WithEvents txtOptionsShortcut As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtMessage As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents chURL As System.Windows.Forms.ColumnHeader
@@ -1005,4 +1127,16 @@ Partial Class frmOptions
     Friend WithEvents txtUserAgent As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents chkDownloadDetectionfile As System.Windows.Forms.CheckBox
+    Friend WithEvents txtOptionsShortcut As System.Windows.Forms.TextBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents nudIconSizeHeight As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudIconSizeWidth As System.Windows.Forms.NumericUpDown
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents nudIconGapHeight As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudIconGapWidth As System.Windows.Forms.NumericUpDown
 End Class

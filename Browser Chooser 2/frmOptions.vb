@@ -76,6 +76,10 @@
         'more settings
         gSettings.UserAgent = txtUserAgent.Text
         gSettings.DownloadDetectionFile = chkDownloadDetectionfile.Checked
+        gSettings.IconWidth = CInt(nudIconSizeWidth.Value)
+        gSettings.IconHeight = CInt(nudIconSizeHeight.Value)
+        gSettings.IconGapWidth = CInt(nudIconGapWidth.Value)
+        gSettings.IconGapHeight = CInt(nudIconGapHeight.Value)
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -323,6 +327,10 @@
         'more settings
         txtUserAgent.Text = gSettings.UserAgent
         chkDownloadDetectionfile.Checked = gSettings.DownloadDetectionFile
+        nudIconSizeHeight.Value = gSettings.IconHeight
+        nudIconSizeWidth.Value = gSettings.IconWidth
+        nudIconGapHeight.Value = gSettings.IconGapHeight
+        nudIconGapWidth.Value = gSettings.IconGapWidth
 
         'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings
