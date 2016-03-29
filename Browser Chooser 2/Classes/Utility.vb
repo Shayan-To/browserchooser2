@@ -36,6 +36,23 @@ Public Class Utility
             {ListOfCommands.BuildDetectionFile, "--builddetectionfile"} _
         }
 
+    'used to build the list box, will also allow future translations
+    Public Shared ReadOnly AvailableStartingPositionsNames As New Dictionary(Of Settings.AvailableStartingPositions, String) From {
+        {Settings.AvailableStartingPositions.CenterScreen, "Center Screen"},
+        {Settings.AvailableStartingPositions.OffsetCenter, "Offset Center (Use X, Y for Offset)"},
+        {Settings.AvailableStartingPositions.XY, "X, Y"},
+        {Settings.AvailableStartingPositions.Seperator1, "--"},
+        {Settings.AvailableStartingPositions.TopLeft, "Top Left"},
+        {Settings.AvailableStartingPositions.TopRight, "Top Right"},
+        {Settings.AvailableStartingPositions.BottomLeft, "Bottom Left"},
+        {Settings.AvailableStartingPositions.BottomRight, "Bottom Right"},
+        {Settings.AvailableStartingPositions.Seperator2, "--"},
+        {Settings.AvailableStartingPositions.OffsetTopLeft, "Offset Top Left (Use X, Y for Offset)"},
+        {Settings.AvailableStartingPositions.OffsetTopRight, "Offset Top Right (Use X, Y for Offset)"},
+        {Settings.AvailableStartingPositions.OffsetBottomLeft, "Offset Bottom Left (Use X, Y for Offset)"},
+        {Settings.AvailableStartingPositions.OffsetBottomRight, "Offset Bottom Right (Use X, Y for Offset)"}
+    }
+
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio
     ' it has only been signed.
     ' OSVersionInfo comes from http://www.codeproject.com/Articles/73000/Getting-Operating-System-Version-Info-Even-for-Win. it has not been modifyed

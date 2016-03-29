@@ -80,6 +80,8 @@
         gSettings.IconHeight = CInt(nudIconSizeHeight.Value)
         gSettings.IconGapWidth = CInt(nudIconGapWidth.Value)
         gSettings.IconGapHeight = CInt(nudIconGapHeight.Value)
+        gSettings.BackgroundColor = pbBackgroundColor.BackColor.ToArgb
+        gSettings.IconScale = nudIconScale.Value
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -254,6 +256,18 @@
             cmdOpenDefaultForProtocol.Visible = False
         End If
 
+        'prepare the starting position combo box
+        cmbStartingPosition.Items.Clear()
+        For Each lItem As KeyValuePair(Of Settings.AvailableStartingPositions, String) In Utility.AvailableStartingPositionsNames
+            If lItem.Key < 0 Then
+                'seperator
+
+                cmbStartingPosition.Items.Add(StrDup(40, "-"))
+            Else
+                cmbStartingPosition.Items.Add(lItem.Value)
+            End If
+        Next
+
         'indicate that the screen is NOT dirty and DOES NOT need to be saved
         mbDirty = False
     End Sub
@@ -331,6 +345,8 @@
         nudIconSizeWidth.Value = gSettings.IconWidth
         nudIconGapHeight.Value = gSettings.IconGapHeight
         nudIconGapWidth.Value = gSettings.IconGapWidth
+        pbBackgroundColor.BackColor = Color.FromArgb(gSettings.BackgroundColor)
+        nudIconScale.Value = gSettings.IconScale
 
         'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings
@@ -887,4 +903,13 @@
     End Sub
 #End Region
 
+    Private Sub cmdChangeBackgroundColor_Click(sender As System.Object, e As System.EventArgs) Handles cmdChangeBackgroundColor.Click
+        cdColorDialog.Color = pbBackgroundColor.BackColor
+        cdColorDialog.ShowDialog()
+        pbBackgroundColor.BackColor = cdColorDialog.Color
+    End Sub
+
+    Private Sub cmdTransparentBackground_Click(sender As System.Object, e As System.EventArgs) Handles cmdTransparentBackground.Click
+        pbBackgroundColor.BackColor = Color.Transparent
+    End Sub
 End Class

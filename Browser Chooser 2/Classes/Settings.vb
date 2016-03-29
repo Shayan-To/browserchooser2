@@ -7,6 +7,24 @@ Public Class Settings
     '   NOTE: Version 2 adds the protocol and file types - automaticly added
     '   NOTE: Version 3 redoes the protocols and file types, adds accessiblity settings
     '   NOTE: Version 4 redoes the accessiblity settings and mimics v3
+    '   NOTE: Several Settings were added in Beta 2 but did not required a version bump.
+
+    Public Enum AvailableStartingPositions
+        CenterScreen
+        OffsetCenter
+        XY
+        TopLeft
+        TopRight
+        BottomLeft
+        BottomRight
+        OffsetTopLeft
+        OffsetTopRight
+        OffsetBottomLeft
+        OffsetBottomRight
+        Seperator1 = -1
+        Seperator2 = -2
+        Seperator3 = -3
+    End Enum
 
     Public Const BrowserChooserConfigFileName As String = "BrowserChooser2Config.xml"
     Public Browsers As List(Of Browser)
@@ -23,6 +41,7 @@ Public Class Settings
     Public IconHeight As Integer = 80
     Public IconGapWidth As Integer = 0
     Public IconGapHeight As Integer = 0
+    Public IconScale As Decimal = 1D
     Public OptionsShortcut As Char = "O"c
     Public DefaultMessage As String = "Choose a Browser"
     Public DefaultDelay As Integer = 0
@@ -35,9 +54,10 @@ Public Class Settings
     Public UseAreo As Boolean = True ' incase the user prefers not to have the fancy background
     Public UserAgent As String = "Mozilla/5.0"
     Public DownloadDetectionFile As Boolean = True
+    Public BackgroundColor As Integer = Color.Transparent.ToArgb
+    Public StartingPosition As Integer = AvailableStartingPositions.CenterScreen
+
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
-
-
 
     Sub New(ByVal aError As Boolean)
         SharedNew()

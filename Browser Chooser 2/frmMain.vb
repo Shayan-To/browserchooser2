@@ -19,15 +19,44 @@ Public Class frmMain
                                                 LinearGradientMode.Vertical)
                 e.Graphics.FillRectangle(br, Me.DisplayRectangle)
             End Using
-        End If
+        ElseIf mHasAero = True And gSettings.BackgroundColor <> Color.Transparent.ToArgb() Then
+            '      'Composition disabled; fake it like Microsoft does
+            '      Dim clFakeGlassColor As Integer = &HEAD1B9 ' //(185, 209, 234) This is the fake foreground glass color (for use when composition is disabled)
+            '      Dim clFakeGlassColorUnfocused As Integer = &HF2E4D7 ' //(215, 228, 242) This is the fake background glass color (for use when composition is disabled)
+            '      'The color to use depends if the form has focused or not
+            '      Dim glassColor As SolidBrush
+            '      If Me.Focused = True Then
+            '          glassColor = New SolidBrush(Color.FromArgb(gSettings.BackgroundColor))
+            '      Else
+            '          glassColor = New SolidBrush(Color.FromArgb(clFakeGlassColorUnfocused))
+            '      End If
+
+            '      e.Graphics.FillRectangle(glassColor, Me.DisplayRectangle) ' //fill rectangle with fake color
+
+
+            '      'Now we have to draw the two accent lines along the bottom.
+
+
+            '      Dim edgeHighlight As Color = ColorBlend(Color.White, glassColor, 0.33) '//mix 33% of glass color to white
+            '      dim edgeShadow as Color =new ColorBlend(Color.Black, glassColor, 0.33); //mix 33% of glass color to black
+
+            '//Draw highlight as 2nd-last row:
+            'g.DrawLine(edgeHighlight, Point(r.Left, r.Bottom-2), Point(r.Right, r.Bottom-2);
+
+            '//Draw shadow on the very last row:
+            'g.DrawLine(edgeHighlight, Point(r.Left, r.Bottom-1), Point(r.Right, r.Bottom-1);
+
+            End If
 
         MyBase.OnPaint(e)
+
     End Sub
 
     Private Sub styleXP()
         'TODO: DETERMINE WHAT BACKGROUND OR AERO STYLE TO USE - OR MAKE IT AN OPTION
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
         Me.chkAutoClose.BackColor = Color.Transparent
+        Me.chkAutoOpen.BackColor = Color.Transparent
     End Sub
 
     Protected Function frmMain_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean Handles Me.KeyUp
@@ -45,8 +74,10 @@ Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         mHasAero = Utility.IsAeroEnabled() And gSettings.UseAreo
-        If mHasAero = True Then
+        If mHasAero = True And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
             Utility.MakeFormGlassy(Me)
+        Else
+            'fake it
         End If
 
         InitializeMain()
@@ -80,7 +111,7 @@ Public Class frmMain
                     End Select
 
                     'now scale that image
-                    lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale)
+                    lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale * gSettings.IconScale)
 
                 Catch ex As Exception
                     'file specified not a valid image format - set icon to default
@@ -93,7 +124,7 @@ Public Class frmMain
         Else
             'no file specifyed, extract from file, this is the new default
             lOut = Utility.GetICOFromFile(BrowserChoice.Target, BrowserChoice.IconIndex)
-            lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale)
+            lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale * gSettings.IconScale)
         End If
 
         Return lOut
@@ -176,6 +207,14 @@ Public Class frmMain
         Dim lBorderSpace As Integer = Me.Height - chkAutoClose.Height - chkAutoClose.Top
         Me.Height = lSpaceY + chkAutoClose.Height + lBorderSpace + 6 '6 gives just enough space for the custom focus box
 
+        'set on screen colors
+        If mHasAero = False And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
+            'Me.BackColor = Color.Transparent
+        ElseIf gSettings.BackgroundColor <> Color.Transparent.ToArgb Then
+            Me.BackColor = Color.FromArgb(gSettings.BackgroundColor)
+            chkAutoOpen.BackColor = Color.FromArgb(gSettings.BackgroundColor)
+            chkAutoClose.BackColor = Color.FromArgb(gSettings.BackgroundColor)
+        End If
 
         'create controls, they are added in order from browser file, with support for x y addressing
         For Each lBrowser In gSettings.Browsers
@@ -211,8 +250,10 @@ Public Class frmMain
                         .TabStop = False
                     End If
 
-                    If mHasAero = False Then
+                    If mHasAero = False And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
                         .BackColor = Color.Transparent
+                    Else
+                        .BackColor = Color.FromArgb(gSettings.BackgroundColor)
                     End If
 
                     'add tool tip
@@ -291,9 +332,15 @@ Public Class frmMain
         btnOptions.ShowFocusBox = gSettings.ShowFocus
         btnInfo.ShowFocusBox = gSettings.ShowFocus
         chkAutoClose.ShowFocusBox = gSettings.ShowFocus
-        chkAutoClose.UsesAreo = gSettings.UseAreo
         chkAutoOpen.ShowFocusBox = gSettings.ShowFocus
-        chkAutoOpen.UsesAreo = gSettings.UseAreo
+
+        If gSettings.BackgroundColor = Color.Transparent.ToArgb Then
+            chkAutoOpen.UsesAreo = gSettings.UseAreo
+            chkAutoClose.UsesAreo = gSettings.UseAreo
+        Else
+            chkAutoOpen.UsesAreo = False
+            chkAutoClose.UsesAreo = False
+        End If
 
         'recenter form
         Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
