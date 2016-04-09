@@ -84,6 +84,13 @@ Partial Class frmOptions
         Me.chkShowURLs = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tabMoreSettings = New System.Windows.Forms.TabPage()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.cmbStartingPosition = New SeparatorComboBoxTest.SeparatorComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.nudYOffset = New System.Windows.Forms.NumericUpDown()
+        Me.nudXOffset = New System.Windows.Forms.NumericUpDown()
         Me.cmdTransparentBackground = New System.Windows.Forms.Button()
         Me.pbBackgroundColor = New System.Windows.Forms.PictureBox()
         Me.cmdChangeBackgroundColor = New System.Windows.Forms.Button()
@@ -94,6 +101,8 @@ Partial Class frmOptions
         Me.nudIconGapHeight = New System.Windows.Forms.NumericUpDown()
         Me.nudIconGapWidth = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.nudIconScale = New System.Windows.Forms.NumericUpDown()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.nudIconSizeHeight = New System.Windows.Forms.NumericUpDown()
@@ -115,15 +124,6 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.nudIconScale = New System.Windows.Forms.NumericUpDown()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.nudYOffset = New System.Windows.Forms.NumericUpDown()
-        Me.nudXOffset = New System.Windows.Forms.NumericUpDown()
-        Me.cmbStartingPosition = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -137,19 +137,19 @@ Partial Class frmOptions
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMoreSettings.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbBackgroundColor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.nudIconGapHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconGapWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabDefaultBrowser.SuspendLayout()
         Me.grpScope.SuspendLayout()
-        CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox4.SuspendLayout()
-        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -189,7 +189,7 @@ Partial Class frmOptions
         Me.tabBrowsers.Location = New System.Drawing.Point(4, 22)
         Me.tabBrowsers.Name = "tabBrowsers"
         Me.tabBrowsers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabBrowsers.Size = New System.Drawing.Size(439, 230)
+        Me.tabBrowsers.Size = New System.Drawing.Size(439, 248)
         Me.tabBrowsers.TabIndex = 0
         Me.tabBrowsers.Text = "Browsers / Applications"
         Me.tabBrowsers.UseVisualStyleBackColor = True
@@ -273,7 +273,7 @@ Partial Class frmOptions
         Me.tabAutoURLs.Controls.Add(Me.lstURLs)
         Me.tabAutoURLs.Location = New System.Drawing.Point(4, 22)
         Me.tabAutoURLs.Name = "tabAutoURLs"
-        Me.tabAutoURLs.Size = New System.Drawing.Size(439, 230)
+        Me.tabAutoURLs.Size = New System.Drawing.Size(439, 248)
         Me.tabAutoURLs.TabIndex = 3
         Me.tabAutoURLs.Text = "Auto-URLs"
         Me.tabAutoURLs.UseVisualStyleBackColor = True
@@ -363,7 +363,7 @@ Partial Class frmOptions
         Me.tabProtocols.Controls.Add(Me.lstProtocols)
         Me.tabProtocols.Location = New System.Drawing.Point(4, 22)
         Me.tabProtocols.Name = "tabProtocols"
-        Me.tabProtocols.Size = New System.Drawing.Size(439, 230)
+        Me.tabProtocols.Size = New System.Drawing.Size(439, 248)
         Me.tabProtocols.TabIndex = 5
         Me.tabProtocols.Text = "Protocols"
         Me.tabProtocols.UseVisualStyleBackColor = True
@@ -436,7 +436,7 @@ Partial Class frmOptions
         Me.tabFileTypes.Controls.Add(Me.lstFiletypes)
         Me.tabFileTypes.Location = New System.Drawing.Point(4, 22)
         Me.tabFileTypes.Name = "tabFileTypes"
-        Me.tabFileTypes.Size = New System.Drawing.Size(439, 230)
+        Me.tabFileTypes.Size = New System.Drawing.Size(439, 248)
         Me.tabFileTypes.TabIndex = 6
         Me.tabFileTypes.Text = "File Types"
         Me.tabFileTypes.UseVisualStyleBackColor = True
@@ -761,6 +761,84 @@ Partial Class frmOptions
         Me.tabMoreSettings.Text = "More Settings"
         Me.tabMoreSettings.UseVisualStyleBackColor = True
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label17)
+        Me.GroupBox4.Controls.Add(Me.cmbStartingPosition)
+        Me.GroupBox4.Controls.Add(Me.Label15)
+        Me.GroupBox4.Controls.Add(Me.Label16)
+        Me.GroupBox4.Controls.Add(Me.nudYOffset)
+        Me.GroupBox4.Controls.Add(Me.nudXOffset)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 158)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(430, 47)
+        Me.GroupBox4.TabIndex = 20
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Main Screen Starting Position"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(6, 20)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(83, 13)
+        Me.Label17.TabIndex = 5
+        Me.Label17.Text = "Starting Position"
+        '
+        'cmbStartingPosition
+        '
+        Me.cmbStartingPosition.AutoAdjustItemHeight = False
+        Me.cmbStartingPosition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cmbStartingPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbStartingPosition.DropDownWidth = 250
+        Me.cmbStartingPosition.FormattingEnabled = True
+        Me.cmbStartingPosition.Location = New System.Drawing.Point(95, 17)
+        Me.cmbStartingPosition.Name = "cmbStartingPosition"
+        Me.cmbStartingPosition.SeparatorColor = System.Drawing.Color.Black
+        Me.cmbStartingPosition.SeparatorMargin = 1
+        Me.cmbStartingPosition.SeparatorStyle = System.Drawing.Drawing2D.DashStyle.Solid
+        Me.cmbStartingPosition.SeparatorWidth = 1
+        Me.cmbStartingPosition.Size = New System.Drawing.Size(142, 21)
+        Me.cmbStartingPosition.TabIndex = 4
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(335, 20)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(17, 13)
+        Me.Label15.TabIndex = 2
+        Me.Label15.Text = "Y:"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(243, 20)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(20, 13)
+        Me.Label16.TabIndex = 0
+        Me.Label16.Text = "X :"
+        '
+        'nudYOffset
+        '
+        Me.nudYOffset.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudYOffset.Location = New System.Drawing.Point(358, 18)
+        Me.nudYOffset.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudYOffset.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
+        Me.nudYOffset.Name = "nudYOffset"
+        Me.nudYOffset.Size = New System.Drawing.Size(60, 20)
+        Me.nudYOffset.TabIndex = 3
+        '
+        'nudXOffset
+        '
+        Me.nudXOffset.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudXOffset.Location = New System.Drawing.Point(269, 18)
+        Me.nudXOffset.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudXOffset.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
+        Me.nudXOffset.Name = "nudXOffset"
+        Me.nudXOffset.Size = New System.Drawing.Size(60, 20)
+        Me.nudXOffset.TabIndex = 1
+        '
         'cmdTransparentBackground
         '
         Me.cmdTransparentBackground.Location = New System.Drawing.Point(287, 211)
@@ -858,6 +936,27 @@ Partial Class frmOptions
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Size of icons in grid"
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(292, 20)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(64, 13)
+        Me.Label14.TabIndex = 4
+        Me.Label14.Text = "Icon Scale :"
+        '
+        'nudIconScale
+        '
+        Me.nudIconScale.DecimalPlaces = 1
+        Me.nudIconScale.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudIconScale.Location = New System.Drawing.Point(358, 18)
+        Me.nudIconScale.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudIconScale.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudIconScale.Name = "nudIconScale"
+        Me.nudIconScale.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconScale.TabIndex = 5
+        Me.nudIconScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -933,7 +1032,7 @@ Partial Class frmOptions
         Me.tabDefaultBrowser.Controls.Add(Me.txtWarnWin10)
         Me.tabDefaultBrowser.Location = New System.Drawing.Point(4, 22)
         Me.tabDefaultBrowser.Name = "tabDefaultBrowser"
-        Me.tabDefaultBrowser.Size = New System.Drawing.Size(439, 230)
+        Me.tabDefaultBrowser.Size = New System.Drawing.Size(439, 248)
         Me.tabDefaultBrowser.TabIndex = 4
         Me.tabDefaultBrowser.Text = "Default Browser"
         Me.tabDefaultBrowser.UseVisualStyleBackColor = True
@@ -1067,100 +1166,6 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(292, 20)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(64, 13)
-        Me.Label14.TabIndex = 4
-        Me.Label14.Text = "Icon Scale :"
-        '
-        'nudIconScale
-        '
-        Me.nudIconScale.DecimalPlaces = 1
-        Me.nudIconScale.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudIconScale.Location = New System.Drawing.Point(358, 18)
-        Me.nudIconScale.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudIconScale.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudIconScale.Name = "nudIconScale"
-        Me.nudIconScale.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconScale.TabIndex = 5
-        Me.nudIconScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.Label17)
-        Me.GroupBox4.Controls.Add(Me.cmbStartingPosition)
-        Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Controls.Add(Me.Label16)
-        Me.GroupBox4.Controls.Add(Me.nudYOffset)
-        Me.GroupBox4.Controls.Add(Me.nudXOffset)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 158)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(430, 47)
-        Me.GroupBox4.TabIndex = 20
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Main Screen Starting Position"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(335, 20)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(17, 13)
-        Me.Label15.TabIndex = 2
-        Me.Label15.Text = "Y:"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(243, 20)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(20, 13)
-        Me.Label16.TabIndex = 0
-        Me.Label16.Text = "X :"
-        '
-        'nudYOffset
-        '
-        Me.nudYOffset.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudYOffset.Location = New System.Drawing.Point(358, 18)
-        Me.nudYOffset.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.nudYOffset.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
-        Me.nudYOffset.Name = "nudYOffset"
-        Me.nudYOffset.Size = New System.Drawing.Size(60, 20)
-        Me.nudYOffset.TabIndex = 3
-        '
-        'nudXOffset
-        '
-        Me.nudXOffset.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudXOffset.Location = New System.Drawing.Point(269, 18)
-        Me.nudXOffset.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.nudXOffset.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
-        Me.nudXOffset.Name = "nudXOffset"
-        Me.nudXOffset.Size = New System.Drawing.Size(60, 20)
-        Me.nudXOffset.TabIndex = 1
-        '
-        'cmbStartingPosition
-        '
-        Me.cmbStartingPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbStartingPosition.DropDownWidth = 250
-        Me.cmbStartingPosition.FormattingEnabled = True
-        Me.cmbStartingPosition.Items.AddRange(New Object() {"Center Screen", "Offset Center (Use X, Y for Offset)", "X, Y", "---------", "Top Left", "Top Right", "Bottom Left", "Bottom Right", "---------", "Offset Top Left (Use X, Y for Offset)", "Offset Top Right (Use X, Y for Offset)", "Offset Bottom Left (Use X, Y for Offset)", "Offset Bottom Right (Use X, Y for Offset)"})
-        Me.cmbStartingPosition.Location = New System.Drawing.Point(95, 17)
-        Me.cmbStartingPosition.Name = "cmbStartingPosition"
-        Me.cmbStartingPosition.Size = New System.Drawing.Size(142, 21)
-        Me.cmbStartingPosition.TabIndex = 4
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(6, 20)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(83, 13)
-        Me.Label17.TabIndex = 5
-        Me.Label17.Text = "Starting Position"
-        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1196,6 +1201,10 @@ Partial Class frmOptions
         CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMoreSettings.ResumeLayout(False)
         Me.tabMoreSettings.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbBackgroundColor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -1203,17 +1212,13 @@ Partial Class frmOptions
         CType(Me.nudIconGapWidth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabDefaultBrowser.ResumeLayout(False)
         Me.tabDefaultBrowser.PerformLayout()
         Me.grpScope.ResumeLayout(False)
         Me.grpScope.PerformLayout()
-        CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1318,5 +1323,5 @@ Partial Class frmOptions
     Friend WithEvents nudYOffset As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudXOffset As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents cmbStartingPosition As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbStartingPosition As SeparatorComboBoxTest.SeparatorComboBox
 End Class

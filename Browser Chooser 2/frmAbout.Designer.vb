@@ -36,6 +36,8 @@ Partial Class frmAbout
         Me.LabelCopyright = New System.Windows.Forms.Label()
         Me.llLicense = New System.Windows.Forms.LinkLabel()
         Me.cmdDiagnotics = New System.Windows.Forms.Button()
+        Me.cmdAttributions = New System.Windows.Forms.Button()
+        Me.cmdContributers = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -65,7 +67,7 @@ Partial Class frmAbout
         Me.llHome.AutoSize = True
         Me.llHome.Location = New System.Drawing.Point(43, 270)
         Me.llHome.Name = "llHome"
-        Me.llHome.Size = New System.Drawing.Size(157, 13)
+        Me.llHome.Size = New System.Drawing.Size(111, 13)
         Me.llHome.TabIndex = 2
         Me.llHome.TabStop = True
         Me.llHome.Text = "browserchooser2.com"
@@ -77,7 +79,7 @@ Partial Class frmAbout
         Me.txtContributors.Name = "txtContributors"
         Me.txtContributors.ReadOnly = True
         Me.txtContributors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtContributors.Size = New System.Drawing.Size(390, 85)
+        Me.txtContributors.Size = New System.Drawing.Size(390, 173)
         Me.txtContributors.TabIndex = 3
         Me.txtContributors.Text = "Contributors:"
         '
@@ -93,12 +95,12 @@ Partial Class frmAbout
         '
         'txtAttributions
         '
-        Me.txtAttributions.Location = New System.Drawing.Point(12, 380)
+        Me.txtAttributions.Location = New System.Drawing.Point(12, 292)
         Me.txtAttributions.Multiline = True
         Me.txtAttributions.Name = "txtAttributions"
         Me.txtAttributions.ReadOnly = True
         Me.txtAttributions.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtAttributions.Size = New System.Drawing.Size(390, 85)
+        Me.txtAttributions.Size = New System.Drawing.Size(390, 173)
         Me.txtAttributions.TabIndex = 5
         Me.txtAttributions.Text = "Attributions:"
         Me.txtAttributions.WordWrap = False
@@ -135,7 +137,7 @@ Partial Class frmAbout
         Me.llLicense.AutoSize = True
         Me.llLicense.Location = New System.Drawing.Point(215, 270)
         Me.llLicense.Name = "llLicense"
-        Me.llLicense.Size = New System.Drawing.Size(195, 13)
+        Me.llLicense.Size = New System.Drawing.Size(277, 13)
         Me.llLicense.TabIndex = 11
         Me.llLicense.TabStop = True
         Me.llLicense.Text = "https://bitbucket.org/gmyx/browserchooser2/wiki/MSPL"
@@ -149,23 +151,43 @@ Partial Class frmAbout
         Me.cmdDiagnotics.Text = "Diagnotics"
         Me.cmdDiagnotics.UseVisualStyleBackColor = True
         '
+        'cmdAttributions
+        '
+        Me.cmdAttributions.Location = New System.Drawing.Point(210, 477)
+        Me.cmdAttributions.Name = "cmdAttributions"
+        Me.cmdAttributions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAttributions.TabIndex = 13
+        Me.cmdAttributions.Text = "Attributions"
+        Me.cmdAttributions.UseVisualStyleBackColor = True
+        '
+        'cmdContributers
+        '
+        Me.cmdContributers.Location = New System.Drawing.Point(129, 477)
+        Me.cmdContributers.Name = "cmdContributers"
+        Me.cmdContributers.Size = New System.Drawing.Size(75, 23)
+        Me.cmdContributers.TabIndex = 14
+        Me.cmdContributers.Text = "Contributers"
+        Me.cmdContributers.UseVisualStyleBackColor = True
+        '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.OKButton
         Me.ClientSize = New System.Drawing.Size(414, 512)
+        Me.Controls.Add(Me.cmdContributers)
+        Me.Controls.Add(Me.cmdAttributions)
         Me.Controls.Add(Me.cmdDiagnotics)
         Me.Controls.Add(Me.llLicense)
         Me.Controls.Add(Me.LabelCopyright)
         Me.Controls.Add(Me.LabelVersion)
         Me.Controls.Add(Me.LabelProductName)
-        Me.Controls.Add(Me.txtAttributions)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.txtContributors)
         Me.Controls.Add(Me.llHome)
         Me.Controls.Add(Me.OKButton)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.txtAttributions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -192,5 +214,7 @@ Partial Class frmAbout
     Friend WithEvents LabelCopyright As System.Windows.Forms.Label
     Friend WithEvents llLicense As System.Windows.Forms.LinkLabel
     Friend WithEvents cmdDiagnotics As System.Windows.Forms.Button
+    Friend WithEvents cmdAttributions As System.Windows.Forms.Button
+    Friend WithEvents cmdContributers As System.Windows.Forms.Button
 
 End Class

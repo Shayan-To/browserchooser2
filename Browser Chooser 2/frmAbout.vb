@@ -29,10 +29,16 @@
         txtAttributions.Text = txtAttributions.Text & vbCrLf & _
             "* TAFactory.IconPack.dll: http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio and " & vbCrLf & _
             "* OSVersionInfo.dll: http://www.codeproject.com/Articles/73000/Getting-Operating-System-Version-Info-Even-for-Win. " & vbCrLf & _
-            vbTab & "Both licenced under " & vbCrLf & _
+            "* A Separator Combo/List Box: http://www.codeproject.com/Articles/18971/A-Separator-Combo-List-Box. " & vbCrLf & _
+            vbTab & "All licenced under " & vbCrLf & _
             vbTab & "The Code Project Open License (CPOL) 1.02: http://www.codeproject.com/info/cpol10.aspx. " & vbCrLf & _
-            vbTab & "The only modifycation done to the project is signing of the code." & vbCrLf
+            vbTab & "The only modifycation done to any of the projects is potentially signing of the code." & vbCrLf & _
+            vbTab & vbTab & "- Separator Combo/List Box has also been turned in DLL and had issues fixed as indentifyed in that article's comments."
+        'note that signing was an experiment - did not work as expected. Will be revisisted in the future.
 
+        txtAttributions.BringToFront()
+        txtAttributions.Enabled = True
+        txtContributors.Enabled = False
     End Sub
 
     Private Sub OKButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKButton.Click
@@ -88,5 +94,17 @@
         If MessageBox.Show(String.Format("{0}{1}Do you want to copy this to the clipboard?", lMessage, vbCrLf & vbCrLf), "Diagnotic message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
             Clipboard.SetText(lMessage)
         End If
+    End Sub
+
+    Private Sub cmdContributers_Click(sender As System.Object, e As System.EventArgs) Handles cmdContributers.Click
+        txtContributors.Enabled = True
+        txtContributors.BringToFront()
+        txtAttributions.Enabled = False
+    End Sub
+
+    Private Sub cmdAttributions_Click(sender As System.Object, e As System.EventArgs) Handles cmdAttributions.Click
+        txtAttributions.Enabled = True
+        txtAttributions.BringToFront()
+        txtContributors.Enabled = False
     End Sub
 End Class

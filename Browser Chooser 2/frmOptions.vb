@@ -82,6 +82,7 @@
         gSettings.IconGapHeight = CInt(nudIconGapHeight.Value)
         gSettings.BackgroundColor = pbBackgroundColor.BackColor.ToArgb
         gSettings.IconScale = nudIconScale.Value
+        'gSettings.StartingPosition = Utility.AvailableStartingPositionsNames(cmbStartingPosition.SelectedValue)
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -257,14 +258,21 @@
         End If
 
         'prepare the starting position combo box
+        Dim lbAddSeperator As Boolean
         cmbStartingPosition.Items.Clear()
-        For Each lItem As KeyValuePair(Of Settings.AvailableStartingPositions, String) In Utility.AvailableStartingPositionsNames
+        For Each lItem As KeyValuePair(Of Settings.AvailableStartingPositions, String) In DisplayDictionary.AvailableStartingPositionsNames
             If lItem.Key < 0 Then
                 'seperator
 
-                cmbStartingPosition.Items.Add(StrDup(40, "-"))
+                lbAddSeperator = True ' happens on the next iteration
             Else
-                cmbStartingPosition.Items.Add(lItem.Value)
+                If lbAddSeperator = True Then
+                    cmbStartingPosition.AddStringWithSeparator(DisplayDictionary.Item(lItem.Key).ToString)
+                    lbAddSeperator = False
+                Else
+                    cmbStartingPosition.AddString(DisplayDictionary.Item(lItem.Key).ToString)
+                End If
+
             End If
         Next
 
@@ -911,5 +919,14 @@
 
     Private Sub cmdTransparentBackground_Click(sender As System.Object, e As System.EventArgs) Handles cmdTransparentBackground.Click
         pbBackgroundColor.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub cmbStartingPosition_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbStartingPosition.SelectedIndexChanged
+        Debug.Print(cmbStartingPosition.SelectedIndex.ToString)
+
+        Dim l As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
+        If Not l Is Nothing Then
+            Debug.Print(l.Index.ToString & " .. " & l.ToString)
+        End If
     End Sub
 End Class

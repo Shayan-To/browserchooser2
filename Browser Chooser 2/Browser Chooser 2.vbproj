@@ -330,6 +330,7 @@
     <Compile Include="Classes\DefaultBrowser.vb" />
     <Compile Include="Classes\DetectedBrowsers\BrowserDefinition.vb" />
     <Compile Include="Classes\DetectedBrowsers\DetectedBrowsers.vb" />
+    <Compile Include="Classes\DisplayDictionary.vb" />
     <Compile Include="Classes\FileType.vb" />
     <Compile Include="Classes\IApplicationActivationManager.vb" />
     <Compile Include="Classes\Protocol.vb" />
@@ -572,6 +573,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\OSVersionInfo.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SepCombo.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SepCombo\SepCombo.csproj">
+      <Project>{54333A9B-1874-4F9F-B3DE-5D585F0799C1}</Project>
+      <Name>SepCombo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
