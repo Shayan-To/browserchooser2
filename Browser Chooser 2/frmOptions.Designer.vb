@@ -86,7 +86,7 @@ Partial Class frmOptions
         Me.tabMoreSettings = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.cmbStartingPosition = New SeparatorComboBoxTest.SeparatorComboBox()
+        Me.cmbStartingPosition = New SeparatorComboBox.SeparatorComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.nudYOffset = New System.Windows.Forms.NumericUpDown()
@@ -1323,5 +1323,5 @@ Partial Class frmOptions
     Friend WithEvents nudYOffset As System.Windows.Forms.NumericUpDown
     Friend WithEvents nudXOffset As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents cmbStartingPosition As SeparatorComboBoxTest.SeparatorComboBox
+    Friend WithEvents cmbStartingPosition As SeparatorComboBox.SeparatorComboBox
 End Class

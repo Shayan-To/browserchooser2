@@ -83,6 +83,14 @@
         gSettings.BackgroundColor = pbBackgroundColor.BackColor.ToArgb
         gSettings.IconScale = nudIconScale.Value
         'gSettings.StartingPosition = Utility.AvailableStartingPositionsNames(cmbStartingPosition.SelectedValue)
+        'gSettings.StartingPosition(-cmbStartingPosition.ItemHeight)
+
+        Dim lSelectedStartingPosition As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
+        If Not lSelectedStartingPosition Is Nothing Then
+            gSettings.StartingPosition = lSelectedStartingPosition.Index
+        Else
+            gSettings.StartingPosition = Settings.AvailableStartingPositions.CenterScreen 'center screen
+        End If
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -98,11 +106,6 @@
 
         'Save
         gSettings.DoSave(True)
-        'If gSettings.PortableMode = True Then
-        '    gSettings.Save(Application.StartupPath)
-        'Else
-        '    gSettings.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
-        'End If
 
         Application.Restart()
     End Sub
@@ -267,10 +270,10 @@
                 lbAddSeperator = True ' happens on the next iteration
             Else
                 If lbAddSeperator = True Then
-                    cmbStartingPosition.AddStringWithSeparator(DisplayDictionary.Item(lItem.Key).ToString)
+                    cmbStartingPosition.AddStringWithSeparator(DisplayDictionary.Item(lItem.Key))
                     lbAddSeperator = False
                 Else
-                    cmbStartingPosition.AddString(DisplayDictionary.Item(lItem.Key).ToString)
+                    cmbStartingPosition.AddString(DisplayDictionary.Item(lItem.Key))
                 End If
 
             End If
@@ -355,6 +358,7 @@
         nudIconGapWidth.Value = gSettings.IconGapWidth
         pbBackgroundColor.BackColor = Color.FromArgb(gSettings.BackgroundColor)
         nudIconScale.Value = gSettings.IconScale
+        cmbStartingPosition.SelectedItem = cmbStartingPosition.Items(gSettings.StartingPosition)
 
         'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings
@@ -770,7 +774,10 @@
         chkShowURLs.CheckedChanged, chkAutoCheckUpdate.CheckedChanged, chkPortableMode.CheckedChanged, chkRevealShortURLs.CheckedChanged, chkAdvanced.CheckedChanged, _
         nudDelayBeforeAutoload.ValueChanged, nudWidth.ValueChanged, nudHeight.ValueChanged, _
         txtOptionsShortcut.TextChanged, txtMessage.TextChanged, txtSeperator.TextChanged, _
-        txtUserAgent.TextChanged
+        txtUserAgent.TextChanged, chkDownloadDetectionfile.CheckedChanged, _
+        nudIconSizeHeight.ValueChanged, nudIconSizeWidth.ValueChanged, nudIconScale.ValueChanged, _
+        nudIconGapHeight.ValueChanged, nudIconGapWidth.ValueChanged, _
+        cmbStartingPosition.SelectedIndexChanged, nudXOffset.ValueChanged, nudYOffset.ValueChanged
 
         'indicate that the screen is dirty and needs to be saved
         mbDirty = True
@@ -915,18 +922,15 @@
         cdColorDialog.Color = pbBackgroundColor.BackColor
         cdColorDialog.ShowDialog()
         pbBackgroundColor.BackColor = cdColorDialog.Color
+
+        'indicate that the screen is dirty and needs to be saved
+        mbDirty = True
     End Sub
 
     Private Sub cmdTransparentBackground_Click(sender As System.Object, e As System.EventArgs) Handles cmdTransparentBackground.Click
         pbBackgroundColor.BackColor = Color.Transparent
-    End Sub
 
-    Private Sub cmbStartingPosition_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbStartingPosition.SelectedIndexChanged
-        Debug.Print(cmbStartingPosition.SelectedIndex.ToString)
-
-        Dim l As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
-        If Not l Is Nothing Then
-            Debug.Print(l.Index.ToString & " .. " & l.ToString)
-        End If
+        'indicate that the screen is dirty and needs to be saved
+        mbDirty = True
     End Sub
 End Class

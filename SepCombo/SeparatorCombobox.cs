@@ -8,15 +8,13 @@ Note:				For a Combo box with Separators
 * Modifyed to turn in DLL and fix some issues as indentifyed in that article's comments.
 ****************************************************************************************************************/
 
-using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Collections;
 using System.ComponentModel;
-using System.Diagnostics;
 
-namespace SeparatorComboBoxTest
+namespace SeparatorComboBox
 {
 	public class SeparatorComboBox : ComboBox
 	{
@@ -37,12 +35,12 @@ namespace SeparatorComboBoxTest
 
 		#region Medthods
 
-		public void AddString(string s)
+		public void AddString(object s)
 		{
 			Items.Add(s);
 		}
 
-		public void AddStringWithSeparator(string s)
+        public void AddStringWithSeparator(object s)
 		{
 			Items.Add(s);
 			_separators.Add(s);
@@ -126,13 +124,18 @@ namespace SeparatorComboBoxTest
                     if (this.Items[e.Index].ToString() == o as string)
 						sep = true;
 				}
-				else 
-				{
-					int pos = (int)o;
-					if (pos<0) pos += Items.Count;
+                else if (o is int)
+                {
+                    int pos = (int)o;
+                    if (pos < 0) pos += Items.Count;
 
-					if (e.Index == pos) sep = true;
-				}
+                    if (e.Index == pos) sep = true;
+                }
+                else
+                {
+                    if (this.Items[e.Index].ToString() == o.ToString())
+                        sep = true;
+                }
 			}
 
 			e.DrawBackground();
