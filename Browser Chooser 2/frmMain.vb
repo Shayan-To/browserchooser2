@@ -179,6 +179,48 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub AlignScreenToUserSettings()
+        Dim lPosition As Settings.AvailableStartingPositions = DirectCast(gSettings.StartingPosition, Settings.AvailableStartingPositions)
+        Select Case lPosition
+            Case Settings.AvailableStartingPositions.CenterScreen
+                Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
+                Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
+                Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
+            Case Settings.AvailableStartingPositions.XY
+                Me.Top = gSettings.OffsetY
+                Me.Left = gSettings.OffsetX
+            Case Settings.AvailableStartingPositions.TopLeft
+                Me.Top = My.Computer.Screen.Bounds.Top
+                Me.Left = My.Computer.Screen.Bounds.Left
+            Case Settings.AvailableStartingPositions.TopRight
+                Me.Top = My.Computer.Screen.Bounds.Top
+                Me.Left = My.Computer.Screen.Bounds.Right - Me.Width
+            Case Settings.AvailableStartingPositions.BottomLeft
+                Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height
+                Me.Left = My.Computer.Screen.Bounds.Left
+            Case Settings.AvailableStartingPositions.BottomRight
+                Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height
+                Me.Left = My.Computer.Screen.Bounds.Right - Me.Width
+            Case Settings.AvailableStartingPositions.OffsetTopLeft
+                Me.Top = My.Computer.Screen.Bounds.Top + gSettings.OffsetY
+                Me.Left = My.Computer.Screen.Bounds.Left + gSettings.OffsetX
+            Case Settings.AvailableStartingPositions.OffsetTopRight
+                Me.Top = My.Computer.Screen.Bounds.Top + gSettings.OffsetY
+                Me.Left = My.Computer.Screen.Bounds.Right - Me.Width + gSettings.OffsetX
+            Case Settings.AvailableStartingPositions.OffsetBottomLeft
+                Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height + gSettings.OffsetY
+                Me.Left = My.Computer.Screen.Bounds.Left + gSettings.OffsetX
+            Case Settings.AvailableStartingPositions.OffsetBottomRight
+                Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height + gSettings.OffsetY
+                Me.Left = My.Computer.Screen.Bounds.Right - Me.Width + gSettings.OffsetX
+            Case Else 'default to center screen
+                Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
+                Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
+                Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
+        End Select
+        
+    End Sub
+
     Public Sub InitializeMain()
         'build array of icons as specifyed
 
@@ -343,9 +385,9 @@ Public Class frmMain
         End If
 
         'recenter form
-        Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
-        Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
-        Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
+        'Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
+        'Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
+        'Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
 
         'launch delay, if configured
         If StartupLauncher.Delay <> 0 Then
@@ -363,6 +405,9 @@ Public Class frmMain
             chkAutoClose.Top = chkAutoOpen.Top
             Me.Height = Me.Height - chkAutoOpen.Height
         End If
+
+        'move form to user requested potions
+        AlignScreenToUserSettings()
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click

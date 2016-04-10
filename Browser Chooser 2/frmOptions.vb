@@ -82,8 +82,6 @@
         gSettings.IconGapHeight = CInt(nudIconGapHeight.Value)
         gSettings.BackgroundColor = pbBackgroundColor.BackColor.ToArgb
         gSettings.IconScale = nudIconScale.Value
-        'gSettings.StartingPosition = Utility.AvailableStartingPositionsNames(cmbStartingPosition.SelectedValue)
-        'gSettings.StartingPosition(-cmbStartingPosition.ItemHeight)
 
         Dim lSelectedStartingPosition As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
         If Not lSelectedStartingPosition Is Nothing Then
@@ -91,6 +89,9 @@
         Else
             gSettings.StartingPosition = Settings.AvailableStartingPositions.CenterScreen 'center screen
         End If
+
+        gSettings.OffsetX = CInt(nudXOffset.Value)
+        gSettings.OffsetY = CInt(nudYOffset.Value)
 
         'a11y settings
         gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
@@ -359,6 +360,8 @@
         pbBackgroundColor.BackColor = Color.FromArgb(gSettings.BackgroundColor)
         nudIconScale.Value = gSettings.IconScale
         cmbStartingPosition.SelectedItem = cmbStartingPosition.Items(gSettings.StartingPosition)
+        nudXOffset.Value = gSettings.OffsetX
+        nudYOffset.Value = gSettings.OffsetY
 
         'A11YSettings
         mA11YSettings = New frmAccessibilitySettings.A11YSettings

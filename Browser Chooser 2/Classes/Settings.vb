@@ -56,6 +56,8 @@ Public Class Settings
     Public DownloadDetectionFile As Boolean = True
     Public BackgroundColor As Integer = Color.Transparent.ToArgb
     Public StartingPosition As Integer = AvailableStartingPositions.CenterScreen
+    Public OffsetX As Integer = 0
+    Public OffsetY As Integer = 0
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
 
