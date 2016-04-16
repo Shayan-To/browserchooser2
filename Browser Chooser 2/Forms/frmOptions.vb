@@ -128,11 +128,16 @@
 
             Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
             llsiItem.Tag = mLastBrowserID + 1
+            llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
+            llsiItem.SubItems.Add(lNewBrowser.Browser.PosY.ToString)
             mLastBrowserID += 1
 
             'also save updated protocols and filetypes
             mProtocols = lNewBrowser.Protocols
             mFileTypes = lNewBrowser.FileTypes
+
+            'now display them
+            llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lNewBrowser.Browser))
 
             'indicate that the screen is dirty and needs to be saved
             mbDirty = True
@@ -162,10 +167,15 @@
                 imBrowserIcons.Images.Item(CInt(lstBrowsers.SelectedItems(0).Tag)) = ImageUtilities.ScaleImageTo(ImageUtilities.GetImage(lNewBrowser.Browser, False), New Size(16, 16))
 
                 lstBrowsers.SelectedItems(0).Text = lNewBrowser.Browser.Name
+                lstBrowsers.SelectedItems(0).SubItems(1).Text = lNewBrowser.Browser.PosX.ToString
+                lstBrowsers.SelectedItems(0).SubItems(2).Text = lNewBrowser.Browser.PosY.ToString
 
                 'also save updated protocols and filetypes
                 mProtocols = lNewBrowser.Protocols
                 mFileTypes = lNewBrowser.FileTypes
+
+                ' now display them
+                lstBrowsers.SelectedItems(0).SubItems(3).Text = GetBrowserProtocolsAndFileTypes(lNewBrowser.Browser)
 
                 'indicate that the screen is dirty and needs to be saved
                 mbDirty = True
@@ -185,11 +195,16 @@
 
                 Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
                 llsiItem.Tag = mLastBrowserID + 1
+                llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
+                llsiItem.SubItems.Add(lNewBrowser.Browser.PosY.ToString)
                 mLastBrowserID += 1
 
                 'also save updated protocols and filetypes
                 mProtocols = lNewBrowser.Protocols
                 mFileTypes = lNewBrowser.FileTypes
+
+                'now display them
+                llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lNewBrowser.Browser))
             End If
         End If
     End Sub
@@ -293,31 +308,12 @@
         'update screen from internet classes 
         Dim llsiItem As ListViewItem
 
-        'browsers
-        lstBrowsers.Items.Clear()
-        mBrowser = New Dictionary(Of Integer, Browser)
-        For Each lBrowser As Browser In gSettings.Browsers
-            Dim lSingleBrowser As Browser = DirectCast(lBrowser.Clone, Browser)
-            mBrowser.Add(mBrowser.Count, lSingleBrowser)
-            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lSingleBrowser, False))
+        'if advanced settings, show protocols and file types colomn, else remove
+        If gSettings.AdvancedScreens = False Then
+            lstBrowsers.Columns("chProtocolsAndFileTypes").Width = 0
+        End If
 
-            llsiItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
-            llsiItem.Tag = mBrowser.Count - 1
-        Next
-        mLastBrowserID = mBrowser.Count - 1
-
-        'urls
-        lstURLs.Items.Clear()
-        mURLs = New SortedDictionary(Of Integer, URL)
-        For Each lURL As URL In gSettings.URLs
-            mURLs.Add(mURLs.Count, DirectCast(lURL.Clone, URL))
-
-            llsiItem = lstURLs.Items.Add(lURL.URL)
-            llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lURL.Guid).Name)
-            llsiItem.Tag = mURLs.Count - 1
-        Next
-        mLastURLID = mURLs.Count - 1
-
+        'Note; protocols and filetypes must come first as they are referenced in the browser section
         'protocols
         lstProtocols.Items.Clear()
         mProtocols = New Dictionary(Of Integer, Protocol)
@@ -341,6 +337,35 @@
             llsiItem.SubItems.Add(lFileType.Extention)
         Next
         mLastFileTypeID = mFileTypes.Count - 1
+
+        'browsers
+        lstBrowsers.Items.Clear()
+        mBrowser = New Dictionary(Of Integer, Browser)
+        For Each lBrowser As Browser In gSettings.Browsers
+            Dim lSingleBrowser As Browser = DirectCast(lBrowser.Clone, Browser)
+            mBrowser.Add(mBrowser.Count, lSingleBrowser)
+            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lSingleBrowser, False))
+
+            llsiItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
+            llsiItem.Tag = mBrowser.Count - 1
+            llsiItem.SubItems.Add(lBrowser.PosX.ToString)
+            llsiItem.SubItems.Add(lBrowser.PosY.ToString)
+
+            llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lBrowser))
+        Next
+        mLastBrowserID = mBrowser.Count - 1
+
+        'urls
+        lstURLs.Items.Clear()
+        mURLs = New SortedDictionary(Of Integer, URL)
+        For Each lURL As URL In gSettings.URLs
+            mURLs.Add(mURLs.Count, DirectCast(lURL.Clone, URL))
+
+            llsiItem = lstURLs.Items.Add(lURL.URL)
+            llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lURL.Guid).Name)
+            llsiItem.Tag = mURLs.Count - 1
+        Next
+        mLastURLID = mURLs.Count - 1
 
         'options page
         'default
@@ -943,4 +968,25 @@
         'indicate that the screen is dirty and needs to be saved
         mbDirty = True
     End Sub
+
+    Private Function GetBrowserProtocolsAndFileTypes(aBrowser As Browser) As String
+        'add the protocols and filetypes
+        Dim lItems As String = ""
+        For Each lKVP As KeyValuePair(Of Integer, Protocol) In mProtocols
+            If lKVP.Value.SupportingBrowsers.Contains(aBrowser.GUID) Then
+                lItems = String.Format("{0}{1}{2}", IIf(lItems = "", "", lItems), IIf(lItems = "", "", " ,"), lKVP.Value.ProtocolName)
+
+            End If
+        Next
+
+        'repeat for file types
+        For Each lKVP As KeyValuePair(Of Integer, FileType) In mFileTypes
+            If lKVP.Value.SupportingBrowsers.Contains(aBrowser.GUID) Then
+                lItems = String.Format("{0}{1}{2}", IIf(lItems = "", "", lItems), IIf(lItems = "", "", " ,"), lKVP.Value.FiletypeName)
+            End If
+        Next
+
+        Return lItems
+    End Function
+
 End Class

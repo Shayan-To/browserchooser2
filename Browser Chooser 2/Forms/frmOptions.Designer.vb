@@ -33,7 +33,7 @@ Partial Class frmOptions
         Me.cmdBrowserAdd = New System.Windows.Forms.Button()
         Me.lstBrowsers = New System.Windows.Forms.ListView()
         Me.chName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.chAssociatedProtocols = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.imBrowserIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutoURLs = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cmdMoveDownAutoURL = New System.Windows.Forms.Button()
@@ -125,7 +125,9 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
-        Me.imBrowserIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.chRow = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.chColumn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.chProtocolsAndFileTypes = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -243,7 +245,7 @@ Partial Class frmOptions
         '
         'lstBrowsers
         '
-        Me.lstBrowsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chName, Me.chAssociatedProtocols})
+        Me.lstBrowsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chName, Me.chRow, Me.chColumn, Me.chProtocolsAndFileTypes})
         Me.lstBrowsers.FullRowSelect = True
         Me.lstBrowsers.HideSelection = False
         Me.lstBrowsers.Location = New System.Drawing.Point(87, 6)
@@ -260,10 +262,11 @@ Partial Class frmOptions
         Me.chName.Text = "Name"
         Me.chName.Width = 109
         '
-        'chAssociatedProtocols
+        'imBrowserIcons
         '
-        Me.chAssociatedProtocols.Text = "Associated Protocols"
-        Me.chAssociatedProtocols.Width = 215
+        Me.imBrowserIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.imBrowserIcons.ImageSize = New System.Drawing.Size(16, 16)
+        Me.imBrowserIcons.TransparentColor = System.Drawing.Color.Transparent
         '
         'tabAutoURLs
         '
@@ -1169,11 +1172,18 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
-        'imBrowserIcons
+        'chRow
         '
-        Me.imBrowserIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-        Me.imBrowserIcons.ImageSize = New System.Drawing.Size(16, 16)
-        Me.imBrowserIcons.TransparentColor = System.Drawing.Color.Transparent
+        Me.chRow.Text = "Row"
+        '
+        'chColumn
+        '
+        Me.chColumn.Text = "Column"
+        '
+        'chProtocolsAndFileTypes
+        '
+        Me.chProtocolsAndFileTypes.Text = "File Types and Protocols"
+        Me.chProtocolsAndFileTypes.Width = 158
         '
         'frmOptions
         '
@@ -1282,7 +1292,6 @@ Partial Class frmOptions
     Friend WithEvents lstFiletypes As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents chAssociatedProtocols As System.Windows.Forms.ColumnHeader
     Friend WithEvents grpScope As System.Windows.Forms.GroupBox
     Friend WithEvents rbScopeSystem As System.Windows.Forms.RadioButton
     Friend WithEvents rbScopeUser As System.Windows.Forms.RadioButton
@@ -1334,4 +1343,7 @@ Partial Class frmOptions
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents cmbStartingPosition As SeparatorComboBox.SeparatorComboBox
     Friend WithEvents imBrowserIcons As System.Windows.Forms.ImageList
+    Friend WithEvents chRow As System.Windows.Forms.ColumnHeader
+    Friend WithEvents chColumn As System.Windows.Forms.ColumnHeader
+    Friend WithEvents chProtocolsAndFileTypes As System.Windows.Forms.ColumnHeader
 End Class
