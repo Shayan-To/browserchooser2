@@ -124,7 +124,9 @@
         If lfrmAdd.AddBrowser(mBrowser, mProtocols, mFileTypes, chkAdvanced.Checked, New Point(CInt(nudWidth.Value), CInt(nudHeight.Value))) = True Then
             Dim lNewBrowser As frmAddEditBrowser.BrowserReturnValue = lfrmAdd.GetData
             mBrowser.Add(mLastBrowserID + 1, lNewBrowser.Browser)
-            Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name)
+            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lNewBrowser.Browser, False))
+
+            Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
             llsiItem.Tag = mLastBrowserID + 1
             mLastBrowserID += 1
 
@@ -157,6 +159,7 @@
             If lfrmAdd.EditBrowser(mBrowser(CInt(lstBrowsers.SelectedItems(0).Tag)), mBrowser, mProtocols, mFileTypes, chkAdvanced.Checked) = True Then
                 Dim lNewBrowser As frmAddEditBrowser.BrowserReturnValue = lfrmAdd.GetData
                 mBrowser(CInt(lstBrowsers.SelectedItems(0).Tag)) = lNewBrowser.Browser
+                imBrowserIcons.Images.Item(CInt(lstBrowsers.SelectedItems(0).Tag)) = ImageUtilities.ScaleImageTo(ImageUtilities.GetImage(lNewBrowser.Browser, False), New Size(16, 16))
 
                 lstBrowsers.SelectedItems(0).Text = lNewBrowser.Browser.Name
 
@@ -178,7 +181,9 @@
             If lfrmAdd.AddBrowser(mBrowser, mProtocols, mFileTypes, chkAdvanced.Checked, New Point(CInt(nudWidth.Value), CInt(nudHeight.Value)), mBrowser(CInt(lstBrowsers.SelectedItems(0).Tag))) = True Then
                 Dim lNewBrowser As frmAddEditBrowser.BrowserReturnValue = lfrmAdd.GetData
                 mBrowser.Add(mLastBrowserID + 1, lNewBrowser.Browser)
-                Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name)
+                imBrowserIcons.Images.Add(ImageUtilities.GetImage(lNewBrowser.Browser, False))
+
+                Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
                 llsiItem.Tag = mLastBrowserID + 1
                 mLastBrowserID += 1
 
@@ -234,7 +239,7 @@
         End If
 
         'determine if Win8+, if yes, must be user
-        If Utility.IsRunningPost8 = True Then
+        If GeneralUtilities.IsRunningPost8 = True Then
             rbScopeUser.Checked = True
             grpScope.Enabled = False
 
@@ -245,7 +250,7 @@
             chkCheckDefaultOnLaunch.Checked = False
         End If
 
-        If Utility.IsRunningPost10 = True Then
+        If GeneralUtilities.IsRunningPost10 = True Then
             rbScopeUser.Checked = True
             grpScope.Enabled = False
 
@@ -292,9 +297,11 @@
         lstBrowsers.Items.Clear()
         mBrowser = New Dictionary(Of Integer, Browser)
         For Each lBrowser As Browser In gSettings.Browsers
-            mBrowser.Add(mBrowser.Count, DirectCast(lBrowser.Clone, Browser))
+            Dim lSingleBrowser As Browser = DirectCast(lBrowser.Clone, Browser)
+            mBrowser.Add(mBrowser.Count, lSingleBrowser)
+            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lSingleBrowser, False))
 
-            llsiItem = lstBrowsers.Items.Add(lBrowser.Name)
+            llsiItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
             llsiItem.Tag = mBrowser.Count - 1
         Next
         mLastBrowserID = mBrowser.Count - 1
@@ -306,7 +313,7 @@
             mURLs.Add(mURLs.Count, DirectCast(lURL.Clone, URL))
 
             llsiItem = lstURLs.Items.Add(lURL.URL)
-            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lURL.Guid).Name)
+            llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lURL.Guid).Name)
             llsiItem.Tag = mURLs.Count - 1
         Next
         mLastURLID = mURLs.Count - 1
@@ -389,7 +396,7 @@
             Dim lNewURL As URL = lfrmAdd.GetData
             mURLs.Add(mLastURLID + 1, lNewURL)
             Dim llsiItem As ListViewItem = lstURLs.Items.Add(lNewURL.URL)
-            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name)
+            llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name)
             llsiItem.Tag = mLastURLID + 1
             mLastURLID += 1
 
@@ -407,7 +414,7 @@
                 Dim lNewURL As URL = lfrmAdd.GetData
                 mURLs(CInt(lstURLs.SelectedItems(0).Tag)) = lNewURL
                 lstURLs.SelectedItems(0).Text = lNewURL.URL
-                lstURLs.SelectedItems(0).SubItems(1).Text = Utility.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name
+                lstURLs.SelectedItems(0).SubItems(1).Text = BrowserUtilities.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name
 
                 'indicate that the screen is dirty and needs to be saved
                 mbDirty = True
@@ -560,7 +567,7 @@
         If rbScopeUser.Checked = True Then
             DefaultBrowser.MakeAvailable(DefaultBrowser.Scope.sUser)
         Else
-            Utility.LaunchAdminMode(Utility.ListOfCommands.MakeAvailable)
+            GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeAvailable)
         End If
     End Sub
 
@@ -568,7 +575,7 @@
         If rbScopeUser.Checked = True Then
             DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser)
         Else
-            Utility.LaunchAdminMode(Utility.ListOfCommands.MakeDefault)
+            GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
         End If
     End Sub
 
@@ -577,7 +584,7 @@
             DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser, aDoSingle:=aItem, abIsProtocol:=abIsProtocol)
         Else
             Debug.Print("FIXME: Admin does not yet support default single")
-            Utility.LaunchAdminMode(Utility.ListOfCommands.MakeDefault) 'admin does not yet support this branch
+            GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault) 'admin does not yet support this branch
         End If
     End Sub
 
@@ -691,13 +698,13 @@
 
             'add the new GUID to the list above
             For Each lProtocol As KeyValuePair(Of Integer, Protocol) In mProtocols
-                If lProtocol.Value.DefaultCategories.Contains(Utility.DEFAULT_CATEGORY) = True Then
+                If lProtocol.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
                     lProtocol.Value.SupportingBrowsers.Add(lBrowser.GUID)
                 End If
             Next
 
             For Each lFileTypes As KeyValuePair(Of Integer, FileType) In mFileTypes
-                If lFileTypes.Value.DefaultCategories.Contains(Utility.DEFAULT_CATEGORY) = True Then
+                If lFileTypes.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
                     lFileTypes.Value.SupportingBrowsers.Add(lBrowser.GUID)
                 End If
             Next

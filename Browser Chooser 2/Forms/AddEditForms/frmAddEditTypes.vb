@@ -32,7 +32,7 @@
         Me.Text = "Add FileType"
         Me.TopMost = True
         PopulateBrowsers(aBrowsers, Nothing)
-        PopulateCategories(aBrowsers, New List(Of String) From {Utility.DEFAULT_CATEGORY})
+        PopulateCategories(aBrowsers, New List(Of String) From {GeneralUtilities.DEFAULT_CATEGORY})
 
         Me.ShowDialog()
 

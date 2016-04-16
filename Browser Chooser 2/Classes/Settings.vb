@@ -91,7 +91,7 @@ Public Class Settings
         Next
 
         Dim lDefaultCategories As New List(Of String)
-        lDefaultCategories.Add(Utility.DEFAULT_CATEGORY)
+        lDefaultCategories.Add(GeneralUtilities.DEFAULT_CATEGORY)
         CreateDefaultProtocols(lGUIDs, lDefaultCategories)
         CreateDefaultFileTypes(lGUIDs, lDefaultCategories)
 
@@ -251,7 +251,7 @@ Public Class Settings
                         lGUIDs.Add(lBrowsers.GUID)
 
                         'add the Browsers category
-                        lBrowsers.Category = Utility.DEFAULT_CATEGORY
+                        lBrowsers.Category = GeneralUtilities.DEFAULT_CATEGORY
 
                         If lBrowsers.Target.Contains(".exe ") Then
                             ' old method
@@ -282,7 +282,7 @@ Public Class Settings
                     Next
 
                     Dim lDefaultCategories As New List(Of String)
-                    lDefaultCategories.Add(Utility.DEFAULT_CATEGORY)
+                    lDefaultCategories.Add(GeneralUtilities.DEFAULT_CATEGORY)
                     lOut.CreateDefaultProtocols(lGUIDs, lDefaultCategories) 'moved dow because GUID are created above.
                     lOut.CreateDefaultFileTypes(lGUIDs, lDefaultCategories)
 

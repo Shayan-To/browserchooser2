@@ -47,7 +47,7 @@ Public Class FFCheckBox
         Dim lCheckBox As CheckBox = CType(sender, CheckBox)
 
         If Me.DesignMode = True Then Exit Sub 'do nothing
-        If Utility.IsAeroEnabled() = True And mUsesAreo = True And gSettings.AccessibleRendering = False Then
+        If GeneralUtilities.IsAeroEnabled() = True And mUsesAreo = True And gSettings.AccessibleRendering = False Then
             'draw using buffered graphics - prevents fliker
             Dim g As Graphics = Me.Parent.CreateGraphics
             Dim lRect As New Rectangle(lCheckBox.Location.X + 15, lCheckBox.Location.Y - 4, mOldwidth, mOldHeight)
@@ -79,7 +79,7 @@ Public Class FFCheckBox
             Dim g As Graphics = Me.Parent.CreateGraphics
 
             Dim lPen As New Pen(Brushes.Black, 2)
-            If Utility.IsAeroEnabled() = True And gSettings.AccessibleRendering = False Then
+            If GeneralUtilities.IsAeroEnabled() = True And gSettings.AccessibleRendering = False Then
                 g.DrawRectangle(lPen, Me.Location.X - 5, Me.Location.Y - 5, mOldwidth + 10, mOldHeight)
             Else
                 g.DrawRectangle(lPen, Me.Location.X - 5, Me.Location.Y - 5, Me.Width + 10, Me.Height + 10)

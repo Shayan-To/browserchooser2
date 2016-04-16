@@ -45,7 +45,7 @@
         Else
             chkIsActive.Checked = True
             cmbStandard.Text = "(Extract)"
-            cmbCategory.Text = Utility.DEFAULT_CATEGORY
+            cmbCategory.Text = GeneralUtilities.DEFAULT_CATEGORY
             chkVisible.Checked = True
             nudScale.Value = 1
         End If
@@ -80,13 +80,13 @@
 
         'add the new GUID to the list above
         For Each lProtocol As KeyValuePair(Of Integer, Protocol) In mProtocols
-            If lProtocol.Value.DefaultCategories.Contains(Utility.DEFAULT_CATEGORY) = True Then
+            If lProtocol.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
                 lProtocol.Value.SupportingBrowsers.Add(mGUID)
             End If
         Next
 
         For Each lFileTypes As KeyValuePair(Of Integer, FileType) In mFileTypes
-            If lFileTypes.Value.DefaultCategories.Contains(Utility.DEFAULT_CATEGORY) = True Then
+            If lFileTypes.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
                 lFileTypes.Value.SupportingBrowsers.Add(mGUID)
             End If
         Next

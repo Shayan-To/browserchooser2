@@ -24,7 +24,7 @@ Module modStart
         If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
             'see if current doesn't exists
             If Not File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName)) Then
-                If Utility.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     Dim lImporter As New Importer(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName))
 
                 End If
@@ -32,7 +32,7 @@ Module modStart
         ElseIf File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName) Then
             'non portable mode
             If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\" & Settings.BrowserChooserConfigFileName) Then
-                If Utility.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     Dim lImporter As New Importer(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)
 
                 End If
@@ -47,7 +47,7 @@ Module modStart
         If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
             'see if current doesn't exists
             If Not File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName)) Then
-                If Utility.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     Dim lImporter As New Importer(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName))
 
                 End If
@@ -55,7 +55,7 @@ Module modStart
         ElseIf File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName) Then
             'non portable mode
             If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\" & Settings.BrowserChooserConfigFileName) Then
-                If Utility.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     Dim lImporter As New Importer(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)
 
                 End If
@@ -100,7 +100,7 @@ Module modStart
 #End If
         End If
 
-        If gSettings.CheckDefaultOnLaunch = True And Utility.IsRunningPost8 = False Then
+        If gSettings.CheckDefaultOnLaunch = True And GeneralUtilities.IsRunningPost8 = False Then
             DefaultBrowser.CheckIfIsDefault()
         End If
 
@@ -114,22 +114,22 @@ Module modStart
                 If MatchURLs(lURL.URL, aURL) Then
                     'load that browser
                     If lURL.DelayTime = 0 And lURL.AutoLoad = True Then
-                        lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
+                        lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                         Exit For
 
                     ElseIf lURL.DelayTime = -1 Then
                         'look at system setting
                         If gSettings.DefaultDelay <= 0 Then
-                            lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
+                            lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                             Exit For
                         Else
                             'launch mainscreen with delay
-                            lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
+                            lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                             lDelay = gSettings.DefaultDelay
                         End If
                     Else
                         'launch mainscreen with delay
-                        lBrowser = Utility.GetBrowserByGUID(lURL.Guid)
+                        lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                         lDelay = lURL.DelayTime
                     End If
 
@@ -139,7 +139,7 @@ Module modStart
         End If
 
         If IsNothing(lBrowser) = False And lDelay = 0 Then
-            Utility.LaunchBrowser(lBrowser, aURL, True) 'launch and die
+            BrowserUtilities.LaunchBrowser(lBrowser, aURL, True) 'launch and die
         Else
             'skip checkking for migrate at this point - you have already set your settings
             Dim lMain As New frmMain
@@ -180,44 +180,44 @@ Module modStart
 
                 'special functions
                 Select Case cmdLineOption.ToLower
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.Reinstall) '  "--reinstall"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Reinstall) '  "--reinstall"
                         'make default
                         DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser) 'will do HKCU only
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.HideIcons) ' "--hideicons"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.HideIcons) ' "--hideicons"
                         'undo default, and hide traces
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.ShowIcons) '"--showicons"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ShowIcons) '"--showicons"
                         'do default, but show traces
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.FirstRun) '"--firstrun"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FirstRun) '"--firstrun"
                         're-run the start-up dialogs
                         'TODO: first run dialog, including addeing IE and co and registering as a browser
-                        Utility.LaunchAdminMode(Utility.ListOfCommands.MakeAvailable)
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.Testadmin) ' "--testadmin"
+                        GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeAvailable)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadmin) ' "--testadmin"
                         'debug purposes only
-                        Dim lCode As Integer = Utility.LaunchAdminMode(Utility.ListOfCommands.Testadminint)
+                        Dim lCode As Integer = GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.Testadminint)
                         MessageBox.Show("ExitCode: " + lCode.ToString)
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.Testadminint) '"--testadmin-int"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadminint) '"--testadmin-int"
                         MessageBox.Show("Admin mode launched")
                         Environment.ExitCode = 1 'all good
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.MakeAvailable) '"--makeavailable"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeAvailable) '"--makeavailable"
 #If CONFIG = "Debug Admin" Then
                         MsgBox("Paused to attach")
 #End If
                         LoadSettings()
                         DefaultBrowser.MakeAvailable(DefaultBrowser.Scope.sGlobal) ' used by admin mode, so is global
 
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.MakeDefault) ' "--makedefault"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeDefault) ' "--makedefault"
 #If CONFIG = "Debug Admin" Then
                         MsgBox("Paused to attach")
 #End If
                         LoadSettings()
                         DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sGlobal)
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.ApplyUpdate) ' "--applyupdate"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ApplyUpdate) ' "--applyupdate"
                         If My.Application.CommandLineArgs.Count > 1 Then
                             Updator.ApplyUpdate(My.Application.CommandLineArgs.Item(1))
                         Else
                             Updator.ApplyUpdate("")
                         End If
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.FinishApplyUpdate) ' "--finishapplyupdate"
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FinishApplyUpdate) ' "--finishapplyupdate"
                         Updator.FinishApplyUpdate()
                         lbExit = False
 #If CONFIG = "BuildDetectionFile" Then
@@ -226,10 +226,10 @@ Module modStart
                         MessageBox.Show("Detection file exported to ""C:\temp\DetectedBrowsers.xml""", "Browser Chooser 2 - Detection File Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End
 #End If
-                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.Settings), _
-                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SSettings), _
-                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SettingsBrowsers), _
-                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SettingsBrowsers)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers)
                 End Select
 
                 If lbExit = True Then

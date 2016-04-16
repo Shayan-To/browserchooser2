@@ -172,7 +172,7 @@
         If aGUID <> GUID.Empty Then
             mGUID = aGUID
         Else
-            mGUID = Utility.GetUniquedID
+            mGUID = GeneralUtilities.GetUniquedID
         End If
         msName = asName
         msTarget = asTarget

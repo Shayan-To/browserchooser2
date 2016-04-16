@@ -335,59 +335,59 @@
     <Compile Include="Classes\Updator.vb" />
     <Compile Include="Classes\WinAPIExtras.vb" />
     <Compile Include="Classes\WinAPIs.vb" />
-    <Compile Include="AddEditForms\frmAddEditProtocols.Designer.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditProtocols.Designer.vb">
       <DependentUpon>frmAddEditProtocols.vb</DependentUpon>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditProtocols.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditProtocols.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditTypes.Designer.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditTypes.Designer.vb">
       <DependentUpon>frmAddEditTypes.vb</DependentUpon>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditTypes.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditTypes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FFButton.vb">
+    <Compile Include="CustomControls\FFButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FFCheckBox.vb">
+    <Compile Include="CustomControls\FFCheckBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="frmAbout.Designer.vb">
+    <Compile Include="Forms\frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAbout.vb">
+    <Compile Include="Forms\frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BrowserList\Browser.vb" />
-    <Compile Include="AddEditForms\frmAddEditBrowser.Designer.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditBrowser.Designer.vb">
       <DependentUpon>frmAddEditBrowser.vb</DependentUpon>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditBrowser.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditBrowser.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditURL.Designer.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditURL.Designer.vb">
       <DependentUpon>frmAddEditURL.vb</DependentUpon>
     </Compile>
-    <Compile Include="AddEditForms\frmAddEditURL.vb">
+    <Compile Include="Forms\AddEditForms\frmAddEditURL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAccessibilitySettings.Designer.vb">
+    <Compile Include="Forms\frmAccessibilitySettings.Designer.vb">
       <DependentUpon>frmAccessibilitySettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAccessibilitySettings.vb">
+    <Compile Include="Forms\frmAccessibilitySettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmIcons.Designer.vb">
+    <Compile Include="Forms\frmIcons.Designer.vb">
       <DependentUpon>frmIcons.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmIcons.vb">
+    <Compile Include="Forms\frmIcons.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImportSource.Designer.vb">
+    <Compile Include="Forms\frmImportSource.Designer.vb">
       <DependentUpon>frmImportSource.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmImportSource.vb">
+    <Compile Include="Forms\frmImportSource.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Importer\Importer.vb" />
@@ -397,19 +397,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Utilities\BrowserUtilities.vb" />
+    <Compile Include="Classes\Utilities\ImageUtilities.vb" />
     <Compile Include="v1\Browser.vb" />
     <Compile Include="v1\BrowserList.vb" />
-    <Compile Include="frmOptions.Designer.vb">
+    <Compile Include="Forms\frmOptions.Designer.vb">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmOptions.vb">
+    <Compile Include="Forms\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenericBrowserControl.vb" />
-    <Compile Include="frmMain.vb">
+    <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.vb">
+    <Compile Include="Forms\frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -426,38 +427,38 @@
     </Compile>
     <Compile Include="Classes\Settings.vb" />
     <Compile Include="StartupLauncher.vb" />
-    <Compile Include="Classes\Utility.vb" />
+    <Compile Include="Classes\Utilities\GeneralUtilities.vb" />
     <Compile Include="v1\Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddEditForms\frmAddEditProtocols.resx">
+    <EmbeddedResource Include="Forms\AddEditForms\frmAddEditProtocols.resx">
       <DependentUpon>frmAddEditProtocols.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEditForms\frmAddEditTypes.resx">
+    <EmbeddedResource Include="Forms\AddEditForms\frmAddEditTypes.resx">
       <DependentUpon>frmAddEditTypes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAbout.resx">
+    <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEditForms\frmAddEditBrowser.resx">
+    <EmbeddedResource Include="Forms\AddEditForms\frmAddEditBrowser.resx">
       <DependentUpon>frmAddEditBrowser.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEditForms\frmAddEditURL.resx">
+    <EmbeddedResource Include="Forms\AddEditForms\frmAddEditURL.resx">
       <DependentUpon>frmAddEditURL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAccessibilitySettings.resx">
+    <EmbeddedResource Include="Forms\frmAccessibilitySettings.resx">
       <DependentUpon>frmAccessibilitySettings.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmIcons.resx">
+    <EmbeddedResource Include="Forms\frmIcons.resx">
       <DependentUpon>frmIcons.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImportSource.resx">
+    <EmbeddedResource Include="Forms\frmImportSource.resx">
       <DependentUpon>frmImportSource.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOptions.resx">
+    <EmbeddedResource Include="Forms\frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">

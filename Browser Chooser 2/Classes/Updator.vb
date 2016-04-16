@@ -84,7 +84,7 @@ Public Class Updator
         My.Computer.FileSystem.CopyFile(Application.ExecutablePath, lFileName)
 
         'restart proc again - almost done!
-        Utility.LaunchUserMode(Utility.ListOfCommands.FinishApplyUpdate, aURL, lFileName, False)
+        GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.FinishApplyUpdate, aURL, lFileName, False)
 
         'this process needs to exit
         Application.Exit()
@@ -102,7 +102,7 @@ Public Class Updator
         My.Computer.Network.DownloadFile(lPublicVersion.download, Application.ExecutablePath & ".new.exe", "", "", False, 60000, True)
         '#End If
 
-        Utility.LaunchUserMode(Utility.ListOfCommands.ApplyUpdate, StartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
+        GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.ApplyUpdate, StartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
 
         'this process needs to exit
         Application.Exit()

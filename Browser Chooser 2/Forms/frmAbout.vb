@@ -69,8 +69,8 @@
 
         lMessage = AddLine(lMessage, String.Format("WinAPIs.SystemParametersInfo(SPI_GETSCREENREADER): {0}", lAPIResult.ToString))
         lMessage = AddLine(lMessage, String.Format("SPI_GETSCREENREADER: {0}", lResult.ToString))
-        lMessage = AddLine(lMessage, String.Format("AERO Status: {0}", Utility.IsAeroEnabled.ToString))
-        lMessage = AddLine(lMessage, String.Format("IsAdmin: {0}", Utility.IsAdminMode.ToString))
+        lMessage = AddLine(lMessage, String.Format("AERO Status: {0}", GeneralUtilities.IsAeroEnabled.ToString))
+        lMessage = AddLine(lMessage, String.Format("IsAdmin: {0}", GeneralUtilities.IsAdminMode.ToString))
         lMessage = AddLine(lMessage, StrDup(50, "-"))
         lMessage = AddLine(lMessage, String.Format("Major: {0}, Minor: {1}", JCS.OSVersionInfo.MajorVersion.ToString, JCS.OSVersionInfo.MinorVersion.ToString))
         lMessage = AddLine(lMessage, StrDup(50, "-"))

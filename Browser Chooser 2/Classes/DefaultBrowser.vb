@@ -153,7 +153,7 @@ Public Class DefaultBrowser
             .CreateSubKey("Capabilities\FileAssociations").GetValueNames
 
             'put our canoninical name in the default of those in classes root
-            If Utility.IsRunningXP = True Then
+            If GeneralUtilities.IsRunningXP = True Then
                 Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey, RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("", mFileAssociations, RegistryValueKind.String)
             Else
                 'windows 7. if user has manully set an association there may be a deny mark on the this key, try to override
@@ -174,14 +174,14 @@ Public Class DefaultBrowser
                 'reopen it with set value permissions
                 lRegKey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\" & lKey & "\\UserChoice", RegistryKeyPermissionCheck.ReadWriteSubTree)
                 lRegKey.SetValue("Progid", mURLAssociations)
-                End If
+            End If
         Next
 
         'repeat for URLs
         For Each lKey As String In aMaster.CreateSubKey(mBC2KeyName, RegistryKeyPermissionCheck.ReadWriteSubTree) _
             .CreateSubKey("Capabilities\URLAssociations").GetValueNames
 
-            If Utility.IsRunningXP = True Then
+            If GeneralUtilities.IsRunningXP = True Then
                 'copy our stuff into here - kinds weird XP...
                 Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey & "\DefaultIcon", RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("", _
                     """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
@@ -195,7 +195,7 @@ Public Class DefaultBrowser
         Next 'and XP ends abrutly like this...
 
         'one extra for Win Vista and 7 
-        If Utility.IsRunningXP = False Then
+        If GeneralUtilities.IsRunningXP = False Then
             '                                                                          intentional front slash ---v do not change
             Registry.CurrentUser.CreateSubKey("SOFTWARE\Microsoft\Windows\Shell\Associations\MIMEAssociations\text/html\UserChoice").SetValue("Progid", mFileAssociations) 'not sure if this will work
         End If
@@ -205,7 +205,7 @@ Public Class DefaultBrowser
     End Sub
 
     Public Shared Sub MakeDefault(ByVal aScope As DefaultBrowser.Scope, Optional ByVal aForce8 As Boolean = False, Optional ByVal aShowMessage As Boolean = True, Optional aDoSingle As String = "", Optional abIsProtocol As Boolean = False)
-        If Utility.IsRunningPost8 = False And aForce8 = False Then
+        If GeneralUtilities.IsRunningPost8 = False And aForce8 = False Then
             'upto windows 7 - default programs / SPAD
             Dim lMaster As RegistryKey
 
@@ -219,7 +219,7 @@ Public Class DefaultBrowser
             lMaster.CreateSubKey("SOFTWARE\Clients\StartMenuInternet").SetValue("", mCanonical, RegistryValueKind.String)
 
             'windows XP only 
-            If Utility.IsRunningXP = True Or aScope = Scope.sUser Then
+            If GeneralUtilities.IsRunningXP = True Or aScope = Scope.sUser Then
                 If aDoSingle <> "" Then
                     Debug.Print("FIXME: Add DoSingle for Windows XP and user mode for Windows 7")
                 End If
@@ -251,7 +251,7 @@ Public Class DefaultBrowser
             Dim lString As IntPtr = Marshal.StringToCoTaskMemAuto("SOFTWARE/Clients/StartMenuInternet")
             SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, IntPtr.Zero, lString, SendMessageTimeoutFlags.SMTO_NORMAL, 100, IntPtr.Zero)
             'SHChangeNotify(SHChangeNotifyEventID.SHCNE_ASSOCCHANGED, SHChangeNotifyFlags.SHCNF_DWORD Or SHChangeNotifyFlags.SHCNF_FLUSH, Nothing, Nothing)
-        ElseIf Utility.IsRunningPost10 = True Then
+        ElseIf GeneralUtilities.IsRunningPost10 = True Then
             'scan registry keys for immersivecontrolpanel
             Dim lKey As RegistryKey = Registry.ClassesRoot.OpenSubKey("ActivatableClasses\Package")
 
@@ -319,7 +319,7 @@ Public Class DefaultBrowser
             If iaa.QueryAppIsDefaultAll(ASSOCIATIONLEVEL.AL_EFFECTIVE, mAppName, lbIsDefault) = 0 Then
                 If lbIsDefault = True Then
                     If MessageBox.Show("Browser Chooser 2 is no longer the default browser. Do you whish to re-enable?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                        Utility.LaunchAdminMode(Utility.ListOfCommands.MakeDefault)
+                        GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
                     End If
                 End If
             End If
@@ -330,7 +330,7 @@ Public Class DefaultBrowser
             'for each protocol and filetype
             For Each lProtocol In gSettings.Protocols
                 'copy our stuff into here - kinds weird XP...
-                If Utility.IsRunningXP = True Then
+                If GeneralUtilities.IsRunningXP = True Then
                     Dim lKey As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\" & lProtocol.Header, False)
 
                     If IsNothing(lKey) = True Then
@@ -368,7 +368,7 @@ Public Class DefaultBrowser
             'repeat for each filetype
             If lbFound = True Then 'short circuit
                 For Each lFileType In gSettings.FileTypes
-                    If Utility.IsRunningXP = True Then
+                    If GeneralUtilities.IsRunningXP = True Then
                         Dim lKey As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\." & lFileType.Extention, False)
 
                         If IsNothing(lKey) = True Then

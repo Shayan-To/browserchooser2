@@ -73,9 +73,9 @@ Public Class frmMain
     End Function
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        mHasAero = Utility.IsAeroEnabled() And gSettings.UseAreo
+        mHasAero = GeneralUtilities.IsAeroEnabled() And gSettings.UseAreo
         If mHasAero = True And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
-            Utility.MakeFormGlassy(Me)
+            GeneralUtilities.MakeFormGlassy(Me)
         Else
             'fake it
         End If
@@ -86,49 +86,6 @@ Public Class frmMain
             styleXP()
         End If
     End Sub
-
-    Private Function SetImage(ByRef BrowserChoice As Browser) As Image
-        Dim lOut As Image
-
-        If (Not String.IsNullOrEmpty(BrowserChoice.CustomImagePath)) Then
-            'handles absolute or relative paths, 
-            'Path.Combine(path1, path2): If path2 contains an absolute path, this method returns path2
-            Dim cImage As FileInfo = New FileInfo(Path.Combine(Application.StartupPath, BrowserChoice.CustomImagePath))
-            If (cImage.Exists) Then
-                Try
-                    Select Case cImage.Extension.ToUpper
-                        Case ".PNG"
-                            lOut = Bitmap.FromFile(cImage.FullName)
-                        Case ".ICO"
-                            lOut = New Icon(cImage.FullName, New Size(75, 80)).ToBitmap()
-                        Case ".EXE"
-                            lOut = Utility.GetICOFromFile(cImage.FullName, 0)
-                        Case ".dll"
-                            lOut = Utility.GetICOFromFile(cImage.FullName, 0)
-                        Case Else
-                            'unexpected file format - set icon to default
-                            lOut = Utility.GetICOFromFile(BrowserChoice.Target, BrowserChoice.IconIndex)
-                    End Select
-
-                    'now scale that image
-                    lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale * gSettings.IconScale)
-
-                Catch ex As Exception
-                    'file specified not a valid image format - set icon to default
-                    lOut = Utility.GetICOFromFile(BrowserChoice.Target, BrowserChoice.IconIndex)
-                End Try
-            Else
-                'file doesn't exist - set icon to edefault
-                lOut = Utility.GetICOFromFile(BrowserChoice.Target, BrowserChoice.IconIndex)
-            End If
-        Else
-            'no file specifyed, extract from file, this is the new default
-            lOut = Utility.GetICOFromFile(BrowserChoice.Target, BrowserChoice.IconIndex)
-            lOut = Utility.ScaleImage(lOut, BrowserChoice.Scale * gSettings.IconScale)
-        End If
-
-        Return lOut
-    End Function
 
     Public Sub HandleGotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseEnter, btnInfo.MouseHover, btnInfo.GotFocus, btnOptions.MouseEnter, btnOptions.MouseHover, btnOptions.GotFocus, btnCopyToClipboard.MouseHover, btnCopyToClipboard.GotFocus, btnCopyToClipboardAndClose.MouseHover, btnCopyToClipboardAndClose.GotFocus
         'get the referenced object
@@ -169,12 +126,12 @@ Public Class frmMain
         Dim lBrowser As Browser = gSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
 
         If (My.Computer.Keyboard.CtrlKeyDown) And (e.Button = Windows.Forms.MouseButtons.Left) Then
-            Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
+            BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
         ElseIf (e.Button = Windows.Forms.MouseButtons.Left) Then
             If chkAutoClose.Checked = True Then
-                Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
+                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
             Else
-                Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
+                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
             End If
         End If
     End Sub
@@ -218,7 +175,7 @@ Public Class frmMain
                 Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
                 Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
         End Select
-        
+
     End Sub
 
     Public Sub InitializeMain()
@@ -275,7 +232,7 @@ Public Class frmMain
                     .Left = btnAppStub.Left + ((lBrowser.PosX - 1) * btnAppStub.Width) + CInt(IIf(lBrowser.PosX = 1, 0, gSettings.IconGapWidth)) ' + spacing
                     .Height = btnAppStub.Height
                     .Width = btnAppStub.Width
-                    .Image = SetImage(lBrowser)
+                    .Image = ImageUtilities.GetImage(lBrowser, True)
                     .FlatStyle = FlatStyle.Flat
                     .FlatAppearance.BorderSize = 0
                     .Visible = True
@@ -423,7 +380,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DoLaunch(ByVal lBrowser As Browser)
-        Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, chkAutoClose.Checked) 'to do, add if control is pressed, do not close
+        BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, chkAutoClose.Checked) 'to do, add if control is pressed, do not close
     End Sub
 
     Private Sub HandleShortcut(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
@@ -459,8 +416,8 @@ Public Class frmMain
             End If
 
             'evaluate speparatelty
-            If Utility.KeyCodeValues.ContainsKey(e.KeyCode) = True Then
-                If lIndex <= 10 And lIndex = Utility.KeyCodeValues.Item(e.KeyCode) Then
+            If GeneralUtilities.KeyCodeValues.ContainsKey(e.KeyCode) = True Then
+                If lIndex <= 10 And lIndex = GeneralUtilities.KeyCodeValues.Item(e.KeyCode) Then
                     DoLaunch(lBrowser)
                     Exit Sub 'short circuit out of here
                 End If
@@ -599,9 +556,9 @@ Public Class frmMain
 
         If (e.KeyCode = Keys.Enter) Then
             If chkAutoClose.Checked = True Then
-                Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
+                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
             Else
-                Utility.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
+                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
             End If
         End If
     End Sub

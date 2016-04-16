@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Threading
 Imports System.ComponentModel
 Imports System.Net
-Imports Browser_Chooser_2.Utility
+Imports Browser_Chooser_2.GeneralUtilities
 
 Public Class StartupLauncher
     Public Delegate Sub UpdateURL(ByVal mURL As String)
@@ -20,7 +20,7 @@ Public Class StartupLauncher
         If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
             mbIs64Bit = True
         End If
-        Utility.LoadDLLPrep()
+        GeneralUtilities.LoadDLLPrep()
     End Sub
 
 #Region "Read-only Properties"
@@ -54,7 +54,7 @@ Public Class StartupLauncher
         End Get
     End Property
 
-    Private Shared Sub ProcessParts(ByVal aParts As Utility.URLParts)
+    Private Shared Sub ProcessParts(ByVal aParts As GeneralUtilities.URLParts)
         mSupportingBrowsers = New List(Of Guid)
 
         If aParts.isProtocol = TriState.True Then
@@ -100,7 +100,7 @@ Public Class StartupLauncher
     Public Shared Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDeletegate As UpdateURL)
         mURL = aURL
         mDeletegate = aDeletegate
-        Dim lParts As Utility.URLParts = DetermineParts(aURL)
+        Dim lParts As GeneralUtilities.URLParts = DetermineParts(aURL)
         ProcessParts(lParts)
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
@@ -116,7 +116,7 @@ Public Class StartupLauncher
         mDelay = aDelay
         mBrowser = aBrowser
         mDeletegate = aDeletegate
-        Dim lParts As Utility.URLParts = DetermineParts(aURL)
+        Dim lParts As GeneralUtilities.URLParts = DetermineParts(aURL)
         ProcessParts(lParts)
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then

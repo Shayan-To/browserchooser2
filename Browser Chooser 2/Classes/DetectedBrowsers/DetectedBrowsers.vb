@@ -73,7 +73,7 @@ Public Class DetectedBrowsers
                                     lNewBrowser.Target = lDefinition.AlternativeExecution.Path
                                     lNewBrowser.Arguments = lDefinition.AlternativeExecution.Arguments
                                     lNewBrowser.IsIE = False 'cannot be true
-                                    lNewBrowser.Category = Utility.DEFAULT_CATEGORY
+                                    lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                     lNewBrowser.Image = "(Extract)" ' To be be fixed
                                     lNewBrowser.PosX = lPosX
                                     lNewBrowser.PosY = 1
@@ -98,7 +98,7 @@ Public Class DetectedBrowsers
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = lPath
                                 lNewBrowser.IsIE = lDefinition.IsIE
-                                lNewBrowser.Category = Utility.DEFAULT_CATEGORY
+                                lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                 lNewBrowser.Image = "(Extract)"
                                 lNewBrowser.PosX = lPosX
                                 lNewBrowser.PosY = 1
@@ -126,7 +126,7 @@ Public Class DetectedBrowsers
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = BrowserDefinition.NonAdminPath.GetSpecialFolder(lPath.SpecialFolder) & "\" & lPath.FinalSection
                                 lNewBrowser.IsIE = lDefinition.IsIE
-                                lNewBrowser.Category = Utility.DEFAULT_CATEGORY
+                                lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                 lNewBrowser.Image = "(Extract)"
                                 lNewBrowser.PosX = lPosX
                                 lNewBrowser.PosY = 1

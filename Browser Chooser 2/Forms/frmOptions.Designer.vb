@@ -22,6 +22,7 @@ Partial Class frmOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.tabSettings = New System.Windows.Forms.TabControl()
         Me.tabBrowsers = New System.Windows.Forms.TabPage()
@@ -124,6 +125,7 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
+        Me.imBrowserIcons = New System.Windows.Forms.ImageList(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -248,6 +250,7 @@ Partial Class frmOptions
         Me.lstBrowsers.MultiSelect = False
         Me.lstBrowsers.Name = "lstBrowsers"
         Me.lstBrowsers.Size = New System.Drawing.Size(346, 218)
+        Me.lstBrowsers.SmallImageList = Me.imBrowserIcons
         Me.lstBrowsers.TabIndex = 5
         Me.lstBrowsers.UseCompatibleStateImageBehavior = False
         Me.lstBrowsers.View = System.Windows.Forms.View.Details
@@ -1166,6 +1169,12 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
+        'imBrowserIcons
+        '
+        Me.imBrowserIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.imBrowserIcons.ImageSize = New System.Drawing.Size(16, 16)
+        Me.imBrowserIcons.TransparentColor = System.Drawing.Color.Transparent
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1324,4 +1333,5 @@ Partial Class frmOptions
     Friend WithEvents nudXOffset As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents cmbStartingPosition As SeparatorComboBox.SeparatorComboBox
+    Friend WithEvents imBrowserIcons As System.Windows.Forms.ImageList
 End Class

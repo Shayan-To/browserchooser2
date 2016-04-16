@@ -102,7 +102,7 @@ Namespace LegacyNS
                 Dim rez = 0
 
                 If Me.IntranetBrowser IsNot Nothing Then
-                    If Utility.IsIntranetUrl(url) Then
+                    If GeneralUtilities.IsIntranetUrl(url) Then
                         rez = Legacy.Settings.BrowserConfig.IntranetBrowser.BrowserNumber
                     End If
                 End If

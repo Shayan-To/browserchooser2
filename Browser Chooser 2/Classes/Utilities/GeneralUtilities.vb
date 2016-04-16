@@ -1,4 +1,4 @@
-﻿Option Strict Off
+﻿'Option Strict Off
 Imports System.IO
 Imports System.Reflection
 Imports Browser_Chooser_2.WinAPIs
@@ -6,7 +6,7 @@ Imports System.Security.Principal
 Imports System
 Imports System.Management
 
-Public Class Utility
+Public Class GeneralUtilities
     Public Const DEFAULT_CATEGORY As String = "Browsers"
     Public Enum ListOfCommands
         MakeAvailable
@@ -229,12 +229,12 @@ Public Class Utility
             Dim resourceName = parentAssembly.GetManifestResourceNames().First(Function(s) s.EndsWith(name))
 
             Using stream As Stream = parentAssembly.GetManifestResourceStream(resourceName)
-                Dim block As Byte() = New Byte(stream.Length - 1) {}
+                Dim block As Byte() = New Byte(CInt(stream.Length - 1)) {}
                 stream.Read(block, 0, block.Length)
                 Return Assembly.Load(block)
             End Using
         Else
-            Return GetType(Utility).Assembly
+            Return GetType(GeneralUtilities).Assembly
         End If
     End Function
 
@@ -297,38 +297,7 @@ Public Class Utility
     '    End' If
     'End Function
 
-#Region "IE Open as Tab code"
-    Public Shared Sub GetIE(ByVal lBrowser As Browser, ByVal aURL As String, ByVal aTerminate As Boolean)
-        'made it an option to allow user to override
-        Dim lbFound As Boolean = False
-
-        For Each lIe As SHDocVw.InternetExplorer In New SHDocVw.ShellWindows()
-            If lIe.FullName = lBrowser.Target Then
-                'good start
-                Try
-                    lIe.Navigate2(aURL, BrowserNavConstants.navOpenInNewTab)
-                Catch ex As Exception
-                    lIe.Navigate2(aURL, BrowserNavConstants.navOpenInNewWindow)
-                End Try
-
-                lIe.Visible = True
-
-                'AppActivate() ' see if needed
-
-                lbFound = True
-                Exit For
-            End If
-        Next
-
-        If lbFound = False Then
-            DoLaunch(lBrowser, aURL, aTerminate)
-        ElseIf aTerminate = True Then
-            End 'not clean, will do for now
-        End If
-    End Sub
-#End Region
-
-    Private Shared Sub doCleanExit()
+    Public Shared Sub doCleanExit()
         Dim lFormsToClose As New List(Of Form)
 
         'build list of forms to close
@@ -345,102 +314,6 @@ Public Class Utility
         'System.Environment.Exit(0) ' this line needs a security permission
         'sercutiry permissions will be done in Beta 3
     End Sub
-
-    Private Shared Function DoLaunch(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean) As Boolean
-        'Dim strParameters As String = ""
-        Dim strBrowser As String = GenericBrowserControl.NormalizeTarget(aTarget.Target)
-
-        'If aTarget.Target.Contains(".exe ") Then
-        '    ' old method
-        '    Dim lTargetEXE As String = GenericBrowserControl.NormalizeTarget(aTarget.Target)
-        '    strBrowser = lTargetEXE.Substring(0, InStr(aTarget.Target, ".exe") + 4)
-        '    strParameters = lTargetEXE.Substring(InStr(lTargetEXE, ".exe") + 4, lTargetEXE.Length - (InStr(lTargetEXE, ".exe") + 4)) & " " & aTarget.Arguments
-
-        '    If Not String.IsNullOrEmpty(aURL) Then
-        '        Process.Start(strBrowser, strParameters & """" & aURL & """")
-        '    Else
-        '        Process.Start(strBrowser, strParameters)
-        '    End If
-        'Else
-        If My.Computer.FileSystem.FileExists(strBrowser) = True Then
-            Dim lProcess As Process
-            If Not String.IsNullOrEmpty(aURL) Then
-                lProcess = Process.Start(strBrowser, aTarget.Arguments & " """ & aURL & """")
-            Else
-                lProcess = Process.Start(strBrowser, aTarget.Arguments)
-            End If
-            Dim lID As Integer = lProcess.Id
-
-            lProcess.WaitForInputIdle()
-            If lProcess.HasExited = False Then
-                'bring this one foward - else we have no way to reliably know when it went
-                Try
-                    AppActivate(lID)
-                Catch ex As Exception
-                    'do nothing - this just means that the process is gone.
-                End Try
-            End If
-
-            'End If
-
-            If aTerminate = True Then
-                lProcess = Nothing
-                doCleanExit()
-            End If
-
-            Return True
-        ElseIf aTarget.Target = "" Then
-            doCleanExit()
-        Else
-            MessageBox.Show("Browser " & aTarget.Name & " cannot be found.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End If
-    End Function
-
-    Public Shared Sub LaunchBrowser(ByVal lBrowser As Browser, ByVal lURL As String, ByVal aTerminate As Boolean)
-        'Dim target As String = GenericBrowserControl.NormalizeTarget(lBrowser.Target)
-
-        'special handleing for IE (surprise, surprise!)
-        If lBrowser.IsIE = True Then
-            GetIE(lBrowser, lURL, aTerminate) 'now get IE, but the DLL will be loaded before calling
-
-        Else
-            'check to see if the file exists
-            'If (IO.File.Exists(target)) Or target.Contains(".exe ") Then
-            If DoLaunch(lBrowser, lURL, aTerminate) = True Then
-                'End If
-
-                If aTerminate = True Then
-                    End 'not clean, will do for now
-                End If
-            End If
-        End If
-    End Sub
-
-    Public Shared Function GetAllICOsFromFile(ByVal aFile As String) As Image()
-        Dim lIcons As List(Of Icon) = TAFactory.IconPack.IconHelper.ExtractAllIcons(aFile)
-        Dim lOut(lIcons.Count) As Image
-
-        For lCount As Integer = 0 To lIcons.Count - 1
-            lOut(lCount) = TAFactory.IconPack.IconHelper.ExtractBestFitIcon(aFile, lCount, New Size(64, 64)).ToBitmap
-        Next
-
-        Return lOut
-    End Function
-
-    Public Shared Function GetICOFromFile(ByVal aFile As String, ByVal aIndex As Integer, Optional ByVal ErrorIconOnFail As Boolean = True) As Image
-        If My.Computer.FileSystem.FileExists(aFile) = True Then
-            Dim lIcon As Icon = TAFactory.IconPack.IconHelper.ExtractBestFitIcon(aFile, aIndex, New Size(64, 64))
-
-            'If c.Size.Width = 256 Then 're-add later as an option?
-            '    Return Bitmap.FromHicon(c.Handle)
-            'Else
-            Return lIcon.ToBitmap
-            'End If
-        Else
-            Return My.Resources._53
-        End If
-    End Function
 
     Public Shared Function GetUniquedID() As Guid
         Dim lOut As Guid = System.Guid.NewGuid()
@@ -481,56 +354,5 @@ Public Class Utility
         End If
 
         Return lOut
-    End Function
-
-    Public Shared Function ScaleImage(ByVal aImage As Image, ByVal aScale As Single) As Image
-        ' Get the source bitmap.
-        Dim bm_source As New Bitmap(aImage)
-
-        ' Make a bitmap for the result.
-        Dim bm_dest As New Bitmap( _
-            CInt(bm_source.Width * aScale), _
-            CInt(bm_source.Height * aScale))
-
-        ' Make a Graphics object for the result Bitmap.
-        Dim gr_dest As Graphics = Graphics.FromImage(bm_dest)
-
-        ' Copy the source image into the destination bitmap.
-        gr_dest.DrawImage(bm_source, 0, 0, _
-            bm_dest.Width + 1, _
-            bm_dest.Height + 1)
-
-        ' Display the result.
-        Return bm_dest
-    End Function
-
-    Public Shared Function GetBrowserByGUID(aGUID As Guid) As Browser
-        For Each lBrowser As Browser In gSettings.Browsers
-            If lBrowser.GUID = aGUID Then
-                Return lBrowser
-            End If
-        Next
-
-        Return Nothing
-    End Function
-
-    Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateList As List(Of Browser)) As Browser
-        For Each lBrowser As Browser In aSeperateList
-            If lBrowser.GUID = aGUID Then
-                Return lBrowser
-            End If
-        Next
-
-        Return Nothing
-    End Function
-
-    Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateDictionary As Dictionary(Of Integer, Browser)) As Browser
-        For Each lBrowser As KeyValuePair(Of Integer, Browser) In aSeperateDictionary
-            If lBrowser.Value.GUID = aGUID Then
-                Return lBrowser.Value
-            End If
-        Next
-
-        Return Nothing
     End Function
 End Class
