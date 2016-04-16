@@ -226,6 +226,10 @@ Module modStart
                         MessageBox.Show("Detection file exported to ""C:\temp\DetectedBrowsers.xml""", "Browser Chooser 2 - Detection File Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End
 #End If
+                    Case Utility.AvailableCommands.Item(Utility.ListOfCommands.Settings), _
+                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SSettings), _
+                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SettingsBrowsers), _
+                        Utility.AvailableCommands.Item(Utility.ListOfCommands.SettingsBrowsers)
                 End Select
 
                 If lbExit = True Then

@@ -149,7 +149,7 @@
         End If
     End Sub
 
-    Private Sub cmdBrowserEdit_Click(sender As System.Object, e As System.EventArgs) Handles cmdBrowserEdit.Click
+    Private Sub cmdBrowserEdit_Click(sender As System.Object, e As System.EventArgs) Handles cmdBrowserEdit.Click, lstBrowsers.DoubleClick
         If lstBrowsers.SelectedItems.Count > 0 Then
             'show up a dialog to set the browser settings
             Dim lfrmAdd As New frmAddEditBrowser
@@ -389,7 +389,7 @@
             Dim lNewURL As URL = lfrmAdd.GetData
             mURLs.Add(mLastURLID + 1, lNewURL)
             Dim llsiItem As ListViewItem = lstURLs.Items.Add(lNewURL.URL)
-            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lNewURL.Guid).Name)
+            llsiItem.SubItems.Add(Utility.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name)
             llsiItem.Tag = mLastURLID + 1
             mLastURLID += 1
 
@@ -398,7 +398,7 @@
         End If
     End Sub
 
-    Private Sub cmdAutoURLEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAutoURLEdit.Click
+    Private Sub cmdAutoURLEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAutoURLEdit.Click, lstURLs.DoubleClick
         If lstURLs.SelectedItems.Count > 0 Then
             'show up a dialog to set the url settings
             Dim lfrmAdd As New frmAddEditURL
@@ -407,7 +407,7 @@
                 Dim lNewURL As URL = lfrmAdd.GetData
                 mURLs(CInt(lstURLs.SelectedItems(0).Tag)) = lNewURL
                 lstURLs.SelectedItems(0).Text = lNewURL.URL
-                lstURLs.SelectedItems(0).SubItems(1).Text = Utility.GetBrowserByGUID(lNewURL.Guid).Name
+                lstURLs.SelectedItems(0).SubItems(1).Text = Utility.GetBrowserByGUID(lNewURL.Guid, mBrowser).Name
 
                 'indicate that the screen is dirty and needs to be saved
                 mbDirty = True
@@ -448,7 +448,7 @@
         End If
     End Sub
 
-    Private Sub cmdProtocolEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEditProtocol.Click
+    Private Sub cmdProtocolEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEditProtocol.Click, lstProtocols.DoubleClick
         If lstProtocols.SelectedItems.Count > 0 Then
             'show up a dialog to set the url settings
             Dim lfrmAdd As New frmAddEditProtocols
@@ -502,7 +502,7 @@
         End If
     End Sub
 
-    Private Sub cmdFileTypeEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEditFileType.Click
+    Private Sub cmdFileTypeEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdEditFileType.Click, lstFiletypes.DoubleClick
         If lstFiletypes.SelectedItems.Count > 0 Then
             'show up a dialog to set the url settings
             Dim lfrmAdd As New frmAddEditType

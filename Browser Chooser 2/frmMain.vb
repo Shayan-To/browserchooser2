@@ -260,8 +260,8 @@ Public Class frmMain
 
         'create controls, they are added in order from browser file, with support for x y addressing
         For Each lBrowser In gSettings.Browsers
-            'ensure the position is valid
-            If Not (lBrowser.PosX < 1 Or lBrowser.PosY < 1 Or lBrowser.PosX > gSettings.Width Or lBrowser.PosY > gSettings.Height) Then
+            'ensure the position is valid and item should be visible
+            If Not (lBrowser.PosX < 1 Or lBrowser.PosY < 1 Or lBrowser.PosX > gSettings.Width Or lBrowser.PosY > gSettings.Height) And lBrowser.Shown = True Then
                 'copy a stub to it's location
                 lControls(lIndex) = New FFButton
 

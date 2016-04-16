@@ -20,6 +20,26 @@ Public Class Utility
         ApplyUpdate
         FinishApplyUpdate
         BuildDetectionFile
+        ' options screen quick hits
+        Settings
+        SettingsBrowsers
+        SettingsAutoURLs
+        SettingsProtocols
+        SettingsFileTypes
+        SettingsCategories
+        SettingsSettings
+        SettingsMoreSettings
+        SettingsDefaultBrowser
+        'options, short hand version
+        SSettings
+        SSettingsBrowsers
+        SSettingsAutoURLs
+        SSettingsProtocols
+        SSettingsFileTypes
+        SSettingsCategories
+        SSettingsSettings
+        SSettingsMoreSettings
+        SSettingsDefaultBrowser
     End Enum
 
     Public Shared AvailableCommands As New Dictionary(Of ListOfCommands, String) From { _
@@ -33,7 +53,25 @@ Public Class Utility
             {ListOfCommands.Testadminint, "--testadmin-int"}, _
             {ListOfCommands.ApplyUpdate, "--applyupdate"}, _
             {ListOfCommands.FinishApplyUpdate, "--finishapplyupdate"}, _
-            {ListOfCommands.BuildDetectionFile, "--builddetectionfile"} _
+            {ListOfCommands.BuildDetectionFile, "--builddetectionfile"}, _
+            {ListOfCommands.Settings, "--settings"}, _
+            {ListOfCommands.SettingsBrowsers, "--settings:browsers"}, _
+            {ListOfCommands.SettingsAutoURLs, "--settings:autourls"}, _
+            {ListOfCommands.SettingsProtocols, "--settings:protocols"}, _
+            {ListOfCommands.SettingsFileTypes, "--settings:filetypes"}, _
+            {ListOfCommands.SettingsCategories, "--settings:categories"}, _
+            {ListOfCommands.SettingsSettings, "--settings:settings"}, _
+            {ListOfCommands.SettingsMoreSettings, "--settings:moresettings"}, _
+            {ListOfCommands.SettingsDefaultBrowser, "--settings:defaultbrowser"}, _
+            {ListOfCommands.SSettings, "--s"}, _
+            {ListOfCommands.SSettingsBrowsers, "--s:b"}, _
+            {ListOfCommands.SSettingsAutoURLs, "--s:a"}, _
+            {ListOfCommands.SSettingsProtocols, "--s:p"}, _
+            {ListOfCommands.SSettingsFileTypes, "--s:f"}, _
+            {ListOfCommands.SSettingsCategories, "--s:c"}, _
+            {ListOfCommands.SSettingsSettings, "--s:s"}, _
+            {ListOfCommands.SSettingsMoreSettings, "--s:ms"}, _
+            {ListOfCommands.SSettingsDefaultBrowser, "--s:db"} _
         }
 
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio
@@ -290,6 +328,23 @@ Public Class Utility
     End Sub
 #End Region
 
+    Private Shared Sub doCleanExit()
+        Dim lFormsToClose As New List(Of Form)
+
+        'build list of forms to close
+        For Each lForm As Form In Application.OpenForms
+            lFormsToClose.Add(lForm) 'cannot close here, causes a colleciton has changed error.
+        Next
+
+        'close forms found above
+        For Each lForm As Form In lFormsToClose
+            lForm.Close()
+        Next
+
+        'End 'not clean, will do for now
+        'System.Environment.Exit(0) ' this line needs a security permission
+        'sercutiry permissions will be done in Beta 3
+    End Sub
 
     Private Shared Function DoLaunch(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean) As Boolean
         'Dim strParameters As String = ""
@@ -330,23 +385,12 @@ Public Class Utility
 
             If aTerminate = True Then
                 lProcess = Nothing
-
-                Dim lFormsToClose As New List(Of Form)
-
-                'build list of forms to close
-                For Each lForm As Form In Application.OpenForms
-                    lFormsToClose.Add(lForm) 'cannot close here, causes a colleciton has changed error.
-                Next
-
-                'close forms found above
-                For Each lForm As Form In lFormsToClose
-                    lForm.Close()
-                Next
-
-                'End 'not clean, will do for now
+                doCleanExit()
             End If
 
             Return True
+        ElseIf aTarget.Target = "" Then
+            doCleanExit()
         Else
             MessageBox.Show("Browser " & aTarget.Name & " cannot be found.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
@@ -464,6 +508,26 @@ Public Class Utility
         For Each lBrowser As Browser In gSettings.Browsers
             If lBrowser.GUID = aGUID Then
                 Return lBrowser
+            End If
+        Next
+
+        Return Nothing
+    End Function
+
+    Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateList As List(Of Browser)) As Browser
+        For Each lBrowser As Browser In aSeperateList
+            If lBrowser.GUID = aGUID Then
+                Return lBrowser
+            End If
+        Next
+
+        Return Nothing
+    End Function
+
+    Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateDictionary As Dictionary(Of Integer, Browser)) As Browser
+        For Each lBrowser As KeyValuePair(Of Integer, Browser) In aSeperateDictionary
+            If lBrowser.Value.GUID = aGUID Then
+                Return lBrowser.Value
             End If
         Next
 

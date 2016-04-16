@@ -9,7 +9,7 @@ Public Class Importer
         'convert legacy settings into new format - they are similar but there are changes (e.g. urls list is outside of browsers now)
         For Each lLegacyBrowser As LegacyNS.Legacy.Browser In lLegacyList.Browsers
             Dim lNewBrowser As New Browser(Guid.Empty, lLegacyBrowser.Name, lLegacyBrowser.Target, lLegacyBrowser.Image, lLegacyBrowser.CustomImagePath,
-                                           lLegacyBrowser.IsActive, CChar(lLegacyBrowser.BrowserNumber.ToString), False, gSettings.Browsers.Count + 1, 1, 0, "", "", 1)
+                                           lLegacyBrowser.IsActive, CChar(lLegacyBrowser.BrowserNumber.ToString), False, gSettings.Browsers.Count + 1, 1, 0, "", "", 1, True)
             If lLegacyBrowser.Target.Contains("iexplore.exe") Then
                 lNewBrowser.IsIE = True
             End If

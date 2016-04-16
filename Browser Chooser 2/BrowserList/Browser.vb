@@ -19,6 +19,7 @@
     Private msArguments As String
     Private msScale As Single = 1 'standard default
     'Private msGroupName As String 'ver 2 feature
+    Private mbShown As Boolean = True 'allows to hide an option
 
     Public Property GUID As Guid
         Get
@@ -146,6 +147,15 @@
         End Set
     End Property
 
+    Public Property Shown As Boolean
+        Get
+            Return mbShown
+        End Get
+        Set(ByVal value As Boolean)
+            mbShown = value
+        End Set
+    End Property
+
     Public Overrides Function ToString() As String
         Return msName
     End Function
@@ -158,7 +168,7 @@
         'required for export / import
     End Sub
 
-    Public Sub New(ByVal aGUID As Guid, ByVal asName As String, ByVal asTarget As String, ByVal asImage As String, ByVal asCustomImagePath As String, ByVal abIsActive As Boolean, ByVal acHotkey As Char, ByVal abIsIE As Boolean, ByVal aPosX As Integer, ByVal aPosY As Integer, ByVal aIconIndex As Integer, ByVal aCategory As String, ByVal asArguemnts As String, ByVal asScale As Single)
+    Public Sub New(ByVal aGUID As Guid, ByVal asName As String, ByVal asTarget As String, ByVal asImage As String, ByVal asCustomImagePath As String, ByVal abIsActive As Boolean, ByVal acHotkey As Char, ByVal abIsIE As Boolean, ByVal aPosX As Integer, ByVal aPosY As Integer, ByVal aIconIndex As Integer, ByVal aCategory As String, ByVal asArguemnts As String, ByVal asScale As Single, abShown As Boolean)
         If aGUID <> GUID.Empty Then
             mGUID = aGUID
         Else
@@ -177,6 +187,7 @@
         miIconIndex = aIconIndex
         msArguments = asArguemnts
         msScale = asScale
+        mbShown = abShown
     End Sub
 
     Public Function Clone() As Object Implements System.ICloneable.Clone
@@ -196,6 +207,7 @@
         lOut.Category = msCategory
         lOut.Arguments = msArguments
         lOut.Scale = msScale
+        lOut.Shown = mbShown
 
         Return lOut
     End Function
@@ -215,6 +227,7 @@
         If Me.msCategory <> other.Category Then Return False
         If Me.msArguments <> other.Arguments Then Return False
         If Me.msScale <> other.Scale Then Return False
+        If Me.mbShown <> other.Shown Then Return False
         Return True ' all checks pass
     End Function
 End Class

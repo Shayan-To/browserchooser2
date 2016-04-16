@@ -41,12 +41,15 @@
             nudIconIndex.Value = aOriginal.IconIndex
             txtArguments.Text = aOriginal.Arguments
             nudScale.Value = CType(aOriginal.Scale, Decimal)
+            chkVisible.Checked = aOriginal.Shown
         Else
             chkIsActive.Checked = True
             cmbStandard.Text = "(Extract)"
             cmbCategory.Text = Utility.DEFAULT_CATEGORY
+            chkVisible.Checked = True
             nudScale.Value = 1
         End If
+        UpdateVisible()
 
         'find the next avilable slot
         Dim lIndexes As New SortedList 'start with an index of positions used
@@ -132,6 +135,9 @@
         nudIconIndex.Value = aBrowser.IconIndex
         txtArguments.Text = aBrowser.Arguments
         nudScale.Value = CType(aBrowser.Scale, Decimal)
+        chkVisible.Checked = aBrowser.Shown
+        UpdateVisible()
+
         mBrowser = aBrowser
 
         mGUID = mBrowser.GUID
@@ -231,6 +237,7 @@
         lBOut.Category = cmbCategory.Text
         lBOut.Arguments = txtArguments.Text
         lBOut.Scale = nudScale.Value
+        lBOut.Shown = chkVisible.Checked
 
         lOut.Browser = lBOut
 
@@ -404,5 +411,21 @@
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub UpdateVisible()
+        If chkVisible.Checked = True Then
+            chkVisible.CheckState = CheckState.Checked
+            nudX.Enabled = True
+            nudY.Enabled = True
+        Else
+            nudX.Enabled = False
+            nudY.Enabled = False
+            chkVisible.CheckState = CheckState.Unchecked
+        End If
+    End Sub
+
+    Private Sub chkVisible_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkVisible.CheckedChanged
+        UpdateVisible()
     End Sub
 End Class
