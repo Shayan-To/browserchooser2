@@ -293,7 +293,7 @@ Public Class frmMain
                         End If
                     End If
 
-                    lTooltips(lIndex).SetToolTip(lControls(lIndex), "Open " & lBrowser.Name & "." & vbCrLf & lToolTipText)
+                    lTooltips(lIndex).SetToolTip(lControls(lIndex), "Open " & lBrowser.Name & "." & Environment.NewLine & lToolTipText)
 
                     'see if this item show be grayed out and disabled
                     If Not StartupLauncher.SupportingBrowsers.Contains(lBrowser.GUID) Then

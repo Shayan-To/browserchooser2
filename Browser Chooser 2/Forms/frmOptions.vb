@@ -15,9 +15,9 @@
 #Region "Bottom Control Buttons"
     Private Sub cmdHelp_Click(sender As System.Object, e As System.EventArgs) Handles cmdHelp.Click
         Try
-            Process.Start("https://bitbucket.org/gmyx/browserchooser2/wiki/Home")
-        Catch ex As Exception
-            MsgBox("Help page cannot be reached!" & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+			Launch("https://bitbucket.org/gmyx/browserchooser2/wiki/Home", False)
+		Catch ex As Exception
+            MsgBox("Help page cannot be reached!" & Environment.NewLine & Environment.NewLine & ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
 
@@ -308,9 +308,9 @@
         'update screen from internet classes 
         Dim llsiItem As ListViewItem
 
-        'if advanced settings, show protocols and file types colomn, else remove
+        'if advanced settings, show protocols and file types column, else remove
         If gSettings.AdvancedScreens = False Then
-            lstBrowsers.Columns("chProtocolsAndFileTypes").Width = 0
+            lstBrowsers.Columns(3).Width = 0
         End If
 
         'Note; protocols and filetypes must come first as they are referenced in the browser section
