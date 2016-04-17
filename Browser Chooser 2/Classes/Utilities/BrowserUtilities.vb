@@ -32,6 +32,19 @@ Public Class BrowserUtilities
     End Sub
 #End Region
 
+    Private Shared Sub TryToBringToFront(strBrowser As String)
+        'see if we only have once process of target browser
+        Dim lTarget As String = Mid(strBrowser, InStrRev(strBrowser, "\") + 1)
+        'now trim out .exe
+        lTarget = Left(lTarget, InStrRev(lTarget, ".") - 1)
+        Dim lAllProcesses() As Process = Process.GetProcessesByName(lTarget)
+
+        If lAllProcesses.Count = 1 Then
+            'bring that one up
+            AppActivate(lAllProcesses(0).Id)
+        End If
+    End Sub
+
     Private Shared Function DoLaunch(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean) As Boolean
         'Dim strParameters As String = ""
         Dim strBrowser As String = NormalizeTarget(aTarget.Target)
@@ -57,14 +70,24 @@ Public Class BrowserUtilities
             End If
             Dim lID As Integer = lProcess.Id
 
-            lProcess.WaitForInputIdle()
+            Try
+                lProcess.WaitForInputIdle()
+            Catch ex As Exception
+                'do nothing
+            End Try
+
             If lProcess.HasExited = False Then
                 'bring this one foward - else we have no way to reliably know when it went
                 Try
                     AppActivate(lID)
                 Catch ex As Exception
                     'do nothing - this just means that the process is gone.
+
+                    'see if we only have once process of target browser
+                    TryToBringToFront(strBrowser)
                 End Try
+            Else
+                TryToBringToFront(strBrowser)
             End If
 
             'End If
