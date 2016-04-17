@@ -21,6 +21,7 @@
 
         lblContributors.Text =
             "Guy Moreau" & Environment.NewLine & _
+            "J. Scott Elblein" & Environment.NewLine & _
             "--------------------------------" & Environment.NewLine & Environment.NewLine & _
             "Browser Chooser 1: " & Environment.NewLine & Environment.NewLine & _
             "Original BC: Jan Ole Peek" & Environment.NewLine & _
