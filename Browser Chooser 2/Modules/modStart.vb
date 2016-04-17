@@ -19,7 +19,7 @@ Module modStart
     Public Const CurVersionDisplay As String = "Beta 1"
 #End If
 
-    Public Sub CheckForMigrateBeforeOptions()
+    Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
         'if old XML file found and not the new one, ask to migrate - portable mode
         If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
             'see if current doesn't exists
@@ -39,7 +39,9 @@ Module modStart
             End If
         End If
 
-        Application.Run(frmOptions)
+        Dim lFormToShow As New frmOptions
+        lFormToShow.ShowForm(aScreen, False)
+        Application.Run(lFormToShow) 'terrible, but it works
     End Sub
 
     Public Sub CheckForMigrateBeforeLaunch()
@@ -173,8 +175,9 @@ Module modStart
             Dim cmdLineOption As String = My.Application.CommandLineArgs.Item(0)
 
             If (cmdLineOption = "gooptions") Or gSettings Is Nothing Then
+                'note that this part is semi deprecated. gooptions is the BC1 way and may break in the future. use --settings or --s
                 LoadSettings()
-                CheckForMigrateBeforeOptions()
+                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
             ElseIf cmdLineOption.StartsWith("--") Then
                 Dim lbExit As Boolean = True
 
@@ -230,6 +233,45 @@ Module modStart
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings), _
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers), _
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsAutoURLs)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
+
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsProtocols)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsProtocols)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsFileTypes)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsCategories)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsCategories)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsSettings)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsSettings)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsMoreSettings)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser), _
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsDefaultBrowser)
+
+                        LoadSettings()
+                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
                 End Select
 
                 If lbExit = True Then

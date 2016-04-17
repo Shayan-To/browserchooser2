@@ -235,7 +235,34 @@ Public Class frmOptions
 #End Region
 
 #Region "Form Events"
+    Public Enum SettingsStartPage
+        SettingsBrowsers
+        SettingsAutoURLs
+        SettingsProtocols
+        SettingsFileTypes
+        SettingsCategories
+        SettingsSettings
+        SettingsMoreSettings
+        SettingsDefaultBrowser
+    End Enum
 
+    Public Sub ShowForm(aModal As Boolean)
+        If aModal = True Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
+    End Sub
+
+    Public Sub ShowForm(aScreen As SettingsStartPage, aModal As Boolean)
+        tabSettings.SelectTab(aScreen)
+
+        If aModal = True Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
+    End Sub
     Private Sub frmOptions_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If e.CloseReason = CloseReason.UserClosing Then
             If mbDirty = True Then
@@ -738,9 +765,16 @@ Public Class frmOptions
 
             'finaly, add it to the browser list
             mBrowser.Add(mLastBrowserID + 1, lBrowser)
-            mLastBrowserID = mLastBrowserID + 1
-            Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name)
-            llsiItem.Tag = mBrowser.Count - 1
+            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lBrowser, False))
+
+            Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
+            llsiItem.Tag = mLastBrowserID + 1
+            llsiItem.SubItems.Add(lBrowser.PosX.ToString)
+            llsiItem.SubItems.Add(lBrowser.PosY.ToString)
+            mLastBrowserID += 1
+
+            'now display them
+            llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lBrowser))
         Next
 
         'indicate that the screen is dirty and needs to be saved
@@ -829,6 +863,7 @@ Public Class frmOptions
 #Region "Auto-URL Drag and Drop"
     Private mbURLMouseDown As Boolean = False
     Private mDragHighlight As ListViewItem
+    Private mStartPoint As Point
 
     Private Sub RebuildAutoURLs()
         'could be lenghty if long list
@@ -938,6 +973,7 @@ Public Class frmOptions
     Private Sub lstURLs_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseDown
         If lstURLs.SelectedItems.Count > 0 Then
             mbURLMouseDown = True
+            mStartPoint = e.Location
         End If
 
         Dim lResult As ListViewHitTestInfo = lstURLs.HitTest(e.X, e.Y)
@@ -945,8 +981,11 @@ Public Class frmOptions
     End Sub
 
     Private Sub lstURLs_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstURLs.MouseMove
-        If mbURLMouseDown = True Then
-            lstURLs.DoDragDrop(New DataObject("System.Windows.Forms.ListViewItem", lstURLs.SelectedItems(0)), DragDropEffects.Move)
+        If mbURLMouseDown = True Then 'need to add a minimum move, othersize doubleclick doesn't work
+            Debug.Print(String.Format("start: {0}, current: {1}", mStartPoint.X, e.Location.X))
+            If mStartPoint.X <> e.Location.X And mStartPoint.Y <> e.Location.Y Then
+                lstURLs.DoDragDrop(New DataObject("System.Windows.Forms.ListViewItem", lstURLs.SelectedItems(0)), DragDropEffects.Move)
+            End If
         End If
     End Sub
 
@@ -1030,7 +1069,5 @@ Public Class frmOptions
 		' Set back color back to normal
 		lstBrowsers.BackColor = Color.FromKnownColor(KnownColor.Window)
 
-	End Sub
-
-
+    End Sub
 End Class

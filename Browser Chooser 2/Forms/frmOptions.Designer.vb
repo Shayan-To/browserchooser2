@@ -34,8 +34,8 @@ Partial Class frmOptions
         Me.cmdBrowserAdd = New System.Windows.Forms.Button()
         Me.lstBrowsers = New System.Windows.Forms.ListView()
         Me.chName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.chColumn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.chRow = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.chColumn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.chProtocolsAndFileTypes = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.imBrowserIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutoURLs = New System.Windows.Forms.TabPage()
@@ -266,13 +266,13 @@ Partial Class frmOptions
         Me.chName.Text = "Name"
         Me.chName.Width = 109
         '
-        'chColumn
-        '
-        Me.chColumn.Text = "Column"
-        '
         'chRow
         '
         Me.chRow.Text = "Row"
+        '
+        'chColumn
+        '
+        Me.chColumn.Text = "Column"
         '
         'chProtocolsAndFileTypes
         '

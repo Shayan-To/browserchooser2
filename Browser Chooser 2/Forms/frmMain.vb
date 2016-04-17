@@ -532,7 +532,7 @@ Public Class frmMain
         Dim lTimerStatus As Boolean = tmrDelay.Enabled
         Me.TopMost = False
         tmrDelay.Enabled = False
-        frmOptions.ShowDialog()
+        frmOptions.ShowForm(True)
         tmrDelay.Enabled = lTimerStatus
         Me.TopMost = True
     End Sub
