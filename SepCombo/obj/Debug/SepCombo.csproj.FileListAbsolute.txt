@@ -12,3 +12,10 @@ D:\CodeRepository\GIT\BrowserChooser2\SepCombo\obj\Debug\SepCombo.dll
 D:\CodeRepository\GIT\BrowserChooser2\SepCombo\obj\Debug\SepCombo.pdb
 D:\CodeRepository\GIT\BrowserChooser2\SepCombo\obj\Debug\SeparatorComboBox.SeparatorComboBox.resources
 D:\CodeRepository\GIT\BrowserChooser2\SepCombo\obj\Debug\SepCombo.csprojResolveAssemblyReference.cache
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\bin\Debug\SepCombo.dll
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\bin\Debug\SepCombo.pdb
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\obj\Debug\SepCombo.csprojResolveAssemblyReference.cache
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\obj\Debug\SeparatorComboBox.SeparatorComboBox.resources
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\obj\Debug\SepCombo.csproj.GenerateResource.Cache
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\obj\Debug\SepCombo.dll
+Z:\Cloud Drives\Dropbox\Coding\Git-Repos\Cloned\browserchooser2\SepCombo\obj\Debug\SepCombo.pdb

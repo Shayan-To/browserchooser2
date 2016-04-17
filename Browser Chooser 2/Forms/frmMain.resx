@@ -120,21 +120,21 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancel.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOqwAA
-        DqsBjuzE/AAAAfRJREFUOE+lk9tOU0EUhueWQAIBA0ZCNB6pQtq0JZZSMGkxLW2jWA80IDGe4uGNeCAu
-        OCQ8ghdeGHvQtLXd5/mc2c1u2dh4oRcrmWTP/631r3+PEEIc/GeFAb+EMBCCoDx1Dqqtvo1oNgR0tPje
-        bfj0Ej7uIT/sIt9XkW9fIF8/w71zHXXHvgDpAwbiz/uQzyGTSWQ8jheL4S0v42ZSuPuPsW9dpR6e5IJ4
-        rwpnZ8hKBS8axVtawi2VkKenOOUCzs4W1o0Fvg8h4sD3q0dWnbWYTgeaTdxyGbdYhEYD2m3k8TF29C72
-        k6y2omT+9H2A7zeRwNve9sUBxD9rsYLYGxuYc3NYjx7QOg/QW5bvdoZ+1ciBUIv1BNb6OubsLMbMDGYp
-        MwLw5nnfbySCWyiEALq7lU5jTE/Tm5zELKT+BHivKriLi7j5/MCz7qzFtFrIWg1DJdMdH8d8uMLP8xYc
-        /bOoiJz7ceTJSd9zvY61toa5uuqLpYJ4h4f0Fi5j5BJhwA8Vic7XqRZx8lm8oyNfrP32pqYw9HKV2FiJ
-        YWwmac9f4osQvUEK+tBQEJ2v/XQTK3Jz4Lc7MUF3bIzuvFqg6twKi/sxBlVTkO61K1jlDOZWGjOf8v0a
-        uSRGNj5KHAZo0DcF0RkHpZelq6nqqxDmXx/Tvzzr3x7y76YOJsawAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA6rAAAOqwGO7MT8AAAB7UlE
+        QVQ4T6WRWU9TQRiG55ZAAgEDRkIkrlQhbdoSSymYtJiWtlGsCw1IjKhx+Uf9QVywJPwEL7wwdtG0tT37
+        PM4c0uUUboxN3jTnnHmemXc+oX6V/0zwxR8hDISgF28oLfVtdL3K4KGt4Yf34Msb+LyP/LSH/FhGvn+N
+        fPcS9/4t1Bp7mFEZgb8eQDaDjMeR0SheJIK3soKbSuAePMO+e5Na8CQj8H4Zzs+RpRJeOIy3vIxbKCDP
+        znCKOZzdbazbC/wcSETF76uPrHbWMO02NBq4xSJuPg/1OrRayJMT7PAD7OdpXUVhQwK/byyGt7Pjwz2J
+        Hw0rib25iTk3h/X0Mc1hgb5h+WF30FcduQf6UbC1sYE5O4sxM4NZSF0hOHx10TcUws3lAgK9u5VMYkxP
+        052cxMwlLgu8tyXcpSXcbLbfWf9rmGYTWa1iqMl0xscxn6zye1jgaIEakfMoijw9vdi1VsNaX8dcW/Nh
+        qSTe0RHdhesYmVhQ8EuNRM/XKedxsmm842Mf1n27U1MY+nIVbKxGMLbitOav8U2Ibl+gU1cSPV/7xRZW
+        6E6/b2digs7YGJ15dYFq52YQHgh0qkrSWbyBVUxhbicxswm/r5GJY6SjV8FBgc4PJdE33IvuqtNQ+S6E
+        Obpe5dKLf4io/AUe8u+mFogIqwAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="tmrDelay.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>657, 17</value>
+    <value>25, 37</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

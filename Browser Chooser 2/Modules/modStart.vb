@@ -96,7 +96,7 @@ Module modStart
         If gSettings.AutomaticUpdates = True Then
 #If CONFIG = "Debug Update" Or CONFIG = "Debug Update and Pause" Or Not Debug Then
             'update desiabled in debug unless debuggin updates
-            Updator.CheckForUpdate(True) ' will not return a value, runs in a thread.
+            Updater.CheckForUpdate(True) ' will not return a value, runs in a thread.
 #End If
         End If
 
@@ -213,12 +213,12 @@ Module modStart
                         DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sGlobal)
                     Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ApplyUpdate) ' "--applyupdate"
                         If My.Application.CommandLineArgs.Count > 1 Then
-                            Updator.ApplyUpdate(My.Application.CommandLineArgs.Item(1))
+                            Updater.ApplyUpdate(My.Application.CommandLineArgs.Item(1))
                         Else
-                            Updator.ApplyUpdate("")
+                            Updater.ApplyUpdate("")
                         End If
                     Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FinishApplyUpdate) ' "--finishapplyupdate"
-                        Updator.FinishApplyUpdate()
+                        Updater.FinishApplyUpdate()
                         lbExit = False
 #If CONFIG = "BuildDetectionFile" Then
                     Case Utility.AvailableCommands.Item(Utility.ListOfCommands.BuildDetectionFile)
