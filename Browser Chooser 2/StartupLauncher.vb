@@ -131,8 +131,10 @@ Public Class StartupLauncher
 #Region "ShortURL deshortening"
     Private Shared mWorker As System.Threading.Thread
     Private Shared Sub mWorker_DoWork()
+
         Dim lRequest As HttpWebRequest
         Dim lResponse As WebResponse = Nothing
+
         Try
             lRequest = DirectCast(WebRequest.Create(mURL), HttpWebRequest)
             lRequest.UserAgent = gSettings.UserAgent
@@ -141,6 +143,7 @@ Public Class StartupLauncher
 
             mURL = lResponse.ResponseUri.ToString
         Catch ex As WebException
+
             Try
                 lRequest = DirectCast(WebRequest.Create(mURL), HttpWebRequest)
                 lRequest.UserAgent = gSettings.UserAgent
@@ -153,14 +156,18 @@ Public Class StartupLauncher
             If IsNothing(lResponse) = False AndAlso IsNothing(lResponse.ResponseUri) = False Then
                 mURL = lResponse.ResponseUri.ToString
             End If
+
         End Try
 
         'clean up and destroy self
         If IsNothing(mDeletegate) = False Then
             mDeletegate.Invoke(mURL) 'send the new URL message
         End If
+
         mWorker = Nothing
+
     End Sub
+
 #End Region
 
 End Class

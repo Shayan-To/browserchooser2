@@ -71,18 +71,18 @@ Partial Class frmAddEditType
 		Me.Label1.AutoSize = true
 		Me.Label1.Location = New System.Drawing.Point(12, 12)
 		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(41, 13)
+		Me.Label1.Size = New System.Drawing.Size(38, 13)
 		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "Name :"
+		Me.Label1.Text = "Name:"
 		'
 		'Label2
 		'
 		Me.Label2.AutoSize = true
 		Me.Label2.Location = New System.Drawing.Point(12, 38)
 		Me.Label2.Name = "Label2"
-		Me.Label2.Size = New System.Drawing.Size(57, 13)
+		Me.Label2.Size = New System.Drawing.Size(56, 13)
 		Me.Label2.TabIndex = 4
-		Me.Label2.Text = "Extention :"
+		Me.Label2.Text = "Extension:"
 		Me.ToolTip1.SetToolTip(Me.Label2, "Examples: http; https; ftp; magnet")
 		'
 		'txtHeader

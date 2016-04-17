@@ -332,7 +332,7 @@
     <Compile Include="Classes\FileType.vb" />
     <Compile Include="Classes\IApplicationActivationManager.vb" />
     <Compile Include="Classes\Protocol.vb" />
-    <Compile Include="Classes\Updator.vb" />
+    <Compile Include="Classes\Updater.vb" />
     <Compile Include="Classes\WinAPIExtras.vb" />
     <Compile Include="Classes\WinAPIs.vb" />
     <Compile Include="Forms\AddEditForms\frmAddEditProtocols.Designer.vb">

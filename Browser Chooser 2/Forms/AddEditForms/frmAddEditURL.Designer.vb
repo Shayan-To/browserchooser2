@@ -40,11 +40,11 @@ Partial Class frmAddEditURL
 		'Label1
 		'
 		Me.Label1.AutoSize = true
-		Me.Label1.Location = New System.Drawing.Point(12, 12)
+		Me.Label1.Location = New System.Drawing.Point(19, 12)
 		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(35, 13)
+		Me.Label1.Size = New System.Drawing.Size(32, 13)
 		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "URL :"
+		Me.Label1.Text = "URL:"
 		'
 		'txtURL
 		'
@@ -56,11 +56,11 @@ Partial Class frmAddEditURL
 		'Label2
 		'
 		Me.Label2.AutoSize = true
-		Me.Label2.Location = New System.Drawing.Point(12, 39)
+		Me.Label2.Location = New System.Drawing.Point(3, 39)
 		Me.Label2.Name = "Label2"
-		Me.Label2.Size = New System.Drawing.Size(45, 13)
+		Me.Label2.Size = New System.Drawing.Size(48, 13)
 		Me.Label2.TabIndex = 2
-		Me.Label2.Text = "Browser"
+		Me.Label2.Text = "Browser:"
 		'
 		'cmbBrowser
 		'

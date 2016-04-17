@@ -446,7 +446,7 @@ Partial Class frmAddEditBrowser
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.cmdCancel
-		Me.ClientSize = New System.Drawing.Size(513, 439)
+		Me.ClientSize = New System.Drawing.Size(513, 481)
 		Me.Controls.Add(Me.lstSupportedProps)
 		Me.Controls.Add(Me.cmdShowExtentions)
 		Me.Controls.Add(Me.cmdShowProtocols)

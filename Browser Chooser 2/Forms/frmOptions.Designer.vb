@@ -34,8 +34,8 @@ Partial Class frmOptions
 		Me.cmdBrowserAdd = New System.Windows.Forms.Button()
 		Me.lstBrowsers = New System.Windows.Forms.ListView()
 		Me.chName = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-		Me.chRow = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
 		Me.chColumn = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+		Me.chRow = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
 		Me.chProtocolsAndFileTypes = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
 		Me.imBrowserIcons = New System.Windows.Forms.ImageList(Me.components)
 		Me.tabAutoURLs = New System.Windows.Forms.TabPage()
@@ -246,7 +246,10 @@ Partial Class frmOptions
 		'
 		'lstBrowsers
 		'
-		Me.lstBrowsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chName, Me.chRow, Me.chColumn, Me.chProtocolsAndFileTypes})
+		Me.lstBrowsers.AllowDrop = true
+		Me.lstBrowsers.BackColor = System.Drawing.SystemColors.Window
+		Me.lstBrowsers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.lstBrowsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chName, Me.chColumn, Me.chRow, Me.chProtocolsAndFileTypes})
 		Me.lstBrowsers.FullRowSelect = true
 		Me.lstBrowsers.HideSelection = false
 		Me.lstBrowsers.Location = New System.Drawing.Point(87, 6)
@@ -263,13 +266,15 @@ Partial Class frmOptions
 		Me.chName.Text = "Name"
 		Me.chName.Width = 109
 		'
-		'chRow
-		'
-		Me.chRow.Text = "Row"
-		'
 		'chColumn
 		'
+		Me.chColumn.DisplayIndex = 2
 		Me.chColumn.Text = "Column"
+		'
+		'chRow
+		'
+		Me.chRow.DisplayIndex = 1
+		Me.chRow.Text = "Row"
 		'
 		'chProtocolsAndFileTypes
 		'
@@ -644,24 +649,24 @@ Partial Class frmOptions
 		'Label3
 		'
 		Me.Label3.AutoSize = true
-		Me.Label3.Location = New System.Drawing.Point(149, 18)
+		Me.Label3.Location = New System.Drawing.Point(149, 23)
 		Me.Label3.Name = "Label3"
-		Me.Label3.Size = New System.Drawing.Size(44, 13)
+		Me.Label3.Size = New System.Drawing.Size(37, 13)
 		Me.Label3.TabIndex = 2
-		Me.Label3.Text = "Height :"
+		Me.Label3.Text = "Rows:"
 		'
 		'Label2
 		'
 		Me.Label2.AutoSize = true
-		Me.Label2.Location = New System.Drawing.Point(6, 20)
+		Me.Label2.Location = New System.Drawing.Point(6, 23)
 		Me.Label2.Name = "Label2"
-		Me.Label2.Size = New System.Drawing.Size(41, 13)
+		Me.Label2.Size = New System.Drawing.Size(50, 13)
 		Me.Label2.TabIndex = 0
-		Me.Label2.Text = "Width :"
+		Me.Label2.Text = "Columns:"
 		'
 		'nudHeight
 		'
-		Me.nudHeight.Location = New System.Drawing.Point(193, 16)
+		Me.nudHeight.Location = New System.Drawing.Point(196, 21)
 		Me.nudHeight.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
 		Me.nudHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
 		Me.nudHeight.Name = "nudHeight"
@@ -671,7 +676,7 @@ Partial Class frmOptions
 		'
 		'nudWidth
 		'
-		Me.nudWidth.Location = New System.Drawing.Point(47, 18)
+		Me.nudWidth.Location = New System.Drawing.Point(62, 20)
 		Me.nudWidth.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
 		Me.nudWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
 		Me.nudWidth.Name = "nudWidth"

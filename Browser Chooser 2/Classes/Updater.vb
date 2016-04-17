@@ -1,6 +1,6 @@
 ﻿Imports System.Threading
 
-Public Class Updator
+Public Class Updater
     Private Shared mThread As Thread
 
     Private Const UpdateFile As String = "https://browserchooser2.com/app/PublicVersion.xml"
@@ -49,7 +49,7 @@ Public Class Updator
                 End Select
             Next
         Catch ex As Exception
-            'auto aupdate failled
+            ' auto-update failed
             Return Nothing
         End Try
         Return lPublicVersion
@@ -115,14 +115,14 @@ Public Class Updator
             If lPublicVersion.id <> CurVersion Then
                 'build an do you want to update dialog box
                 Dim lResult As DialogResult
-                Dim lOut As String = "An update to Browser Chooser 2 is available!" + Environment.NewLine + _
-                    "Do you want to download and apply this update?" + Environment.NewLine + _
-                    "Press Cancel to turn off update notification." + Environment.NewLine + _
-                    Environment.NewLine + _
-                    "Your version: " + CurVersion + Environment.NewLine + _
-                    "Available version: " + lPublicVersion.id + Environment.NewLine + _
-                    Environment.NewLine + _
-                    "Details: " + lPublicVersion.details
+                Dim lOut As String = "An update to Browser Chooser 2 is available!" & Environment.NewLine & _
+                    "Do you want to download and apply this update?" & Environment.NewLine & _
+                    "Press Cancel to turn off update notification." & Environment.NewLine & _
+                    Environment.NewLine & _
+                    "Your version: " & CurVersion + Environment.NewLine & _
+                    "Available version: " & lPublicVersion.id & Environment.NewLine & _
+                    Environment.NewLine & _
+                    "Details: " & lPublicVersion.details
 
                 lResult = MessageBox.Show(lOut, "Download update?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
                 If lResult = DialogResult.Yes Then

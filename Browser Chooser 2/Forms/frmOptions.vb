@@ -1,4 +1,6 @@
-﻿Public Class frmOptions
+﻿Imports System.IO
+
+Public Class frmOptions
     Private mBrowser As Dictionary(Of Integer, Browser) 'copies
     Private mURLs As SortedDictionary(Of Integer, URL) 'copies
     Private mProtocols As Dictionary(Of Integer, Protocol) 'copies
@@ -585,7 +587,7 @@
     End Sub
 
     Private Sub cmdCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCheckForUpdate.Click
-        Updator.CheckForUpdate(False) ' handles the full process
+        Updater.CheckForUpdate(False) ' handles the full process
     End Sub
 
     Private Sub AddToDefault()
@@ -988,5 +990,47 @@
 
         Return lItems
     End Function
+
+	Private Sub lstBrowsers_DragEnter(sender As Object, e As DragEventArgs) Handles lstBrowsers.DragEnter
+
+		' See if the data is a File(s).
+		If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+			' Yup! Allow copy.
+			e.Effect = DragDropEffects.Copy
+			lstBrowsers.BackColor = Color.FromKnownColor(KnownColor.Highlight)
+		Else
+			' Nope, Sorry Charlie!
+			e.Effect = DragDropEffects.None
+		End If
+
+	End Sub
+
+	Private Sub lstBrowsers_DragLeave(sender As Object, e As EventArgs) Handles lstBrowsers.DragLeave
+
+		' Set back color back to normal
+		lstBrowsers.BackColor = Color.FromKnownColor(KnownColor.Window)
+
+	End Sub
+
+	Private Sub lstBrowsers_DragDrop(sender As Object, e As DragEventArgs) Handles lstBrowsers.DragDrop
+
+		Dim strFiles() As String = CType(e.Data.GetData(DataFormats.FileDrop), String())
+
+		For Each strPath In strFiles
+
+			' Confirm it's a .exe
+			If Path.GetExtension(strPath.ToLower) = ".exe" then
+
+				Debug.Print(strPath)
+
+			End If
+
+		Next
+
+		' Set back color back to normal
+		lstBrowsers.BackColor = Color.FromKnownColor(KnownColor.Window)
+
+	End Sub
+
 
 End Class

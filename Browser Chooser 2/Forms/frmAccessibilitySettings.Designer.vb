@@ -144,7 +144,7 @@ Partial Class frmAccessibilitySettings
 		Me.chkUseAreo.Name = "chkUseAreo"
 		Me.chkUseAreo.Size = New System.Drawing.Size(158, 17)
 		Me.chkUseAreo.TabIndex = 1
-		Me.chkUseAreo.Text = "Use AREO (when available)"
+		Me.chkUseAreo.Text = "Use AERO (when available)"
 		Me.chkUseAreo.UseVisualStyleBackColor = true
 		'
 		'frmAccessibilitySettings
