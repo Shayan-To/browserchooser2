@@ -157,6 +157,18 @@ Public Class WinAPIs
             ByVal intWinIniFlag As Integer) As Boolean
         ' returns non-zero value if function succeeds
     End Function
+
+    <DllImport("user32.dll")> _
+    Public Shared Function SetForegroundWindow(ByVal hWnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
+    End Function
+
+    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+    Public Shared Function FindWindow(ByVal lpClassName As String, ByVal lpWindowName As String) As IntPtr
+    End Function
+
+    <DllImport("user32.dll", EntryPoint:="FindWindow", SetLastError:=True, CharSet:=CharSet.Auto)> _
+    Public Shared Function FindWindowByCaption(ByVal zero As IntPtr, ByVal lpWindowName As String) As IntPtr
+    End Function
 #End Region
 
 #Region "FOLDERID"

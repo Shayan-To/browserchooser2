@@ -1,4 +1,5 @@
 ﻿Imports Browser_Chooser_2.WinAPIs
+Imports System.Net
 
 Public Class BrowserUtilities
 #Region "IE Open as Tab code"
@@ -7,7 +8,8 @@ Public Class BrowserUtilities
         Dim lbFound As Boolean = False
 
         For Each lIe As SHDocVw.InternetExplorer In New SHDocVw.ShellWindows()
-            If lIe.FullName = lBrowser.Target Then
+            'on 64bit systems, first half will NOT match
+            If lIe.FullName.ToLower = lBrowser.Target.ToLower OrElse lIe.FullName.ToLower = Replace(lBrowser.Target, "\Program Files\", "\Program Files (x86)\").ToLower Then
                 'good start
                 Try
                     lIe.Navigate2(DirectCast(aURL, Object), BrowserNavConstants.navOpenInNewTab)
@@ -17,7 +19,7 @@ Public Class BrowserUtilities
 
                 lIe.Visible = True
 
-                'AppActivate() ' see if needed
+                SetForegroundWindow(New IntPtr(lIe.HWND))
 
                 lbFound = True
                 Exit For
@@ -41,7 +43,24 @@ Public Class BrowserUtilities
 
         If lAllProcesses.Count = 1 Then
             'bring that one up
-            AppActivate(lAllProcesses(0).Id)
+            'AppActivate(lAllProcesses(0).Id)
+            SetForegroundWindow(lAllProcesses(0).Handle) 'will not work with chrome, but then abgain chrome has many processes
+
+        Else
+            'seach for the right window
+            Dim lCandidates As New List(Of Process)
+            For Each lProc As Process In lAllProcesses
+                'if it has a title, probably the process we want
+                If lProc.MainWindowTitle <> "" Then
+                    lCandidates.Add(lProc)
+                End If
+            Next
+
+            If lCandidates.Count = 1 Then
+                SetForegroundWindow(lCandidates.Item(0).Handle) 'chome has only one window with a title
+            Else
+                'need a better way to find the correct process, for now bail out.
+            End If
         End If
     End Sub
 
