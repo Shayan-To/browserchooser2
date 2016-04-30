@@ -52,6 +52,8 @@ Public Class Settings
     Public AccessibleRendering As Boolean 'true only if a screen reader is detected
     Public ShowFocus As Boolean 'determines if we show the black box around the main screen elements
     Public UseAreo As Boolean = True ' incase the user prefers not to have the fancy background
+    Public FocusBoxLineWidth As Integer = 1
+    Public FocusBoxColor As Integer = Color.Black.ToArgb
     Public UserAgent As String = "Mozilla/5.0"
 	Public DownloadDetectionFile As Boolean = True
     Public BackgroundColor As Integer = Color.Transparent.ToArgb

@@ -129,6 +129,8 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
+        Me.chkUseAreo = New System.Windows.Forms.CheckBox()
+        Me.chkUseAccessibleRendering = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -548,6 +550,8 @@ Partial Class frmOptions
         '
         'tabOtherSettings
         '
+        Me.tabOtherSettings.Controls.Add(Me.chkUseAreo)
+        Me.tabOtherSettings.Controls.Add(Me.chkUseAccessibleRendering)
         Me.tabOtherSettings.Controls.Add(Me.cmdAccessiblitySettings)
         Me.tabOtherSettings.Controls.Add(Me.txtSeperator)
         Me.tabOtherSettings.Controls.Add(Me.Label6)
@@ -574,11 +578,11 @@ Partial Class frmOptions
         '
         'cmdAccessiblitySettings
         '
-        Me.cmdAccessiblitySettings.Location = New System.Drawing.Point(283, 77)
+        Me.cmdAccessiblitySettings.Location = New System.Drawing.Point(283, 118)
         Me.cmdAccessiblitySettings.Name = "cmdAccessiblitySettings"
         Me.cmdAccessiblitySettings.Size = New System.Drawing.Size(134, 23)
         Me.cmdAccessiblitySettings.TabIndex = 9
-        Me.cmdAccessiblitySettings.Text = "Accessibility Settings"
+        Me.cmdAccessiblitySettings.Text = "Focus Settings"
         Me.cmdAccessiblitySettings.UseVisualStyleBackColor = True
         '
         'txtSeperator
@@ -1189,6 +1193,26 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
+        'chkUseAreo
+        '
+        Me.chkUseAreo.AutoSize = True
+        Me.chkUseAreo.Location = New System.Drawing.Point(275, 95)
+        Me.chkUseAreo.Name = "chkUseAreo"
+        Me.chkUseAreo.Size = New System.Drawing.Size(158, 17)
+        Me.chkUseAreo.TabIndex = 19
+        Me.chkUseAreo.Text = "Use AERO (when available)"
+        Me.chkUseAreo.UseVisualStyleBackColor = True
+        '
+        'chkUseAccessibleRendering
+        '
+        Me.chkUseAccessibleRendering.AutoSize = True
+        Me.chkUseAccessibleRendering.Location = New System.Drawing.Point(275, 72)
+        Me.chkUseAccessibleRendering.Name = "chkUseAccessibleRendering"
+        Me.chkUseAccessibleRendering.Size = New System.Drawing.Size(151, 17)
+        Me.chkUseAccessibleRendering.TabIndex = 18
+        Me.chkUseAccessibleRendering.Text = "Use Accessible Rendering"
+        Me.chkUseAccessibleRendering.UseVisualStyleBackColor = True
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1351,4 +1375,6 @@ End Sub
     Friend WithEvents chRow As System.Windows.Forms.ColumnHeader
     Friend WithEvents chColumn As System.Windows.Forms.ColumnHeader
     Friend WithEvents chProtocolsAndFileTypes As System.Windows.Forms.ColumnHeader
+    Friend WithEvents chkUseAreo As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseAccessibleRendering As System.Windows.Forms.CheckBox
 End Class

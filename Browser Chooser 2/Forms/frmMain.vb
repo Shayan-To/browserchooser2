@@ -20,21 +20,34 @@ Public Class frmMain
                 e.Graphics.FillRectangle(br, Me.DisplayRectangle)
             End Using
         ElseIf mHasAero = True And gSettings.BackgroundColor <> Color.Transparent.ToArgb() Then
-            '      'Composition disabled; fake it like Microsoft does
-            '      Dim clFakeGlassColor As Integer = &HEAD1B9 ' //(185, 209, 234) This is the fake foreground glass color (for use when composition is disabled)
-            '      Dim clFakeGlassColorUnfocused As Integer = &HF2E4D7 ' //(215, 228, 242) This is the fake background glass color (for use when composition is disabled)
-            '      'The color to use depends if the form has focused or not
-            '      Dim glassColor As SolidBrush
-            '      If Me.Focused = True Then
-            '          glassColor = New SolidBrush(Color.FromArgb(gSettings.BackgroundColor))
-            '      Else
-            '          glassColor = New SolidBrush(Color.FromArgb(clFakeGlassColorUnfocused))
-            '      End If
+            'custom background
+            Using br As New LinearGradientBrush(Me.DisplayRectangle, _
+                                    Color.FromArgb(185, 209, 234), Color.FromArgb(gSettings.BackgroundColor), _
+                                    LinearGradientMode.Vertical)
+                e.Graphics.FillRectangle(br, Me.DisplayRectangle)
+            End Using
 
-            '      e.Graphics.FillRectangle(glassColor, Me.DisplayRectangle) ' //fill rectangle with fake color
+
+            ''Composition disabled; fake it like Microsoft does
+            'Dim clFakeGlassColor As Integer = &HEAD1B9 ' //(185, 209, 234) This is the fake foreground glass color (for use when composition is disabled)
+            'Dim clFakeGlassColorUnfocused As Integer = &HF2E4D7 ' //(215, 228, 242) This is the fake background glass color (for use when composition is disabled)
+
+            ''The color to use depends if the form has focused or not
+            'Dim glassColor As SolidBrush
+            'If Me.Focused = True Then
+            '    glassColor = New SolidBrush(Color.FromArgb(gSettings.BackgroundColor))
+            'Else
+            '    glassColor = New SolidBrush(Color.FromArgb(gSettings.BackgroundColor))
+            '    'glassColor = New SolidBrush(Color.FromArgb(clFakeGlassColorUnfocused))
+            'End If
+
+            'e.Graphics.FillRectangle(glassColor, Me.DisplayRectangle) ' //fill rectangle with fake color
 
 
             '      'Now we have to draw the two accent lines along the bottom.
+            'Dim a As New ColorBlend(2)
+            'a.Colors(0) = Color.White
+            'a.Colors(1) = glassColor
 
 
             '      Dim edgeHighlight As Color = ColorBlend(Color.White, glassColor, 0.33) '//mix 33% of glass color to white
@@ -48,7 +61,7 @@ Public Class frmMain
 
             End If
 
-        MyBase.OnPaint(e)
+            MyBase.OnPaint(e)
 
     End Sub
 
@@ -210,7 +223,7 @@ Public Class frmMain
         If mHasAero = False And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
             'Me.BackColor = Color.Transparent
         ElseIf gSettings.BackgroundColor <> Color.Transparent.ToArgb Then
-            Me.BackColor = Color.FromArgb(gSettings.BackgroundColor)
+            'Me.BackColor = Color.FromArgb(gSettings.BackgroundColor)
             chkAutoOpen.BackColor = Color.FromArgb(gSettings.BackgroundColor)
             chkAutoClose.BackColor = Color.FromArgb(gSettings.BackgroundColor)
         End If

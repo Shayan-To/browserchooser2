@@ -11,7 +11,7 @@ Public Class frmOptions
     Private mLastURLID As Integer
     Private mLastProtocolID As Integer
     Private mLastFileTypeID As Integer
-    Private mA11YSettings As frmAccessibilitySettings.A11YSettings
+    Private mFocusSettings As frmAccessibilitySettings.FocusSettings
     Private mbDirty As Boolean = False
 
 #Region "Bottom Control Buttons"
@@ -96,9 +96,13 @@ Public Class frmOptions
         gSettings.OffsetY = CInt(nudYOffset.Value)
 
         'a11y settings
-        gSettings.AccessibleRendering = mA11YSettings.AccessibleRendering
-        gSettings.ShowFocus = mA11YSettings.ShowFocus
-        gSettings.UseAreo = mA11YSettings.UseAreo
+        gSettings.AccessibleRendering = chkUseAccessibleRendering.Checked
+        gSettings.UseAreo = chkUseAreo.Checked
+
+        'focus settings
+        gSettings.ShowFocus = mFocusSettings.ShowFocus
+        gSettings.FocusBoxColor = mFocusSettings.BoxColor.ToArgb
+        gSettings.FocusBoxLineWidth = mFocusSettings.BoxWidth
 
         If txtOptionsShortcut.Text <> "" Then
             gSettings.OptionsShortcut = txtOptionsShortcut.Text.Chars(0) 'no matter what, i take the first and only char
@@ -424,11 +428,14 @@ Public Class frmOptions
         nudXOffset.Value = gSettings.OffsetX
         nudYOffset.Value = gSettings.OffsetY
 
-        'A11YSettings
-        mA11YSettings = New frmAccessibilitySettings.A11YSettings
-        mA11YSettings.AccessibleRendering = gSettings.AccessibleRendering
-        mA11YSettings.ShowFocus = gSettings.ShowFocus
-        mA11YSettings.UseAreo = gSettings.UseAreo
+        'FocusSettings
+        mFocusSettings = New frmAccessibilitySettings.FocusSettings
+        mFocusSettings.ShowFocus = gSettings.ShowFocus
+        mFocusSettings.BoxColor = Color.FromArgb(gSettings.FocusBoxColor)
+        mFocusSettings.BoxWidth = gSettings.FocusBoxLineWidth
+
+        chkUseAccessibleRendering.Checked = gSettings.AccessibleRendering
+        chkUseAreo.Checked = gSettings.UseAreo
 
 
         'check if advanced settings are on
@@ -833,8 +840,8 @@ Public Class frmOptions
     End Sub
 
     Private Sub cmdAccessiblitySettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAccessiblitySettings.Click
-        If frmAccessibilitySettings.ShowSettings(mA11YSettings) = True Then
-            mA11YSettings = frmAccessibilitySettings.GetSettings
+        If frmAccessibilitySettings.ShowSettings(mFocusSettings) = True Then
+            mFocusSettings = frmAccessibilitySettings.GetSettings
 
             'indicate that the screen is dirty and needs to be saved
             mbDirty = True

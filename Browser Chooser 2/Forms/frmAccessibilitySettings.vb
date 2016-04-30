@@ -1,16 +1,16 @@
 ﻿Public Class frmAccessibilitySettings
     Private mbOkayed As Boolean = False
 
-    Public Structure A11YSettings
-        Public AccessibleRendering As Boolean
+    Public Structure FocusSettings
         Public ShowFocus As Boolean
-        Public UseAreo As Boolean
+        Public BoxWidth As Integer
+        Public BoxColor As Color
     End Structure
 
-    Public Function ShowSettings(ByVal aA11YSettings As A11YSettings) As Boolean
-        chkUseAccessibleRendering.Checked = aA11YSettings.AccessibleRendering
+    Public Function ShowSettings(ByVal aA11YSettings As FocusSettings) As Boolean
         chkShowVisualFocus.Checked = aA11YSettings.ShowFocus
-        chkUseAreo.Checked = aA11YSettings.UseAreo
+        nudWidth.Value = aA11YSettings.BoxWidth
+        txtColor.BackColor = aA11YSettings.BoxColor
 
         Me.TopMost = True
         Me.ShowDialog()
@@ -18,11 +18,11 @@
         Return mbOkayed
     End Function
 
-    Public Function GetSettings() As A11YSettings
-        Dim lOut As New A11YSettings
-        lOut.AccessibleRendering = chkUseAccessibleRendering.Checked
+    Public Function GetSettings() As FocusSettings
+        Dim lOut As New FocusSettings
         lOut.ShowFocus = chkShowVisualFocus.Checked
-        lOut.UseAreo = chkUseAreo.Checked
+        lOut.BoxColor = txtColor.BackColor
+        lOut.BoxWidth = CInt(nudWidth.Value)
 
         Return lOut
     End Function
