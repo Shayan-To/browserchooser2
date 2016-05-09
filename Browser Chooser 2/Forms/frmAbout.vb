@@ -118,8 +118,14 @@
 #Region "Link Labels"
 
 	Private Sub LinkLabel_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llHome.LinkClicked, llLicense.LinkClicked
-		Launch("http://" & CType(sender, LinkLabel).Text, False)
-	End Sub
+        ' Check if link starts with http(s) and add it if not
+        Dim strLink As String = CType(sender, LinkLabel).Text
+        If Not ((strLink.StartsWith("https://")) Or (strLink.StartsWith("http://"))) Then
+            strLink = "http://" & strLink
+        End If
+        ' Launch link
+        Launch(strLink, False)
+    End Sub
 
 	Private Sub llFactoryPack_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llFactoryPack.LinkClicked
 		Launch("http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio", False)
