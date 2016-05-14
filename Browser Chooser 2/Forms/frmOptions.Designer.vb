@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports SeparatorComboBoxTest
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmOptions
     Inherits System.Windows.Forms.Form
 
@@ -67,6 +69,8 @@ Partial Class frmOptions
         Me.lstCategories = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabOtherSettings = New System.Windows.Forms.TabPage()
+        Me.chkUseAreo = New System.Windows.Forms.CheckBox()
+        Me.chkUseAccessibleRendering = New System.Windows.Forms.CheckBox()
         Me.cmdAccessiblitySettings = New System.Windows.Forms.Button()
         Me.txtSeperator = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -129,8 +133,6 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
-        Me.chkUseAreo = New System.Windows.Forms.CheckBox()
-        Me.chkUseAccessibleRendering = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -576,6 +578,26 @@ Partial Class frmOptions
         Me.tabOtherSettings.Text = "Settings"
         Me.tabOtherSettings.UseVisualStyleBackColor = True
         '
+        'chkUseAreo
+        '
+        Me.chkUseAreo.AutoSize = True
+        Me.chkUseAreo.Location = New System.Drawing.Point(275, 95)
+        Me.chkUseAreo.Name = "chkUseAreo"
+        Me.chkUseAreo.Size = New System.Drawing.Size(158, 17)
+        Me.chkUseAreo.TabIndex = 19
+        Me.chkUseAreo.Text = "Use AERO (when available)"
+        Me.chkUseAreo.UseVisualStyleBackColor = True
+        '
+        'chkUseAccessibleRendering
+        '
+        Me.chkUseAccessibleRendering.AutoSize = True
+        Me.chkUseAccessibleRendering.Location = New System.Drawing.Point(275, 72)
+        Me.chkUseAccessibleRendering.Name = "chkUseAccessibleRendering"
+        Me.chkUseAccessibleRendering.Size = New System.Drawing.Size(151, 17)
+        Me.chkUseAccessibleRendering.TabIndex = 18
+        Me.chkUseAccessibleRendering.Text = "Use Accessible Rendering"
+        Me.chkUseAccessibleRendering.UseVisualStyleBackColor = True
+        '
         'cmdAccessiblitySettings
         '
         Me.cmdAccessiblitySettings.Location = New System.Drawing.Point(283, 118)
@@ -874,6 +896,7 @@ Partial Class frmOptions
         Me.cmdTransparentBackground.TabIndex = 23
         Me.cmdTransparentBackground.Text = "Transparent Background"
         Me.cmdTransparentBackground.UseVisualStyleBackColor = True
+        Me.cmdTransparentBackground.Visible = False
         '
         'pbBackgroundColor
         '
@@ -882,6 +905,7 @@ Partial Class frmOptions
         Me.pbBackgroundColor.Size = New System.Drawing.Size(25, 23)
         Me.pbBackgroundColor.TabIndex = 22
         Me.pbBackgroundColor.TabStop = False
+        Me.pbBackgroundColor.Visible = False
         '
         'cmdChangeBackgroundColor
         '
@@ -891,6 +915,7 @@ Partial Class frmOptions
         Me.cmdChangeBackgroundColor.TabIndex = 21
         Me.cmdChangeBackgroundColor.Text = "Change Background Color"
         Me.cmdChangeBackgroundColor.UseVisualStyleBackColor = True
+        Me.cmdChangeBackgroundColor.Visible = False
         '
         'Label13
         '
@@ -900,6 +925,7 @@ Partial Class frmOptions
         Me.Label13.Size = New System.Drawing.Size(92, 13)
         Me.Label13.TabIndex = 20
         Me.Label13.Text = "Background Color"
+        Me.Label13.Visible = False
         '
         'GroupBox3
         '
@@ -1193,26 +1219,6 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
-        'chkUseAreo
-        '
-        Me.chkUseAreo.AutoSize = True
-        Me.chkUseAreo.Location = New System.Drawing.Point(275, 95)
-        Me.chkUseAreo.Name = "chkUseAreo"
-        Me.chkUseAreo.Size = New System.Drawing.Size(158, 17)
-        Me.chkUseAreo.TabIndex = 19
-        Me.chkUseAreo.Text = "Use AERO (when available)"
-        Me.chkUseAreo.UseVisualStyleBackColor = True
-        '
-        'chkUseAccessibleRendering
-        '
-        Me.chkUseAccessibleRendering.AutoSize = True
-        Me.chkUseAccessibleRendering.Location = New System.Drawing.Point(275, 72)
-        Me.chkUseAccessibleRendering.Name = "chkUseAccessibleRendering"
-        Me.chkUseAccessibleRendering.Size = New System.Drawing.Size(151, 17)
-        Me.chkUseAccessibleRendering.TabIndex = 18
-        Me.chkUseAccessibleRendering.Text = "Use Accessible Rendering"
-        Me.chkUseAccessibleRendering.UseVisualStyleBackColor = True
-        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1269,7 +1275,7 @@ Partial Class frmOptions
         Me.grpScope.PerformLayout()
         Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents tabSettings As System.Windows.Forms.TabControl
     Friend WithEvents tabBrowsers As System.Windows.Forms.TabPage

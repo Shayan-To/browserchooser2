@@ -323,6 +323,11 @@
       <HintPath>Resources\OSVersionInfo.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SepCombo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\SepCombo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -580,6 +585,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\OSVersionInfo.dll" />
+    <EmbeddedResource Include="Resources\SepCombo.dll" />
     <EmbeddedResource Include="Resources\TAFactory.IconPack.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -595,20 +602,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\paste_and_close_24x24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\OSVersionInfo.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SepCombo.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SepCombo\SepCombo.csproj">
-      <Project>{54333A9B-1874-4F9F-B3DE-5D585F0799C1}</Project>
-      <Name>SepCombo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

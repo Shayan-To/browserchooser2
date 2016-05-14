@@ -80,10 +80,12 @@ Public Class GeneralUtilities
 
     Public Shared mFileNames As New Dictionary(Of EmbededDLLs, String) From {{EmbededDLLs.SHDocVw, "Interop.SHDocVw.dll"},
                                                                              {EmbededDLLs.TAFactory_IconPack, "TAFactory.IconPack.dll"},
-                                                                             {EmbededDLLs.OSVersionInfo, "OSVersionInfo.dll"}}
+                                                                             {EmbededDLLs.OSVersionInfo, "OSVersionInfo.dll"},
+                                                                             {EmbededDLLs.SepCombo, "SepCombo.dll"}}
     Private Shared mbLoadedDLLs As New Dictionary(Of EmbededDLLs, Boolean) From {{EmbededDLLs.SHDocVw, False},
                                                                              {EmbededDLLs.TAFactory_IconPack, False},
-                                                                             {EmbededDLLs.OSVersionInfo, False}}
+                                                                             {EmbededDLLs.OSVersionInfo, False},
+                                                                             {EmbededDLLs.SepCombo, False}}
 
     Public Shared KeyCodeValues As New Dictionary(Of Keys, Integer) From { _
         {Keys.NumPad1, 1}, _
@@ -111,6 +113,7 @@ Public Class GeneralUtilities
         SHDocVw
         TAFactory_IconPack
         OSVersionInfo
+        SepCombo
     End Enum
 
     Public Shared Function SafeMessagebox(ByVal text As String, ByVal caption As String,
@@ -268,6 +271,31 @@ Public Class GeneralUtilities
         aForm.BackColor = Color.Black
         Dim hwnd As IntPtr = aForm.Handle
         Dim result As Integer = DwmExtendFrameIntoClientArea(hwnd, margins)
+
+        'attemp to make pretty
+        'Try
+        '    Dim lPreColor As New WinAPIs.tagCOLORIZATIONPARAMS
+        '    WinAPIs.DwmGetColorizationParameters(lPreColor)
+
+        '    Debug.Print(lPreColor.clrColor.R.ToString)
+
+        '    'change RGB to user selected value
+        '    Dim lNewColor As WinAPIs.tagCOLORIZATIONPARAMS = lPreColor.Clone
+        '    Dim lBackColor As Color = Color.FromArgb(gSettings.BackgroundColor)
+        '    lNewColor.clrColor.R = lBackColor.R
+        '    lNewColor.clrColor.G = lBackColor.G
+        '    lNewColor.clrColor.B = lBackColor.B
+
+        '    WinAPIs.DwmSetColorizationParameters(lNewColor, False)
+
+        '    'show the form
+        '    aForm.Show()
+
+        '    'reset to original
+        '    WinAPIs.DwmSetColorizationParameters(lPreColor, False)
+        'Catch ex As Exception
+
+        'End Try
     End Sub
 
     Public Shared Function IsIntranetUrl(ByVal url As String) As Boolean

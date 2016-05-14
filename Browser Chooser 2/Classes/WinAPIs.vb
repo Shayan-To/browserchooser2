@@ -327,4 +327,55 @@ Public Class WinAPIs
   <MarshalAs(UnmanagedType.LPWStr)> ByRef ppszError As String)
     End Interface
 #End Region
+
+#Region "DWM Undocumented functions - use with extreme care and fallbacks"
+    Structure COLORREF
+        Public R As Byte
+        Public G As Byte
+        Public B As Byte
+
+        Public Overrides Function ToString() As String
+            Return String.Format("({0},{1},{2})", R, G, B)
+        End Function
+
+        Public Function Clone() As COLORREF
+            Dim lOut As New COLORREF
+            lOut.R = R
+            lOut.G = G
+            lOut.B = B
+        End Function
+    End Structure
+
+    Public Structure tagCOLORIZATIONPARAMS
+        Public clrColor As COLORREF 'ColorizationColor
+        Public clrAftGlow As COLORREF 'ColorizationAfterglow
+        Public nIntensity As Integer 'ColorizationColorBalance -> 0-100
+        Public clrAftGlowBal As Integer 'ColorizationAfterglowBalance
+        Public clrBlurBal As Integer 'ColorizationBlurBalance
+        Public clrGlassReflInt As Integer 'ColorizationGlassReflectionIntensity
+        Public fOpaque As Boolean
+
+        Public Function Clone() As tagCOLORIZATIONPARAMS
+            Dim lOut As New tagCOLORIZATIONPARAMS
+            lOut.clrColor = clrColor.Clone
+            lOut.clrAftGlow = clrAftGlow.Clone
+            lOut.nIntensity = nIntensity
+            lOut.clrAftGlowBal = clrAftGlowBal
+            lOut.clrBlurBal = clrBlurBal
+            lOut.clrGlassReflInt = clrGlassReflInt
+            lOut.fOpaque = fOpaque
+        End Function
+    End Structure
+
+    <DllImport("dwmapi.dll", EntryPoint:="#131", PreserveSig:=False)> _
+    Public Shared Sub DwmSetColorizationParameters(ByRef parameters As tagCOLORIZATIONPARAMS, unknown As Boolean)
+    End Sub
+
+    <DllImport("dwmapi.dll", EntryPoint:="#127", PreserveSig:=False)> _
+    Public Shared Sub DwmGetColorizationParameters(<Out()> ByRef parameters As tagCOLORIZATIONPARAMS)
+    End Sub
+
+    'TDwmGetColorizationParameters = procedure(out parameters :TColorizationParams); stdcall;
+    'TDwmSetColorizationParameters = procedure(parameters :PColorizationParams;unknown:BOOL); stdcall;
+#End Region
 End Class
