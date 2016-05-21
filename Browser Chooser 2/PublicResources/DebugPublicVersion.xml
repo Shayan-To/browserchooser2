@@ -1,35 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <versionInfo>
-  <id>B1</id>  
-  <download><![CDATA[http://browserchooser2.com/debug/Browser Chooser 2.exe]]></download>
-  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Beta1</releaseinfo>
+  <id>B2</id>
+  <download><![CDATA[http://browserchooser2.com/app/Browser Chooser 2.exe]]></download>
+  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Beta2</releaseinfo>
   <details>
-    New Features:
-    * Added Detect Browsers to add remove screen
-    * Added non-admin/user profile installations to browser detection
-    * Made the arrow keys navigate list of icons instead of tabbing
-    * Allow to re-order the auto-urls list since it is processed in order top-to-bottom
-    * A11Y: Detect presence of screen reader and disables the non-compatible display of check boxes (overridable via settings - runs only once)
-    * A11Y: allows to hide the focus indicator
-    * A11Y: allows to disable the use of AREO
-    * A11Y: allows to disable the non-compatible display of checkboxes
+    New source code location: https://bitbucket.org/gmyx/browserchooser2
+    New web site: http://browserchooser2.com
+    p.s. I know it does not look great, but drop me a line if you want to improve it.
 
-    Fixed Issues from Alpha 3:
-    * Disabled configuration not found message, uses default settings
-    * Auto saving new / updated configuration files
-    * Added Orera, Vivaldi and dev editions to browser detection mode
-    * Pressing enter on a browser icons now triggers the open action
-    * Editing of auto-urls used wrong item
-    * Will now present app screen when auto-url is on and url is blank instead of quiting
-    * Fixed ugly display of transparent checkboxes (active only if accessible rendering is off)
-    * Moved the dash ("-") from being hard-coded and moved it to the title settings
-    * Added an option per browser to scale icons
-    * All add/edit forms validates their contents
+    New Features:
+    * Better support for Windows 10 and it's variants (e.g. surface)
+    * Many lesser known browsers added to browser detection
+    * MS Edge properly detected and added
+    * Many UI customization have been added, including:
+    * change size of icons
+    * change spacing of icons
+    * starting position
+    * can specify a user agent (default is a generic Mozilla string)
+    * added chosen browser icons to list of add/edit browsers
+    * can turn off downloading of detections files and update checks
+    * note: it was downloaded only on first run or if you hit the detect browser button
+    * command line options added to bring you to a specified settings page
+
+    Fixed Issues from previous versions:
+    * Issue #1: Crash on Win10 open defaults dialog - api has changed in Windows 10
+    * Issue #3: Does not properly detect edge / support launching edge
+    * Issue #4: Crash on exit. Some systems did not like the way BC2 was exiting. Cleaned up.
+    * Issue #5: URL de-shortening could cause wierd URLs to be returned (Facebook). Now sending a user agent string
+    * And more crashes.
 
     Special Thanks for new features
-    * pietjeprecies and ALuckyGuy: For using BC2 in a way I never thought of - and finding a few bugs in the process!
-    * GeekDrop_com: For suggesting icon scalling and many other items
-    * sakima: For suggesting the new keyboard naviagtion and many other items
+    * J. Scott Elblein: Found many bugs and commit some code and ui improvements.
+    * _pi for many UI suggestions
+    * Norbert T. for raising issues and creative use of the tool!
+    * Mitch Geller, sakima, bshamster1, johnlgalt, Paul Trevino, Mark Williams for windows 10 / edge information and testing.
+    * Everyone who uses this tool and the many creative ways you use it!!
+    * If I missed your suggestion, apologies and thanks!
 
     The [url:documentation|https://bitbucket.org/gmyx/browserchooser2/wiki/Documentation] has been increased. While not yet complete it is covering the main screen and the configuration screen. The add / edit screens will be added later.
 
