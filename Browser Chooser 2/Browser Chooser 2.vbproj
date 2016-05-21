@@ -361,6 +361,7 @@
     <Compile Include="Classes\DisplayDictionary.vb" />
     <Compile Include="Classes\FileType.vb" />
     <Compile Include="Classes\IApplicationActivationManager.vb" />
+    <Compile Include="Classes\Logger.vb" />
     <Compile Include="Classes\Protocol.vb" />
     <Compile Include="Classes\Updater.vb" />
     <Compile Include="Classes\WinAPIExtras.vb" />

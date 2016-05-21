@@ -15,8 +15,8 @@ Module modStart
     Public Const CurVersionDisplay As String = "Beta 2"
 #End If
 #Else
-    Public Const CurVersion As String = "B1"
-    Public Const CurVersionDisplay As String = "Beta 1"
+    Public Const CurVersion As String = "B2"
+    Public Const CurVersionDisplay As String = "Beta 2"
 #End If
 
     Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
@@ -272,6 +272,11 @@ Module modStart
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
+
+
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.LoggingEnabled)
+                        'logging
+                        Settings.LogDebugs = True
                 End Select
 
                 If lbExit = True Then

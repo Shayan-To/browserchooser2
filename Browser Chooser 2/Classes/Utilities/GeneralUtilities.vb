@@ -40,6 +40,8 @@ Public Class GeneralUtilities
         SSettingsSettings
         SSettingsMoreSettings
         SSettingsDefaultBrowser
+        'log where we are
+        LoggingEnabled
     End Enum
 
     Public Shared AvailableCommands As New Dictionary(Of ListOfCommands, String) From { _
@@ -71,7 +73,8 @@ Public Class GeneralUtilities
             {ListOfCommands.SSettingsCategories, "--s:c"}, _
             {ListOfCommands.SSettingsSettings, "--s:s"}, _
             {ListOfCommands.SSettingsMoreSettings, "--s:ms"}, _
-            {ListOfCommands.SSettingsDefaultBrowser, "--s:db"} _
+            {ListOfCommands.SSettingsDefaultBrowser, "--s:db"}, _
+            {ListOfCommands.LoggingEnabled, "--log"} _
         }
 
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio

@@ -62,6 +62,7 @@ Public Class Settings
     Public OffsetY As Integer = 0
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
+    <NonSerialized()> Public Shared LogDebugs As Boolean = False 'only true if specified by command line
 
     Sub New(ByVal aError As Boolean)
         SharedNew()
