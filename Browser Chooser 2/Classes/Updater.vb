@@ -160,14 +160,14 @@ Public Class Updater
                     Environment.NewLine & _
                     "Details: " & lPublicVersion.details
 
-                lResult = MessageBox.Show(lOut, "Download update?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+                lResult = MessageBox.Show(lOut, "Download update?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 If lResult = DialogResult.Yes Then
                     Return True
-                ElseIf lResult = DialogResult.Cancel Then
-                    gSettings.AutomaticUpdates = False
-                    gSettings.DoSave(True)
+                    'ElseIf lResult = DialogResult.Cancel Then
+                    'gSettings.AutomaticUpdates = False
+                    'gSettings.DoSave(True)
 
-                    Return False
+                    'Return False
                 Else
                     Return False
                 End If

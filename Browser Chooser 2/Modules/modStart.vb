@@ -283,7 +283,7 @@ Module modStart
                     Application.Exit()
                 Else
                     'update complete! ready to go!
-                    If My.Application.CommandLineArgs.Count > 0 Then
+                    If My.Application.CommandLineArgs.Count > 1 Then
                         ContinueMain(My.Application.CommandLineArgs.Item(1))
                     Else
                         ContinueMain("")
