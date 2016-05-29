@@ -344,6 +344,7 @@ Public Class GeneralUtilities
         'End 'not clean, will do for now
         'System.Environment.Exit(0) ' this line needs a security permission
         'sercutiry permissions will be done in Beta 3
+        Application.Exit()
     End Sub
 
     Public Shared Function GetUniquedID() As Guid

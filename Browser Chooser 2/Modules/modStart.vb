@@ -283,10 +283,14 @@ Module modStart
                     Application.Exit()
                 Else
                     'update complete! ready to go!
-                    ContinueMain(My.Application.CommandLineArgs.Item(1))
+                    If My.Application.CommandLineArgs.Count > 0 Then
+                        ContinueMain(My.Application.CommandLineArgs.Item(1))
+                    Else
+                        ContinueMain("")
+                    End If
                 End If
             Else
-                ContinueMain(cmdLineOption)
+                    ContinueMain(cmdLineOption)
             End If
         Else
             CheckForMigrateBeforeLaunch()

@@ -99,13 +99,49 @@ Public Class Updater
 
         '        My.Computer.FileSystem.CopyFile(Application.ExecutablePath, Application.ExecutablePath & ".new.exe")
         '#Else
-        My.Computer.Network.DownloadFile(lPublicVersion.download, Application.ExecutablePath & ".new.exe", "", "", False, 60000, True)
-        '#End If
 
-        GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.ApplyUpdate, StartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
+        'ideally, we hide the main form. but we are in a threaded enviroment and does not work the same.
+        'will need to invoke a method on the main form.
+        'Dim lWasEnabled As Boolean
+        'Dim lForm As Form = Nothing
+        'Dim lTmrControl As System.Windows.Forms.Timer = Nothing
+        'For Each lSearchForm As Form In Application.OpenForms
+        '    If lSearchForm.Name = "frmMain" Then
+        '        lForm = lSearchForm
 
-        'this process needs to exit
-        Application.Exit()
+        '        'now find the timer objecty
+        '        For Each lControl As System.Windows.Forms.Control In lForm.Controls
+        '            If lControl.Name = "tmrTimer" Then
+        '                'seems like timer does not behanve as a normal control
+        '                lWasEnabled = lControl.Enabled
+        '                lControl.Enabled = False
+
+        '                Exit For
+        '            End If
+        '        Next
+
+        '        'lWasEnabled = lForm.Controls.Item("tmrDelay").Enabled
+        '        'lForm.Controls.Item("tmrDelay").Enabled = False
+        '        lForm.Visible = False
+
+        '        Exit For
+        '    End If
+        'Next
+        
+        Try
+            My.Computer.Network.DownloadFile(lPublicVersion.download, Application.ExecutablePath & ".new.exe", "", "", True, 60000, True, FileIO.UICancelOption.ThrowException)
+            '#End If
+
+            GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.ApplyUpdate, StartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
+
+            'this process needs to exit
+            Application.Exit()
+        Catch ex As System.OperationCanceledException
+
+            'lForm.Controls.Item("tmrDelay").Enabled = lWasEnabled
+            'lForm.Visible = True
+        End Try
+
     End Sub
 
     Private Shared Function askForUpdate() As Boolean
