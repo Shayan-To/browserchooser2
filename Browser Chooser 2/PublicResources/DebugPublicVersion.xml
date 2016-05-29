@@ -13,13 +13,13 @@
     * Many lesser known browsers added to browser detection
     * MS Edge properly detected and added
     * Many UI customization have been added, including:
-    * change size of icons
-    * change spacing of icons
-    * starting position
+        * change size of icons
+        * change spacing of icons
+        * starting position
     * can specify a user agent (default is a generic Mozilla string)
     * added chosen browser icons to list of add/edit browsers
     * can turn off downloading of detections files and update checks
-    * note: it was downloaded only on first run or if you hit the detect browser button
+        * note: it was downloaded only on first run or if you hit the detect browser button
     * command line options added to bring you to a specified settings page
 
     Fixed Issues from previous versions:
