@@ -105,9 +105,11 @@ Public Class StartupLauncher
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
             'to do
-            mWorker = New System.Threading.Thread(AddressOf mWorker_DoWork)
-            mWorker.IsBackground = True
-            mWorker.Start()
+            If lParts.Protocol = "http" Or lParts.Protocol = "https" Then
+                mWorker = New System.Threading.Thread(AddressOf mWorker_DoWork_HTTP)
+                mWorker.IsBackground = True
+                mWorker.Start()
+            End If
         End If
     End Sub
 
@@ -121,16 +123,19 @@ Public Class StartupLauncher
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
             'to do
-            mWorker = New System.Threading.Thread(AddressOf mWorker_DoWork)
-            mWorker.IsBackground = True
-            mWorker.Start()
+            If lParts.Protocol = "http" Or lParts.Protocol = "https" Then
+                mWorker = New System.Threading.Thread(AddressOf mWorker_DoWork_HTTP)
+                mWorker.IsBackground = True
+                mWorker.Start()
+            End If
         End If
     End Sub
 #End Region
 
 #Region "ShortURL deshortening"
+    'only applies to http(s) 
     Private Shared mWorker As System.Threading.Thread
-    Private Shared Sub mWorker_DoWork()
+    Private Shared Sub mWorker_DoWork_HTTP()
 
         Dim lRequest As HttpWebRequest
         Dim lResponse As WebResponse = Nothing
@@ -167,7 +172,10 @@ Public Class StartupLauncher
         mWorker = Nothing
 
     End Sub
-
 #End Region
+
+    Private Shared Sub mWorker_DoWork()
+        Throw New NotImplementedException
+    End Sub
 
 End Class
