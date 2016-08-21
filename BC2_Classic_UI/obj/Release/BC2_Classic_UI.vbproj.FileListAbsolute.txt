@@ -1,0 +1,10 @@
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Release\BC2ClassicUI.exe.config
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Release\BC2ClassicUI.exe
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Release\BC2ClassicUI.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Release\BC2ClassicUI.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2_Classic_UI.vbprojResolveAssemblyReference.cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2ClassicUI.Resources.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2_Classic_UI.vbproj.GenerateResource.Cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2ClassicUI.exe
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2ClassicUI.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Release\BC2ClassicUI.pdb

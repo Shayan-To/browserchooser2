@@ -1,0 +1,3 @@
+D:\CodeRepository\GIT\browserchooser2WPF\Browser Chooser 2\bin\Release\Browser Chooser 2.exe.config
+D:\CodeRepository\GIT\browserchooser2WPF\Browser Chooser 2\obj\Release\Interop.SHDocVw.dll
+D:\CodeRepository\GIT\browserchooser2WPF\Browser Chooser 2\obj\Release\Browser Chooser 2.vbproj.ResolveComReference.cache

@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow x:Class="WpfApplication1.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WpfApplication1"
+    mc:Ignorable="d"
+    xmlns:View="clr-namespace:WpfApplication1.View"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    Title="MainWindow" Height="350" Width="525">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <View:RightHandControlsBar />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+
+    <Grid x:Name="TileArray" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".2*"/>
+        </Grid.RowDefinitions>
+        <Controls:Tile Title="Hello!" 
+            TiltFactor="2"                        
+            Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+            Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+            Count="1"
+            Grid.Column="0" Grid.Row="0"  >
+        </Controls:Tile>
+    </Grid>
+</Controls:MetroWindow>

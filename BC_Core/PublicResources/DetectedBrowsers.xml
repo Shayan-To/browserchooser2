@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+<DetectedBrowsers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ListOfKnownBrowsers>
+    <BrowserDefinition>
+      <Name>Internet Explorer</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Internet Explorer\iexplore.exe</string>
+      </InstallPath>
+      <IsIE>true</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>false</SupportsNonAdmin>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Edge</Name>
+      <FolderName>Microsoft.MicrosoftEdge</FolderName>
+      <AlternativeExecution>
+        <Path>C:\Windows\explorer.exe</Path>
+        <Arguments>microsoft-edge:</Arguments>
+      </AlternativeExecution>
+      <InstallPath>
+        <string>C:\Windows\SystemApps</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>true</IsUniversalApp>
+      <SupportsNonAdmin>false</SupportsNonAdmin>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath>Assets\MicrosoftEdgeSquare44x44.targetsize-48_altform-unplated.png</DefaultIconPath>
+      <HasWilcardEndingToPath>true</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Firefox</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Mozilla Firefox\firefox.exe</string>
+        <string>C:\Program Files (x86)\Mozilla Firefox\firefox.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Mozilla Firefox\firefox.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Firefox Developer Edition</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Firefox Developer Edition\firefox.exe</string>
+        <string>C:\Program Files (x86)\Firefox Developer Edition\firefox.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Firefox Developer Edition\firefox.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Firefox Nighlty</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Nightly\firefox.exe</string>
+        <string>C:\Program Files (x86)\Nightly\firefox.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Nightly\firefox.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Chrome</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Google\Chrome\Application\chrome.exe</string>
+        <string>C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Google\Chrome\Application\chrome.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Chrome Canary</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Google\Chrome SxS\Application\chrome.exe</string>
+        <string>C:\Program Files (x86)\Google\Chrome SxS\Application\chrome.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Google\Chrome SxS\Application\chrome.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>4</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Opera</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Opera\launcher.exe</string>
+        <string>C:\Program Files (x86)\Opera\launcher.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Programs\Opera\launcher.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Opera Beta</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Opera beta\launcher.exe</string>
+        <string>C:\Program Files (x86)\Opera beta\launcher.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Programs\Opera beta\launcher.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Opera Developer</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Opera developer\launcher.exe</string>
+        <string>C:\Program Files (x86)\Opera developer\launcher.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Programs\Opera developer\launcher.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Vivaldi</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Vivaldi\Application\vivaldi.exe</string>
+        <string>C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Vivaldi\Application\vivaldi.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Avant</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Avant Browser\avant.exe</string>
+        <string>C:\Program Files (x86)\Avant Browser\avant.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Avant Browser\avant.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Seamonkey</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\SeaMonkey\seamonkey.exe</string>
+        <string>C:\Program Files (x86)\SeaMonkey\seamonkey.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>SeaMonkey\seamonkey.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Waterfox</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Waterfox\waterfox.exe</string>
+        <string>C:\Program Files (x86)\Waterfox\waterfox.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Waterfox\waterfox.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Maxthon</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Maxthon\Bin\Maxthon.exe</string>
+        <string>C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Maxthon\Bin\Maxthon.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>QupZilla</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\QupZilla\qupzilla.exee</string>
+        <string>C:\Program Files (x86)\QupZilla\qupzilla.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>QupZilla\qupzilla.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Pale Moon</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Pale Moon\palemoon.exe</string>
+        <string>C:\Program Files (x86)\Pale Moon\palemoon.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Pale Moon\palemoon.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+    <BrowserDefinition>
+      <Name>Torch</Name>
+      <AlternativeExecution />
+      <InstallPath>
+        <string>C:\Program Files\Torch\Application\torch.exe</string>
+        <string>C:\Program Files (x86)\Torch\Application\torch.exe</string>
+      </InstallPath>
+      <IsIE>false</IsIE>
+      <IsUniversalApp>false</IsUniversalApp>
+      <SupportsNonAdmin>true</SupportsNonAdmin>
+      <NonAdminInstallPath>
+        <NonAdminPath>
+          <SpecialFolder>LocalApplicationPath</SpecialFolder>
+          <FinalSection>Torch\Application\torch.exe</FinalSection>
+        </NonAdminPath>
+      </NonAdminInstallPath>
+      <DefaultIconIndex>0</DefaultIconIndex>
+      <DefaultIconPath />
+      <HasWilcardEndingToPath>false</HasWilcardEndingToPath>
+    </BrowserDefinition>
+  </ListOfKnownBrowsers>
+</DetectedBrowsers>

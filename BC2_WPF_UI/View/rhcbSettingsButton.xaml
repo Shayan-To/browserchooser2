@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="View.rhcbSettingsButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:animationAP="clr-namespace:WpfApplication1.WpfApplication1.View.ViewStyles.ExtraCodeBehind"
+             xmlns:local="clr-namespace:WpfApplication1"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+
+    <Expander Template="{StaticResource RevealExpanderTemp}" IsExpanded="True" animationAP:animationsAP.APMinWidthProperty="20.0" >
+        <Button  Width="70px">
+            <Grid x:Name="LayoutRoot">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Width="20"
+                            Height="20"
+                            Grid.Column="0" Grid.Row="0"
+                            Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+
+                <TextBlock x:Name="cmdSettings_Label" Margin="4 0 0 0"
+                            Grid.Column="1" Grid.Row="0"                         
+                            Width="50px"                        
+                            Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+                            VerticalAlignment="Center"
+                            Text="Settings">
+                </TextBlock>
+            </Grid>
+        </Button>
+    </Expander>    
+</UserControl>

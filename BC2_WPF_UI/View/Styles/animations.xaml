@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:View="clr-namespace:WpfApplication1.View"                                         
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:WpfApplication1.WpfApplication1.View.ViewStyles"
+    xmlns:animationAP="clr-namespace:WpfApplication1.WpfApplication1.View.ViewStyles.ExtraCodeBehind"
+    xmlns:ExtraCodeBehind="clr-namespace:WpfApplication1.WpfApplication1.View.ViewStyles.ExtraCodeBehind">
+
+    <ExtraCodeBehind:CalculateWidth x:Key="CalculateWidth" />
+    <ControlTemplate x:Key="RevealExpanderTemp" TargetType="{x:Type Expander}">
+        <DockPanel>
+            <ScrollViewer x:Name="ExpanderContentScrollView" DockPanel.Dock="Left"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Bottom"
+                              >
+                <ScrollViewer.Tag>                    
+                    <sys:Double>0.0</sys:Double>
+                </ScrollViewer.Tag>                
+                <ScrollViewer.Width>
+                    <MultiBinding Converter="{StaticResource CalculateWidth}">
+                        <Binding Path="ActualWidth" ElementName="ExpanderContent" />
+                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="(animationAP:animationsAP.APMinWidth)" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </MultiBinding>
+                </ScrollViewer.Width>
+                <ContentPresenter x:Name="ExpanderContent" ContentSource="Content" />
+            </ScrollViewer>
+        </DockPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
+                                                 Storyboard.TargetProperty="Tag"                                                 
+                                                 To="0.0"
+                                                 Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
+                                                 Storyboard.TargetProperty="Tag"                                                 
+                                                 To="1"
+                                                 Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>
