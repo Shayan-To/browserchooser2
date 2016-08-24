@@ -83,9 +83,15 @@ Public Class BrowserUtilities
         If My.Computer.FileSystem.FileExists(strBrowser) = True Then
             Dim lProcess As Process
             If Not String.IsNullOrEmpty(aURL) Then
-                lProcess = Process.Start(strBrowser, aTarget.Arguments & " """ & aURL & """")
+                If InStr(aTarget.Arguments, "{0}") > 0 Then
+                    'using replacement, new start
+                    lProcess = Process.Start(strBrowser, String.Format(aTarget.Arguments, aURL))
+                Else
+                    'no replacement, old start
+                    lProcess = Process.Start(strBrowser, aTarget.Arguments & " """ & aURL & """")
+                End If
             Else
-                lProcess = Process.Start(strBrowser, aTarget.Arguments)
+                    lProcess = Process.Start(strBrowser, aTarget.Arguments)
             End If
             Dim lID As Integer = lProcess.Id
 
