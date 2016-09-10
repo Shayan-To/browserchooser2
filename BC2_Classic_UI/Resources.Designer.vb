@@ -24,22 +24,26 @@ Namespace My.Resources
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
-    Friend Module Resources
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
+    Friend Class Resources
         
-        Private resourceMan As Global.System.Resources.ResourceManager
+        Private Shared resourceMan As Global.System.Resources.ResourceManager
         
-        Private resourceCulture As Global.System.Globalization.CultureInfo
+        Private Shared resourceCulture As Global.System.Globalization.CultureInfo
+        
+        <Global.System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")>  _
+        Friend Sub New()
+            MyBase.New
+        End Sub
         
         '''<summary>
         '''  Returns the cached ResourceManager instance used by this class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("Browser_Chooser_Core.Resources", GetType(Resources).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("BC2ClassicUI.Resources", GetType(Resources).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan
@@ -51,7 +55,7 @@ Namespace My.Resources
         '''  resource lookups using this strongly typed resource class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Property Culture() As Global.System.Globalization.CultureInfo
+        Friend Shared Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -63,7 +67,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _122() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property _122() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("_122", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -73,7 +77,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _128() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property _128() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("_128", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -83,7 +87,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _53() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property _53() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("_53", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -93,9 +97,19 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property bc() As System.Drawing.Icon
+        Friend Shared ReadOnly Property bclogo() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("bc", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("bclogo", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend Shared ReadOnly Property bclogo1() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("bclogo1", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
@@ -103,38 +117,47 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property browserchooser1() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property browserchooser() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("browserchooser1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("browserchooser", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        '''&lt;DetectedBrowsers xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        '''  &lt;ListOfKnownBrowsers&gt;
-        '''    &lt;BrowserDefinition&gt;
-        '''      &lt;Name&gt;Internet Explorer&lt;/Name&gt;
-        '''      &lt;AlternativeExecution /&gt;
-        '''      &lt;InstallPath&gt;
-        '''        &lt;string&gt;C:\Program Files\Internet Explorer\iexplore.exe&lt;/string&gt;
-        '''      &lt;/InstallPath&gt;
-        '''      &lt;IsIE&gt;true&lt;/IsIE&gt;
-        '''      &lt;IsUniversalApp&gt;false&lt;/IsUniversalApp&gt;
-        '''      &lt;SupportsNonAdmin&gt;false&lt;/SupportsNonAdmin&gt;
-        '''      &lt;Defau [rest of string was truncated]&quot;;.
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property DetectedBrowsers() As String
+        Friend Shared ReadOnly Property BrowserChooser3() As System.Drawing.Icon
             Get
-                Return ResourceManager.GetString("DetectedBrowsers", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("BrowserChooser3", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend Shared ReadOnly Property Jrdn88_IconPackage_Icon_146() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Jrdn88_IconPackage_Icon_146", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend Shared ReadOnly Property Jrdn88_IconPackage_Icon_17() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Jrdn88_IconPackage_Icon_17", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property paste_24x24() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property paste_24x24() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("paste_24x24", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -144,7 +167,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property paste_and_close_24x24() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property paste_and_close_24x24() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("paste_and_close_24x24", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -154,7 +177,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Settings_icon() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property Settings_icon() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Settings_icon", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
@@ -164,11 +187,11 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property world_go() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property world_go() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("world_go", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
-    End Module
+    End Class
 End Namespace

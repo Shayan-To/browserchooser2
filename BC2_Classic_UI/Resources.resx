@@ -112,43 +112,49 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\safari.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_122" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\122.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\128.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bg.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BrowserChooser4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BrowserChooser4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BrowserChooser41" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BrowserChooser4.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bgxp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgxp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\53.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bclogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\bclogo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bclogo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bclogo1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>resources\bclogo1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="browserchooser1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\browserchooser.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="browserchooser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\browserchooser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowserChooser3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\browserchooser3.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Jrdn88_IconPackage_Icon_146" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\jrdn88 iconpackage icon 146.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Jrdn88_IconPackage_Icon_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\jrdn88 iconpackage icon 17.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paste_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\paste_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paste_and_close_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\paste_and_close_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Settings_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Settings-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>resources\settings-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="world_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\world_go.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_122" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\122.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\53.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

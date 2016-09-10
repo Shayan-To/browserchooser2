@@ -9,8 +9,8 @@
     <OutputType>Library</OutputType>
     <StartupObject>
     </StartupObject>
-    <RootNamespace>Browser_Chooser_2</RootNamespace>
-    <AssemblyName>Browser Chooser 2</AssemblyName>
+    <RootNamespace>Browser_Chooser_Core</RootNamespace>
+    <AssemblyName>Browser Chooser Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -56,7 +56,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -70,7 +70,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -81,7 +81,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -91,7 +91,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -103,7 +103,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Admin\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -117,7 +117,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug Admin\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -129,7 +129,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Update\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -143,7 +143,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug Update\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -156,7 +156,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\DebugPauseOnStart\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -167,7 +167,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\DebugPauseOnStart\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -179,18 +179,18 @@
     <DebugType>Full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugShortURL|x64'">
     <OutputPath>bin\x64\DebugShortURL\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAutoURL|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\DebugAutoURL\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -202,7 +202,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\DebugAutoURL\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -215,7 +215,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\BuildDetectionFile\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -227,7 +227,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\BuildDetectionFile\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -247,7 +247,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Update and Pause\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -261,7 +261,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug Update and Pause\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -274,7 +274,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Local Detection File\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -286,7 +286,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug Local Detection File\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -299,7 +299,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Open To Settings\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -311,7 +311,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug Open To Settings\</OutputPath>
-    <DocumentationFile>Browser Chooser 2.xml</DocumentationFile>
+    <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
@@ -380,12 +380,6 @@
     <Compile Include="Forms\AddEditForms\frmAddEditTypes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomControls\FFButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CustomControls\FFCheckBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
@@ -441,13 +435,6 @@
     <Compile Include="Forms\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmMain.Designer.vb">
-      <DependentUpon>frmMain.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Modules\modStart.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -491,9 +478,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMain.resx">
-      <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

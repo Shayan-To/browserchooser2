@@ -72,11 +72,25 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
+    <Compile Include="CustomControls\FFButton.vb">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="CustomControls\FFCheckBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SimplefiedClasses\SimplefiedBrowser.vb" />
+    <Compile Include="Utility\LoopMath.vb" />
+    <Compile Include="Utility\Screen.vb" />
+    <Compile Include="ViewModel\vmMain.vb" />
+    <Compile Include="View\frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -96,6 +110,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -114,6 +136,54 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BC_Core\Browser Chooser Core.vbproj">
+      <Project>{37b05362-7806-4dd0-92a4-b4681d43b32f}</Project>
+      <Name>Browser Chooser Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\122.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\53.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bclogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bclogo1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browserchooser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BrowserChooser3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Jrdn88 IconPackage Icon 146.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Jrdn88 IconPackage Icon 17.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_and_close_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SepCombo.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\world_go.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
