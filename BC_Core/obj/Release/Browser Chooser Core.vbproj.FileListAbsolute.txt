@@ -15,3 +15,14 @@ D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_2.f
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_2.Resources.resources
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser Chooser Core.vbproj.GenerateResource.Cache
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser Chooser 2.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAddEditProtocols.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAddEditType.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAbout.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAddEditBrowser.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAddEditURL.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmAccessibilitySettings.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmIcons.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmImportSource.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmOptions.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.Resources.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser Chooser Core.xml

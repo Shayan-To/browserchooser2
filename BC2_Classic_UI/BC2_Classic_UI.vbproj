@@ -83,7 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SimplefiedClasses\SimplefiedBrowser.vb" />
+    <Compile Include="SimplefiedClasses\SimplefiedSettings.vb" />
     <Compile Include="Utility\LoopMath.vb" />
     <Compile Include="Utility\Screen.vb" />
     <Compile Include="ViewModel\vmMain.vb" />

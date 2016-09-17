@@ -1,0 +1,100 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Browser Chooser Core
+</name>
+</assembly>
+<members>
+<member name="T:Browser_Chooser_Core.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources._122">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources._128">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources._53">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.bc">
+<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.browserchooser1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.DetectedBrowsers">
+<summary>
+  Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;DetectedBrowsers xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+  &lt;ListOfKnownBrowsers&gt;
+    &lt;BrowserDefinition&gt;
+      &lt;Name&gt;Internet Explorer&lt;/Name&gt;
+      &lt;AlternativeExecution /&gt;
+      &lt;InstallPath&gt;
+        &lt;string&gt;C:\Program Files\Internet Explorer\iexplore.exe&lt;/string&gt;
+      &lt;/InstallPath&gt;
+      &lt;IsIE&gt;true&lt;/IsIE&gt;
+      &lt;IsUniversalApp&gt;false&lt;/IsUniversalApp&gt;
+      &lt;SupportsNonAdmin&gt;false&lt;/SupportsNonAdmin&gt;
+      &lt;Defau [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.paste_24x24">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.paste_and_close_24x24">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.Settings_icon">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Browser_Chooser_Core.My.Resources.Resources.world_go">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:Browser_Chooser_Core.DefaultBrowser.CreateApplicationRegistration(Microsoft.Win32.RegistryKey)">
+
+ Notes: As of Alpha 3, the protocols and file types are dynamic and set by the user. this call will happen more often
+  Also, Alpha 3 is the first to not fully support windows XP, this class is impcacted by that change. It will be a best effot.
+     Windows 7 User scope uses the XP process, so I guess XP will live a little longer.
+
+ As of Windows 8, we need to deregister and reregister to get the dialog to pop-up. i think.
+ Update Nov 2014: It is more simple than that. We can either show the associations dialog in windows or the open with box. 
+
+ You can try to figure out what i happening for the Windows 8+ hash, but good luck. Here is what I know so far:
+     Uses bcrypt and rsa and the machine guid
+</member>
+</members>
+</doc>

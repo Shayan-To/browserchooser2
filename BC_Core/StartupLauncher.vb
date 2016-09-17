@@ -7,12 +7,12 @@ Imports Browser_Chooser_2.GeneralUtilities
 
 Public Class StartupLauncher
     Public Delegate Sub UpdateURL(ByVal mURL As String)
-    Private Shared mURL As String
-    Private Shared mbIs64Bit As Boolean
-    Private Shared mDelay As Integer 'if > 0 count down and launch browser
-    Private Shared mBrowser As Browser
-    Private Shared mDeletegate As UpdateURL
-    Private Shared mSupportingBrowsers As List(Of Guid)
+    Private mURL As String
+    Private mbIs64Bit As Boolean
+    Private mDelay As Integer 'if > 0 count down and launch browser
+    Private mBrowser As Browser
+    Private mDeletegate As UpdateURL
+    Private mSupportingBrowsers As List(Of Guid)
 
     Sub New()
         gSettings = New Settings
@@ -24,37 +24,37 @@ Public Class StartupLauncher
     End Sub
 
 #Region "Read-only Properties"
-    Public Shared ReadOnly Property Is64Bit As Boolean
+    Public ReadOnly Property Is64Bit As Boolean
         Get
             Return mbIs64Bit
         End Get
     End Property
 
-    Public Shared ReadOnly Property URL As String
+    Public ReadOnly Property URL As String
         Get
             Return mURL
         End Get
     End Property
 
-    Public Shared ReadOnly Property Browser As Browser
+    Public ReadOnly Property Browser As Browser
         Get
             Return mBrowser
         End Get
     End Property
 
-    Public Shared ReadOnly Property Delay As Integer
+    Public ReadOnly Property Delay As Integer
         Get
             Return mDelay
         End Get
     End Property
 
-    Public Shared ReadOnly Property SupportingBrowsers As List(Of Guid)
+    Public ReadOnly Property SupportingBrowsers As List(Of Guid)
         Get
             Return mSupportingBrowsers
         End Get
     End Property
 
-    Private Shared Sub ProcessParts(ByVal aParts As GeneralUtilities.URLParts)
+    Private Sub ProcessParts(ByVal aParts As GeneralUtilities.URLParts)
         mSupportingBrowsers = New List(Of Guid)
 
         If aParts.isProtocol = TriState.True Then
@@ -97,7 +97,7 @@ Public Class StartupLauncher
         End If
     End Sub
 
-    Public Shared Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDeletegate As UpdateURL)
+    Public Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDeletegate As UpdateURL)
         mURL = aURL
         mDeletegate = aDeletegate
         Dim lParts As GeneralUtilities.URLParts = DetermineParts(aURL)
@@ -113,7 +113,7 @@ Public Class StartupLauncher
         End If
     End Sub
 
-    Public Shared Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDelay As Integer, ByVal aBrowser As Browser, ByVal aDeletegate As UpdateURL)
+    Public Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDelay As Integer, ByVal aBrowser As Browser, ByVal aDeletegate As UpdateURL)
         mURL = aURL
         mDelay = aDelay
         mBrowser = aBrowser
@@ -134,8 +134,8 @@ Public Class StartupLauncher
 
 #Region "ShortURL deshortening"
     'only applies to http(s) 
-    Private Shared mWorker As System.Threading.Thread
-    Private Shared Sub mWorker_DoWork_HTTP()
+    Private mWorker As System.Threading.Thread
+    Private Sub mWorker_DoWork_HTTP()
 
         Dim lRequest As HttpWebRequest
         Dim lResponse As WebResponse = Nothing
@@ -173,9 +173,4 @@ Public Class StartupLauncher
 
     End Sub
 #End Region
-
-    Private Shared Sub mWorker_DoWork()
-        Throw New NotImplementedException
-    End Sub
-
 End Class
