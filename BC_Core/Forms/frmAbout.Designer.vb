@@ -66,12 +66,12 @@ Partial Class frmAbout
 		Me.OKButton.Size = New System.Drawing.Size(75, 23)
 		Me.OKButton.TabIndex = 0
 		Me.OKButton.Text = "&OK"
-		Me.OKButton.UseVisualStyleBackColor = false
-		'
-		'PictureBox1
-		'
-		Me.PictureBox1.Image = Global.Browser_Chooser_2.My.Resources.Resources.browserchooser1
-		Me.PictureBox1.Location = New System.Drawing.Point(51, 5)
+		Me.OKButton.UseVisualStyleBackColor = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.Browser_Chooser_Core.My.Resources.Resources.browserchooser1
+        Me.PictureBox1.Location = New System.Drawing.Point(51, 5)
 		Me.PictureBox1.Name = "PictureBox1"
 		Me.PictureBox1.Size = New System.Drawing.Size(390, 267)
 		Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -87,11 +87,11 @@ Partial Class frmAbout
 		Me.llHome.TabIndex = 2
 		Me.llHome.TabStop = true
 		Me.llHome.Text = "browserchooser2.com"
-		'
-		'PictureBox2
-		'
-		Me.PictureBox2.Image = Global.Browser_Chooser_2.My.Resources.Resources.world_go
-		Me.PictureBox2.Location = New System.Drawing.Point(10, 78)
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.Browser_Chooser_Core.My.Resources.Resources.world_go
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 78)
 		Me.PictureBox2.Name = "PictureBox2"
 		Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
 		Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize

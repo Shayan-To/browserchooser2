@@ -1,7 +1,7 @@
 ﻿'Option Strict Off
 Imports System.IO
 Imports System.Reflection
-Imports Browser_Chooser_2.WinAPIs
+Imports Browser_Chooser_Core.WinAPIs
 Imports System.Security.Principal
 Imports System
 Imports System.Management

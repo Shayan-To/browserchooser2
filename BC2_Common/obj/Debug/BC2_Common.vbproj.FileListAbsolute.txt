@@ -1,0 +1,13 @@
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\Resources\Interop.SHDocVw.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\BC2_Common.dll.config
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\BC2_Common.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\BC2_Common.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\BC2_Common.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\OSVersionInfo.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\SepCombo.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\bin\Debug\TAFactory.IconPack.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\obj\Debug\BC2_Common.Resources.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\obj\Debug\BC2_Common.vbproj.GenerateResource.Cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\obj\Debug\BC2_Common.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\obj\Debug\BC2_Common.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Common\obj\Debug\BC2_Common.pdb

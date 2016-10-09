@@ -5,14 +5,16 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E911F5E2-7549-42BE-8739-C6F7A2228A92}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>BC2ClassicUI.My.MyApplication</StartupObject>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
     <RootNamespace>BC2ClassicUI</RootNamespace>
     <AssemblyName>BC2ClassicUI</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +25,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>BC2ClassicUI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +36,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>BC2ClassicUI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -53,10 +57,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -67,8 +67,6 @@
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Windows.Forms" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +75,6 @@
     </Compile>
     <Compile Include="CustomControls\FFCheckBox.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SimplefiedClasses\SimplefiedSettings.vb" />
     <Compile Include="Utility\LoopMath.vb" />
@@ -110,11 +103,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -138,52 +126,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BC_Core\Browser Chooser Core.vbproj">
-      <Project>{37b05362-7806-4dd0-92a4-b4681d43b32f}</Project>
-      <Name>Browser Chooser Core</Name>
+    <ProjectReference Include="..\BC2_Common\BC2_Common.vbproj">
+      <Project>{74bed599-e4f0-4200-b3fa-04e52130f313}</Project>
+      <Name>BC2_Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\122.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\128.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\53.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bclogo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bclogo1.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\browserchooser.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BrowserChooser3.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Jrdn88 IconPackage Icon 146.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Jrdn88 IconPackage Icon 17.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paste_24x24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paste_and_close_24x24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SepCombo.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Settings-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\world_go.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

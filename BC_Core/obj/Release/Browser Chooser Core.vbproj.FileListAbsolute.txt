@@ -26,3 +26,4 @@ D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Cor
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.frmOptions.resources
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser_Chooser_Core.Resources.resources
 D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Release\Browser Chooser Core.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Release\Browser Chooser Core.exe.config

@@ -3,10 +3,10 @@ Imports System.ComponentModel
 Imports System.Drawing.Drawing2D
 Imports System.Windows
 Imports BC2ClassicUI.Utility.LoopMath
-Imports Browser_Chooser_Core
+Imports BC2_Common
 
 Public Class vmMain
-    Implements Browser_Chooser_Core.ILoggingSupported
+    Implements BC2_Common.ILoggingSupported
 
     ''' <summary>
     ''' Handles all of the logic and the connection to the settings file. 
@@ -16,19 +16,19 @@ Public Class vmMain
     Private mSettings As SimplefiedSettings
 
 
-    Public Sub frmMain(aSettings As Browser_Chooser_Core.Settings, aStartUpDetails As Browser_Chooser_Core.StartupLauncher)
+    Public Sub frmMain(aSettings As BC2_Common.Settings, aStartUpDetails As StartupLauncher)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "frmMain", "Enter sub", aSettings, aStartUpDetails)
+        Logger.AddToLog(Me, "frmMain", "Enter sub", aSettings, aStartUpDetails)
         'End Log
 
-        Dim lRelevantSettings As SimplefiedSettings = aSettings
+        Dim lRelevantSettings As SimplefiedSettings = aSettings.As(Of SimplefiedSettings)
 
         With lRelevantSettings
-            .IsAeroEnabled = Browser_Chooser_Core.GeneralUtilities.IsAeroEnabled()
+            .IsAeroEnabled = BC2_Common.GeneralUtilities.IsAeroEnabled()
             .URL = aStartUpDetails.URL
             .Delay = aStartUpDetails.Delay
             .DefaultBrowser = aStartUpDetails.Browser
-            .HasAero = mSettings.IsAeroEnabled And mSettings.UseAreo
+            .HasAero = .IsAeroEnabled And aSettings.UseAreo
         End With
 
         mSettings = lRelevantSettings
@@ -47,13 +47,13 @@ Public Class vmMain
         AddHandler mfrmMain.tmrDelay.Tick, AddressOf tmrDelay_Tick
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "frmMain", "Exit sub")
+        Logger.AddToLog(Me, "frmMain", "Exit sub")
         'End Log
     End Sub
 
     Private Sub btnCopyToClipboard_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCopyToClipboard_Click", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "btnCopyToClipboard_Click", "Enter sub", sender, e)
         'End Log
 
         If mSettings.URL <> "" Then
@@ -61,23 +61,23 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCopyToClipboard_Click", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "btnCopyToClipboard_Click", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Private Sub btnCopyToClipboardAndClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCopyToClipboardAndClose_Click", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "btnCopyToClipboardAndClose_Click", "Enter sub", sender, e)
         'End Log
 
         If mSettings.URL <> "" Then
             Clipboard.SetText(mSettings.URL)
 
-            End 'need better
+            'End 'need better
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCopyToClipboardAndClose_Click", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "btnCopyToClipboardAndClose_Click", "Exit sub", sender, e)
         'End Log
     End Sub
 
@@ -106,7 +106,7 @@ Public Class vmMain
 #Region "Focus Handeling Functions"
     Protected Function frmMain_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean Handles mfrmMain.KeyUp
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "frmMain_KeyUp", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "frmMain_KeyUp", "Enter sub", sender, e)
         'End Log
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right Or e.KeyCode = Keys.Tab Then
@@ -119,13 +119,13 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "frmMain_KeyUp", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "frmMain_KeyUp", "Exit sub", sender, e)
         'End Log
     End Function
 
     Public Sub HandleGotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleGotFocus", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "HandleGotFocus", "Enter sub", sender, e)
         'End Log
 
         'get the referenced object
@@ -135,7 +135,7 @@ Public Class vmMain
             lTitle = DirectCast(sender, Button).AccessibleName
             msCurrentText = lTitle
         Else
-            Dim lBrowser As Browser_Chooser_Core.Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
+            Dim lBrowser As Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
             msCurrentText = "Open " & lBrowser.Name
 
             If mSettings.ShowURL = True Then
@@ -148,13 +148,13 @@ Public Class vmMain
         mfrmMain.Text = Mid(lTitle, 1, 256)
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleGotFocus", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "HandleGotFocus", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Public Sub HandleLostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleLostFocus", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "HandleLostFocus", "Enter sub", sender, e)
         'End Log
 
         msCurrentText = mSettings.DefaultMessage
@@ -170,16 +170,16 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleLostFocus", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "HandleLostFocus", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Public Sub HandleActivated(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleActivated", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "HandleActivated", "Enter sub", sender, e)
         'End Log
 
-        Dim lBrowser As Browser_Chooser_Core.Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
+        Dim lBrowser As Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
 
         If (My.Computer.Keyboard.CtrlKeyDown) And (e.Button = System.Windows.Forms.MouseButtons.Left) Then
             BrowserUtilities.LaunchBrowser(lBrowser, mSettings.URL, True)
@@ -192,16 +192,16 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleActivated", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "HandleActivated", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Private Sub HandleKeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleKeyUp", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "HandleKeyUp", "Enter sub", sender, e)
         'End Log
 
-        Dim lBrowser As Browser_Chooser_Core.Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
+        Dim lBrowser As Browser = mSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
 
         If (e.KeyCode = Keys.Enter) Then
             If mfrmMain.chkAutoClose.Checked = True Then
@@ -212,23 +212,23 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleKeyUp", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "HandleKeyUp", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Private Sub HandleArrowKeyUp(ByVal sender As Object, ByVal KeyData As System.Windows.Forms.Keys) 'Handles btnAppStub.ArrowKeyUp
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleArrowKeyUp", "Enter sub", sender, KeyData)
+        Logger.AddToLog(Me, "HandleArrowKeyUp", "Enter sub", sender, KeyData)
         'End Log
 
         'moves the focus around the buttons - looping around
-        Dim lBrowser As Browser_Chooser_Core.Browser = mSettings.Browsers(CInt(DirectCast(sender, FFButton).Tag))
+        Dim lBrowser As Browser = mSettings.Browsers(CInt(DirectCast(sender, FFButton).Tag))
         Debug.Print(lBrowser.PosX & " .. " & lBrowser.PosY)
 
         Dim lCurPoX As Integer = lBrowser.PosX
         Dim lCurPoY As Integer = lBrowser.PosY
         Dim lData As Integer
-        Dim lbFoundBrowser As Browser_Chooser_Core.Browser = Nothing
+        Dim lbFoundBrowser As Browser = Nothing
         Dim lIndex As Integer
 
         Select Case KeyData
@@ -240,7 +240,7 @@ Public Class vmMain
 
                     'scan for a button at that position
                     lIndex = 0
-                    For Each mBrowser As Browser_Chooser_Core.Browser In mSettings.Browsers
+                    For Each mBrowser As Browser In mSettings.Browsers
                         lIndex += 1
                         If mBrowser.PosY = lData And mBrowser.PosX = lCurPoX Then
 
@@ -258,7 +258,7 @@ Public Class vmMain
 
                     'scan for a button at that position
                     lIndex = 0
-                    For Each mBrowser As Browser_Chooser_Core.Browser In mSettings.Browsers
+                    For Each mBrowser As Browser In mSettings.Browsers
                         lIndex += 1
                         If mBrowser.PosY = lData And mBrowser.PosX = lCurPoX Then
 
@@ -276,7 +276,7 @@ Public Class vmMain
 
                     'scan for a button at that position
                     lIndex = 0
-                    For Each mBrowser As Browser_Chooser_Core.Browser In mSettings.Browsers
+                    For Each mBrowser As Browser In mSettings.Browsers
                         lIndex += 1
                         If mBrowser.PosY = lCurPoY And mBrowser.PosX = lData Then
 
@@ -294,7 +294,7 @@ Public Class vmMain
 
                     'scan for a button at that position
                     lIndex = 0
-                    For Each mBrowser As Browser_Chooser_Core.Browser In mSettings.Browsers
+                    For Each mBrowser As Browser In mSettings.Browsers
                         lIndex += 1
                         If mBrowser.PosY = lCurPoY And mBrowser.PosX = lData Then
 
@@ -326,7 +326,7 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "HandleArrowKeyUp", "Exit sub", sender, KeyData)
+        Logger.AddToLog(Me, "HandleArrowKeyUp", "Exit sub", sender, KeyData)
         'End Log
     End Sub
 #End Region
@@ -334,37 +334,37 @@ Public Class vmMain
 #Region "Handlers to go to other dialogs"
     Private Sub btnInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnInfo_Click", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "btnInfo_Click", "Enter sub", sender, e)
         'End Log
 
         'frmAbout.ShowDialog()
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnInfo_Click", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "btnInfo_Click", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnOptions_Click", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "btnOptions_Click", "Enter sub", sender, e)
         'End Log
 
         'OpenOptions()
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnOptions_Click", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "btnOptions_Click", "Exit sub", sender, e)
         'End Log
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCancel_Click", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "btnCancel_Click", "Enter sub", sender, e)
         'End Log
 
         ' Me.Close() -- need to go to a proper shutdown function
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "btnCancel_Click", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "btnCancel_Click", "Exit sub", sender, e)
         'End Log
     End Sub
 #End Region
@@ -372,7 +372,7 @@ Public Class vmMain
 #Region "Timer functions"
     Private Sub tmrDelay_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "tmrDelay_Tick", "Enter sub", sender, e)
+        Logger.AddToLog(Me, "tmrDelay_Tick", "Enter sub", sender, e)
         'End Log
 
         Static lCurTimer As Integer = mSettings.Delay
@@ -403,7 +403,7 @@ Public Class vmMain
         End If
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "tmrDelay_Tick", "Exit sub", sender, e)
+        Logger.AddToLog(Me, "tmrDelay_Tick", "Exit sub", sender, e)
         'End Log
     End Sub
 #End Region
@@ -413,13 +413,13 @@ Public Class vmMain
     ''' <param name="lBrowser"></param>
     Private Sub DoLaunch(ByVal lBrowser As Browser)
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "DoLaunch", "Enter sub", lBrowser)
+        Logger.AddToLog(Me, "DoLaunch", "Enter sub", lBrowser)
         'End Log
 
         BrowserUtilities.LaunchBrowser(lBrowser, mSettings.URL, mfrmMain.chkAutoClose.Checked) 'to do, add if control is pressed, do not close
 
         'Start Log
-        Browser_Chooser_Core.Logger.AddToLog(Me, "DoLaunch", "Exit sub", lBrowser)
+        Logger.AddToLog(Me, "DoLaunch", "Exit sub", lBrowser)
         'End Log
     End Sub
 

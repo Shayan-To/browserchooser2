@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BC2ClassicUI
+</name>
+</assembly>
+<members>
+<member name="T:BC2ClassicUI.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:BC2ClassicUI.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:BC2ClassicUI.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="F:BC2ClassicUI.vmMain._mfrmMain">
+ <summary>
+ Handles all of the logic and the connection to the settings file. 
+ </summary>
+</member>
+<member name="M:BC2ClassicUI.vmMain.DoLaunch(BC2_Common.Browser)">
+ <summary>
+  does not belong here - should be in core
+ </summary>
+ <param name="lBrowser"></param>
+</member>
+<member name="F:BC2ClassicUI.frmMain.mFirstButton">
+ <summary>
+ All look and feel of the form goes in this class. Connective logic goes in vmMain
+ </summary>
+</member>
+</members>
+</doc>

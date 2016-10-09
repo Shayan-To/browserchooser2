@@ -1,4 +1,4 @@
-﻿Imports SeparatorComboBoxTest
+﻿'Imports SeparatorComboBoxTest
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmOptions
@@ -163,7 +163,7 @@ Partial Class frmOptions
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Browser_Chooser_2.My.Resources.Resources.Settings_icon
+        Me.PictureBox1.Image = Global.Browser_Chooser_Core.My.Resources.Resources.Settings_icon
         Me.PictureBox1.Location = New System.Drawing.Point(12, 79)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(161, 161)

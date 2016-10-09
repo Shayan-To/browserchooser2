@@ -10,7 +10,7 @@
         lstIcons.LargeImageList = lImageList
         lstIcons.SmallImageList = lImageList
 
-        Dim lIcons() As Image = ImageUtilities.GetAllICOsFromFile(aFilename)
+        Dim lIcons() As Image = BC2_Common.ImageUtilities.GetAllICOsFromFile(aFilename)
 
         For lIndex = 0 To lIcons.GetUpperBound(0)
             Try

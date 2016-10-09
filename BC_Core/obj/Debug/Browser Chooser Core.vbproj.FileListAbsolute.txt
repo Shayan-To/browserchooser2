@@ -1,0 +1,27 @@
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Interop.SHDocVw.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.vbproj.ResolveComReference.cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAddEditProtocols.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAddEditType.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAbout.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAddEditBrowser.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAddEditURL.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmAccessibilitySettings.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmIcons.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.frmOptions.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser_Chooser_Core.Resources.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.vbproj.GenerateResource.Cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.vbprojResolveAssemblyReference.cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\Resources\Interop.SHDocVw.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\Browser Chooser Core.exe.config
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\Browser Chooser Core.exe
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\Browser Chooser Core.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\Browser Chooser Core.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2ClassicUI.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2_Common.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2ClassicUI.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2ClassicUI.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2_Common.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\bin\Debug\BC2_Common.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.exe
+D:\CodeRepository\GIT\browserchooser2WPF\BC_Core\obj\Debug\Browser Chooser Core.pdb

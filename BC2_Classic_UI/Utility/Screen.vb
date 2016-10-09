@@ -1,4 +1,4 @@
-﻿Imports Browser_Chooser_Core.WinAPIs
+﻿Imports BC2_Common.WinAPIs
 
 Namespace Utility
     Public Class Screen

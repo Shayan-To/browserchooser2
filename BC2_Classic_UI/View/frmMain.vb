@@ -2,10 +2,10 @@
 Imports System.ComponentModel
 Imports System.Drawing.Drawing2D
 Imports System.Windows
-Imports Browser_Chooser_Core
+Imports BC2_Common
 
 Public Class frmMain
-    Implements Browser_Chooser_Core.ILoggingSupported
+    Implements BC2_Common.ILoggingSupported
 
     ''' <summary>
     ''' All look and feel of the form goes in this class. Connective logic goes in vmMain
@@ -101,37 +101,37 @@ Public Class frmMain
     End Sub
 
     Private Sub AlignScreenToUserSettings()
-        Dim lPosition As Browser_Chooser_Core.Settings.AvailableStartingPositions = mSettings.StartingPosition
+        Dim lPosition As BC2_Common.Settings.AvailableStartingPositions = mSettings.StartingPosition
         Select Case lPosition
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.CenterScreen
+            Case BC2_Common.Settings.AvailableStartingPositions.CenterScreen
                 Dim lCurScreen As Screen = Screen.FromPoint(Me.Location) 'should it pop-up in a seperate screen
                 Me.Top = CInt((lCurScreen.WorkingArea.Height - Me.Height) / 2 + lCurScreen.WorkingArea.Location.Y)
                 Me.Left = CInt((lCurScreen.WorkingArea.Width - Me.Width) / 2 + lCurScreen.WorkingArea.Location.X)
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.XY
+            Case BC2_Common.Settings.AvailableStartingPositions.XY
                 Me.Top = mSettings.OffsetY
                 Me.Left = mSettings.OffsetX
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.TopLeft
+            Case BC2_Common.Settings.AvailableStartingPositions.TopLeft
                 Me.Top = My.Computer.Screen.Bounds.Top
                 Me.Left = My.Computer.Screen.Bounds.Left
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.TopRight
+            Case BC2_Common.Settings.AvailableStartingPositions.TopRight
                 Me.Top = My.Computer.Screen.Bounds.Top
                 Me.Left = My.Computer.Screen.Bounds.Right - Me.Width
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.BottomLeft
+            Case BC2_Common.Settings.AvailableStartingPositions.BottomLeft
                 Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height
                 Me.Left = My.Computer.Screen.Bounds.Left
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.BottomRight
+            Case BC2_Common.Settings.AvailableStartingPositions.BottomRight
                 Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height
                 Me.Left = My.Computer.Screen.Bounds.Right - Me.Width
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.OffsetTopLeft
+            Case BC2_Common.Settings.AvailableStartingPositions.OffsetTopLeft
                 Me.Top = My.Computer.Screen.Bounds.Top + mSettings.OffsetY
                 Me.Left = My.Computer.Screen.Bounds.Left + mSettings.OffsetX
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.OffsetTopRight
+            Case BC2_Common.Settings.AvailableStartingPositions.OffsetTopRight
                 Me.Top = My.Computer.Screen.Bounds.Top + mSettings.OffsetY
                 Me.Left = My.Computer.Screen.Bounds.Right - Me.Width + mSettings.OffsetX
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.OffsetBottomLeft
+            Case BC2_Common.Settings.AvailableStartingPositions.OffsetBottomLeft
                 Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height + mSettings.OffsetY
                 Me.Left = My.Computer.Screen.Bounds.Left + mSettings.OffsetX
-            Case Browser_Chooser_Core.Settings.AvailableStartingPositions.OffsetBottomRight
+            Case BC2_Common.Settings.AvailableStartingPositions.OffsetBottomRight
                 Me.Top = My.Computer.Screen.Bounds.Bottom - Me.Height + mSettings.OffsetY
                 Me.Left = My.Computer.Screen.Bounds.Right - Me.Width + mSettings.OffsetX
             Case Else 'default to center screen
@@ -155,7 +155,7 @@ Public Class frmMain
         Dim lControls(lMax) As FFButton
         Dim lTooltips(lMax) As ToolTip
         Dim lIndex As Integer = 0
-        Dim lBrowser As Browser_Chooser_Core.Browser
+        Dim lBrowser As BC2_Common.Browser
         Dim lToolTipText As String = ""
 
         'set size of stub to chosen selection
@@ -196,7 +196,7 @@ Public Class frmMain
                     .Left = btnAppStub.Left + ((lBrowser.PosX - 1) * btnAppStub.Width) + CInt(IIf(lBrowser.PosX = 1, 0, mSettings.IconGapWidth)) ' + spacing
                     .Height = btnAppStub.Height
                     .Width = btnAppStub.Width
-                    .Image = Browser_Chooser_Core.ImageUtilities.GetImage(lBrowser, True)
+                    .Image = BC2_Common.ImageUtilities.GetImage(lBrowser, True)
                     .FlatStyle = FlatStyle.Flat
                     .FlatAppearance.BorderSize = 0
                     .Visible = True

@@ -1,4 +1,4 @@
-﻿Imports Browser_Chooser_2.WinAPIs
+﻿Imports Browser_Chooser_Core.WinAPIs
 Imports System.Net
 
 Public Class BrowserUtilities
@@ -119,6 +119,7 @@ Public Class BrowserUtilities
             Return True
         ElseIf aTarget.Target = "" Then
             GeneralUtilities.doCleanExit()
+            Return True
         Else
             MessageBox.Show("Browser " & aTarget.Name & " cannot be found.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
@@ -178,7 +179,7 @@ Public Class BrowserUtilities
     Public Shared Function NormalizeTarget(ByVal target As String) As String
         ' it's possible that in portable mode you have a path to an x86 folder and are running on a 32 bit system
         ' so the strBrowser will point to an invalid browser
-        If StartupLauncher.Is64Bit Then
+        If gStartupLauncher.Is64Bit Then
             Dim programFiles As String = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
 
             If (target.StartsWith(programFiles)) Then

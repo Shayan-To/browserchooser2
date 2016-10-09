@@ -43,7 +43,7 @@ Partial Class frmMain
 		Me.btnInfo.FlatAppearance.BorderSize = 0
 		Me.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
 		Me.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnInfo.Image = Global.BC2ClassicUI.My.Resources.Resources._122
+        Me.btnInfo.Image = BC2_Common.My.Resources._122
         Me.btnInfo.Location = New System.Drawing.Point(12, 12)
 		Me.btnInfo.Margin = New System.Windows.Forms.Padding(0)
 		Me.btnInfo.Name = "btnInfo"
@@ -58,7 +58,7 @@ Partial Class frmMain
 		Me.btnAppStub.BackColor = System.Drawing.Color.Transparent
 		Me.btnAppStub.FlatAppearance.BorderSize = 0
 		Me.btnAppStub.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAppStub.Image = Global.BC2ClassicUI.My.Resources.Resources.browserchooser1
+        Me.btnAppStub.Image = Nothing
         Me.btnAppStub.Location = New System.Drawing.Point(56, 1)
 		Me.btnAppStub.Name = "btnAppStub"
 		Me.btnAppStub.ShowFocusBox = false
@@ -78,8 +78,8 @@ Partial Class frmMain
 		Me.btnOptions.FlatAppearance.BorderSize = 0
 		Me.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
 		Me.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.btnOptions.Image = Global.Browser_Chooser_2.My.Resources.Resources._128
-		Me.btnOptions.Location = New System.Drawing.Point(470, 12)
+        Me.btnOptions.Image = BC2_Common.My.Resources._128
+        Me.btnOptions.Location = New System.Drawing.Point(470, 12)
 		Me.btnOptions.Margin = New System.Windows.Forms.Padding(0)
 		Me.btnOptions.Name = "btnOptions"
 		Me.btnOptions.ShowFocusBox = false
@@ -156,8 +156,8 @@ Partial Class frmMain
 		Me.btnCopyToClipboard.FlatAppearance.BorderSize = 0
 		Me.btnCopyToClipboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
 		Me.btnCopyToClipboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.btnCopyToClipboard.Image = Global.Browser_Chooser_2.My.Resources.Resources.paste_24x24
-		Me.btnCopyToClipboard.Location = New System.Drawing.Point(470, 40)
+        Me.btnCopyToClipboard.Image = BC2_Common.My.Resources.paste_24x24
+        Me.btnCopyToClipboard.Location = New System.Drawing.Point(470, 40)
 		Me.btnCopyToClipboard.Margin = New System.Windows.Forms.Padding(0)
 		Me.btnCopyToClipboard.Name = "btnCopyToClipboard"
 		Me.btnCopyToClipboard.ShowFocusBox = false
@@ -174,8 +174,8 @@ Partial Class frmMain
 		Me.btnCopyToClipboardAndClose.FlatAppearance.BorderSize = 0
 		Me.btnCopyToClipboardAndClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
 		Me.btnCopyToClipboardAndClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.btnCopyToClipboardAndClose.Image = Global.Browser_Chooser_2.My.Resources.Resources.paste_and_close_24x24
-		Me.btnCopyToClipboardAndClose.Location = New System.Drawing.Point(470, 70)
+        Me.btnCopyToClipboardAndClose.Image = BC2_Common.My.Resources.paste_and_close_24x24
+        Me.btnCopyToClipboardAndClose.Location = New System.Drawing.Point(470, 70)
 		Me.btnCopyToClipboardAndClose.Margin = New System.Windows.Forms.Padding(0)
 		Me.btnCopyToClipboardAndClose.Name = "btnCopyToClipboardAndClose"
 		Me.btnCopyToClipboardAndClose.ShowFocusBox = false

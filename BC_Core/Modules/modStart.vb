@@ -1,108 +1,34 @@
 ﻿Imports System.IO
 Imports System.Reflection
 Imports System.Security.Principal
+Imports BC2_Common
 
 'Imports Microsoft.WindowsAPICodePack.Taskbar
 
 Module modStart
-    Public gSettings As Settings
-#If Debug = True Then
-#If CONFIG = "Debug Update" Or config = "Debug Update and Pause" Then
-    Public Const CurVersion As String = "DU"
-    Public Const CurVersionDisplay As String = "Debug Update"
-#Else
-    Public Const CurVersion As String = "B2"
-    Public Const CurVersionDisplay As String = "Beta 2"
-#End If
-#Else
-    Public Const CurVersion As String = "B2"
-    Public Const CurVersionDisplay As String = "Beta 2"
-#End If
-
-    Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
-        'if old XML file found and not the new one, ask to migrate - portable mode
-        If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
-            'see if current doesn't exists
-            If Not File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName)) Then
-                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    Dim lImporter As New Importer(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName))
-
-                End If
-            End If
-        ElseIf File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName) Then
-            'non portable mode
-            If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\" & Settings.BrowserChooserConfigFileName) Then
-                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    Dim lImporter As New Importer(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)
-
-                End If
-            End If
-        End If
-
-        Dim lFormToShow As New frmOptions
-        lFormToShow.ShowForm(aScreen, False)
-        Application.Run(lFormToShow) 'terrible, but it works
-    End Sub
-
-    Public Sub CheckForMigrateBeforeLaunch()
-        'if old XML file found and not the new one, ask to migrate - portable mode
-        If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
-            'see if current doesn't exists
-            If Not File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName)) Then
-                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    Dim lImporter As New Importer(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName))
-
-                End If
-            End If
-        ElseIf File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName) Then
-            'non portable mode
-            If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\" & Settings.BrowserChooserConfigFileName) Then
-                If GeneralUtilities.SafeMessagebox("Do you want to import the settings from BrowserChooser 1?", "First Run", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    Dim lImporter As New Importer(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\" & LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)
-
-                End If
-            End If
-        End If
-
-        ContinueMain("")
-    End Sub
-
     Public Sub LoadSettings()
         If (File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName))) Then
-            gSettings.PortableMode = True
-            gSettings = Settings.Load(Application.StartupPath)
+            Globals.gSettings.PortableMode = True
+            Globals.gSettings = Settings.Load(Application.StartupPath)
         Else
-            gSettings.PortableMode = False
-            gSettings = Settings.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
+            Globals.gSettings.PortableMode = False
+            Globals.gSettings = Settings.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
         End If
     End Sub
-
-    Private Function MatchURLs(ByVal aSource As String, ByVal aTarget As String) As Boolean
-        'strip http(s):// from urls and strip www from urls
-        Dim lsSource As String = aSource.Replace("http://", "").Replace("https://", "").Replace("www.", "")
-        Dim lsTarget As String = aTarget.Replace("http://", "").Replace("https://", "").Replace("www.", "")
-
-        'perform basic wilcard (regex to come later)
-        If lsTarget Like lsSource Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
 
     Public Sub ContinueMain(ByVal aURL As String)
         ' set the portable mode flag if we detect a config file in the same path
         LoadSettings()
 
         'first things first, check for updates
-        If gSettings.AutomaticUpdates = True Then
-#If CONFIG = "Debug Update" Or CONFIG = "Debug Update and Pause" Or Not Debug Then
+        If Globals.gSettings.AutomaticUpdates = True Then
+#If CONFIG = "Debug Update" Or CONFIG = "Debug Update and Pause" Or Not DEBUG Then
             'update desiabled in debug unless debuggin updates
             Updater.CheckForUpdate(True) ' will not return a value, runs in a thread.
 #End If
         End If
 
-        If gSettings.CheckDefaultOnLaunch = True And GeneralUtilities.IsRunningPost8 = False Then
+        If Globals.gSettings.CheckDefaultOnLaunch = True And GeneralUtilities.IsRunningPost8 = False Then
             DefaultBrowser.CheckIfIsDefault()
         End If
 
@@ -112,8 +38,8 @@ Module modStart
 
         If aURL <> "" Then
             'ignore pattern match if no url provided
-            For Each lURL As URL In gSettings.URLs
-                If MatchURLs(lURL.URL, aURL) Then
+            For Each lURL As URL In Globals.gSettings.URLs
+                If URLUtilities.MatchURLs(lURL.URL, aURL) Then
                     'load that browser
                     If lURL.DelayTime = 0 And lURL.AutoLoad = True Then
                         lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
@@ -121,13 +47,13 @@ Module modStart
 
                     ElseIf lURL.DelayTime = -1 Then
                         'look at system setting
-                        If gSettings.DefaultDelay <= 0 Then
+                        If Globals.gSettings.DefaultDelay <= 0 Then
                             lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                             Exit For
                         Else
                             'launch mainscreen with delay
                             lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
-                            lDelay = gSettings.DefaultDelay
+                            lDelay = Globals.gSettings.DefaultDelay
                         End If
                     Else
                         'launch mainscreen with delay
@@ -144,19 +70,33 @@ Module modStart
             BrowserUtilities.LaunchBrowser(lBrowser, aURL, True) 'launch and die
         Else
             'skip checkking for migrate at this point - you have already set your settings
-            Dim lMain As New frmMain
+            'If UI ==== classic
+            Dim lMain As New BC2ClassicUI.vmMain
 
             Dim lDelegate As New StartupLauncher.UpdateURL(AddressOf lMain.UpdateURL)
 
             If lDelay <> 0 Then
-                StartupLauncher.SetURL(aURL, gSettings.RevealShortURL, lDelay, lBrowser, lDelegate)
+                Globals.gStartupLauncher.SetURL(aURL, Globals.gSettings.RevealShortURL, lDelay, lBrowser, lDelegate)
             Else
-                StartupLauncher.SetURL(aURL, gSettings.RevealShortURL, lDelegate)
+                Globals.gStartupLauncher.SetURL(aURL, Globals.gSettings.RevealShortURL, lDelegate)
             End If
 
-            Application.Run(lMain)
+            'Application.Run(lMain)
+#If UI = "Classic" Then
+            'classic launch
+            Dim lvmMain As New BC2ClassicUI.vmMain
+            lvmMain.frmMain(Globals.gSettings, Globals.gStartupLauncher)
+#Else
+            'wpf launch
+#End If
         End If
         'End If
+    End Sub
+
+    Private Sub StartOptions(aScreen As frmOptions.SettingsStartPage)
+        'Dim lFormToShow As New frmOptions
+        'lFormToShow.ShowForm(aScreen, False)
+        'Application.Run(lFormToShow) 'terrible, but it works
     End Sub
 
     Public Sub Main()
@@ -164,7 +104,10 @@ Module modStart
         MsgBox("Paused to attach")
 #End If
 
-        Dim lStartup As New StartupLauncher
+        Globals.gStartupLauncher = New StartupLauncher
+#If DisableV1 = False Then
+        Dim lCheck As New BC2_Common.StartChecks
+#End If
 
         ' load the WindowsAPICodePack DLLs from the embedded resource allowing us to keep one tidy .exe and no dlls.
         'Dim currentDomain As AppDomain = AppDomain.CurrentDomain
@@ -174,10 +117,13 @@ Module modStart
         If (My.Application.CommandLineArgs.Count > 0) Then
             Dim cmdLineOption As String = My.Application.CommandLineArgs.Item(0)
 
-            If (cmdLineOption = "gooptions") Or gSettings Is Nothing Then
+            If (cmdLineOption = "gooptions") Or Globals.gSettings Is Nothing Then
                 'note that this part is semi deprecated. gooptions is the BC1 way and may break in the future. use --settings or --s
                 LoadSettings()
-                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
+#If DisableV1 = False Then
+                lCheck.CheckForMigrateBeforeOptions()
+#End If
+                StartOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
             ElseIf cmdLineOption.StartsWith("--") Then
                 Dim lbExit As Boolean = True
 
@@ -229,49 +175,73 @@ Module modStart
                         MessageBox.Show("Detection file exported to ""C:\temp\DetectedBrowsers.xml""", "Browser Chooser 2 - Detection File Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End
 #End If
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings), _
-                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings), _
-                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings),
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings),
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsAutoURLs)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
 
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsProtocols)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsProtocols)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsProtocols)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsFileTypes)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsCategories)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsCategories)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsCategories)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsSettings)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsSettings)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsSettings)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsMoreSettings)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser), _
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsDefaultBrowser)
 
                         LoadSettings()
-                        CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
+#If DisableV1 = False Then
+                        lCheck.CheckForMigrateBeforeOptions()
+#End If
+                        StartOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
 
 
                     Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.LoggingEnabled)
@@ -280,7 +250,7 @@ Module modStart
                 End Select
 
                 If lbExit = True Then
-                    Application.Exit()
+                    CleanUp.DoExit()
                 Else
                     'update complete! ready to go!
                     If My.Application.CommandLineArgs.Count > 1 Then
@@ -290,10 +260,13 @@ Module modStart
                     End If
                 End If
             Else
-                    ContinueMain(cmdLineOption)
+                ContinueMain(cmdLineOption)
             End If
         Else
-            CheckForMigrateBeforeLaunch()
+#If DisableV1 = False Then
+            lCheck.CheckForMigrateBeforeLaunch()
+#End If
+            ContinueMain("")
         End If
     End Sub
 End Module

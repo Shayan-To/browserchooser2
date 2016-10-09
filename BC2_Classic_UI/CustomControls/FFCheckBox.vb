@@ -18,7 +18,7 @@ Public Class FFCheckBox
     Protected Overrides ReadOnly Property ShowFocusCues As Boolean
         Get
             If Me.DesignMode = False Then
-                If gSettings.ShowFocus = True Then
+                If BC2_Common.Globals.gSettings.ShowFocus = True Then
                     Return False 'not #a11y - will be replaced with a better focus
                 Else
                     Return True
@@ -47,7 +47,7 @@ Public Class FFCheckBox
         Dim lCheckBox As CheckBox = CType(sender, CheckBox)
 
         If Me.DesignMode = True Then Exit Sub 'do nothing
-        If GeneralUtilities.IsAeroEnabled() = True And mUsesAreo = True And gSettings.AccessibleRendering = False Then
+        If BC2_Common.GeneralUtilities.IsAeroEnabled() = True And mUsesAreo = True And BC2_Common.Globals.gSettings.AccessibleRendering = False Then
             'draw using buffered graphics - prevents fliker
             Dim g As Graphics = Me.Parent.CreateGraphics
             Dim lRect As New Rectangle(lCheckBox.Location.X + 15, lCheckBox.Location.Y - 4, mOldwidth, mOldHeight)
@@ -79,7 +79,7 @@ Public Class FFCheckBox
             Dim g As Graphics = Me.Parent.CreateGraphics
 
             Dim lPen As New Pen(Brushes.Black, 2)
-            If GeneralUtilities.IsAeroEnabled() = True And gSettings.AccessibleRendering = False Then
+            If BC2_Common.GeneralUtilities.IsAeroEnabled() = True And BC2_Common.Globals.gSettings.AccessibleRendering = False Then
                 g.DrawRectangle(lPen, Me.Location.X - 5, Me.Location.Y - 5, mOldwidth + 10, mOldHeight)
             Else
                 g.DrawRectangle(lPen, Me.Location.X - 5, Me.Location.Y - 5, Me.Width + 10, Me.Height + 10)
@@ -91,7 +91,7 @@ Public Class FFCheckBox
     End Sub
 
     Private Sub frmMain_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        If mUsesAreo = True And gSettings.AccessibleRendering = False Then
+        If mUsesAreo = True And BC2_Common.Globals.gSettings.AccessibleRendering = False Then
             Debug.Print(e.Location.ToString)
             'the plus width excludes the checkbox from the hit test
             If e.Location.X > Me.Location.X + Me.Width And e.Location.X < Me.Location.X + mOldwidth Then

@@ -1,0 +1,17 @@
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2_Classic_UI.vbprojResolveAssemblyReference.cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2ClassicUI.frmMain.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2ClassicUI.Resources.resources
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2_Classic_UI.vbproj.GenerateResource.Cache
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2ClassicUI.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\Resources\Interop.SHDocVw.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2ClassicUI.dll.config
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2ClassicUI.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2ClassicUI.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2ClassicUI.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2_Common.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\OSVersionInfo.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\TAFactory.IconPack.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2_Common.pdb
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\bin\Debug\BC2_Common.xml
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2ClassicUI.dll
+D:\CodeRepository\GIT\browserchooser2WPF\BC2_Classic_UI\obj\Debug\BC2ClassicUI.pdb

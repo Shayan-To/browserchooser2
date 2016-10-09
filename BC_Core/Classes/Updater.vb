@@ -132,7 +132,7 @@ Public Class Updater
             My.Computer.Network.DownloadFile(lPublicVersion.download, Application.ExecutablePath & ".new.exe", "", "", True, 60000, True, FileIO.UICancelOption.ThrowException)
             '#End If
 
-            GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.ApplyUpdate, StartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
+            GeneralUtilities.LaunchUserMode(GeneralUtilities.ListOfCommands.ApplyUpdate, gStartupLauncher.URL, Application.ExecutablePath & ".new.exe", False)
 
             'this process needs to exit
             Application.Exit()

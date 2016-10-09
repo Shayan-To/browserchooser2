@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{37B05362-7806-4DD0-92A4-B4681D43B32F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <StartupObject>
-    </StartupObject>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Browser_Chooser_Core</RootNamespace>
     <AssemblyName>Browser Chooser Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>On</OptionStrict>
     <OptionInfer>On</OptionInfer>
-    <ApplicationIcon>Resources\bclogo.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <ManifestCertificateThumbprint>8F67FD7A10D9A3416B3BF6E2F4F444265304251C</ManifestCertificateThumbprint>
     <ManifestKeyFile>
     </ManifestKeyFile>
@@ -63,6 +63,8 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <DefineConstants>DisableV1=True,UI="Classic"</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,6 +77,7 @@
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +90,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
@@ -97,6 +101,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Admin|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -111,6 +116,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Admin|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -123,6 +129,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Update|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -137,6 +144,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Update|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -150,6 +158,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPauseOnStart|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -161,6 +170,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPauseOnStart|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -172,6 +182,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugShortURL|AnyCPU'">
     <OutputPath>bin\DebugShortURL\</OutputPath>
@@ -180,10 +191,12 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugShortURL|x64'">
     <OutputPath>bin\x64\DebugShortURL\</OutputPath>
     <DocumentationFile>Browser Chooser Core.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAutoURL|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -196,6 +209,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAutoURL|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -209,6 +223,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildDetectionFile|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -221,6 +236,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'BuildDetectionFile|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -234,6 +250,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -255,6 +272,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Update and Pause|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -268,6 +286,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Local Detection File|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -280,6 +299,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Local Detection File|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -293,6 +313,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Open To Settings|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -305,6 +326,7 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Open To Settings|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -318,6 +340,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OSVersionInfo">
@@ -331,6 +354,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -357,18 +381,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DefaultBrowser.vb" />
-    <Compile Include="Classes\DetectedBrowsers\BrowserDefinition.vb" />
-    <Compile Include="Classes\DetectedBrowsers\DetectedBrowsers.vb" />
-    <Compile Include="Classes\DisplayDictionary.vb" />
-    <Compile Include="Classes\FileType.vb" />
-    <Compile Include="Classes\IApplicationActivationManager.vb" />
-    <Compile Include="Classes\Logging\Logger.vb" />
-    <Compile Include="Classes\Logging\ILoggingSupported.vb" />
-    <Compile Include="Classes\Protocol.vb" />
-    <Compile Include="Classes\Updater.vb" />
-    <Compile Include="Classes\WinAPIExtras.vb" />
-    <Compile Include="Classes\WinAPIs.vb" />
     <Compile Include="Forms\AddEditForms\frmAddEditProtocols.Designer.vb">
       <DependentUpon>frmAddEditProtocols.vb</DependentUpon>
     </Compile>
@@ -387,7 +399,6 @@
     <Compile Include="Forms\frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrowserList\Browser.vb" />
     <Compile Include="Forms\AddEditForms\frmAddEditBrowser.Designer.vb">
       <DependentUpon>frmAddEditBrowser.vb</DependentUpon>
     </Compile>
@@ -412,24 +423,11 @@
     <Compile Include="Forms\frmIcons.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmImportSource.Designer.vb">
-      <DependentUpon>frmImportSource.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmImportSource.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Importer\Importer.vb" />
-    <Compile Include="Classes\URL.vb" />
-    <Compile Include="Modules\modCommon.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Utilities\BrowserUtilities.vb" />
-    <Compile Include="Classes\Utilities\ImageUtilities.vb" />
-    <Compile Include="v1\Browser.vb" />
-    <Compile Include="v1\BrowserList.vb" />
     <Compile Include="Forms\frmOptions.Designer.vb">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </Compile>
@@ -447,10 +445,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Classes\Settings.vb" />
-    <Compile Include="StartupLauncher.vb" />
-    <Compile Include="Classes\Utilities\GeneralUtilities.vb" />
-    <Compile Include="v1\Settings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\AddEditForms\frmAddEditProtocols.resx">
@@ -474,9 +468,6 @@
     <EmbeddedResource Include="Forms\frmIcons.resx">
       <DependentUpon>frmIcons.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmImportSource.resx">
-      <DependentUpon>frmImportSource.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -497,25 +488,11 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Resources\world_go.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Interop.SHDocVw.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Include="Resources\Settings-icon.png" />
-    <None Include="Resources\bclogo.ico" />
-    <None Include="Resources\bclogo1.ico" />
-    <None Include="Resources\browserchooser.png" />
     <None Include="My Project\app.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\BrowserChooser3.ico" />
-    <None Include="Resources\128.png" />
-    <None Include="Resources\122.png" />
-    <None Include="Resources\53.png" />
-    <None Include="Resources\Jrdn88 IconPackage Icon 146.ico" />
-    <None Include="Resources\Jrdn88 IconPackage Icon 17.ico" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -573,25 +550,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\OSVersionInfo.dll" />
-    <EmbeddedResource Include="Resources\SepCombo.dll" />
-    <EmbeddedResource Include="Resources\TAFactory.IconPack.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="PublicResources\DetectedBrowsers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DetectedBrowsers.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <ProjectReference Include="..\BC2_Classic_UI\BC2_Classic_UI.vbproj">
+      <Project>{e911f5e2-7549-42be-8739-c6f7a2228a92}</Project>
+      <Name>BC2_Classic_UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BC2_Common\BC2_Common.vbproj">
+      <Project>{74bed599-e4f0-4200-b3fa-04e52130f313}</Project>
+      <Name>BC2_Common</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paste_24x24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paste_and_close_24x24.png" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Images\bc.ico" />
   </ItemGroup>
@@ -600,6 +570,7 @@
     <Content Include="Images\BrowserChooser2.png" />
     <Content Include="Images\BrowserChooser2.psd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -3,8 +3,8 @@ Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Security.Permissions
 Imports System.Windows.Forms
-Imports Browser_Chooser_2.WinAPIs
-Imports Browser_Chooser_2.WinAPIExtras
+Imports Browser_Chooser_Core.WinAPIs
+Imports Browser_Chooser_Core.WinAPIExtras
 Imports System.Security.AccessControl
 
 'windows 10 control panel solution from https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/7aa1dedd-7016-4093-a5d2-d2e3658f6414/how-to-start-windows-store-control-panel-from-desktop-app?forum=windowsgeneraldevelopmentissues
