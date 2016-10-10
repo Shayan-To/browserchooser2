@@ -699,4 +699,25 @@ Public Class frmMain
             Next
         End If
     End Sub
+
+    Private Sub btnOptions_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOptions.MouseUp
+        If e.Button = MouseButtons.Right Then
+            btnOptions.ContextMenuStrip = cmOptions
+            cmOptions.Show()
+        End If
+    End Sub
+
+    Private Sub miEditMode_Click(sender As Object, e As EventArgs) Handles miEditMode.Click
+        'go into edit mode
+        For Each lButton As Control In Me.Controls
+            If TypeName(lButton) = "FFButton" Then
+                Dim lFFButton As FFButton = DirectCast(lButton, FFButton)
+
+                If Not IsNothing(lFFButton.Image) Then
+                    lFFButton.Image = ImageUtilities.MergeImages(lFFButton.Image, My.Resources._53)
+                    lFFButton.Refresh()
+                End If
+            End If
+        Next
+    End Sub
 End Class

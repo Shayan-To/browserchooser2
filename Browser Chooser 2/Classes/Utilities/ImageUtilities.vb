@@ -100,4 +100,16 @@ Public Class ImageUtilities
             Return My.Resources._53
         End If
     End Function
+
+    Public Shared Function MergeImages(aBase As Image, aTop As Image) As Image
+
+        'Dim Result As New Bitmap(aBase)
+        Dim g As Graphics = Graphics.FromImage(aBase)
+        Dim Layer As New Bitmap(aTop)
+
+        g.DrawImage(Layer, 12, 12, 12, 12)
+
+        Return aBase
+
+    End Function
 End Class

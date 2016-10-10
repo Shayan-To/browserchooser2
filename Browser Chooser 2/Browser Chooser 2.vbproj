@@ -591,7 +591,9 @@
     <EmbeddedResource Include="Resources\TAFactory.IconPack.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PublicResources\DetectedBrowsers.xml" />
+    <None Include="PublicResources\DetectedBrowsers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DetectedBrowsers.xml">

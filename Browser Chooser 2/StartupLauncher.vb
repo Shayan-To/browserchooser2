@@ -5,6 +5,7 @@ Imports System.ComponentModel
 Imports System.Net
 Imports Browser_Chooser_2.GeneralUtilities
 
+
 Public Class StartupLauncher
     Public Delegate Sub UpdateURL(ByVal mURL As String)
     Private Shared mURL As String
