@@ -25,6 +25,19 @@ Partial Class frmOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Browsers and Applications")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Auto URLs")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Common", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2})
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Protocols")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("File Types")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Associations", New System.Windows.Forms.TreeNode() {TreeNode4, TreeNode5})
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Display")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Grid")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shortcuts")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Privacy")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Startup")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Settings", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11})
+        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Add to Windows Default")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.tabSettings = New System.Windows.Forms.TabControl()
@@ -68,42 +81,21 @@ Partial Class frmOptions
         Me.tabCategories = New System.Windows.Forms.TabPage()
         Me.lstCategories = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.tabOtherSettings = New System.Windows.Forms.TabPage()
+        Me.tabDisplay = New System.Windows.Forms.TabPage()
+        Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkUseAreo = New System.Windows.Forms.CheckBox()
         Me.chkUseAccessibleRendering = New System.Windows.Forms.CheckBox()
         Me.cmdAccessiblitySettings = New System.Windows.Forms.Button()
-        Me.txtSeperator = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.chkAdvanced = New System.Windows.Forms.CheckBox()
-        Me.txtMessage = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtOptionsShortcut = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.nudHeight = New System.Windows.Forms.NumericUpDown()
-        Me.nudWidth = New System.Windows.Forms.NumericUpDown()
-        Me.cmdImport = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.nudDelayBeforeAutoload = New System.Windows.Forms.NumericUpDown()
-        Me.cmdCheckForUpdate = New System.Windows.Forms.Button()
-        Me.chkAutoCheckUpdate = New System.Windows.Forms.CheckBox()
-        Me.chkPortableMode = New System.Windows.Forms.CheckBox()
-        Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
-        Me.chkShowURLs = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.tabMoreSettings = New System.Windows.Forms.TabPage()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.cmbStartingPosition = New SeparatorComboBox.SeparatorComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.nudYOffset = New System.Windows.Forms.NumericUpDown()
-        Me.nudXOffset = New System.Windows.Forms.NumericUpDown()
         Me.cmdTransparentBackground = New System.Windows.Forms.Button()
         Me.pbBackgroundColor = New System.Windows.Forms.PictureBox()
         Me.cmdChangeBackgroundColor = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.chkShowURLs = New System.Windows.Forms.CheckBox()
+        Me.txtSeperator = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtMessage = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.tabGrid = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -116,6 +108,29 @@ Partial Class frmOptions
         Me.Label10 = New System.Windows.Forms.Label()
         Me.nudIconSizeHeight = New System.Windows.Forms.NumericUpDown()
         Me.nudIconSizeWidth = New System.Windows.Forms.NumericUpDown()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.nudHeight = New System.Windows.Forms.NumericUpDown()
+        Me.nudWidth = New System.Windows.Forms.NumericUpDown()
+        Me.tabShortcuts = New System.Windows.Forms.TabPage()
+        Me.txtOptionsShortcut = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.tabStartup = New System.Windows.Forms.TabPage()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.cmbStartingPosition = New SeparatorComboBox.SeparatorComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.nudYOffset = New System.Windows.Forms.NumericUpDown()
+        Me.nudXOffset = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.nudDelayBeforeAutoload = New System.Windows.Forms.NumericUpDown()
+        Me.chkAdvanced = New System.Windows.Forms.CheckBox()
+        Me.cmdCheckForUpdate = New System.Windows.Forms.Button()
+        Me.chkAutoCheckUpdate = New System.Windows.Forms.CheckBox()
+        Me.chkPortableMode = New System.Windows.Forms.CheckBox()
+        Me.tabPrivacy = New System.Windows.Forms.TabPage()
         Me.chkDownloadDetectionfile = New System.Windows.Forms.CheckBox()
         Me.txtUserAgent = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -133,6 +148,7 @@ Partial Class frmOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
+        Me.treeSettings = New System.Windows.Forms.TreeView()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -140,16 +156,9 @@ Partial Class frmOptions
         Me.tabProtocols.SuspendLayout()
         Me.tabFileTypes.SuspendLayout()
         Me.tabCategories.SuspendLayout()
-        Me.tabOtherSettings.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabMoreSettings.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabDisplay.SuspendLayout()
         CType(Me.pbBackgroundColor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabGrid.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.nudIconGapHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconGapWidth, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,6 +166,16 @@ Partial Class frmOptions
         CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabShortcuts.SuspendLayout()
+        Me.tabStartup.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPrivacy.SuspendLayout()
         Me.tabDefaultBrowser.SuspendLayout()
         Me.grpScope.SuspendLayout()
         Me.SuspendLayout()
@@ -178,8 +197,11 @@ Partial Class frmOptions
         Me.tabSettings.Controls.Add(Me.tabProtocols)
         Me.tabSettings.Controls.Add(Me.tabFileTypes)
         Me.tabSettings.Controls.Add(Me.tabCategories)
-        Me.tabSettings.Controls.Add(Me.tabOtherSettings)
-        Me.tabSettings.Controls.Add(Me.tabMoreSettings)
+        Me.tabSettings.Controls.Add(Me.tabDisplay)
+        Me.tabSettings.Controls.Add(Me.tabGrid)
+        Me.tabSettings.Controls.Add(Me.tabShortcuts)
+        Me.tabSettings.Controls.Add(Me.tabStartup)
+        Me.tabSettings.Controls.Add(Me.tabPrivacy)
         Me.tabSettings.Controls.Add(Me.tabDefaultBrowser)
         Me.tabSettings.Location = New System.Drawing.Point(179, 12)
         Me.tabSettings.Name = "tabSettings"
@@ -550,112 +572,281 @@ Partial Class frmOptions
         Me.ColumnHeader4.Text = "Name"
         Me.ColumnHeader4.Width = 425
         '
-        'tabOtherSettings
+        'tabDisplay
         '
-        Me.tabOtherSettings.Controls.Add(Me.chkUseAreo)
-        Me.tabOtherSettings.Controls.Add(Me.chkUseAccessibleRendering)
-        Me.tabOtherSettings.Controls.Add(Me.cmdAccessiblitySettings)
-        Me.tabOtherSettings.Controls.Add(Me.txtSeperator)
-        Me.tabOtherSettings.Controls.Add(Me.Label6)
-        Me.tabOtherSettings.Controls.Add(Me.chkAdvanced)
-        Me.tabOtherSettings.Controls.Add(Me.txtMessage)
-        Me.tabOtherSettings.Controls.Add(Me.Label5)
-        Me.tabOtherSettings.Controls.Add(Me.txtOptionsShortcut)
-        Me.tabOtherSettings.Controls.Add(Me.GroupBox1)
-        Me.tabOtherSettings.Controls.Add(Me.cmdImport)
-        Me.tabOtherSettings.Controls.Add(Me.Label1)
-        Me.tabOtherSettings.Controls.Add(Me.nudDelayBeforeAutoload)
-        Me.tabOtherSettings.Controls.Add(Me.cmdCheckForUpdate)
-        Me.tabOtherSettings.Controls.Add(Me.chkAutoCheckUpdate)
-        Me.tabOtherSettings.Controls.Add(Me.chkPortableMode)
-        Me.tabOtherSettings.Controls.Add(Me.chkRevealShortURLs)
-        Me.tabOtherSettings.Controls.Add(Me.chkShowURLs)
-        Me.tabOtherSettings.Controls.Add(Me.Label4)
-        Me.tabOtherSettings.Location = New System.Drawing.Point(4, 22)
-        Me.tabOtherSettings.Name = "tabOtherSettings"
-        Me.tabOtherSettings.Size = New System.Drawing.Size(439, 248)
-        Me.tabOtherSettings.TabIndex = 2
-        Me.tabOtherSettings.Text = "Settings"
-        Me.tabOtherSettings.UseVisualStyleBackColor = True
+        Me.tabDisplay.Controls.Add(Me.chkRevealShortURLs)
+        Me.tabDisplay.Controls.Add(Me.chkUseAreo)
+        Me.tabDisplay.Controls.Add(Me.chkUseAccessibleRendering)
+        Me.tabDisplay.Controls.Add(Me.cmdAccessiblitySettings)
+        Me.tabDisplay.Controls.Add(Me.cmdTransparentBackground)
+        Me.tabDisplay.Controls.Add(Me.pbBackgroundColor)
+        Me.tabDisplay.Controls.Add(Me.cmdChangeBackgroundColor)
+        Me.tabDisplay.Controls.Add(Me.Label13)
+        Me.tabDisplay.Controls.Add(Me.chkShowURLs)
+        Me.tabDisplay.Controls.Add(Me.txtSeperator)
+        Me.tabDisplay.Controls.Add(Me.Label6)
+        Me.tabDisplay.Controls.Add(Me.txtMessage)
+        Me.tabDisplay.Controls.Add(Me.Label5)
+        Me.tabDisplay.Location = New System.Drawing.Point(4, 22)
+        Me.tabDisplay.Name = "tabDisplay"
+        Me.tabDisplay.Size = New System.Drawing.Size(439, 248)
+        Me.tabDisplay.TabIndex = 9
+        Me.tabDisplay.Text = "Display"
+        Me.tabDisplay.UseVisualStyleBackColor = True
+        '
+        'chkRevealShortURLs
+        '
+        Me.chkRevealShortURLs.AutoSize = True
+        Me.chkRevealShortURLs.Location = New System.Drawing.Point(6, 26)
+        Me.chkRevealShortURLs.Name = "chkRevealShortURLs"
+        Me.chkRevealShortURLs.Size = New System.Drawing.Size(142, 17)
+        Me.chkRevealShortURLs.TabIndex = 31
+        Me.chkRevealShortURLs.Text = "&Reveal Shortened URLs"
+        Me.chkRevealShortURLs.UseVisualStyleBackColor = True
         '
         'chkUseAreo
         '
         Me.chkUseAreo.AutoSize = True
-        Me.chkUseAreo.Location = New System.Drawing.Point(275, 95)
+        Me.chkUseAreo.Location = New System.Drawing.Point(276, 26)
         Me.chkUseAreo.Name = "chkUseAreo"
         Me.chkUseAreo.Size = New System.Drawing.Size(158, 17)
-        Me.chkUseAreo.TabIndex = 19
+        Me.chkUseAreo.TabIndex = 30
         Me.chkUseAreo.Text = "Use AERO (when available)"
         Me.chkUseAreo.UseVisualStyleBackColor = True
         '
         'chkUseAccessibleRendering
         '
         Me.chkUseAccessibleRendering.AutoSize = True
-        Me.chkUseAccessibleRendering.Location = New System.Drawing.Point(275, 72)
+        Me.chkUseAccessibleRendering.Location = New System.Drawing.Point(276, 3)
         Me.chkUseAccessibleRendering.Name = "chkUseAccessibleRendering"
         Me.chkUseAccessibleRendering.Size = New System.Drawing.Size(151, 17)
-        Me.chkUseAccessibleRendering.TabIndex = 18
+        Me.chkUseAccessibleRendering.TabIndex = 29
         Me.chkUseAccessibleRendering.Text = "Use Accessible Rendering"
         Me.chkUseAccessibleRendering.UseVisualStyleBackColor = True
         '
         'cmdAccessiblitySettings
         '
-        Me.cmdAccessiblitySettings.Location = New System.Drawing.Point(283, 118)
+        Me.cmdAccessiblitySettings.Location = New System.Drawing.Point(286, 45)
         Me.cmdAccessiblitySettings.Name = "cmdAccessiblitySettings"
         Me.cmdAccessiblitySettings.Size = New System.Drawing.Size(134, 23)
-        Me.cmdAccessiblitySettings.TabIndex = 9
+        Me.cmdAccessiblitySettings.TabIndex = 28
         Me.cmdAccessiblitySettings.Text = "Focus Settings"
         Me.cmdAccessiblitySettings.UseVisualStyleBackColor = True
         '
+        'cmdTransparentBackground
+        '
+        Me.cmdTransparentBackground.Location = New System.Drawing.Point(286, 222)
+        Me.cmdTransparentBackground.Name = "cmdTransparentBackground"
+        Me.cmdTransparentBackground.Size = New System.Drawing.Size(149, 23)
+        Me.cmdTransparentBackground.TabIndex = 27
+        Me.cmdTransparentBackground.Text = "Transparent Background"
+        Me.cmdTransparentBackground.UseVisualStyleBackColor = True
+        Me.cmdTransparentBackground.Visible = False
+        '
+        'pbBackgroundColor
+        '
+        Me.pbBackgroundColor.Location = New System.Drawing.Point(100, 222)
+        Me.pbBackgroundColor.Name = "pbBackgroundColor"
+        Me.pbBackgroundColor.Size = New System.Drawing.Size(25, 23)
+        Me.pbBackgroundColor.TabIndex = 26
+        Me.pbBackgroundColor.TabStop = False
+        Me.pbBackgroundColor.Visible = False
+        '
+        'cmdChangeBackgroundColor
+        '
+        Me.cmdChangeBackgroundColor.Location = New System.Drawing.Point(131, 222)
+        Me.cmdChangeBackgroundColor.Name = "cmdChangeBackgroundColor"
+        Me.cmdChangeBackgroundColor.Size = New System.Drawing.Size(149, 23)
+        Me.cmdChangeBackgroundColor.TabIndex = 25
+        Me.cmdChangeBackgroundColor.Text = "Change Background Color"
+        Me.cmdChangeBackgroundColor.UseVisualStyleBackColor = True
+        Me.cmdChangeBackgroundColor.Visible = False
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(2, 227)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(92, 13)
+        Me.Label13.TabIndex = 24
+        Me.Label13.Text = "Background Color"
+        Me.Label13.Visible = False
+        '
+        'chkShowURLs
+        '
+        Me.chkShowURLs.AutoSize = True
+        Me.chkShowURLs.Location = New System.Drawing.Point(5, 3)
+        Me.chkShowURLs.Name = "chkShowURLs"
+        Me.chkShowURLs.Size = New System.Drawing.Size(164, 17)
+        Me.chkShowURLs.TabIndex = 21
+        Me.chkShowURLs.Text = "Show &URLs in User Interface"
+        Me.chkShowURLs.UseVisualStyleBackColor = True
+        '
         'txtSeperator
         '
-        Me.txtSeperator.Location = New System.Drawing.Point(233, 178)
+        Me.txtSeperator.Location = New System.Drawing.Point(232, 99)
         Me.txtSeperator.Name = "txtSeperator"
         Me.txtSeperator.Size = New System.Drawing.Size(203, 20)
-        Me.txtSeperator.TabIndex = 16
+        Me.txtSeperator.TabIndex = 20
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(3, 178)
+        Me.Label6.Location = New System.Drawing.Point(2, 99)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(224, 13)
-        Me.Label6.TabIndex = 15
+        Me.Label6.TabIndex = 19
         Me.Label6.Text = "Separator (Text between message and URL) :"
-        '
-        'chkAdvanced
-        '
-        Me.chkAdvanced.AutoSize = True
-        Me.chkAdvanced.Location = New System.Drawing.Point(275, 49)
-        Me.chkAdvanced.Name = "chkAdvanced"
-        Me.chkAdvanced.Size = New System.Drawing.Size(139, 17)
-        Me.chkAdvanced.TabIndex = 7
-        Me.chkAdvanced.Text = "Use Advanced &Screens"
-        Me.chkAdvanced.UseVisualStyleBackColor = True
         '
         'txtMessage
         '
-        Me.txtMessage.Location = New System.Drawing.Point(159, 153)
+        Me.txtMessage.Location = New System.Drawing.Point(158, 74)
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.Size = New System.Drawing.Size(277, 20)
-        Me.txtMessage.TabIndex = 14
+        Me.txtMessage.TabIndex = 18
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 153)
+        Me.Label5.Location = New System.Drawing.Point(2, 74)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(131, 13)
-        Me.Label5.TabIndex = 13
+        Me.Label5.TabIndex = 17
         Me.Label5.Text = "Message on main screen :"
         '
-        'txtOptionsShortcut
+        'tabGrid
         '
-        Me.txtOptionsShortcut.Location = New System.Drawing.Point(159, 128)
-        Me.txtOptionsShortcut.MaxLength = 1
-        Me.txtOptionsShortcut.Name = "txtOptionsShortcut"
-        Me.txtOptionsShortcut.Size = New System.Drawing.Size(100, 20)
-        Me.txtOptionsShortcut.TabIndex = 12
+        Me.tabGrid.Controls.Add(Me.GroupBox3)
+        Me.tabGrid.Controls.Add(Me.GroupBox2)
+        Me.tabGrid.Controls.Add(Me.GroupBox1)
+        Me.tabGrid.Location = New System.Drawing.Point(4, 22)
+        Me.tabGrid.Name = "tabGrid"
+        Me.tabGrid.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabGrid.Size = New System.Drawing.Size(439, 248)
+        Me.tabGrid.TabIndex = 11
+        Me.tabGrid.Text = "Grid"
+        Me.tabGrid.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.nudIconGapHeight)
+        Me.GroupBox3.Controls.Add(Me.nudIconGapWidth)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 110)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(263, 47)
+        Me.GroupBox3.TabIndex = 21
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Gap Size between icons in grid (can be negative)"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(150, 20)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(44, 13)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "Height :"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(6, 20)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(41, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Width :"
+        '
+        'nudIconGapHeight
+        '
+        Me.nudIconGapHeight.Location = New System.Drawing.Point(193, 18)
+        Me.nudIconGapHeight.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
+        Me.nudIconGapHeight.Name = "nudIconGapHeight"
+        Me.nudIconGapHeight.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconGapHeight.TabIndex = 3
+        '
+        'nudIconGapWidth
+        '
+        Me.nudIconGapWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconGapWidth.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
+        Me.nudIconGapWidth.Name = "nudIconGapWidth"
+        Me.nudIconGapWidth.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconGapWidth.TabIndex = 1
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Controls.Add(Me.nudIconScale)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.nudIconSizeHeight)
+        Me.GroupBox2.Controls.Add(Me.nudIconSizeWidth)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 57)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(430, 47)
+        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Size of icons in grid"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(292, 20)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(64, 13)
+        Me.Label14.TabIndex = 4
+        Me.Label14.Text = "Icon Scale :"
+        '
+        'nudIconScale
+        '
+        Me.nudIconScale.DecimalPlaces = 1
+        Me.nudIconScale.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudIconScale.Location = New System.Drawing.Point(358, 18)
+        Me.nudIconScale.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudIconScale.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudIconScale.Name = "nudIconScale"
+        Me.nudIconScale.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconScale.TabIndex = 5
+        Me.nudIconScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(149, 20)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(44, 13)
+        Me.Label9.TabIndex = 2
+        Me.Label9.Text = "Height :"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 20)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(41, 13)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Width :"
+        '
+        'nudIconSizeHeight
+        '
+        Me.nudIconSizeHeight.Location = New System.Drawing.Point(193, 18)
+        Me.nudIconSizeHeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudIconSizeHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudIconSizeHeight.Name = "nudIconSizeHeight"
+        Me.nudIconSizeHeight.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconSizeHeight.TabIndex = 3
+        Me.nudIconSizeHeight.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        '
+        'nudIconSizeWidth
+        '
+        Me.nudIconSizeWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconSizeWidth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudIconSizeWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudIconSizeWidth.Name = "nudIconSizeWidth"
+        Me.nudIconSizeWidth.Size = New System.Drawing.Size(60, 20)
+        Me.nudIconSizeWidth.TabIndex = 1
+        Me.nudIconSizeWidth.Value = New Decimal(New Integer() {75, 0, 0, 0})
         '
         'GroupBox1
         '
@@ -663,10 +854,10 @@ Partial Class frmOptions
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.nudHeight)
         Me.GroupBox1.Controls.Add(Me.nudWidth)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 77)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(263, 45)
-        Me.GroupBox1.TabIndex = 10
+        Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "# of icons in grid"
         '
@@ -708,107 +899,49 @@ Partial Class frmOptions
         Me.nudWidth.TabIndex = 1
         Me.nudWidth.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
-        'cmdImport
+        'tabShortcuts
         '
-        Me.cmdImport.Location = New System.Drawing.Point(6, 218)
-        Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(430, 23)
-        Me.cmdImport.TabIndex = 17
-        Me.cmdImport.Text = "Import Settings from Browser Chooser 1"
-        Me.cmdImport.UseVisualStyleBackColor = True
+        Me.tabShortcuts.Controls.Add(Me.txtOptionsShortcut)
+        Me.tabShortcuts.Controls.Add(Me.Label4)
+        Me.tabShortcuts.Location = New System.Drawing.Point(4, 22)
+        Me.tabShortcuts.Name = "tabShortcuts"
+        Me.tabShortcuts.Size = New System.Drawing.Size(439, 248)
+        Me.tabShortcuts.TabIndex = 10
+        Me.tabShortcuts.Text = "Shortcuts"
+        Me.tabShortcuts.UseVisualStyleBackColor = True
         '
-        'Label1
+        'txtOptionsShortcut
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(0, 53)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(162, 13)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Default Delay before Auto-Load :"
-        '
-        'nudDelayBeforeAutoload
-        '
-        Me.nudDelayBeforeAutoload.Location = New System.Drawing.Point(196, 51)
-        Me.nudDelayBeforeAutoload.Name = "nudDelayBeforeAutoload"
-        Me.nudDelayBeforeAutoload.Size = New System.Drawing.Size(60, 20)
-        Me.nudDelayBeforeAutoload.TabIndex = 4
-        '
-        'cmdCheckForUpdate
-        '
-        Me.cmdCheckForUpdate.Location = New System.Drawing.Point(184, 22)
-        Me.cmdCheckForUpdate.Name = "cmdCheckForUpdate"
-        Me.cmdCheckForUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCheckForUpdate.TabIndex = 2
-        Me.cmdCheckForUpdate.Text = "&Check Now"
-        Me.cmdCheckForUpdate.UseVisualStyleBackColor = True
-        '
-        'chkAutoCheckUpdate
-        '
-        Me.chkAutoCheckUpdate.AutoSize = True
-        Me.chkAutoCheckUpdate.Location = New System.Drawing.Point(3, 26)
-        Me.chkAutoCheckUpdate.Name = "chkAutoCheckUpdate"
-        Me.chkAutoCheckUpdate.Size = New System.Drawing.Size(180, 17)
-        Me.chkAutoCheckUpdate.TabIndex = 1
-        Me.chkAutoCheckUpdate.Text = "&Automatically Check for Updates"
-        Me.chkAutoCheckUpdate.UseVisualStyleBackColor = True
-        '
-        'chkPortableMode
-        '
-        Me.chkPortableMode.AutoSize = True
-        Me.chkPortableMode.Location = New System.Drawing.Point(275, 3)
-        Me.chkPortableMode.Name = "chkPortableMode"
-        Me.chkPortableMode.Size = New System.Drawing.Size(95, 17)
-        Me.chkPortableMode.TabIndex = 5
-        Me.chkPortableMode.Text = "&Portable Mode"
-        Me.chkPortableMode.UseVisualStyleBackColor = True
-        '
-        'chkRevealShortURLs
-        '
-        Me.chkRevealShortURLs.AutoSize = True
-        Me.chkRevealShortURLs.Location = New System.Drawing.Point(275, 26)
-        Me.chkRevealShortURLs.Name = "chkRevealShortURLs"
-        Me.chkRevealShortURLs.Size = New System.Drawing.Size(142, 17)
-        Me.chkRevealShortURLs.TabIndex = 6
-        Me.chkRevealShortURLs.Text = "&Reveal Shortened URLs"
-        Me.chkRevealShortURLs.UseVisualStyleBackColor = True
-        '
-        'chkShowURLs
-        '
-        Me.chkShowURLs.AutoSize = True
-        Me.chkShowURLs.Location = New System.Drawing.Point(3, 3)
-        Me.chkShowURLs.Name = "chkShowURLs"
-        Me.chkShowURLs.Size = New System.Drawing.Size(164, 17)
-        Me.chkShowURLs.TabIndex = 0
-        Me.chkShowURLs.Text = "Show &URLs in User Interface"
-        Me.chkShowURLs.UseVisualStyleBackColor = True
+        Me.txtOptionsShortcut.Location = New System.Drawing.Point(158, 3)
+        Me.txtOptionsShortcut.MaxLength = 1
+        Me.txtOptionsShortcut.Name = "txtOptionsShortcut"
+        Me.txtOptionsShortcut.Size = New System.Drawing.Size(100, 20)
+        Me.txtOptionsShortcut.TabIndex = 14
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 131)
+        Me.Label4.Location = New System.Drawing.Point(2, 6)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(156, 13)
-        Me.Label4.TabIndex = 11
+        Me.Label4.TabIndex = 13
         Me.Label4.Text = "Hotkey to open Options dialog :"
         '
-        'tabMoreSettings
+        'tabStartup
         '
-        Me.tabMoreSettings.Controls.Add(Me.GroupBox4)
-        Me.tabMoreSettings.Controls.Add(Me.cmdTransparentBackground)
-        Me.tabMoreSettings.Controls.Add(Me.pbBackgroundColor)
-        Me.tabMoreSettings.Controls.Add(Me.cmdChangeBackgroundColor)
-        Me.tabMoreSettings.Controls.Add(Me.Label13)
-        Me.tabMoreSettings.Controls.Add(Me.GroupBox3)
-        Me.tabMoreSettings.Controls.Add(Me.GroupBox2)
-        Me.tabMoreSettings.Controls.Add(Me.chkDownloadDetectionfile)
-        Me.tabMoreSettings.Controls.Add(Me.txtUserAgent)
-        Me.tabMoreSettings.Controls.Add(Me.Label8)
-        Me.tabMoreSettings.Location = New System.Drawing.Point(4, 22)
-        Me.tabMoreSettings.Name = "tabMoreSettings"
-        Me.tabMoreSettings.Size = New System.Drawing.Size(439, 248)
-        Me.tabMoreSettings.TabIndex = 8
-        Me.tabMoreSettings.Text = "More Settings"
-        Me.tabMoreSettings.UseVisualStyleBackColor = True
+        Me.tabStartup.Controls.Add(Me.GroupBox4)
+        Me.tabStartup.Controls.Add(Me.Label1)
+        Me.tabStartup.Controls.Add(Me.nudDelayBeforeAutoload)
+        Me.tabStartup.Controls.Add(Me.chkAdvanced)
+        Me.tabStartup.Controls.Add(Me.cmdCheckForUpdate)
+        Me.tabStartup.Controls.Add(Me.chkAutoCheckUpdate)
+        Me.tabStartup.Controls.Add(Me.chkPortableMode)
+        Me.tabStartup.Location = New System.Drawing.Point(4, 22)
+        Me.tabStartup.Name = "tabStartup"
+        Me.tabStartup.Size = New System.Drawing.Size(439, 248)
+        Me.tabStartup.TabIndex = 13
+        Me.tabStartup.Text = "Startup"
+        Me.tabStartup.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -818,10 +951,10 @@ Partial Class frmOptions
         Me.GroupBox4.Controls.Add(Me.Label16)
         Me.GroupBox4.Controls.Add(Me.nudYOffset)
         Me.GroupBox4.Controls.Add(Me.nudXOffset)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 158)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 78)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(430, 47)
-        Me.GroupBox4.TabIndex = 20
+        Me.GroupBox4.TabIndex = 21
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Main Screen Starting Position"
         '
@@ -888,165 +1021,73 @@ Partial Class frmOptions
         Me.nudXOffset.Size = New System.Drawing.Size(60, 20)
         Me.nudXOffset.TabIndex = 1
         '
-        'cmdTransparentBackground
+        'Label1
         '
-        Me.cmdTransparentBackground.Location = New System.Drawing.Point(287, 211)
-        Me.cmdTransparentBackground.Name = "cmdTransparentBackground"
-        Me.cmdTransparentBackground.Size = New System.Drawing.Size(149, 23)
-        Me.cmdTransparentBackground.TabIndex = 23
-        Me.cmdTransparentBackground.Text = "Transparent Background"
-        Me.cmdTransparentBackground.UseVisualStyleBackColor = True
-        Me.cmdTransparentBackground.Visible = False
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 54)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(162, 13)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "Default Delay before Auto-Load :"
         '
-        'pbBackgroundColor
+        'nudDelayBeforeAutoload
         '
-        Me.pbBackgroundColor.Location = New System.Drawing.Point(101, 211)
-        Me.pbBackgroundColor.Name = "pbBackgroundColor"
-        Me.pbBackgroundColor.Size = New System.Drawing.Size(25, 23)
-        Me.pbBackgroundColor.TabIndex = 22
-        Me.pbBackgroundColor.TabStop = False
-        Me.pbBackgroundColor.Visible = False
+        Me.nudDelayBeforeAutoload.Location = New System.Drawing.Point(200, 52)
+        Me.nudDelayBeforeAutoload.Name = "nudDelayBeforeAutoload"
+        Me.nudDelayBeforeAutoload.Size = New System.Drawing.Size(60, 20)
+        Me.nudDelayBeforeAutoload.TabIndex = 13
         '
-        'cmdChangeBackgroundColor
+        'chkAdvanced
         '
-        Me.cmdChangeBackgroundColor.Location = New System.Drawing.Point(132, 211)
-        Me.cmdChangeBackgroundColor.Name = "cmdChangeBackgroundColor"
-        Me.cmdChangeBackgroundColor.Size = New System.Drawing.Size(149, 23)
-        Me.cmdChangeBackgroundColor.TabIndex = 21
-        Me.cmdChangeBackgroundColor.Text = "Change Background Color"
-        Me.cmdChangeBackgroundColor.UseVisualStyleBackColor = True
-        Me.cmdChangeBackgroundColor.Visible = False
+        Me.chkAdvanced.AutoSize = True
+        Me.chkAdvanced.Location = New System.Drawing.Point(3, 228)
+        Me.chkAdvanced.Name = "chkAdvanced"
+        Me.chkAdvanced.Size = New System.Drawing.Size(139, 17)
+        Me.chkAdvanced.TabIndex = 11
+        Me.chkAdvanced.Text = "Use Advanced &Screens"
+        Me.chkAdvanced.UseVisualStyleBackColor = True
+        Me.chkAdvanced.Visible = False
         '
-        'Label13
+        'cmdCheckForUpdate
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 216)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(92, 13)
-        Me.Label13.TabIndex = 20
-        Me.Label13.Text = "Background Color"
-        Me.Label13.Visible = False
+        Me.cmdCheckForUpdate.Location = New System.Drawing.Point(185, 24)
+        Me.cmdCheckForUpdate.Name = "cmdCheckForUpdate"
+        Me.cmdCheckForUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCheckForUpdate.TabIndex = 9
+        Me.cmdCheckForUpdate.Text = "&Check Now"
+        Me.cmdCheckForUpdate.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'chkAutoCheckUpdate
         '
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.nudIconGapHeight)
-        Me.GroupBox3.Controls.Add(Me.nudIconGapWidth)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 105)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(263, 47)
-        Me.GroupBox3.TabIndex = 19
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Gap Size between icons in grid (can be negative)"
+        Me.chkAutoCheckUpdate.AutoSize = True
+        Me.chkAutoCheckUpdate.Location = New System.Drawing.Point(6, 28)
+        Me.chkAutoCheckUpdate.Name = "chkAutoCheckUpdate"
+        Me.chkAutoCheckUpdate.Size = New System.Drawing.Size(180, 17)
+        Me.chkAutoCheckUpdate.TabIndex = 8
+        Me.chkAutoCheckUpdate.Text = "&Automatically Check for Updates"
+        Me.chkAutoCheckUpdate.UseVisualStyleBackColor = True
         '
-        'Label11
+        'chkPortableMode
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(150, 20)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(44, 13)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "Height :"
+        Me.chkPortableMode.AutoSize = True
+        Me.chkPortableMode.Location = New System.Drawing.Point(6, 6)
+        Me.chkPortableMode.Name = "chkPortableMode"
+        Me.chkPortableMode.Size = New System.Drawing.Size(95, 17)
+        Me.chkPortableMode.TabIndex = 10
+        Me.chkPortableMode.Text = "&Portable Mode"
+        Me.chkPortableMode.UseVisualStyleBackColor = True
         '
-        'Label12
+        'tabPrivacy
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(6, 20)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(41, 13)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Width :"
-        '
-        'nudIconGapHeight
-        '
-        Me.nudIconGapHeight.Location = New System.Drawing.Point(193, 18)
-        Me.nudIconGapHeight.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
-        Me.nudIconGapHeight.Name = "nudIconGapHeight"
-        Me.nudIconGapHeight.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconGapHeight.TabIndex = 3
-        '
-        'nudIconGapWidth
-        '
-        Me.nudIconGapWidth.Location = New System.Drawing.Point(47, 18)
-        Me.nudIconGapWidth.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
-        Me.nudIconGapWidth.Name = "nudIconGapWidth"
-        Me.nudIconGapWidth.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconGapWidth.TabIndex = 1
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Controls.Add(Me.nudIconScale)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.Label10)
-        Me.GroupBox2.Controls.Add(Me.nudIconSizeHeight)
-        Me.GroupBox2.Controls.Add(Me.nudIconSizeWidth)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 52)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(430, 47)
-        Me.GroupBox2.TabIndex = 18
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Size of icons in grid"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(292, 20)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(64, 13)
-        Me.Label14.TabIndex = 4
-        Me.Label14.Text = "Icon Scale :"
-        '
-        'nudIconScale
-        '
-        Me.nudIconScale.DecimalPlaces = 1
-        Me.nudIconScale.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudIconScale.Location = New System.Drawing.Point(358, 18)
-        Me.nudIconScale.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudIconScale.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudIconScale.Name = "nudIconScale"
-        Me.nudIconScale.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconScale.TabIndex = 5
-        Me.nudIconScale.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(149, 20)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(44, 13)
-        Me.Label9.TabIndex = 2
-        Me.Label9.Text = "Height :"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 20)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(41, 13)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "Width :"
-        '
-        'nudIconSizeHeight
-        '
-        Me.nudIconSizeHeight.Location = New System.Drawing.Point(193, 18)
-        Me.nudIconSizeHeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudIconSizeHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudIconSizeHeight.Name = "nudIconSizeHeight"
-        Me.nudIconSizeHeight.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconSizeHeight.TabIndex = 3
-        Me.nudIconSizeHeight.Value = New Decimal(New Integer() {80, 0, 0, 0})
-        '
-        'nudIconSizeWidth
-        '
-        Me.nudIconSizeWidth.Location = New System.Drawing.Point(47, 18)
-        Me.nudIconSizeWidth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudIconSizeWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudIconSizeWidth.Name = "nudIconSizeWidth"
-        Me.nudIconSizeWidth.Size = New System.Drawing.Size(60, 20)
-        Me.nudIconSizeWidth.TabIndex = 1
-        Me.nudIconSizeWidth.Value = New Decimal(New Integer() {75, 0, 0, 0})
+        Me.tabPrivacy.Controls.Add(Me.chkDownloadDetectionfile)
+        Me.tabPrivacy.Controls.Add(Me.txtUserAgent)
+        Me.tabPrivacy.Controls.Add(Me.Label8)
+        Me.tabPrivacy.Location = New System.Drawing.Point(4, 22)
+        Me.tabPrivacy.Name = "tabPrivacy"
+        Me.tabPrivacy.Size = New System.Drawing.Size(439, 248)
+        Me.tabPrivacy.TabIndex = 12
+        Me.tabPrivacy.Text = "Privacy"
+        Me.tabPrivacy.UseVisualStyleBackColor = True
         '
         'chkDownloadDetectionfile
         '
@@ -1054,7 +1095,7 @@ Partial Class frmOptions
         Me.chkDownloadDetectionfile.Location = New System.Drawing.Point(6, 29)
         Me.chkDownloadDetectionfile.Name = "chkDownloadDetectionfile"
         Me.chkDownloadDetectionfile.Size = New System.Drawing.Size(271, 17)
-        Me.chkDownloadDetectionfile.TabIndex = 17
+        Me.chkDownloadDetectionfile.TabIndex = 20
         Me.chkDownloadDetectionfile.Text = "&Download Detection file from BrowserChooser2.com"
         Me.chkDownloadDetectionfile.UseVisualStyleBackColor = True
         '
@@ -1063,7 +1104,7 @@ Partial Class frmOptions
         Me.txtUserAgent.Location = New System.Drawing.Point(159, 3)
         Me.txtUserAgent.Name = "txtUserAgent"
         Me.txtUserAgent.Size = New System.Drawing.Size(277, 20)
-        Me.txtUserAgent.TabIndex = 16
+        Me.txtUserAgent.TabIndex = 19
         '
         'Label8
         '
@@ -1071,7 +1112,7 @@ Partial Class frmOptions
         Me.Label8.Location = New System.Drawing.Point(3, 6)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(110, 13)
-        Me.Label8.TabIndex = 15
+        Me.Label8.TabIndex = 18
         Me.Label8.Text = "User Agent To Send :"
         '
         'tabDefaultBrowser
@@ -1181,8 +1222,8 @@ Partial Class frmOptions
         Me.txtWarnWin10.Name = "txtWarnWin10"
         Me.txtWarnWin10.Size = New System.Drawing.Size(178, 88)
         Me.txtWarnWin10.TabIndex = 7
-        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to automatically gain default status of eith" & _
-    "er a a protocol (Browser) or Filetypes.  You must manully assign them via the De" & _
+        Me.txtWarnWin10.Text = "Microsoft no longer allows a program to automatically gain default status of eith" &
+    "er a a protocol (Browser) or Filetypes.  You must manully assign them via the De" &
     "faults App Applet."
         Me.txtWarnWin10.Visible = False
         '
@@ -1219,6 +1260,50 @@ Partial Class frmOptions
         Me.cdColorDialog.AnyColor = True
         Me.cdColorDialog.Color = System.Drawing.Color.Transparent
         '
+        'treeSettings
+        '
+        Me.treeSettings.Location = New System.Drawing.Point(12, 12)
+        Me.treeSettings.Name = "treeSettings"
+        TreeNode1.Name = "ndBrowsers"
+        TreeNode1.Tag = "tabBrowsers"
+        TreeNode1.Text = "Browsers and Applications"
+        TreeNode2.Name = "ndAutoUrls"
+        TreeNode2.Tag = "tabAutoURLs"
+        TreeNode2.Text = "Auto URLs"
+        TreeNode3.Name = "ndCommon"
+        TreeNode3.Text = "Common"
+        TreeNode4.Name = "ndProtocols"
+        TreeNode4.Tag = "tabProtocols"
+        TreeNode4.Text = "Protocols"
+        TreeNode5.Name = "ndFileTypes"
+        TreeNode5.Tag = "tabFileTypes"
+        TreeNode5.Text = "File Types"
+        TreeNode6.Name = "ndAssociations"
+        TreeNode6.Text = "Associations"
+        TreeNode7.Name = "ndDisplay"
+        TreeNode7.Tag = "tabDisplay"
+        TreeNode7.Text = "Display"
+        TreeNode8.Name = "ndGrid"
+        TreeNode8.Tag = "tabGrid"
+        TreeNode8.Text = "Grid"
+        TreeNode9.Name = "ndShortcuts"
+        TreeNode9.Tag = "tabShortcuts"
+        TreeNode9.Text = "Shortcuts"
+        TreeNode10.Name = "ndPrivacy"
+        TreeNode10.Tag = "tabPrivacy"
+        TreeNode10.Text = "Privacy"
+        TreeNode11.Name = "ndStartup"
+        TreeNode11.Tag = "tabStartup"
+        TreeNode11.Text = "Startup"
+        TreeNode12.Name = "ndSettigns"
+        TreeNode12.Text = "Settings"
+        TreeNode13.Name = "ndDefauls"
+        TreeNode13.Tag = "tabDefaultBrowser"
+        TreeNode13.Text = "Add to Windows Default"
+        Me.treeSettings.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode3, TreeNode6, TreeNode12, TreeNode13})
+        Me.treeSettings.Size = New System.Drawing.Size(165, 270)
+        Me.treeSettings.TabIndex = 4
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1226,6 +1311,7 @@ Partial Class frmOptions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.cmdCancel
         Me.ClientSize = New System.Drawing.Size(638, 327)
+        Me.Controls.Add(Me.treeSettings)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdCancel)
@@ -1246,20 +1332,10 @@ Partial Class frmOptions
         Me.tabProtocols.ResumeLayout(False)
         Me.tabFileTypes.ResumeLayout(False)
         Me.tabCategories.ResumeLayout(False)
-        Me.tabOtherSettings.ResumeLayout(False)
-        Me.tabOtherSettings.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabMoreSettings.ResumeLayout(False)
-        Me.tabMoreSettings.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabDisplay.ResumeLayout(False)
+        Me.tabDisplay.PerformLayout()
         CType(Me.pbBackgroundColor, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabGrid.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.nudIconGapHeight, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1269,6 +1345,21 @@ Partial Class frmOptions
         CType(Me.nudIconScale, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIconSizeHeight, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudIconSizeWidth, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabShortcuts.ResumeLayout(False)
+        Me.tabShortcuts.PerformLayout()
+        Me.tabStartup.ResumeLayout(False)
+        Me.tabStartup.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudXOffset, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDelayBeforeAutoload, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPrivacy.ResumeLayout(False)
+        Me.tabPrivacy.PerformLayout()
         Me.tabDefaultBrowser.ResumeLayout(False)
         Me.tabDefaultBrowser.PerformLayout()
         Me.grpScope.ResumeLayout(False)
@@ -1284,7 +1375,6 @@ Partial Class frmOptions
     Friend WithEvents cmdBrowserAdd As System.Windows.Forms.Button
     Friend WithEvents lstBrowsers As System.Windows.Forms.ListView
     Friend WithEvents tabAutoURLs As System.Windows.Forms.TabPage
-    Friend WithEvents tabOtherSettings As System.Windows.Forms.TabPage
     Friend WithEvents cmdSave As System.Windows.Forms.Button
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
     Friend WithEvents cmdCancel As System.Windows.Forms.Button
@@ -1293,21 +1383,6 @@ Partial Class frmOptions
     Friend WithEvents cmdAutoURLEdit As System.Windows.Forms.Button
     Friend WithEvents cmdAutoURLAdd As System.Windows.Forms.Button
     Friend WithEvents lstURLs As System.Windows.Forms.ListView
-    Friend WithEvents cmdImport As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents nudDelayBeforeAutoload As System.Windows.Forms.NumericUpDown
-    Friend WithEvents cmdCheckForUpdate As System.Windows.Forms.Button
-    Friend WithEvents chkAutoCheckUpdate As System.Windows.Forms.CheckBox
-    Friend WithEvents chkPortableMode As System.Windows.Forms.CheckBox
-    Friend WithEvents chkRevealShortURLs As System.Windows.Forms.CheckBox
-    Friend WithEvents chkShowURLs As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents nudHeight As System.Windows.Forms.NumericUpDown
-    Friend WithEvents nudWidth As System.Windows.Forms.NumericUpDown
-    Friend WithEvents txtMessage As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents chURL As System.Windows.Forms.ColumnHeader
     Friend WithEvents chBrowser As System.Windows.Forms.ColumnHeader
     Friend WithEvents tabDefaultBrowser As System.Windows.Forms.TabPage
@@ -1330,57 +1405,76 @@ Partial Class frmOptions
     Friend WithEvents grpScope As System.Windows.Forms.GroupBox
     Friend WithEvents rbScopeSystem As System.Windows.Forms.RadioButton
     Friend WithEvents rbScopeUser As System.Windows.Forms.RadioButton
-    Friend WithEvents chkAdvanced As System.Windows.Forms.CheckBox
     Friend WithEvents tabCategories As System.Windows.Forms.TabPage
     Friend WithEvents lstCategories As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblWarnWin8 As System.Windows.Forms.Label
     Friend WithEvents cmdBrowserClone As System.Windows.Forms.Button
     Friend WithEvents cmdDetectBrowsers As System.Windows.Forms.Button
-    Friend WithEvents txtSeperator As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cmdMoveDownAutoURL As System.Windows.Forms.Button
     Friend WithEvents cmdMoveUpAutoURL As System.Windows.Forms.Button
-    Friend WithEvents cmdAccessiblitySettings As System.Windows.Forms.Button
     Friend WithEvents txtWarnWin10 As System.Windows.Forms.TextBox
     Friend WithEvents lblWarnWin10 As System.Windows.Forms.Label
     Friend WithEvents cmdOpenDefaultForProtocol As System.Windows.Forms.Button
     Friend WithEvents cmdOpenDefaultForFile As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents tabMoreSettings As System.Windows.Forms.TabPage
-    Friend WithEvents txtUserAgent As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents chkDownloadDetectionfile As System.Windows.Forms.CheckBox
-    Friend WithEvents txtOptionsShortcut As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents nudIconSizeHeight As System.Windows.Forms.NumericUpDown
-    Friend WithEvents nudIconSizeWidth As System.Windows.Forms.NumericUpDown
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents nudIconGapHeight As System.Windows.Forms.NumericUpDown
-    Friend WithEvents nudIconGapWidth As System.Windows.Forms.NumericUpDown
-    Friend WithEvents pbBackgroundColor As System.Windows.Forms.PictureBox
-    Friend WithEvents cmdChangeBackgroundColor As System.Windows.Forms.Button
-    Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents cdColorDialog As System.Windows.Forms.ColorDialog
-    Friend WithEvents cmdTransparentBackground As System.Windows.Forms.Button
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents nudIconScale As System.Windows.Forms.NumericUpDown
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents nudYOffset As System.Windows.Forms.NumericUpDown
-    Friend WithEvents nudXOffset As System.Windows.Forms.NumericUpDown
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents cmbStartingPosition As SeparatorComboBox.SeparatorComboBox
     Friend WithEvents imBrowserIcons As System.Windows.Forms.ImageList
     Friend WithEvents chRow As System.Windows.Forms.ColumnHeader
     Friend WithEvents chColumn As System.Windows.Forms.ColumnHeader
     Friend WithEvents chProtocolsAndFileTypes As System.Windows.Forms.ColumnHeader
-    Friend WithEvents chkUseAreo As System.Windows.Forms.CheckBox
-    Friend WithEvents chkUseAccessibleRendering As System.Windows.Forms.CheckBox
+    Friend WithEvents treeSettings As TreeView
+    Friend WithEvents tabDisplay As TabPage
+    Friend WithEvents chkRevealShortURLs As CheckBox
+    Friend WithEvents chkUseAreo As CheckBox
+    Friend WithEvents chkUseAccessibleRendering As CheckBox
+    Friend WithEvents cmdAccessiblitySettings As Button
+    Friend WithEvents cmdTransparentBackground As Button
+    Friend WithEvents pbBackgroundColor As PictureBox
+    Friend WithEvents cmdChangeBackgroundColor As Button
+    Friend WithEvents Label13 As Label
+    Friend WithEvents chkShowURLs As CheckBox
+    Friend WithEvents txtSeperator As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtMessage As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents tabGrid As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents nudIconGapHeight As NumericUpDown
+    Friend WithEvents nudIconGapWidth As NumericUpDown
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents nudIconScale As NumericUpDown
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents nudIconSizeHeight As NumericUpDown
+    Friend WithEvents nudIconSizeWidth As NumericUpDown
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents nudHeight As NumericUpDown
+    Friend WithEvents nudWidth As NumericUpDown
+    Friend WithEvents tabShortcuts As TabPage
+    Friend WithEvents txtOptionsShortcut As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents tabStartup As TabPage
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents cmbStartingPosition As SeparatorComboBox.SeparatorComboBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents nudYOffset As NumericUpDown
+    Friend WithEvents nudXOffset As NumericUpDown
+    Friend WithEvents Label1 As Label
+    Friend WithEvents nudDelayBeforeAutoload As NumericUpDown
+    Friend WithEvents chkAdvanced As CheckBox
+    Friend WithEvents cmdCheckForUpdate As Button
+    Friend WithEvents chkAutoCheckUpdate As CheckBox
+    Friend WithEvents chkPortableMode As CheckBox
+    Friend WithEvents tabPrivacy As TabPage
+    Friend WithEvents chkDownloadDetectionfile As CheckBox
+    Friend WithEvents txtUserAgent As TextBox
+    Friend WithEvents Label8 As Label
 End Class

@@ -333,6 +333,10 @@ Public Class frmOptions
             End If
         Next
 
+        tabSettings.Appearance = TabAppearance.FlatButtons
+        tabSettings.ItemSize = New Size(0, 1)
+        tabSettings.SizeMode = TabSizeMode.Fixed
+
         'indicate that the screen is NOT dirty and DOES NOT need to be saved
         mbDirty = False
     End Sub
@@ -439,9 +443,9 @@ Public Class frmOptions
 
 
         'check if advanced settings are on
-        If chkAdvanced.Checked = False Then
-            HideAdvancedPages()
-        End If
+        'If chkAdvanced.Checked = False Then
+        '    HideAdvancedPages()
+        'End If
 
         'indicate that the screen is NOT dirty and DOES NOT need to be saved
         mbDirty = False
@@ -604,7 +608,7 @@ Public Class frmOptions
     End Sub
 #End Region
 
-    Private Sub cmdImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImport.Click
+    Private Sub cmdImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If MessageBox.Show("Importing your setting from Browser Chooser 1 will override your settings here. Are you sure you want to import?",
                            "Comfirm Import", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
@@ -620,7 +624,7 @@ Public Class frmOptions
         End If
     End Sub
 
-    Private Sub cmdCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCheckForUpdate.Click
+    Private Sub cmdCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Updater.CheckForUpdate(False) ' handles the full process
     End Sub
 
@@ -673,13 +677,13 @@ Public Class frmOptions
         End If
     End Sub
 
-    Private Sub chkAdvanced_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAdvanced.CheckedChanged
-        If chkAdvanced.Checked = False Then
-            HideAdvancedPages()
-        Else
-            ShowAdvancedPages()
-        End If
-    End Sub
+    'Private Sub chkAdvanced_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    If chkAdvanced.Checked = False Then
+    '        HideAdvancedPages()
+    '    Else
+    '        ShowAdvancedPages()
+    '    End If
+    'End Sub
 
     Private Sub tabCategories_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles tabCategories.Enter
         'update list of categories
@@ -839,7 +843,7 @@ Public Class frmOptions
         End If
     End Sub
 
-    Private Sub cmdAccessiblitySettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAccessiblitySettings.Click
+    Private Sub cmdAccessiblitySettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If frmAccessibilitySettings.ShowSettings(mFocusSettings) = True Then
             mFocusSettings = frmAccessibilitySettings.GetSettings
 
@@ -849,13 +853,7 @@ Public Class frmOptions
     End Sub
 
     Public Sub DetectDirty(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
-        chkShowURLs.CheckedChanged, chkAutoCheckUpdate.CheckedChanged, chkPortableMode.CheckedChanged, chkRevealShortURLs.CheckedChanged, chkAdvanced.CheckedChanged, _
-        nudDelayBeforeAutoload.ValueChanged, nudWidth.ValueChanged, nudHeight.ValueChanged, _
-        txtOptionsShortcut.TextChanged, txtMessage.TextChanged, txtSeperator.TextChanged, _
-        txtUserAgent.TextChanged, chkDownloadDetectionfile.CheckedChanged, _
-        nudIconSizeHeight.ValueChanged, nudIconSizeWidth.ValueChanged, nudIconScale.ValueChanged, _
-        nudIconGapHeight.ValueChanged, nudIconGapWidth.ValueChanged, _
-        cmbStartingPosition.SelectedIndexChanged, nudXOffset.ValueChanged, nudYOffset.ValueChanged
+          chkAdvanced.CheckedChanged
 
         'indicate that the screen is dirty and needs to be saved
         mbDirty = True
@@ -1001,7 +999,7 @@ Public Class frmOptions
     End Sub
 #End Region
 
-    Private Sub cmdChangeBackgroundColor_Click(sender As System.Object, e As System.EventArgs) Handles cmdChangeBackgroundColor.Click
+    Private Sub cmdChangeBackgroundColor_Click(sender As System.Object, e As System.EventArgs)
         cdColorDialog.Color = pbBackgroundColor.BackColor
         cdColorDialog.ShowDialog()
         pbBackgroundColor.BackColor = cdColorDialog.Color
@@ -1010,7 +1008,7 @@ Public Class frmOptions
         mbDirty = True
     End Sub
 
-    Private Sub cmdTransparentBackground_Click(sender As System.Object, e As System.EventArgs) Handles cmdTransparentBackground.Click
+    Private Sub cmdTransparentBackground_Click(sender As System.Object, e As System.EventArgs)
         pbBackgroundColor.BackColor = Color.Transparent
 
         'indicate that the screen is dirty and needs to be saved
@@ -1076,5 +1074,37 @@ Public Class frmOptions
 		' Set back color back to normal
 		lstBrowsers.BackColor = Color.FromKnownColor(KnownColor.Window)
 
+    End Sub
+
+    Private Sub treeSettings_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles treeSettings.NodeMouseClick
+        'display the tab associated with this node
+        For Each lTab As TabPage In tabSettings.TabPages
+            If IsNothing(e.Node.Tag) = False AndAlso e.Node.Tag.ToString() <> "" AndAlso lTab.Name = e.Node.Tag.ToString() Then
+                'this is the node we want
+                tabSettings.SelectedTab = lTab
+
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub treeSettings_KeyUp(sender As Object, e As KeyEventArgs) Handles treeSettings.KeyUp
+        'display the tab associated with this node
+        For Each lTab As TabPage In tabSettings.TabPages
+            If IsNothing(treeSettings.SelectedNode.Tag) = False AndAlso treeSettings.SelectedNode.Tag.ToString() <> "" AndAlso lTab.Name = treeSettings.SelectedNode.Tag.ToString() Then
+                'prevent a flicker becaue the focus jumps
+                treeSettings.SuspendLayout()
+
+                'this is the node we want
+                tabSettings.SelectedTab = lTab
+
+                'reset focus and refresh
+                treeSettings.Focus()
+                treeSettings.ResumeLayout()
+                'treeSettings.Refresh()
+
+                Exit For
+            End If
+        Next
     End Sub
 End Class

@@ -11,12 +11,12 @@ Module modStart
     Public Const CurVersion As String = "DU"
     Public Const CurVersionDisplay As String = "Debug Update"
 #Else
-    Public Const CurVersion As String = "B2"
-    Public Const CurVersionDisplay As String = "Beta 2"
+    Public Const CurVersion As String = "B3"
+    Public Const CurVersionDisplay As String = "Beta 3"
 #End If
 #Else
-    Public Const CurVersion As String = "B2"
-    Public Const CurVersionDisplay As String = "Beta 2"
+    Public Const CurVersion As String = "B3"
+    Public Const CurVersionDisplay As String = "Beta 3"
 #End If
 
     Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
