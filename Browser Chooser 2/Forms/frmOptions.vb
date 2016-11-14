@@ -134,8 +134,9 @@ Public Class frmOptions
 
             Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
             llsiItem.Tag = mLastBrowserID + 1
-            llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
+            'row (y) first
             llsiItem.SubItems.Add(lNewBrowser.Browser.PosY.ToString)
+            llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
             mLastBrowserID += 1
 
             'also save updated protocols and filetypes
@@ -173,8 +174,9 @@ Public Class frmOptions
                 imBrowserIcons.Images.Item(CInt(lstBrowsers.SelectedItems(0).Tag)) = ImageUtilities.ScaleImageTo(ImageUtilities.GetImage(lNewBrowser.Browser, False), New Size(16, 16))
 
                 lstBrowsers.SelectedItems(0).Text = lNewBrowser.Browser.Name
-                lstBrowsers.SelectedItems(0).SubItems(1).Text = lNewBrowser.Browser.PosX.ToString
-                lstBrowsers.SelectedItems(0).SubItems(2).Text = lNewBrowser.Browser.PosY.ToString
+                'row (y) first
+                lstBrowsers.SelectedItems(0).SubItems(1).Text = lNewBrowser.Browser.PosY.ToString
+                lstBrowsers.SelectedItems(0).SubItems(2).Text = lNewBrowser.Browser.PosX.ToString
 
                 'also save updated protocols and filetypes
                 mProtocols = lNewBrowser.Protocols
@@ -201,8 +203,9 @@ Public Class frmOptions
 
                 Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lNewBrowser.Browser.Name, imBrowserIcons.Images.Count - 1)
                 llsiItem.Tag = mLastBrowserID + 1
-                llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
+                'row (y) first
                 llsiItem.SubItems.Add(lNewBrowser.Browser.PosY.ToString)
+                llsiItem.SubItems.Add(lNewBrowser.Browser.PosX.ToString)
                 mLastBrowserID += 1
 
                 'also save updated protocols and filetypes
@@ -216,27 +219,27 @@ Public Class frmOptions
     End Sub
 #End Region
 
-#Region "TabControl Manipulation"
-    Private mHiddenTabs As New List(Of TabPage)
+    '#Region "TabControl Manipulation"
+    '    Private mHiddenTabs As New List(Of TabPage)
 
-    Private Sub HideAdvancedPages()
-        mHiddenTabs.Add(tabProtocols)
-        mHiddenTabs.Add(tabFileTypes)
-        mHiddenTabs.Add(tabCategories)
-        tabSettings.TabPages.Remove(tabProtocols)
-        tabSettings.TabPages.Remove(tabFileTypes)
-        tabSettings.TabPages.Remove(tabCategories)
-    End Sub
+    '    Private Sub HideAdvancedPages()
+    '        mHiddenTabs.Add(tabProtocols)
+    '        mHiddenTabs.Add(tabFileTypes)
+    '        mHiddenTabs.Add(tabCategories)
+    '        tabSettings.TabPages.Remove(tabProtocols)
+    '        tabSettings.TabPages.Remove(tabFileTypes)
+    '        tabSettings.TabPages.Remove(tabCategories)
+    '    End Sub
 
-    Private Sub ShowAdvancedPages()
-        If mHiddenTabs.Count > 0 Then
-            tabSettings.TabPages.Insert(2, mHiddenTabs(0))
-            tabSettings.TabPages.Insert(3, mHiddenTabs(1))
-            tabSettings.TabPages.Insert(4, mHiddenTabs(2))
-            mHiddenTabs.Clear()
-        End If
-    End Sub
-#End Region
+    '    Private Sub ShowAdvancedPages()
+    '        If mHiddenTabs.Count > 0 Then
+    '            tabSettings.TabPages.Insert(2, mHiddenTabs(0))
+    '            tabSettings.TabPages.Insert(3, mHiddenTabs(1))
+    '            tabSettings.TabPages.Insert(4, mHiddenTabs(2))
+    '            mHiddenTabs.Clear()
+    '        End If
+    '    End Sub
+    '#End Region
 
 #Region "Form Events"
     Public Enum SettingsStartPage
@@ -346,9 +349,9 @@ Public Class frmOptions
         Dim llsiItem As ListViewItem
 
         'if advanced settings, show protocols and file types column, else remove
-        If gSettings.AdvancedScreens = False Then
-            lstBrowsers.Columns(3).Width = 0
-        End If
+        'If gSettings.AdvancedScreens = False Then
+        '    lstBrowsers.Columns(3).Width = 0
+        'End If
 
         'Note; protocols and filetypes must come first as they are referenced in the browser section
         'protocols
@@ -385,8 +388,10 @@ Public Class frmOptions
 
             llsiItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
             llsiItem.Tag = mBrowser.Count - 1
-            llsiItem.SubItems.Add(lBrowser.PosX.ToString)
+
+            'row (y) first
             llsiItem.SubItems.Add(lBrowser.PosY.ToString)
+            llsiItem.SubItems.Add(lBrowser.PosX.ToString)
 
             llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lBrowser))
         Next
@@ -608,6 +613,7 @@ Public Class frmOptions
     End Sub
 #End Region
 
+#If Importer = True Then
     Private Sub cmdImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If MessageBox.Show("Importing your setting from Browser Chooser 1 will override your settings here. Are you sure you want to import?",
                            "Comfirm Import", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
@@ -623,6 +629,7 @@ Public Class frmOptions
             End If
         End If
     End Sub
+#End If
 
     Private Sub cmdCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Updater.CheckForUpdate(False) ' handles the full process
@@ -722,74 +729,80 @@ Public Class frmOptions
             End If
         Next
 
-        'now add missing to the list - this is a lengty (code wise) process
-        'first build a list of used spots
-        Dim lIndexes As New SortedList 'start with an index of positions used
-        For Each lBrowser As KeyValuePair(Of Integer, Browser) In mBrowser
-            lIndexes.Add(lBrowser.Value.PosX.ToString & lBrowser.Value.PosY.ToString, Nothing)
-        Next
+        If lMissing.Count = 0 Then
+            MessageBox.Show("Did not detect any new browsers.", "Detect Browsers", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show(String.Format("Detected {0} new browsers.", lMissing.Count), "Detect Browsers", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        'go throught each browser and find them a spot and assign default settings
-        For Each lBrowser As Browser In lMissing
-            'find it a spot
-            lbFound = False
-            For lY As Integer = 1 To CInt(nudHeight.Value)
-                For lX As Integer = 1 To CInt(nudWidth.Value)
-                    If lIndexes.ContainsKey(lX.ToString & lY.ToString) = False Then
-                        'found it
-                        lBrowser.PosX = lX
-                        lBrowser.PosY = lY
-                        lbFound = True
-                        Exit For : Exit For
+            'now add missing to the list - this is a lengty (code wise) process
+            'first build a list of used spots
+            Dim lIndexes As New SortedList 'start with an index of positions used
+            For Each lBrowser As KeyValuePair(Of Integer, Browser) In mBrowser
+                lIndexes.Add(lBrowser.Value.PosX.ToString & lBrowser.Value.PosY.ToString, Nothing)
+            Next
+
+            'go throught each browser and find them a spot and assign default settings
+            For Each lBrowser As Browser In lMissing
+                'find it a spot
+                lbFound = False
+                For lY As Integer = 1 To CInt(nudHeight.Value)
+                    For lX As Integer = 1 To CInt(nudWidth.Value)
+                        If lIndexes.ContainsKey(lX.ToString & lY.ToString) = False Then
+                            'found it
+                            lBrowser.PosX = lX
+                            lBrowser.PosY = lY
+                            lbFound = True
+                            Exit For : Exit For
+                        End If
+                    Next
+
+                    If lbFound = True Then Exit For
+                Next
+
+
+                If lbFound = False Then
+                    'we need to add a row
+                    nudHeight.Value = nudHeight.Value + 1
+                    lBrowser.PosX = 1
+                    lBrowser.PosY = CInt(nudHeight.Value)
+                End If
+
+                'add to index
+                lIndexes.Add(lBrowser.PosX.ToString & lBrowser.PosY.ToString, Nothing)
+
+                'finish with extra details
+                lBrowser.GUID = System.Guid.NewGuid
+
+                'add the new GUID to the list above
+                For Each lProtocol As KeyValuePair(Of Integer, Protocol) In mProtocols
+                    If lProtocol.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
+                        lProtocol.Value.SupportingBrowsers.Add(lBrowser.GUID)
                     End If
                 Next
 
-                If lbFound = True Then Exit For
+                For Each lFileTypes As KeyValuePair(Of Integer, FileType) In mFileTypes
+                    If lFileTypes.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
+                        lFileTypes.Value.SupportingBrowsers.Add(lBrowser.GUID)
+                    End If
+                Next
+
+                'finaly, add it to the browser list
+                mBrowser.Add(mLastBrowserID + 1, lBrowser)
+                imBrowserIcons.Images.Add(ImageUtilities.GetImage(lBrowser, False))
+
+                Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
+                llsiItem.Tag = mLastBrowserID + 1
+                llsiItem.SubItems.Add(lBrowser.PosX.ToString)
+                llsiItem.SubItems.Add(lBrowser.PosY.ToString)
+                mLastBrowserID += 1
+
+                'now display them
+                llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lBrowser))
             Next
 
-
-            If lbFound = False Then
-                'we need to add a row
-                nudHeight.Value = nudHeight.Value + 1
-                lBrowser.PosX = 1
-                lBrowser.PosY = CInt(nudHeight.Value)
-            End If
-
-            'add to index
-            lIndexes.Add(lBrowser.PosX.ToString & lBrowser.PosY.ToString, Nothing)
-
-            'finish with extra details
-            lBrowser.GUID = System.Guid.NewGuid
-
-            'add the new GUID to the list above
-            For Each lProtocol As KeyValuePair(Of Integer, Protocol) In mProtocols
-                If lProtocol.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
-                    lProtocol.Value.SupportingBrowsers.Add(lBrowser.GUID)
-                End If
-            Next
-
-            For Each lFileTypes As KeyValuePair(Of Integer, FileType) In mFileTypes
-                If lFileTypes.Value.DefaultCategories.Contains(GeneralUtilities.DEFAULT_CATEGORY) = True Then
-                    lFileTypes.Value.SupportingBrowsers.Add(lBrowser.GUID)
-                End If
-            Next
-
-            'finaly, add it to the browser list
-            mBrowser.Add(mLastBrowserID + 1, lBrowser)
-            imBrowserIcons.Images.Add(ImageUtilities.GetImage(lBrowser, False))
-
-            Dim llsiItem As ListViewItem = lstBrowsers.Items.Add(lBrowser.Name, imBrowserIcons.Images.Count - 1)
-            llsiItem.Tag = mLastBrowserID + 1
-            llsiItem.SubItems.Add(lBrowser.PosX.ToString)
-            llsiItem.SubItems.Add(lBrowser.PosY.ToString)
-            mLastBrowserID += 1
-
-            'now display them
-            llsiItem.SubItems.Add(GetBrowserProtocolsAndFileTypes(lBrowser))
-        Next
-
-        'indicate that the screen is dirty and needs to be saved
-        mbDirty = True
+            'indicate that the screen is dirty and needs to be saved
+            mbDirty = True
+        End If
     End Sub
 
     Private Sub SwapURLS(ByVal aFirst As Integer, ByVal aSecond As Integer)

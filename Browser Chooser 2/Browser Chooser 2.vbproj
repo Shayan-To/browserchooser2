@@ -390,7 +390,7 @@
     <Compile Include="Forms\frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrowserList\Browser.vb" />
+    <Compile Include="Classes\Browser.vb" />
     <Compile Include="Forms\AddEditForms\frmAddEditBrowser.Designer.vb">
       <DependentUpon>frmAddEditBrowser.vb</DependentUpon>
     </Compile>
@@ -421,7 +421,6 @@
     <Compile Include="Forms\frmImportSource.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Importer\Importer.vb" />
     <Compile Include="Classes\URL.vb" />
     <Compile Include="Modules\modCommon.vb" />
     <Compile Include="My Project\Resources.Designer.vb">

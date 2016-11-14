@@ -83,15 +83,16 @@ Public Class BrowserUtilities
         If My.Computer.FileSystem.FileExists(strBrowser) = True Then
             Dim lProcess As Process
             If Not String.IsNullOrEmpty(aURL) Then
-                If InStr(aTarget.Arguments, "{0}") > 0 Then
+                If InStr(aTarget.Arguments, "{0}") > 0 Or InStr(aTarget.Arguments, "{1}") > 0 Then
                     'using replacement, new start
-                    lProcess = Process.Start(strBrowser, String.Format(aTarget.Arguments, aURL))
+                    Dim lParts As GeneralUtilities.URLParts = GeneralUtilities.DetermineParts(aURL)
+                    lProcess = Process.Start(strBrowser, String.Format(aTarget.Arguments, lParts.Protocol, lParts.Remainder))
                 Else
                     'no replacement, old start
                     lProcess = Process.Start(strBrowser, aTarget.Arguments & " """ & aURL & """")
                 End If
             Else
-                    lProcess = Process.Start(strBrowser, aTarget.Arguments)
+                lProcess = Process.Start(strBrowser, aTarget.Arguments)
             End If
             Dim lID As Integer = lProcess.Id
 
@@ -129,6 +130,10 @@ Public Class BrowserUtilities
             MessageBox.Show("Browser " & aTarget.Name & " cannot be found.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
+
+        'should not get here
+        MessageBox.Show("Failled to launch Browser. Please submit a bug request.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Return False
     End Function
 
     Public Shared Sub LaunchBrowser(ByVal lBrowser As Browser, ByVal lURL As String, ByVal aTerminate As Boolean)

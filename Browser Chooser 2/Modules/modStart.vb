@@ -20,6 +20,7 @@ Module modStart
 #End If
 
     Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
+#If Importer = True Then
         'if old XML file found and not the new one, ask to migrate - portable mode
         If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
             'see if current doesn't exists
@@ -38,6 +39,7 @@ Module modStart
                 End If
             End If
         End If
+#End If
 
         Dim lFormToShow As New frmOptions
         lFormToShow.ShowForm(aScreen, False)
@@ -46,6 +48,7 @@ Module modStart
 
     Public Sub CheckForMigrateBeforeLaunch()
         'if old XML file found and not the new one, ask to migrate - portable mode
+#If Importer = True Then
         If File.Exists(Path.Combine(Application.StartupPath, LegacyNS.Legacy.Settings.BrowserChooserConfigFileName)) Then
             'see if current doesn't exists
             If Not File.Exists(Path.Combine(Application.StartupPath, Settings.BrowserChooserConfigFileName)) Then
@@ -63,6 +66,7 @@ Module modStart
                 End If
             End If
         End If
+#End If
 
         ContinueMain("")
     End Sub

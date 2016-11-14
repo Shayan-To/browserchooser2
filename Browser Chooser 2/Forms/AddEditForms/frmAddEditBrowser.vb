@@ -24,6 +24,9 @@
 
     Private Function doAddBrowser(ByVal aBrowsers As Dictionary(Of Integer, Browser), ByVal aProtocols As Dictionary(Of Integer, Protocol),
                                ByVal aFileTypes As Dictionary(Of Integer, FileType), ByVal abAdvancedScreens As Boolean, ByVal aXY As Point, ByVal aOriginal As Browser) As Boolean
+        'get the thread started to fill the combobox
+        InitFillPathComboBox()
+
         'Dim lbOk As Boolean = False
         Me.Text = "Add Browser"
         Me.TopMost = True
@@ -34,7 +37,7 @@
             cmbCategory.Text = aOriginal.Category
             txtName.Text = aOriginal.Name
             chkIsActive.Checked = aOriginal.IsActive
-            txtTarget.Text = aOriginal.Target
+            cmbTarget.Text = aOriginal.Target
             chkIEBehaviour.Checked = aOriginal.IsIE
             cmbStandard.Text = aOriginal.Image
             txtImagePath.Text = aOriginal.CustomImagePath
@@ -115,6 +118,9 @@
     Public Function EditBrowser(ByVal aBrowser As Browser, ByVal aBrowsers As Dictionary(Of Integer, Browser), ByVal aProtocols As Dictionary(Of Integer, Protocol),
                                ByVal aFileTypes As Dictionary(Of Integer, FileType), ByVal abAdvancedScreens As Boolean) As Boolean
 
+        'get the thread started to fill the combobox
+        InitFillPathComboBox()
+
         'Dim lbOk As Boolean = False
         Me.Text = "Edit " + aBrowser.Name
         Me.TopMost = True
@@ -125,7 +131,7 @@
         cmbCategory.Text = aBrowser.Category
         txtName.Text = aBrowser.Name
         chkIsActive.Checked = aBrowser.IsActive
-        txtTarget.Text = aBrowser.Target
+        cmbTarget.Text = aBrowser.Target
         chkIEBehaviour.Checked = aBrowser.IsIE
         cmbStandard.Text = aBrowser.Image
         txtImagePath.Text = aBrowser.CustomImagePath
@@ -154,9 +160,9 @@
     Private Sub cmdTargetBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdTargetBrowse.Click
         ofdBrowse.Filter = "*.exe|*.exe"
         If ofdBrowse.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            txtTarget.Text = ofdBrowse.FileName
+            cmbTarget.Text = ofdBrowse.FileName
 
-            If InStr(txtTarget.Text, "iexplore") > 0 Then
+            If InStr(cmbTarget.Text, "iexplore") > 0 Then
                 chkIEBehaviour.Checked = True
             Else
                 chkIEBehaviour.Checked = False
@@ -178,16 +184,16 @@
             MessageBox.Show("Name cannot be empty", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             Exit Sub
-        ElseIf InStr(txtTarget.Text, ".exe ") > 0 Then
+        ElseIf InStr(cmbTarget.Text, ".exe ") > 0 Then
             MessageBox.Show("Do not put parameter info in target path. Use Arguments field.", "Bad Data", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             Exit Sub
-        ElseIf InStr(txtTarget.Text, """") = 1 Then
+        ElseIf InStr(cmbTarget.Text, """") = 1 Then
             'strip leading and trailling quotes if any
-            txtTarget.Text = Mid(txtTarget.Text, 2)
+            cmbTarget.Text = Mid(cmbTarget.Text, 2)
 
-            If Microsoft.VisualBasic.Strings.Right(txtTarget.Text, 1) = """" Then
-                txtTarget.Text = Mid(txtTarget.Text, 1, txtTarget.Text.Length - 1)
+            If Microsoft.VisualBasic.Strings.Right(cmbTarget.Text, 1) = """" Then
+                cmbTarget.Text = Mid(cmbTarget.Text, 1, cmbTarget.Text.Length - 1)
             End If
         End If
 
@@ -221,7 +227,7 @@
 
         lBOut.GUID = mGUID
         lBOut.Name = txtName.Text
-        lBOut.Target = txtTarget.Text
+        lBOut.Target = cmbTarget.Text
         lBOut.Image = cmbStandard.Text
         lBOut.CustomImagePath = txtImagePath.Text
         lBOut.IsActive = chkIsActive.Checked
@@ -252,12 +258,12 @@
         Dim lResult As Integer
 
         If cmbStandard.Text = "(Extract)" Then
-            If My.Computer.FileSystem.FileExists(txtTarget.Text) = True Then
-                lResult = frmIcons.ChooseIcon(txtTarget.Text, CInt(nudIconIndex.Value))
+            If My.Computer.FileSystem.FileExists(cmbTarget.Text) = True Then
+                lResult = frmIcons.ChooseIcon(cmbTarget.Text, CInt(nudIconIndex.Value))
             End If
         Else
             If My.Computer.FileSystem.FileExists(txtImagePath.Text) = True Then
-                lResult = frmIcons.ChooseIcon(txtTarget.Text, CInt(nudIconIndex.Value))
+                lResult = frmIcons.ChooseIcon(cmbTarget.Text, CInt(nudIconIndex.Value))
             End If
         End If
 
@@ -428,4 +434,37 @@
     Private Sub chkVisible_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkVisible.CheckedChanged
         UpdateVisible()
     End Sub
+
+#Region "Detect Browsers to fill Path CMB"
+    Private lThread As Threading.Thread
+    Private Delegate Sub FinishFillPathComboBoxCallback(aBrowsers As List(Of Browser))
+
+    Private Sub FinishFillPathComboBox(aBrowsers As List(Of Browser))
+        For Each lBrowser As Browser In aBrowsers
+            cmbTarget.Items.Add(lBrowser.Target)
+        Next
+    End Sub
+
+    Public Sub DoFillPathComboBox()
+        Dim lResult As List(Of Browser) = DetectedBrowsers.DoBrowserDetection()
+
+        'may nto be thread safe
+        If Me.InvokeRequired Then
+            Dim d As New FinishFillPathComboBoxCallback(AddressOf FinishFillPathComboBox)
+            Me.Invoke(d, New Object() {lResult})
+        Else
+            FinishFillPathComboBox(lResult)
+        End If
+    End Sub
+
+    Public Sub InitFillPathComboBox()
+        lThread = New Threading.Thread(AddressOf DoFillPathComboBox)
+        lThread.Start()
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+#End Region
 End Class

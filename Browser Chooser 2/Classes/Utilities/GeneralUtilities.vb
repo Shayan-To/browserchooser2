@@ -371,16 +371,18 @@ Public Class GeneralUtilities
         If InStr(aURL, "://") > 0 Then 'is a protocol
             lOut.isProtocol = TriState.True
             lOut.Protocol = Left(aURL, InStr(aURL, "://") - 1)
-
+            lOut.Remainder = Mid(aURL, InStr(aURL, "://") + 3)
         ElseIf InStr(aURL, ".") > 0 Then
             'file extention
             lOut.isProtocol = TriState.False
             lOut.Extention = Mid(aURL, InStrRev(aURL, ".") + 1) 'to be tested
+            'lOut.Remainder = Left(aURL,  )
 
         ElseIf InStr(aURL, "/") > 0 Then
             'try domain less
             lOut.isProtocol = TriState.True
             lOut.Protocol = "http"
+            lOut.Remainder = aURL
         Else
             lOut.isProtocol = TriState.UseDefault ' for instances where we can't determine easily
         End If
