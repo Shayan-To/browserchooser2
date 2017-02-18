@@ -57,7 +57,7 @@ Public Class GeneralUtilities
             {ListOfCommands.ApplyUpdate, "--applyupdate"},
             {ListOfCommands.FinishApplyUpdate, "--finishapplyupdate"},
             {ListOfCommands.BuildDetectionFile, "--builddetectionfile"},
-            {ListOfCommands.BuildDetectionFile, "--uninstall"},
+            {ListOfCommands.Uninstall, "--uninstall"},
             {ListOfCommands.Settings, "--settings"},
             {ListOfCommands.SettingsBrowsers, "--settings:browsers"},
             {ListOfCommands.SettingsAutoURLs, "--settings:autourls"},
