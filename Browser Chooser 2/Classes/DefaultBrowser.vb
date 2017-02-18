@@ -336,11 +336,11 @@ Public Class DefaultBrowser
                     If IsNothing(lKey) = True Then
                         lbFound = False
                         Exit For
-                    ElseIf IsNothing(lKey.OpenSubKey("DefaultIcon", False)) = False AndAlso lKey.OpenSubKey("DefaultIcon", False).GetValue("").ToString = _
+                    ElseIf IsNothing(lKey.OpenSubKey("DefaultIcon", False)) = False AndAlso lKey.OpenSubKey("DefaultIcon", False).GetValue("").ToString =
                         """" & Path.Combine(Application.StartupPath, mCanonical) & """,0" Then
 
                         'first test passed, second test is a negative (we are looking exclusivly for faillures)
-                        If lKey.OpenSubKey("Shell\open\command", False).GetValue("").ToString <> _
+                        If lKey.OpenSubKey("Shell\open\command", False).GetValue("").ToString <>
                             """" & Path.Combine(Application.StartupPath, mCanonical) & """ ""%1""" Then
 
                             'second test failled
@@ -406,5 +406,29 @@ Public Class DefaultBrowser
                 End If
             End If
         End Try
+    End Sub
+
+    Public Shared Sub RemoveAllKeys(ByVal aScope As DefaultBrowser.Scope)
+        'remove all keys we created undre current scope
+        Dim lMaster As RegistryKey
+        Dim lClassesRoot As RegistryKey
+
+        If aScope = Scope.sGlobal Then
+            lMaster = Registry.LocalMachine
+            lClassesRoot = Registry.ClassesRoot
+        Else
+            lMaster = Registry.CurrentUser
+            lClassesRoot = Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes", True)
+        End If
+
+        'application registration: Software\Microsoft\Windows\CurrentVersion\App Paths
+        lMaster.DeleteSubKeyTree(String.Format("Software\Microsoft\Windows\CurrentVersion\App Paths\{0}", mCanonical))
+
+        'associations / capabilities
+        lClassesRoot.DeleteSubKeyTree(mFileAssociations)
+        lClassesRoot.DeleteSubKeyTree(mURLAssociations)
+
+        'SPAD
+        lMaster.DeleteSubKeyTree(String.Format("SOFTWARE\Clients\StartMenuInternet\{0}", mCanonical))
     End Sub
 End Class

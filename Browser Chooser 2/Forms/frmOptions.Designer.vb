@@ -37,7 +37,7 @@ Partial Class frmOptions
         Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Privacy")
         Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Startup")
         Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Settings", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11})
-        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Add to Windows Default")
+        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Windows Default")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.tabSettings = New System.Windows.Forms.TabControl()
@@ -149,6 +149,7 @@ Partial Class frmOptions
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
         Me.treeSettings = New System.Windows.Forms.TreeView()
+        Me.cmdRemoveFromDefaultSettings = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -1117,6 +1118,7 @@ Partial Class frmOptions
         '
         'tabDefaultBrowser
         '
+        Me.tabDefaultBrowser.Controls.Add(Me.cmdRemoveFromDefaultSettings)
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin10)
         Me.tabDefaultBrowser.Controls.Add(Me.lblWarnWin8)
         Me.tabDefaultBrowser.Controls.Add(Me.grpScope)
@@ -1299,10 +1301,19 @@ Partial Class frmOptions
         TreeNode12.Text = "Settings"
         TreeNode13.Name = "ndDefauls"
         TreeNode13.Tag = "tabDefaultBrowser"
-        TreeNode13.Text = "Add to Windows Default"
+        TreeNode13.Text = "Windows Default"
         Me.treeSettings.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode3, TreeNode6, TreeNode12, TreeNode13})
         Me.treeSettings.Size = New System.Drawing.Size(165, 270)
         Me.treeSettings.TabIndex = 4
+        '
+        'cmdRemoveFromDefaultSettings
+        '
+        Me.cmdRemoveFromDefaultSettings.Location = New System.Drawing.Point(9, 135)
+        Me.cmdRemoveFromDefaultSettings.Name = "cmdRemoveFromDefaultSettings"
+        Me.cmdRemoveFromDefaultSettings.Size = New System.Drawing.Size(202, 23)
+        Me.cmdRemoveFromDefaultSettings.TabIndex = 8
+        Me.cmdRemoveFromDefaultSettings.Text = "Remove from Default Programs"
+        Me.cmdRemoveFromDefaultSettings.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -1477,4 +1488,5 @@ Partial Class frmOptions
     Friend WithEvents chkDownloadDetectionfile As CheckBox
     Friend WithEvents txtUserAgent As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents cmdRemoveFromDefaultSettings As Button
 End Class

@@ -1120,4 +1120,8 @@ Public Class frmOptions
             End If
         Next
     End Sub
+
+    Private Sub cmdRemoveFromDefaultSettings_Click(sender As Object, e As EventArgs) Handles cmdRemoveFromDefaultSettings.Click
+        DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
+    End Sub
 End Class
