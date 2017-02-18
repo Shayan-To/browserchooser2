@@ -20,6 +20,7 @@ Public Class GeneralUtilities
         ApplyUpdate
         FinishApplyUpdate
         BuildDetectionFile
+        Uninstall
         ' options screen quick hits
         Settings
         SettingsBrowsers
@@ -44,37 +45,38 @@ Public Class GeneralUtilities
         LoggingEnabled
     End Enum
 
-    Public Shared AvailableCommands As New Dictionary(Of ListOfCommands, String) From { _
-            {ListOfCommands.MakeAvailable, "--makeavailable"}, _
-            {ListOfCommands.MakeDefault, "--makedefault"}, _
-            {ListOfCommands.Reinstall, "--reinstall"}, _
-            {ListOfCommands.HideIcons, "--hideicons"}, _
-            {ListOfCommands.ShowIcons, "--showicons"}, _
-            {ListOfCommands.FirstRun, "--firstrun"}, _
-            {ListOfCommands.Testadmin, "--testadmin"}, _
-            {ListOfCommands.Testadminint, "--testadmin-int"}, _
-            {ListOfCommands.ApplyUpdate, "--applyupdate"}, _
-            {ListOfCommands.FinishApplyUpdate, "--finishapplyupdate"}, _
-            {ListOfCommands.BuildDetectionFile, "--builddetectionfile"}, _
-            {ListOfCommands.Settings, "--settings"}, _
-            {ListOfCommands.SettingsBrowsers, "--settings:browsers"}, _
-            {ListOfCommands.SettingsAutoURLs, "--settings:autourls"}, _
-            {ListOfCommands.SettingsProtocols, "--settings:protocols"}, _
-            {ListOfCommands.SettingsFileTypes, "--settings:filetypes"}, _
-            {ListOfCommands.SettingsCategories, "--settings:categories"}, _
-            {ListOfCommands.SettingsSettings, "--settings:settings"}, _
-            {ListOfCommands.SettingsMoreSettings, "--settings:moresettings"}, _
-            {ListOfCommands.SettingsDefaultBrowser, "--settings:defaultbrowser"}, _
-            {ListOfCommands.SSettings, "--s"}, _
-            {ListOfCommands.SSettingsBrowsers, "--s:b"}, _
-            {ListOfCommands.SSettingsAutoURLs, "--s:a"}, _
-            {ListOfCommands.SSettingsProtocols, "--s:p"}, _
-            {ListOfCommands.SSettingsFileTypes, "--s:f"}, _
-            {ListOfCommands.SSettingsCategories, "--s:c"}, _
-            {ListOfCommands.SSettingsSettings, "--s:s"}, _
-            {ListOfCommands.SSettingsMoreSettings, "--s:ms"}, _
-            {ListOfCommands.SSettingsDefaultBrowser, "--s:db"}, _
-            {ListOfCommands.LoggingEnabled, "--log"} _
+    Public Shared AvailableCommands As New Dictionary(Of ListOfCommands, String) From {
+            {ListOfCommands.MakeAvailable, "--makeavailable"},
+            {ListOfCommands.MakeDefault, "--makedefault"},
+            {ListOfCommands.Reinstall, "--reinstall"},
+            {ListOfCommands.HideIcons, "--hideicons"},
+            {ListOfCommands.ShowIcons, "--showicons"},
+            {ListOfCommands.FirstRun, "--firstrun"},
+            {ListOfCommands.Testadmin, "--testadmin"},
+            {ListOfCommands.Testadminint, "--testadmin-int"},
+            {ListOfCommands.ApplyUpdate, "--applyupdate"},
+            {ListOfCommands.FinishApplyUpdate, "--finishapplyupdate"},
+            {ListOfCommands.BuildDetectionFile, "--builddetectionfile"},
+            {ListOfCommands.BuildDetectionFile, "--uninstall"},
+            {ListOfCommands.Settings, "--settings"},
+            {ListOfCommands.SettingsBrowsers, "--settings:browsers"},
+            {ListOfCommands.SettingsAutoURLs, "--settings:autourls"},
+            {ListOfCommands.SettingsProtocols, "--settings:protocols"},
+            {ListOfCommands.SettingsFileTypes, "--settings:filetypes"},
+            {ListOfCommands.SettingsCategories, "--settings:categories"},
+            {ListOfCommands.SettingsSettings, "--settings:settings"},
+            {ListOfCommands.SettingsMoreSettings, "--settings:moresettings"},
+            {ListOfCommands.SettingsDefaultBrowser, "--settings:defaultbrowser"},
+            {ListOfCommands.SSettings, "--s"},
+            {ListOfCommands.SSettingsBrowsers, "--s:b"},
+            {ListOfCommands.SSettingsAutoURLs, "--s:a"},
+            {ListOfCommands.SSettingsProtocols, "--s:p"},
+            {ListOfCommands.SSettingsFileTypes, "--s:f"},
+            {ListOfCommands.SSettingsCategories, "--s:c"},
+            {ListOfCommands.SSettingsSettings, "--s:s"},
+            {ListOfCommands.SSettingsMoreSettings, "--s:ms"},
+            {ListOfCommands.SSettingsDefaultBrowser, "--s:db"},
+            {ListOfCommands.LoggingEnabled, "--log"}
         }
 
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio

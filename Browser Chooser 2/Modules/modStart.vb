@@ -187,6 +187,8 @@ Module modStart
 
                 'special functions
                 Select Case cmdLineOption.ToLower
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Uninstall) '  "--Uninstall"
+                        DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
                     Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Reinstall) '  "--reinstall"
                         'make default
                         DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser) 'will do HKCU only
@@ -233,45 +235,45 @@ Module modStart
                         MessageBox.Show("Detection file exported to ""C:\temp\DetectedBrowsers.xml""", "Browser Chooser 2 - Detection File Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End
 #End If
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings), _
-                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings), _
-                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings),
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings),
+                        GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsAutoURLs)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
 
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsProtocols)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsProtocols)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsFileTypes)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsCategories)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsCategories)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsSettings)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsSettings)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsMoreSettings)
 
                         LoadSettings()
                         CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
-                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser), _
+                    Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsDefaultBrowser)
 
                         LoadSettings()

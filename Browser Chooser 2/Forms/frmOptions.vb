@@ -1122,6 +1122,10 @@ Public Class frmOptions
     End Sub
 
     Private Sub cmdRemoveFromDefaultSettings_Click(sender As Object, e As EventArgs) Handles cmdRemoveFromDefaultSettings.Click
-        DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
+        If rbScopeUser.Checked = True Then
+            DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
+        Else
+            GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
+        End If
     End Sub
 End Class
