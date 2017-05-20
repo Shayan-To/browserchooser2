@@ -219,6 +219,11 @@ Public Class frmMain
         Dim lBorderSpace As Integer = Me.Height - chkAutoClose.Height - chkAutoClose.Top
         Me.Height = lSpaceY + chkAutoClose.Height + lBorderSpace + 6 '6 gives just enough space for the custom focus box
 
+        If gSettings.AllowStayOpen = False Then
+            Me.Height = Me.Height - chkAutoClose.Height
+            chkAutoClose.Visible = False
+        End If
+
         'set on screen colors
         If mHasAero = False And gSettings.BackgroundColor = Color.Transparent.ToArgb Then
             'Me.BackColor = Color.Transparent

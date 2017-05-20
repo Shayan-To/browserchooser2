@@ -135,6 +135,7 @@ Partial Class frmOptions
         Me.txtUserAgent = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.tabDefaultBrowser = New System.Windows.Forms.TabPage()
+        Me.cmdRemoveFromDefaultSettings = New System.Windows.Forms.Button()
         Me.lblWarnWin10 = New System.Windows.Forms.Label()
         Me.lblWarnWin8 = New System.Windows.Forms.Label()
         Me.grpScope = New System.Windows.Forms.GroupBox()
@@ -149,7 +150,8 @@ Partial Class frmOptions
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
         Me.treeSettings = New System.Windows.Forms.TreeView()
-        Me.cmdRemoveFromDefaultSettings = New System.Windows.Forms.Button()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.chkAllowStayOpen = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -529,7 +531,7 @@ Partial Class frmOptions
         '
         'lstFiletypes
         '
-        Me.lstFiletypes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
+        Me.lstFiletypes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2, Me.ColumnHeader5})
         Me.lstFiletypes.FullRowSelect = True
         Me.lstFiletypes.HideSelection = False
         Me.lstFiletypes.Location = New System.Drawing.Point(87, 6)
@@ -575,6 +577,7 @@ Partial Class frmOptions
         '
         'tabDisplay
         '
+        Me.tabDisplay.Controls.Add(Me.chkAllowStayOpen)
         Me.tabDisplay.Controls.Add(Me.chkRevealShortURLs)
         Me.tabDisplay.Controls.Add(Me.chkUseAreo)
         Me.tabDisplay.Controls.Add(Me.chkUseAccessibleRendering)
@@ -676,7 +679,7 @@ Partial Class frmOptions
         'chkShowURLs
         '
         Me.chkShowURLs.AutoSize = True
-        Me.chkShowURLs.Location = New System.Drawing.Point(5, 3)
+        Me.chkShowURLs.Location = New System.Drawing.Point(6, 3)
         Me.chkShowURLs.Name = "chkShowURLs"
         Me.chkShowURLs.Size = New System.Drawing.Size(164, 17)
         Me.chkShowURLs.TabIndex = 21
@@ -761,7 +764,7 @@ Partial Class frmOptions
         '
         'nudIconGapHeight
         '
-        Me.nudIconGapHeight.Location = New System.Drawing.Point(193, 18)
+        Me.nudIconGapHeight.Location = New System.Drawing.Point(196, 18)
         Me.nudIconGapHeight.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.nudIconGapHeight.Name = "nudIconGapHeight"
         Me.nudIconGapHeight.Size = New System.Drawing.Size(60, 20)
@@ -769,7 +772,7 @@ Partial Class frmOptions
         '
         'nudIconGapWidth
         '
-        Me.nudIconGapWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconGapWidth.Location = New System.Drawing.Point(62, 18)
         Me.nudIconGapWidth.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.nudIconGapWidth.Name = "nudIconGapWidth"
         Me.nudIconGapWidth.Size = New System.Drawing.Size(60, 20)
@@ -831,7 +834,7 @@ Partial Class frmOptions
         '
         'nudIconSizeHeight
         '
-        Me.nudIconSizeHeight.Location = New System.Drawing.Point(193, 18)
+        Me.nudIconSizeHeight.Location = New System.Drawing.Point(196, 18)
         Me.nudIconSizeHeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudIconSizeHeight.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudIconSizeHeight.Name = "nudIconSizeHeight"
@@ -841,7 +844,7 @@ Partial Class frmOptions
         '
         'nudIconSizeWidth
         '
-        Me.nudIconSizeWidth.Location = New System.Drawing.Point(47, 18)
+        Me.nudIconSizeWidth.Location = New System.Drawing.Point(62, 18)
         Me.nudIconSizeWidth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudIconSizeWidth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudIconSizeWidth.Name = "nudIconSizeWidth"
@@ -1133,6 +1136,15 @@ Partial Class frmOptions
         Me.tabDefaultBrowser.Text = "Default Browser"
         Me.tabDefaultBrowser.UseVisualStyleBackColor = True
         '
+        'cmdRemoveFromDefaultSettings
+        '
+        Me.cmdRemoveFromDefaultSettings.Location = New System.Drawing.Point(9, 135)
+        Me.cmdRemoveFromDefaultSettings.Name = "cmdRemoveFromDefaultSettings"
+        Me.cmdRemoveFromDefaultSettings.Size = New System.Drawing.Size(202, 23)
+        Me.cmdRemoveFromDefaultSettings.TabIndex = 8
+        Me.cmdRemoveFromDefaultSettings.Text = "Remove from Default Programs"
+        Me.cmdRemoveFromDefaultSettings.UseVisualStyleBackColor = True
+        '
         'lblWarnWin10
         '
         Me.lblWarnWin10.AutoSize = True
@@ -1306,14 +1318,20 @@ Partial Class frmOptions
         Me.treeSettings.Size = New System.Drawing.Size(165, 270)
         Me.treeSettings.TabIndex = 4
         '
-        'cmdRemoveFromDefaultSettings
+        'ColumnHeader5
         '
-        Me.cmdRemoveFromDefaultSettings.Location = New System.Drawing.Point(9, 135)
-        Me.cmdRemoveFromDefaultSettings.Name = "cmdRemoveFromDefaultSettings"
-        Me.cmdRemoveFromDefaultSettings.Size = New System.Drawing.Size(202, 23)
-        Me.cmdRemoveFromDefaultSettings.TabIndex = 8
-        Me.cmdRemoveFromDefaultSettings.Text = "Remove from Default Programs"
-        Me.cmdRemoveFromDefaultSettings.UseVisualStyleBackColor = True
+        Me.ColumnHeader5.Text = "Extention"
+        Me.ColumnHeader5.Width = 74
+        '
+        'chkAllowStayOpen
+        '
+        Me.chkAllowStayOpen.AutoSize = True
+        Me.chkAllowStayOpen.Location = New System.Drawing.Point(6, 49)
+        Me.chkAllowStayOpen.Name = "chkAllowStayOpen"
+        Me.chkAllowStayOpen.Size = New System.Drawing.Size(156, 17)
+        Me.chkAllowStayOpen.TabIndex = 32
+        Me.chkAllowStayOpen.Text = "Allow interface to stay open"
+        Me.chkAllowStayOpen.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -1489,4 +1507,6 @@ Partial Class frmOptions
     Friend WithEvents txtUserAgent As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents cmdRemoveFromDefaultSettings As Button
+    Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents chkAllowStayOpen As CheckBox
 End Class

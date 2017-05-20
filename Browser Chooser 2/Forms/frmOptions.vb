@@ -74,6 +74,7 @@ Public Class frmOptions
         gSettings.AdvancedScreens = chkAdvanced.Checked
         gSettings.DefaultDelay = CInt(nudDelayBeforeAutoload.Value)
         gSettings.Seperator = txtSeperator.Text
+        gSettings.AllowStayOpen = chkAllowStayOpen.Checked
 
         'more settings
         gSettings.UserAgent = txtUserAgent.Text
@@ -423,6 +424,7 @@ Public Class frmOptions
         chkAdvanced.Checked = gSettings.AdvancedScreens
         nudDelayBeforeAutoload.Value = gSettings.DefaultDelay
         txtSeperator.Text = gSettings.Seperator
+        chkAllowStayOpen.Checked = gSettings.AllowStayOpen
 
         'more settings
         txtUserAgent.Text = gSettings.UserAgent

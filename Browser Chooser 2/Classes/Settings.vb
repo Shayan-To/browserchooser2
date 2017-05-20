@@ -60,6 +60,7 @@ Public Class Settings
     Public StartingPosition As Integer = AvailableStartingPositions.CenterScreen
     Public OffsetX As Integer = 0
     Public OffsetY As Integer = 0
+    Public AllowStayOpen As Boolean = False 'new behaviour in R1
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
     <NonSerialized()> Public Shared LogDebugs As Boolean = False 'only true if specified by command line
