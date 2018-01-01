@@ -139,12 +139,12 @@ Public Class frmMain
         Dim lBrowser As Browser = gSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
 
         If (My.Computer.Keyboard.CtrlKeyDown) And (e.Button = Windows.Forms.MouseButtons.Left) Then
-            BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
+            DoLaunch(lBrowser, True)
         ElseIf (e.Button = Windows.Forms.MouseButtons.Left) Then
             If chkAutoClose.Checked = True Then
-                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
+                DoLaunch(lBrowser)
             Else
-                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
+                DoLaunch(lBrowser, False)
             End If
         End If
     End Sub
@@ -401,6 +401,10 @@ Public Class frmMain
         BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, chkAutoClose.Checked) 'to do, add if control is pressed, do not close
     End Sub
 
+    Private Sub DoLaunch(ByVal lBrowser As Browser, abAutoClose As Boolean)
+        BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, abAutoClose) 'to do, add if control is pressed, do not close
+    End Sub
+
     Private Sub HandleShortcut(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
         Dim firstChar As String = e.KeyData.ToString.ToLower
         Dim bClose As Boolean = True
@@ -573,11 +577,7 @@ Public Class frmMain
         Dim lBrowser As Browser = gSettings.Browsers(CInt(DirectCast(sender, Button).Tag))
 
         If (e.KeyCode = Keys.Enter) Then
-            If chkAutoClose.Checked = True Then
-                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, True)
-            Else
-                BrowserUtilities.LaunchBrowser(lBrowser, StartupLauncher.URL, False)
-            End If
+            DoLaunch(lBrowser)
         End If
     End Sub
 

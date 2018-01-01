@@ -37,6 +37,7 @@ Public Class BrowserDefinition
     Public InstallPath As List(Of String)
     Public ExecutePath As List(Of String)
     Public IsIE As Boolean = False
+    Public IsEdge As Boolean = False
     Public IsUniversalApp As Boolean = False 'must launch differently
     Public SupportsNonAdmin As Boolean = False
     Public NonAdminInstallPath As List(Of NonAdminPath)

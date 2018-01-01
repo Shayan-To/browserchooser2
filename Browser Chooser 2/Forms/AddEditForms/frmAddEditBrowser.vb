@@ -39,6 +39,7 @@
             chkIsActive.Checked = aOriginal.IsActive
             cmbTarget.Text = aOriginal.Target
             chkIEBehaviour.Checked = aOriginal.IsIE
+            chkIsEdge.Checked = aOriginal.IsEdge
             cmbStandard.Text = aOriginal.Image
             txtImagePath.Text = aOriginal.CustomImagePath
             nudIconIndex.Value = aOriginal.IconIndex
@@ -133,6 +134,7 @@
         chkIsActive.Checked = aBrowser.IsActive
         cmbTarget.Text = aBrowser.Target
         chkIEBehaviour.Checked = aBrowser.IsIE
+        chkIsEdge.Checked = aBrowser.IsEdge
         cmbStandard.Text = aBrowser.Image
         txtImagePath.Text = aBrowser.CustomImagePath
         nudX.Value = aBrowser.PosX
@@ -237,6 +239,7 @@
             lBOut.Hotkey = Char.MinValue
         End If
         lBOut.IsIE = chkIEBehaviour.Checked
+        lBOut.IsEdge = chkIsEdge.Checked
         lBOut.PosX = CInt(nudX.Value)
         lBOut.PosY = CInt(nudY.Value)
         lBOut.IconIndex = CInt(nudIconIndex.Value)
@@ -461,10 +464,5 @@
         lThread = New Threading.Thread(AddressOf DoFillPathComboBox)
         lThread.Start()
     End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
-
 #End Region
 End Class

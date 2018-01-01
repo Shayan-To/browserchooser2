@@ -73,6 +73,7 @@ Public Class DetectedBrowsers
                                     lNewBrowser.Target = lDefinition.AlternativeExecution.Path
                                     lNewBrowser.Arguments = lDefinition.AlternativeExecution.Arguments
                                     lNewBrowser.IsIE = False 'cannot be true
+                                    lNewBrowser.IsEdge = lDefinition.IsEdge
                                     lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                     lNewBrowser.Image = "(Extract)" ' To be be fixed
                                     lNewBrowser.PosX = lPosX
@@ -98,6 +99,7 @@ Public Class DetectedBrowsers
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = lPath
                                 lNewBrowser.IsIE = lDefinition.IsIE
+                                lNewBrowser.IsEdge = lDefinition.IsEdge
                                 lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                 lNewBrowser.Image = "(Extract)"
                                 lNewBrowser.PosX = lPosX
@@ -126,6 +128,7 @@ Public Class DetectedBrowsers
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = BrowserDefinition.NonAdminPath.GetSpecialFolder(lPath.SpecialFolder) & "\" & lPath.FinalSection
                                 lNewBrowser.IsIE = lDefinition.IsIE
+                                lNewBrowser.IsEdge = lDefinition.IsEdge
                                 lNewBrowser.Category = GeneralUtilities.DEFAULT_CATEGORY
                                 lNewBrowser.Image = "(Extract)"
                                 lNewBrowser.PosX = lPosX
@@ -183,6 +186,7 @@ Public Class DetectedBrowsers
         lEdge.IsUniversalApp = True
         lEdge.HasWilcardEndingToPath = True
         lEdge.IsIE = False ' important - is IE is used for opening tabs in IE since the process is different
+        lEdge.IsEdge = true
         lListOfKnownBrowsers.Add(lEdge)
 
         'FF

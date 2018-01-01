@@ -63,9 +63,10 @@ Public Class Settings
     Public AllowStayOpen As Boolean = False 'new behaviour in R1
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
-    <NonSerialized()> Public Shared LogDebugs As Boolean = False 'only true if specified by command line
+    <NonSerialized()> Public Shared LogDebugs As TriState = TriState.UseDefault 'only true if specified by command line
 
     Sub New(ByVal aError As Boolean)
+        Logger.AddToLog("Settings.New (With Args)", "Start", aError)
         SharedNew()
         If aError = True Then SafeMode = True
         Dim lBrowsers As List(Of Browser) = DetectedBrowsers.DoBrowserDetection()
@@ -94,8 +95,9 @@ Public Class Settings
             lGUIDs.Add(lBrowser.GUID)
         Next
 
-        Dim lDefaultCategories As New List(Of String)
-        lDefaultCategories.Add(GeneralUtilities.DEFAULT_CATEGORY)
+        Dim lDefaultCategories As New List(Of String) From {
+            GeneralUtilities.DEFAULT_CATEGORY
+        }
         CreateDefaultProtocols(lGUIDs, lDefaultCategories)
         CreateDefaultFileTypes(lGUIDs, lDefaultCategories)
 
@@ -115,32 +117,39 @@ Public Class Settings
         'now save the file
         DoSave(False)
         'Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
+        Logger.AddToLog("Settings.New (With Args)", "End", aError)
     End Sub
 
     Private Sub CreateDefaultProtocols(ByVal aBrowsers As List(Of Guid), ByVal aDefaultCategories As List(Of String))
+        Logger.AddToLog("Settings.CreateDefaultProtocols", "Start")
         'xhtml, .xht, .shtml .html, and .htm are defaults
         'ftp and ftps will also be created but not associated with any built-in tool
-        FileTypes = New List(Of FileType)
-        FileTypes.Add(New FileType("XHTML", "xhtml", aBrowsers, aDefaultCategories))
-        FileTypes.Add(New FileType("XHT", "xht", aBrowsers, aDefaultCategories))
-        FileTypes.Add(New FileType("SHTML", "shtml", aBrowsers, aDefaultCategories))
-        FileTypes.Add(New FileType("HTML", "html", aBrowsers, aDefaultCategories))
-        FileTypes.Add(New FileType("HTM", "htm", aBrowsers, aDefaultCategories))
+        FileTypes = New List(Of FileType) From {
+            New FileType("XHTML", "xhtml", aBrowsers, aDefaultCategories),
+            New FileType("XHT", "xht", aBrowsers, aDefaultCategories),
+            New FileType("SHTML", "shtml", aBrowsers, aDefaultCategories),
+            New FileType("HTML", "html", aBrowsers, aDefaultCategories),
+            New FileType("HTM", "htm", aBrowsers, aDefaultCategories)
+        }
+        Logger.AddToLog("Settings.CreateDefaultProtocols", "End")
     End Sub
 
     Private Sub CreateDefaultFileTypes(ByVal aBrowsers As List(Of Guid), ByVal aDefaultCategories As List(Of String))
+        Logger.AddToLog("Settings.CreateDefaultFileTypes", "Start")
         'http and https are defaults
         'ftp and ftps will also be created but not associated with any built-in tool
-        Protocols = New List(Of Protocol)
-
-        Protocols.Add(New Protocol("HTTP", "http", aBrowsers, aDefaultCategories))
-        Protocols.Add(New Protocol("Secure HTTP", "https", aBrowsers, aDefaultCategories))
-        Protocols.Add(New Protocol("FTP", "ftp", aBrowsers, aDefaultCategories))
-        Protocols.Add(New Protocol("Secure FTP", "ftps", aBrowsers, aDefaultCategories))
-        Protocols.Add(New Protocol("URL Shortcut", "url", aBrowsers, aDefaultCategories))
+        Protocols = New List(Of Protocol) From {
+            New Protocol("HTTP", "http", aBrowsers, aDefaultCategories),
+            New Protocol("Secure HTTP", "https", aBrowsers, aDefaultCategories),
+            New Protocol("FTP", "ftp", aBrowsers, aDefaultCategories),
+            New Protocol("Secure FTP", "ftps", aBrowsers, aDefaultCategories),
+            New Protocol("URL Shortcut", "url", aBrowsers, aDefaultCategories)
+        }
+        Logger.AddToLog("Settings.CreateDefaultFileTypes", "End")
     End Sub
 
     Private Sub SharedNew()
+        Logger.AddToLog("Settings.SharedNew", "Start")
         Browsers = New List(Of Browser)
         URLs = New List(Of URL)
         PortableMode = False 'default
@@ -148,48 +157,68 @@ Public Class Settings
         ShowURL = True 'default
         Width = 5 'default
         Height = 1 'default
+        Logger.AddToLog("Settings.SharedNew", "End")
     End Sub
 
     Sub New()
+        Logger.AddToLog("Settings.New (No args)", "Start")
         SharedNew()
+        Logger.AddToLog("Settings.New (No args)", "End")
     End Sub
 
-    <Obsolete("Should use DoSave instead - it knows about portable mode and such")> _
+    <Obsolete("Should use DoSave instead - it knows about portable mode and such")>
     Public Sub Save(ByVal aPath As String)
-        If Me.SafeMode = True Then Exit Sub 'do not save
-        intSave(aPath) 'send to new functions
+        Logger.AddToLog("Settings.Save", "Start")
+        If Me.SafeMode = True Then
+            Logger.AddToLog("Settings.Save", "Safe Mode")
+            Exit Sub 'do not save
+        End If
+        IntSave(aPath) 'send to new functions
+        Logger.AddToLog("Settings.Save", "End")
     End Sub
 
-    Private Sub intSave(ByVal aPath As String)
-        If Me.SafeMode = True Then Exit Sub 'do not save
+    Private Sub IntSave(ByVal aPath As String)
+        Logger.AddToLog("Settings.IntSave", "Start", aPath)
+        If Me.SafeMode = True Then
+            Logger.AddToLog("Settings.IntSave", "Safe Mode", aPath)
+            Exit Sub 'do not save
+        End If
+
         Dim f As New IO.DirectoryInfo(aPath)
         If Not f.Exists Then
+            Logger.AddToLog("Settings.IntSave", "Creating Directory", aPath)
             IO.Directory.CreateDirectory(aPath)
         End If
         Dim xmlSerializer As New XmlSerializer(GetType(Settings)) 'may not work - need to test
 
         Using writer As Stream = New FileStream(Path.Combine(aPath, Settings.BrowserChooserConfigFileName), FileMode.Create)
+            Logger.AddToLog("Settings.IntSave", "Writing", aPath)
             xmlSerializer.Serialize(writer, Me)
             writer.Close()
         End Using
+        Logger.AddToLog("Settings.IntSave", "End", aPath)
     End Sub
 
     Public Sub DoSave(ByVal OverrideSafeMode As Boolean)
+        Logger.AddToLog("Settings.DoSave", "Start", OverrideSafeMode)
         If Me.SafeMode = True And OverrideSafeMode = False Then Exit Sub 'do not save
         If Me.PortableMode = True Then
-            Me.intSave(Application.StartupPath)
+            Me.IntSave(Application.StartupPath)
         Else
-            Me.intSave(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
+            Me.IntSave(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser2\")
         End If
+        Logger.AddToLog("Settings.DoSave", "End", OverrideSafeMode)
     End Sub
 
     Public Shared Function Load(ByVal aPath As String) As Settings
+        Logger.AddToLog("Settings.Load", "Start", aPath)
         Dim serializer As New XmlSerializer(GetType(Settings))
         Dim lOut As Settings
 
         Dim configPath As String = Path.Combine(aPath, Settings.BrowserChooserConfigFileName)
         If (File.Exists(configPath)) Then
             Try
+                Logger.AddToLog("Settings.Load", "Reading Settings", aPath)
                 Using reader As Stream = New FileStream(configPath, FileMode.Open)
                     lOut = DirectCast(serializer.Deserialize(reader), Settings)
                     reader.Close()
@@ -210,6 +239,7 @@ Public Class Settings
 
                 'yes, the order is wrong, it is a programmers shortcut
                 If lOut.FileVersion = 2 Or lOut.FileVersion = 3 Then
+                    Logger.AddToLog("Settings.Load", "Old Version", aPath, lOut.FileVersion)
                     'minor update in v3, the on screen dash is moved into the settings
                     If lOut.Seperator = "" Then
                         lOut.Seperator = " - "
@@ -239,6 +269,7 @@ Public Class Settings
 
                 'check if version 1, if yes, create default protocols
                 If lOut.FileVersion = 1 Then
+                    Logger.AddToLog("Settings.Load", "Old Version", aPath, lOut.FileVersion)
                     Dim lGUIDs As New List(Of Guid)
                     lOut.FileVersion = CURRRENT_FILE_VERSION
 
@@ -285,8 +316,9 @@ Public Class Settings
                         End If
                     Next
 
-                    Dim lDefaultCategories As New List(Of String)
-                    lDefaultCategories.Add(GeneralUtilities.DEFAULT_CATEGORY)
+                    Dim lDefaultCategories As New List(Of String) From {
+                        GeneralUtilities.DEFAULT_CATEGORY
+                    }
                     lOut.CreateDefaultProtocols(lGUIDs, lDefaultCategories) 'moved dow because GUID are created above.
                     lOut.CreateDefaultFileTypes(lGUIDs, lDefaultCategories)
 
@@ -294,13 +326,16 @@ Public Class Settings
                     lOut.DoSave(True)
                 End If
 
+                Logger.AddToLog("Settings.Load", "End", aPath)
                 Return lOut
             Catch ex As Exception
                 'Utility.SafeMessagebox("Failled to load settings file. Default settings used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Logger.AddToLog("Settings.Load", "Exception: Failled to load settings file. Default settings used.", aPath)
                 Return New Settings(True)
             End Try
         Else
             'Utility.SafeMessagebox("Failled to load settings file. Default settings used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Logger.AddToLog("Settings.Load", "Exception: Failled to load settings file. Default settings used.", aPath)
             Return New Settings(False)
         End If
     End Function

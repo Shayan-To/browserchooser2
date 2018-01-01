@@ -136,13 +136,29 @@ Public Class BrowserUtilities
         Return False
     End Function
 
+    Private Shared Sub StartEdge(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean)
+        Dim lProcess As Process
+
+        If Not String.IsNullOrEmpty(aURL) Then
+            'no replacement, old start
+            lProcess = Process.Start("microsoft-edge:" & aURL)
+        Else
+            lProcess = Process.Start("microsoft-edge:")
+        End If
+        If aTerminate = True Then
+            lProcess = Nothing
+            GeneralUtilities.doCleanExit()
+        End If
+    End Sub
+
     Public Shared Sub LaunchBrowser(ByVal lBrowser As Browser, ByVal lURL As String, ByVal aTerminate As Boolean)
         'Dim target As String = GenericBrowserControl.NormalizeTarget(lBrowser.Target)
 
         'special handleing for IE (surprise, surprise!)
         If lBrowser.IsIE = True Then
             GetIE(lBrowser, lURL, aTerminate) 'now get IE, but the DLL will be loaded before calling
-
+        ElseIf lBrowser.IsEdge = True Then
+            StartEdge(lBrowser, lURL, aTerminate)
         Else
             'check to see if the file exists
             'If (IO.File.Exists(target)) Or target.Contains(".exe ") Then

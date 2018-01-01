@@ -1,48 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <versionInfo>
-  <id>B2</id>
+  <id>R1</id>
   <download><![CDATA[http://browserchooser2.com/app/Browser Chooser 2.exe]]></download>
-  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Beta2</releaseinfo>
+  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Relase1</releaseinfo>  
   <details>
-    ************************************************************
-    *** Please download manually                             ***
-    *** http://browserchooser2.com/app/Browser Chooser 2.exe ***
-    ************************************************************
-
-    New source code location: https://bitbucket.org/gmyx/browserchooser2
-    New web site: http://browserchooser2.com
-    p.s. I know it does not look great, but drop me a line if you want to improve it.
+    Source code location: https://bitbucket.org/gmyx/browserchooser2
+    Web site: http://browserchooser2.com
+    p.s. I know it does not look great, I need someone to fix it up. Especially some SEO stuff.
 
     New Features:
-    * Better support for Windows 10 and it's variants (e.g. surface)
-    * Many lesser known browsers added to browser detection
-    * MS Edge properly detected and added
-    * Many UI customization have been added, including:
-    * change size of icons
-    * change spacing of icons
-    * starting position
-    * can specify a user agent (default is a generic Mozilla string)
-    * added chosen browser icons to list of add/edit browsers
-    * can turn off downloading of detections files and update checks
-    * note: it was downloaded only on first run or if you hit the detect browser button
-    * command line options added to bring you to a specified settings page
-
-    Fixed Issues from previous versions:
-    * Issue #1: Crash on Win10 open defaults dialog - api has changed in Windows 10
-    * Issue #3: Does not properly detect edge / support launching edge
-    * Issue #4: Crash on exit. Some systems did not like the way BC2 was exiting. Cleaned up.
-    * Issue #5: URL de-shortening could cause wierd URLs to be returned (Facebook). Now sending a user agent string
-    * And more crashes.
-
-    Special Thanks for new features
-    * J. Scott Elblein: Found many bugs and commiting some code and ui improvements.
-    * _pi for many UI suggestions
-    * Norbert T. for raising issues and creative use of the tool!
-    * Mitch Geller, sakima, bshamster1, johnlgalt, Paul Trevino, Mark Williams for windows 10 / edge information and testing.
-    * Everyone who uses this tool and the many creative ways you use it!!
-    * If I missed your suggestion, apologies and thanks!
-
-    The documentation (https://bitbucket.org/gmyx/browserchooser2/wiki/Documentation) has been increased. While not yet complete it is covering the main screen and the configuration screen. The add / edit screens will be added later.
+    * Setting page reqorked to use a tree view instead of tabs.. Allowed to declutter some screens.
+    * Adds ability to put the URL in the arguments field.
+    * Added ability to hide the auto close check mark. New default is for the checkmark to be hidden. Change changed in settings
+    *Provide uninstallation capability.
+    ** Command line option --uninstall
+    ** Using the UI -> Setting -> Windows Default -> Remove from Default Programs
 
     Special thanks to all for testing and proving great feedback!
   </details>

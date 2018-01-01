@@ -226,31 +226,38 @@ Public Class GeneralUtilities
 
 #Region "Load Internalized Files"
     Shared Function SHDocVw_ResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As [Assembly]
-        Debug.Print(args.Name)
+        Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Start")
+        'Debug.Print(args.Name)
 
         Dim parentAssembly As Assembly = Assembly.GetExecutingAssembly()
 
         Dim name As String = args.Name.Substring(0, args.Name.IndexOf(","c)) & ".dll"
+        Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Name Identifyed", name)
 
         If mFileNames.ContainsValue(name) Then
+            Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Assembly Found")
             'load this assembly
             Dim resourceName = parentAssembly.GetManifestResourceNames().First(Function(s) s.EndsWith(name))
 
             Using stream As Stream = parentAssembly.GetManifestResourceStream(resourceName)
+                Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Loading assembly")
                 Dim block As Byte() = New Byte(CInt(stream.Length - 1)) {}
                 stream.Read(block, 0, block.Length)
                 Return Assembly.Load(block)
             End Using
         Else
+            Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Returning Self")
             Return GetType(GeneralUtilities).Assembly
         End If
     End Function
 
     Public Shared Sub LoadDLLPrep()
+        Logger.AddToLog("GeneralUtilities.LoadDLLPrep", "Start")
         'no need to know which dll, that will be in the args.target parameter above.
         Dim currentDomain As AppDomain = AppDomain.CurrentDomain
 
         AddHandler currentDomain.AssemblyResolve, AddressOf SHDocVw_ResolveEventHandler
+        Logger.AddToLog("GeneralUtilities.LoadDLLPrep", "End")
     End Sub
 #End Region
 

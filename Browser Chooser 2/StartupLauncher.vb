@@ -16,12 +16,17 @@ Public Class StartupLauncher
     Private Shared mSupportingBrowsers As List(Of Guid)
 
     Sub New()
+        Logger.AddToLog("StartupLancher.New", "Start")
         gSettings = New Settings
+
         'init some basic properties - run once only
         If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
+            Logger.AddToLog("StartupLancher.New", "Is 64 Bit")
             mbIs64Bit = True
         End If
+
         GeneralUtilities.LoadDLLPrep()
+        Logger.AddToLog("StartupLancher.New", "End")
     End Sub
 
 #Region "Read-only Properties"

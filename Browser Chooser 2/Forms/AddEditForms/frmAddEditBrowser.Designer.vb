@@ -29,8 +29,9 @@ Partial Class frmAddEditBrowser
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpTarget = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.cmbTarget = New System.Windows.Forms.ComboBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkIsEdge = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtArguments = New System.Windows.Forms.TextBox()
         Me.chkIEBehaviour = New System.Windows.Forms.CheckBox()
@@ -62,7 +63,6 @@ Partial Class frmAddEditBrowser
         Me.cmdShowProtocols = New System.Windows.Forms.Button()
         Me.cmdShowExtentions = New System.Windows.Forms.Button()
         Me.lstSupportedProps = New System.Windows.Forms.ListView()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.grpTarget.SuspendLayout()
         Me.grpImage.SuspendLayout()
         CType(Me.nudScale, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,7 +123,7 @@ Partial Class frmAddEditBrowser
         '
         Me.grpTarget.Controls.Add(Me.TextBox1)
         Me.grpTarget.Controls.Add(Me.cmbTarget)
-        Me.grpTarget.Controls.Add(Me.CheckBox1)
+        Me.grpTarget.Controls.Add(Me.chkIsEdge)
         Me.grpTarget.Controls.Add(Me.Label9)
         Me.grpTarget.Controls.Add(Me.txtArguments)
         Me.grpTarget.Controls.Add(Me.chkIEBehaviour)
@@ -136,6 +136,17 @@ Partial Class frmAddEditBrowser
         Me.grpTarget.TabStop = False
         Me.grpTarget.Text = "Target"
         '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox1.Location = New System.Drawing.Point(420, 63)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(74, 31)
+        Me.TextBox1.TabIndex = 7
+        Me.TextBox1.Text = "{0} = protocol" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{1} = URL" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'cmbTarget
         '
         Me.cmbTarget.FormattingEnabled = True
@@ -144,15 +155,15 @@ Partial Class frmAddEditBrowser
         Me.cmbTarget.Size = New System.Drawing.Size(327, 21)
         Me.cmbTarget.TabIndex = 1
         '
-        'CheckBox1
+        'chkIsEdge
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(212, 45)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(68, 17)
-        Me.CheckBox1.TabIndex = 4
-        Me.CheckBox1.Text = "Is Edge?"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkIsEdge.AutoSize = True
+        Me.chkIsEdge.Location = New System.Drawing.Point(212, 45)
+        Me.chkIsEdge.Name = "chkIsEdge"
+        Me.chkIsEdge.Size = New System.Drawing.Size(68, 17)
+        Me.chkIsEdge.TabIndex = 4
+        Me.chkIsEdge.Text = "Is Edge?"
+        Me.chkIsEdge.UseVisualStyleBackColor = True
         '
         'Label9
         '
@@ -443,17 +454,6 @@ Partial Class frmAddEditBrowser
         Me.lstSupportedProps.UseCompatibleStateImageBehavior = False
         Me.lstSupportedProps.View = System.Windows.Forms.View.Details
         '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Location = New System.Drawing.Point(420, 63)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(74, 31)
-        Me.TextBox1.TabIndex = 7
-        Me.TextBox1.Text = "{0} = protocol" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{1} = URL" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
         'frmAddEditBrowser
         '
         Me.AcceptButton = Me.cmdOK
@@ -536,7 +536,7 @@ Partial Class frmAddEditBrowser
     Friend WithEvents lstSupportedProps As System.Windows.Forms.ListView
     Friend WithEvents nudScale As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIsEdge As System.Windows.Forms.CheckBox
     Friend WithEvents chkVisible As System.Windows.Forms.CheckBox
     Friend WithEvents cmbTarget As ComboBox
     Friend WithEvents TextBox1 As TextBox

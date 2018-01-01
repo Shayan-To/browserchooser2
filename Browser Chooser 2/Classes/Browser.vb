@@ -23,6 +23,7 @@
 
     Private msCategory As String = ""
     Private mbIsIE As Boolean 'triggers special handling
+    Private mbIsIdge As Boolean 'triggers special handling
     Private msArguments As String
     Private msScale As Single = 1 'standard default
     'Private msGroupName As String 'ver 2 feature
@@ -138,6 +139,15 @@
         End Set
     End Property
 
+    Public Property IsEdge() As Boolean
+        Get
+            Return mbIsIdge
+        End Get
+        Set(ByVal value As Boolean)
+            mbIsIdge = value
+        End Set
+    End Property
+
     Public Property Arguments As String
         Get
             Return msArguments
@@ -177,8 +187,8 @@
         'required for export / import
     End Sub
 
-    Public Sub New(ByVal aGUID As Guid, ByVal asName As String, ByVal asTarget As String, ByVal asImage As String, ByVal asCustomImagePath As String, ByVal abIsActive As Boolean, ByVal acHotkey As Char, ByVal abIsIE As Boolean, ByVal aPosX As Integer, ByVal aPosY As Integer, ByVal aIconIndex As Integer, ByVal aCategory As String, ByVal asArguemnts As String, ByVal asScale As Single, abShown As Boolean)
-        If aGUID <> GUID.Empty Then
+    Public Sub New(ByVal aGUID As Guid, ByVal asName As String, ByVal asTarget As String, ByVal asImage As String, ByVal asCustomImagePath As String, ByVal abIsActive As Boolean, ByVal acHotkey As Char, ByVal abIsIE As Boolean, abIsEdge As Boolean, ByVal aPosX As Integer, ByVal aPosY As Integer, ByVal aIconIndex As Integer, ByVal aCategory As String, ByVal asArguemnts As String, ByVal asScale As Single, abShown As Boolean)
+        If aGUID <> Guid.Empty Then
             mGUID = aGUID
         Else
             mGUID = GeneralUtilities.GetUniquedID
@@ -190,6 +200,7 @@
         mbIsActive = abIsActive
         mcHotkey = acHotkey
         mbIsIE = abIsIE
+        mbIsIdge = abIsEdge
         mPosX = aPosX
         mPosY = aPosY
         msCategory = aCategory
@@ -210,6 +221,7 @@
         lOut.IsActive = mbIsActive
         lOut.Hotkey = mcHotkey
         lOut.IsIE = mbIsIE
+        lOut.IsEdge = mbIsIdge
         lOut.PosX = mPosX
         lOut.PosY = mPosY
         lOut.IconIndex = miIconIndex
@@ -230,6 +242,7 @@
         If Me.IsActive <> other.IsActive Then Return False
         If Me.mcHotkey <> other.Hotkey Then Return False
         If Me.mbIsIE <> other.IsIE Then Return False
+        If Me.mbIsIdge <> other.IsEdge Then Return False
         If Me.mPosX <> other.PosX Then Return False
         If Me.mPosY <> other.PosY Then Return False
         If Me.miIconIndex <> other.IconIndex Then Return False
