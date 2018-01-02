@@ -1,5 +1,5 @@
 ﻿Public Class Logger
-    Public Shared lPending As New Queue(Of String)
+    Public Shared lPending As New Queue(Of String)(500)
     <DebuggerStepThrough>
     Public Shared Sub AddToLog(aCaller As String, aMessage As String, ParamArray aExtraVars() As Object)
         If Settings.LogDebugs = TriState.False Then Exit Sub

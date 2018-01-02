@@ -10,12 +10,17 @@ Public Class BrowserDefinition
         Public FinalSection As String
 
         Public Shared Function GetSpecialFolder(ByVal aSpecialFolder As SpecialFolders) As String
+            Logger.AddToLog("BrowserDefinition.NonAdminPath.GetSpecialFolder", "Start", aSpecialFolder)
+
             Select Case aSpecialFolder
                 Case SpecialFolders.LocalApplicationPath
+                    Logger.AddToLog("BrowserDefinition.NonAdminPath.GetSpecialFolder", "End", SpecialFolders.LocalApplicationPath)
                     Return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
                 Case SpecialFolders.SystemApps
+                    Logger.AddToLog("BrowserDefinition.NonAdminPath.GetSpecialFolder", "End", SpecialFolders.SystemApps)
                     Return Environment.GetFolderPath(Environment.SpecialFolder.System)
                 Case Else
+                    Logger.AddToLog("BrowserDefinition.NonAdminPath.GetSpecialFolder", "End", "Nothing")
                     Return Nothing
             End Select
         End Function
@@ -26,8 +31,10 @@ Public Class BrowserDefinition
         Public Arguments As String
 
         Sub New(ByVal aPath As String, ByVal aArguments As String)
+            Logger.AddToLog("BrowserDefinition.AlternativeExecutionDetails.New", "Start")
             Me.Path = aPath
             Me.Arguments = aArguments
+            Logger.AddToLog("BrowserDefinition.AlternativeExecutionDetails.New", "End")
         End Sub
     End Structure
 

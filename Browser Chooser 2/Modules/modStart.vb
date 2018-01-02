@@ -114,10 +114,10 @@ Module modStart
 
     Public Sub ContinueMain(ByVal aURL As String)
         Logger.AddToLog("modStart.ContinueMain", "Start", aURL)
-        If Settings.LogDebugs = TriState.UseDefault Then
-            '--log no specfified, turn off logging
-            Settings.LogDebugs = TriState.False
-        End If
+        'If Settings.LogDebugs = TriState.UseDefault Then
+        '--log no specfified, turn off logging
+        'Settings.LogDebugs = TriState.False
+        'End If
 
         ' set the portable mode flag if we detect a config file in the same path
         Logger.AddToLog("modStart.ContinueMain", "Loading Settings", aURL)

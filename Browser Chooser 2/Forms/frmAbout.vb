@@ -143,6 +143,12 @@
 		Launch("http://www.codeproject.com/info/cpol10.aspx", False)
 	End Sub
 
+    Private Sub cmdSaveLogs_Click(sender As Object, e As EventArgs) Handles cmdSaveLogs.Click
+        If MessageBox.Show("This will write a BC2.log file to where Browser Chooser is executed from. Continue?", "Enable Logging", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            Settings.LogDebugs = TriState.True
+        End If
+    End Sub
+
 #End Region
 
 End Class

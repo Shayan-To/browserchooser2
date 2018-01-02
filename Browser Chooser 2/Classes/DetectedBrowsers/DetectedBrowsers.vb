@@ -8,21 +8,26 @@ Public Class DetectedBrowsers
     Public ListOfKnownBrowsers As List(Of BrowserDefinition)
 
     Private Shared Sub GetLocalfile(ByVal aLocal As String)
+        Logger.AddToLog("DetectedBrowsers.GetLocalfile", "Start", aLocal)
         'write the local detection file to the provided file
         'export from self
         Dim writeRes As New FileStream(aLocal, FileMode.Create)
         Dim binWrite As New BinaryWriter(writeRes)
         binWrite.Write(My.Resources.DetectedBrowsers)
         binWrite.Close()
+        Logger.AddToLog("DetectedBrowsers.GetLocalfile", "End", aLocal)
     End Sub
 
     Public Shared Function DoBrowserDetection() As List(Of Browser) 'ByVal aSettings As Settings)
+        Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Start")
+
         'load an xml file form internet, if that fails, use self
         Dim serializer As New XmlSerializer(GetType(DetectedBrowsers))
         Dim DetectedBrowsers As DetectedBrowsers
         Dim lLocal As String = System.IO.Path.GetTempFileName
         Dim lOut As New List(Of Browser)
 #If CONFIG <> "Debug Local Detection File" Then
+        Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Not #Debug Local Detection File")
         Try
             If gSettings.DownloadDetectionFile = True Then
                 My.Computer.Network.DownloadFile(UpdateFile, lLocal, "", "", False, 5000, True)
@@ -35,6 +40,7 @@ Public Class DetectedBrowsers
             GetLocalfile(lLocal)
         End Try
 #Else
+        Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "#Debug Local Detection File")
         'export from self
         Dim writeRes As New FileStream(lLocal, FileMode.Create)
         Dim binWrite As New BinaryWriter(writeRes)
@@ -59,14 +65,17 @@ Public Class DetectedBrowsers
 
                 Dim lPosX As Integer = 1
                 For Each lDefinition As BrowserDefinition In DetectedBrowsers.ListOfKnownBrowsers
+                    Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Detecting Browser", lDefinition.Name)
                     For Each lPath As String In lDefinition.InstallPath
+                        Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Detecting Browser " & lDefinition.Name & " at path", lPath)
 
                         If lDefinition.HasWilcardEndingToPath = True Then
                             Dim lFiles As String() = IO.Directory.GetDirectories(lPath)
 
-
                             For Each lItem As String In lFiles
                                 If lItem.StartsWith(String.Format("{0}\{1}", lPath, lDefinition.FolderName)) = True Then
+                                    Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Found Browser " & lDefinition.Name & " at path " & lPath, "StartsWith")
+
                                     'found it - get full path
                                     Dim lNewBrowser As New Browser
                                     lNewBrowser.Name = lDefinition.Name
@@ -95,6 +104,7 @@ Public Class DetectedBrowsers
 
                         Else
                             If My.Computer.FileSystem.FileExists(lPath) = True Then
+                                Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Found Browser " & lDefinition.Name & " at path " & lPath, "Exact")
                                 Dim lNewBrowser As New Browser
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = lPath
@@ -123,7 +133,9 @@ Public Class DetectedBrowsers
 
                     If lDefinition.SupportsNonAdmin = True Then
                         For Each lPath As BrowserDefinition.NonAdminPath In lDefinition.NonAdminInstallPath
+                            Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Detecting Non Admin Browser " & lDefinition.Name & " at path", lPath.FinalSection)
                             If My.Computer.FileSystem.FileExists(BrowserDefinition.NonAdminPath.GetSpecialFolder(lPath.SpecialFolder) & "\" & lPath.FinalSection) Then
+                                Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Found Non Admin Browser " & lDefinition.Name & " at path " & lPath.FinalSection, "NonAdmin")
                                 Dim lNewBrowser As New Browser
                                 lNewBrowser.Name = lDefinition.Name
                                 lNewBrowser.Target = BrowserDefinition.NonAdminPath.GetSpecialFolder(lPath.SpecialFolder) & "\" & lPath.FinalSection
@@ -144,6 +156,7 @@ Public Class DetectedBrowsers
                     End If
                 Next
             Catch ex As Exception
+                Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "Error while detecting browser", ex.Message & vbCrLf & ex.StackTrace.ToString())
                 'every resonable attemp has failled, just do IE
                 Dim lIE As New Browser
                 With lIE
@@ -158,6 +171,7 @@ Public Class DetectedBrowsers
             End Try
         End If
 
+        Logger.AddToLog("DetectedBrowsers.DoBrowserDetection", "End")
         Return lOut
     End Function
 
