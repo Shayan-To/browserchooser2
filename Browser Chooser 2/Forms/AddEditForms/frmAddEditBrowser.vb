@@ -58,7 +58,10 @@
         'find the next avilable slot
         Dim lIndexes As New SortedList 'start with an index of positions used
         For Each lBrowser As KeyValuePair(Of Integer, Browser) In aBrowsers
-            lIndexes.Add(lBrowser.Value.PosX.ToString & lBrowser.Value.PosY.ToString, Nothing)
+            'ensure that ID is not already in use, ignore if yes
+            If lIndexes.ContainsKey(lBrowser.Value.PosX.ToString & lBrowser.Value.PosY.ToString) = False Then
+                lIndexes.Add(lBrowser.Value.PosX.ToString & lBrowser.Value.PosY.ToString, Nothing)
+            End If 'else, bc2 file is corrupt
         Next
 
         'go thrught list until a gap is found
@@ -76,6 +79,14 @@
 
             If lbFound = True Then Exit For
         Next
+
+        'see if we found a spot
+        If lbFound = False Then
+            MessageBox.Show("No free space found to add browser. Please add either a row or a column", "No Free Space", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            mbOkayed = False
+            Me.Close()
+            Return False
+        End If
 
         mGUID = System.Guid.NewGuid
         mProtocols = aProtocols

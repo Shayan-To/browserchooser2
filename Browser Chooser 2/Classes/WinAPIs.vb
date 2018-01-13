@@ -85,7 +85,7 @@ Public Class WinAPIs
         SHCNF_TYPE = &HFF
     End Enum
 
-    <Flags()> _
+    <Flags()>
     Public Enum OPEN_AS_INFO_FLAGS As UInt32
         OAIF_ALLOW_REGISTRATION = &H1 ' Show "Always" checkbox
         OAIF_REGISTER_EXT = &H2 ' Perform registration when user hits OK
@@ -94,6 +94,93 @@ Public Class WinAPIs
         OAIF_HIDE_REGISTRATION = &H20 ' Vista+: Hide the "always use this file" checkbox
         OAIF_URL_PROTOCOL = &H40 ' Vista+: cszFile is actually a URI scheme; show handlers for that scheme
         OAIF_FILE_IS_URI = &H80 ' Win8+: The location pointed to by the pcszFile parameter is given as a URI
+    End Enum
+
+    Public Enum GET_FILEEX_INFO_LEVELS
+        GetFileExInfoStandard
+        GetFileExMaxInfoLevel
+    End Enum
+
+    ''' <summary>
+    ''' File attributes are metadata values stored by the file system on disk and are used by the system and are available to developers via various file I/O APIs.
+    ''' </summary>
+    <Flags>
+    <CLSCompliant(False)>
+    Enum FileAttributes As UInteger
+        ''' <summary>
+        ''' A file that is read-only. Applications can read the file, but cannot write to it or delete it. This attribute is not honored on directories. For more information, see "You cannot view or change the Read-only or the System attributes of folders in Windows Server 2003, in Windows XP, or in Windows Vista".
+        ''' </summary>
+        [Readonly] = &H1
+
+        ''' <summary>
+        ''' The file or directory is hidden. It is not included in an ordinary directory listing.
+        ''' </summary>
+        Hidden = &H2
+
+        ''' <summary>
+        ''' A file or directory that the operating system uses a part of, or uses exclusively.
+        ''' </summary>
+        System = &H4
+
+        ''' <summary>
+        ''' The handle that identifies a directory.
+        ''' </summary>
+        Directory = &H10
+
+        ''' <summary>
+        ''' A file or directory that is an archive file or directory. Applications typically use this attribute to mark files for backup or removal.
+        ''' </summary>
+        Archive = &H20
+
+        ''' <summary>
+        ''' This value is reserved for system use.
+        ''' </summary>
+        Device = &H40
+
+        ''' <summary>
+        ''' A file that does not have other attributes set. This attribute is valid only when used alone.
+        ''' </summary>
+        Normal = &H80
+
+        ''' <summary>
+        ''' A file that is being used for temporary storage. File systems avoid writing data back to mass storage if sufficient cache memory is available, because typically, an application deletes a temporary file after the handle is closed. In that scenario, the system can entirely avoid writing the data. Otherwise, the data is written after the handle is closed.
+        ''' </summary>
+        Temporary = &H100
+
+        ''' <summary>
+        ''' A file that is a sparse file.
+        ''' </summary>
+        SparseFile = &H200
+
+        ''' <summary>
+        ''' A file or directory that has an associated reparse point, or a file that is a symbolic link.
+        ''' </summary>
+        ReparsePoint = &H400
+
+        ''' <summary>
+        ''' A file or directory that is compressed. For a file, all of the data in the file is compressed. For a directory, compression is the default for newly created files and subdirectories.
+        ''' </summary>
+        Compressed = &H800
+
+        ''' <summary>
+        ''' The data of a file is not available immediately. This attribute indicates that the file data is physically moved to offline storage. This attribute is used by Remote Storage, which is the hierarchical storage management software. Applications should not arbitrarily change this attribute.
+        ''' </summary>
+        Offline = &H1000
+
+        ''' <summary>
+        ''' The file or directory is not to be indexed by the content indexing service.
+        ''' </summary>
+        NotContentIndexed = &H2000
+
+        ''' <summary>
+        ''' A file or directory that is encrypted. For a file, all data streams in the file are encrypted. For a directory, encryption is the default for newly created files and subdirectories.
+        ''' </summary>
+        Encrypted = &H4000
+
+        ''' <summary>
+        ''' This value is reserved for system use.
+        ''' </summary>
+        Virtual = &H10000
     End Enum
 #End Region
 
@@ -112,9 +199,25 @@ Public Class WinAPIs
         <MarshalAs(UnmanagedType.LPWStr)> Public cszClass As String
         Public OPEN_AS_INFO_FLAGS As OPEN_AS_INFO_FLAGS
     End Structure
+
+    Structure WIN32_FILE_ATTRIBUTE_DATA
+        Public dwFileAttributes As FileAttributes
+        Public ftCreationTime As ComTypes.FILETIME
+        Public ftLastAccessTime As ComTypes.FILETIME
+        Public ftLastWriteTime As ComTypes.FILETIME
+        Public nFileSizeHigh As UInt32
+        Public nFileSizeLow As UInt32
+    End Structure
 #End Region
 
 #Region "DLLImports"
+    <DllImport("kernel32.dll")>
+    Public Shared Function GetFileAttributesEx(
+        lpFileName As String,
+        fInfoLevelId As GET_FILEEX_INFO_LEVELS,
+        lpFileInformation As WIN32_FILE_ATTRIBUTE_DATA) As <MarshalAs(UnmanagedType.Bool)> Boolean
+    End Function
+
     <DllImport("user32.dll", SetLastError:=True)> _
     Public Shared Sub SendMessageTimeout(ByVal windowHandle As IntPtr, ByVal Msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr, ByVal flags As SendMessageTimeoutFlags, ByVal timeout As Integer, ByRef result As IntPtr)
     End Sub

@@ -16,21 +16,25 @@
 
         If Settings.LogDebugs = TriState.True Then
             'if in system32, send to logs
-            Dim lWritter As System.IO.TextWriter
-            If My.Application.Info.DirectoryPath = Environment.SystemDirectory Then
-                lWritter = My.Computer.FileSystem.OpenTextFileWriter(Environment.SpecialFolder.Desktop & "\bc2.log", True)
-            Else
-                lWritter = My.Computer.FileSystem.OpenTextFileWriter(My.Application.Info.DirectoryPath & "\bc2.log", True)
-            End If
+            Try
+                Dim lWritter As System.IO.TextWriter
+                If My.Application.Info.DirectoryPath = Environment.SystemDirectory Then
+                    lWritter = My.Computer.FileSystem.OpenTextFileWriter(Environment.SpecialFolder.Desktop & "\bc2.log", True)
+                Else
+                    lWritter = My.Computer.FileSystem.OpenTextFileWriter(My.Application.Info.DirectoryPath & "\bc2.log", True)
+                End If
 
-            'pop everything on the list and write it
-            Do While lPending.Count > 0
-                Dim lWriteNow As String = lPending.Dequeue
-                lWritter.WriteLine(lWriteNow)
-            Loop
+                'pop everything on the list and write it
+                Do While lPending.Count > 0
+                    Dim lWriteNow As String = lPending.Dequeue
+                    lWritter.WriteLine(lWriteNow)
+                Loop
 
-            'close and exit
-            lWritter.Close()
+                'close and exit
+                lWritter.Close()
+            Catch ex As Exception
+                'do nothing, the log will be enqued for next time
+            End Try
         End If
     End Sub
 End Class

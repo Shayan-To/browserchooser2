@@ -4,6 +4,7 @@ Imports System.Net
 Public Class BrowserUtilities
 #Region "IE Open as Tab code"
     Public Shared Sub GetIE(ByVal lBrowser As Browser, ByVal aURL As String, ByVal aTerminate As Boolean)
+        Logger.AddToLog("BrowserUtilities.getIE", "Starting", lBrowser.Name, aURL, aTerminate)
         'made it an option to allow user to override
         Dim lbFound As Boolean = False
 
@@ -27,60 +28,64 @@ Public Class BrowserUtilities
         Next
 
         If lbFound = False Then
+            Logger.AddToLog("BrowserUtilities.getIE", "IE not starting, using alternative", lBrowser.Name, aURL, aTerminate)
             DoLaunch(lBrowser, aURL, aTerminate)
         ElseIf aTerminate = True Then
-            End 'not clean, will do for now
+            Logger.AddToLog("BrowserUtilities.getIE", "End", lBrowser.Name, aURL, aTerminate)
+            GeneralUtilities.doCleanExit()
         End If
     End Sub
 #End Region
 
     Private Shared Sub TryToBringToFront(strBrowser As String)
+        Logger.AddToLog("BrowserUtilities.getIE", "TryToBringToFront", strBrowser)
         'see if we only have once process of target browser
-        Dim lTarget As String = Mid(strBrowser, InStrRev(strBrowser, "\") + 1)
-        'now trim out .exe
-        lTarget = Left(lTarget, InStrRev(lTarget, ".") - 1)
-        Dim lAllProcesses() As Process = Process.GetProcessesByName(lTarget)
+        Try
+            Dim lTarget As String = Mid(strBrowser, InStrRev(strBrowser, "\") + 1)
+            'now trim out .exe
+            lTarget = Left(lTarget, InStrRev(lTarget, ".") - 1)
+            Dim lAllProcesses() As Process = Process.GetProcessesByName(lTarget)
 
-        If lAllProcesses.Count = 1 Then
-            'bring that one up
-            'AppActivate(lAllProcesses(0).Id)
-            SetForegroundWindow(lAllProcesses(0).Handle) 'will not work with chrome, but then abgain chrome has many processes
+            If lAllProcesses.Count = 1 Then
+                'bring that one up
+                'AppActivate(lAllProcesses(0).Id)
+                SetForegroundWindow(lAllProcesses(0).Handle) 'will not work with chrome, but then abgain chrome has many processes
 
-        Else
-            'seach for the right window
-            Dim lCandidates As New List(Of Process)
-            For Each lProc As Process In lAllProcesses
-                'if it has a title, probably the process we want
-                If lProc.MainWindowTitle <> "" Then
-                    lCandidates.Add(lProc)
-                End If
-            Next
-
-            If lCandidates.Count = 1 Then
-                SetForegroundWindow(lCandidates.Item(0).Handle) 'chome has only one window with a title
             Else
-                'need a better way to find the correct process, for now bail out.
+                'seach for the right window
+                Dim lCandidates As New List(Of Process)
+                For Each lProc As Process In lAllProcesses
+                    'if it has a title, probably the process we want
+                    If lProc.MainWindowTitle <> "" Then
+                        lCandidates.Add(lProc)
+                    End If
+                Next
+
+                If lCandidates.Count = 1 Then
+                    SetForegroundWindow(lCandidates.Item(0).Handle) 'chome has only one window with a title
+                Else
+                    'need a better way to find the correct process, for now bail out.
+                End If
             End If
-        End If
+        Catch ex As Exception
+            Logger.AddToLog("BrowserUtilities.TryTryToBringToFront", "Failled", ex.Message)
+        End Try
+
+        Logger.AddToLog("BrowserUtilities.TryTryToBringToFront", "End", strBrowser)
     End Sub
 
     Private Shared Function DoLaunch(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean) As Boolean
+        Logger.AddToLog("BrowserUtilities.DoLaunch", "Start", aTarget.Name, aURL, aTerminate)
         'Dim strParameters As String = ""
         Dim strBrowser As String = NormalizeTarget(aTarget.Target)
 
-        'If aTarget.Target.Contains(".exe ") Then
-        '    ' old method
-        '    Dim lTargetEXE As String = GenericBrowserControl.NormalizeTarget(aTarget.Target)
-        '    strBrowser = lTargetEXE.Substring(0, InStr(aTarget.Target, ".exe") + 4)
-        '    strParameters = lTargetEXE.Substring(InStr(lTargetEXE, ".exe") + 4, lTargetEXE.Length - (InStr(lTargetEXE, ".exe") + 4)) & " " & aTarget.Arguments
+        'hide the main form
+        frmMain.Visible = False
 
-        '    If Not String.IsNullOrEmpty(aURL) Then
-        '        Process.Start(strBrowser, strParameters & """" & aURL & """")
-        '    Else
-        '        Process.Start(strBrowser, strParameters)
-        '    End If
-        'Else
-        If My.Computer.FileSystem.FileExists(strBrowser) = True Then
+        'use windows api to bypass permissions, may be an issue with non-admin accounts
+        Dim lInfo As WinAPIs.WIN32_FILE_ATTRIBUTE_DATA
+        If WinAPIs.GetFileAttributesEx(strBrowser, GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard, lInfo) = True Then
+            'If My.Computer.FileSystem.FileExists(strBrowser) = True Then
             Dim lProcess As Process
             If Not String.IsNullOrEmpty(aURL) Then
                 If InStr(aTarget.Arguments, "{0}") > 0 Or InStr(aTarget.Arguments, "{1}") > 0 Then
@@ -97,7 +102,7 @@ Public Class BrowserUtilities
             Dim lID As Integer = lProcess.Id
 
             Try
-                lProcess.WaitForInputIdle()
+                lProcess.WaitForInputIdle(1000)
             Catch ex As Exception
                 'do nothing
             End Try
@@ -120,23 +125,28 @@ Public Class BrowserUtilities
 
             If aTerminate = True Then
                 lProcess = Nothing
+                Logger.AddToLog("BrowserUtilities.DoLaunch", "Terminate 1", aTarget.Name, aURL, aTerminate)
                 GeneralUtilities.doCleanExit()
             End If
 
             Return True
         ElseIf aTarget.Target = "" Then
+            Logger.AddToLog("BrowserUtilities.DoLaunch", "Terminate 2", aTarget.Name, aURL, aTerminate)
             GeneralUtilities.doCleanExit()
         Else
             MessageBox.Show("Browser " & aTarget.Name & " cannot be found.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Logger.AddToLog("BrowserUtilities.DoLaunch", "Not found", aTarget.Name, aURL, aTerminate)
             Return False
         End If
 
         'should not get here
         MessageBox.Show("Failled to launch Browser. Please submit a bug request.", "Missing Target", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Logger.AddToLog("BrowserUtilities.DoLaunch", "Major Fail", aTarget.Name, aURL, aTerminate)
         Return False
     End Function
 
     Private Shared Sub StartEdge(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean)
+        Logger.AddToLog("BrowserUtilities.StartEdge", "Start", aTarget.Name, aURL, aTerminate)
         Dim lProcess As Process
 
         If Not String.IsNullOrEmpty(aURL) Then
@@ -147,12 +157,15 @@ Public Class BrowserUtilities
         End If
         If aTerminate = True Then
             lProcess = Nothing
+            Logger.AddToLog("BrowserUtilities.StartEdge", "Terminate", aTarget.Name, aURL, aTerminate)
             GeneralUtilities.doCleanExit()
         End If
+
+        Logger.AddToLog("BrowserUtilities.StartEdge", "End", aTarget.Name, aURL, aTerminate)
     End Sub
 
     Public Shared Sub LaunchBrowser(ByVal lBrowser As Browser, ByVal lURL As String, ByVal aTerminate As Boolean)
-        'Dim target As String = GenericBrowserControl.NormalizeTarget(lBrowser.Target)
+        Logger.AddToLog("BrowserUtilities.LaunchBrowser", "Start", lBrowser.Name, lURL, aTerminate)
 
         'special handleing for IE (surprise, surprise!)
         If lBrowser.IsIE = True Then
@@ -166,43 +179,57 @@ Public Class BrowserUtilities
                 'End If
 
                 If aTerminate = True Then
-                    End 'not clean, will do for now
+                    Logger.AddToLog("BrowserUtilities.LaunchBrowser", "Terminate", lBrowser.Name, lURL, aTerminate)
+                    GeneralUtilities.doCleanExit() 'not clean, will do for now
                 End If
             End If
         End If
+
+        Logger.AddToLog("BrowserUtilities.LaunchBrowser", "End", lBrowser.Name, lURL, aTerminate)
     End Sub
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid) As Browser
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "Start", aGUID)
         For Each lBrowser As Browser In gSettings.Browsers
             If lBrowser.GUID = aGUID Then
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID found", aGUID)
                 Return lBrowser
             End If
         Next
 
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID not found", aGUID)
         Return Nothing
     End Function
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateList As List(Of Browser)) As Browser
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "Start", aGUID)
         For Each lBrowser As Browser In aSeperateList
             If lBrowser.GUID = aGUID Then
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "GUID found", aGUID)
                 Return lBrowser
             End If
         Next
 
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "GUID not found", aGUID)
         Return Nothing
     End Function
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateDictionary As Dictionary(Of Integer, Browser)) As Browser
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "Start", aGUID)
         For Each lBrowser As KeyValuePair(Of Integer, Browser) In aSeperateDictionary
             If lBrowser.Value.GUID = aGUID Then
+
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID found", aGUID)
                 Return lBrowser.Value
             End If
         Next
 
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID Not found", aGUID)
         Return Nothing
     End Function
 
     Public Shared Function NormalizeTarget(ByVal target As String) As String
+        Logger.AddToLog("BrowserUtilities.NormalizeTarget", "Start", target)
         ' it's possible that in portable mode you have a path to an x86 folder and are running on a 32 bit system
         ' so the strBrowser will point to an invalid browser
         If StartupLauncher.Is64Bit Then
@@ -219,6 +246,7 @@ Public Class BrowserUtilities
             End If
         End If
 
+        Logger.AddToLog("BrowserUtilities.NormalizeTarget", "End", target)
         Return target
     End Function
 End Class
