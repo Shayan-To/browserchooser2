@@ -33,22 +33,25 @@ Public Class DefaultBrowser
     '''     Uses bcrypt and rsa and the machine guid
 
     Private Shared Sub CreateApplicationRegistration(ByVal aROOT As RegistryKey)
+        Logger.AddToLog("DefaultBrowser.CreateApplicationRegistration", "Start", aROOT.Name)
         'oftware\Microsoft\Windows\CurrentVersion\App Paths
         Dim lKey As RegistryKey = aROOT.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\App Paths", RegistryKeyPermissionCheck.ReadWriteSubTree)
         Dim lSubKey As RegistryKey = lKey.CreateSubKey(mCanonical, RegistryKeyPermissionCheck.ReadWriteSubTree)
         lSubKey.SetValue("", String.Format("{0}\{1}", My.Application.Info.DirectoryPath, mCanonical), RegistryValueKind.String)
         lSubKey.SetValue("Path", My.Application.Info.DirectoryPath, RegistryValueKind.String)
         lSubKey.SetValue("UseUrl", 1, RegistryValueKind.DWord)
+        Logger.AddToLog("DefaultBrowser.CreateApplicationRegistration", "End", aROOT.Name)
     End Sub
 
     Private Shared Sub CreateAssociations(ByVal aROOT As RegistryKey)
+        Logger.AddToLog("DefaultBrowser.CreateAssociations", "Start", aROOT.Name)
         'finaly, end with file accociations
         Dim lData As Byte() = New Byte() {2}
         Dim lKey = aROOT.CreateSubKey(mFileAssociations)
         lKey.SetValue("", mCanonical, RegistryValueKind.String)
         lKey.SetValue("FriendlyTypeName", mAppName, RegistryValueKind.String)
         lKey.SetValue("EditFlags", lData, RegistryValueKind.Binary)
-        lKey.CreateSubKey("DefaultIcon").SetValue("", _
+        lKey.CreateSubKey("DefaultIcon").SetValue("",
             """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
         lKey.CreateSubKey("shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
 
@@ -63,12 +66,14 @@ Public Class DefaultBrowser
         lKey.SetValue("FriendlyTypeName", mAppName, RegistryValueKind.String)
         lKey.SetValue("EditFlags", lData, RegistryValueKind.Binary)
         lKey.SetValue("URL Protocol", mCanonical, RegistryValueKind.String)
-        lKey.CreateSubKey("DefaultIcon").SetValue("", _
+        lKey.CreateSubKey("DefaultIcon").SetValue("",
             """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
         lKey.CreateSubKey("shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+        Logger.AddToLog("DefaultBrowser.CreateAssociations", "End", aROOT.Name)
     End Sub
 
     Private Shared Sub CreateCapabilities(ByVal aROOT As RegistryKey)
+        Logger.AddToLog("DefaultBrowser.CreateCapabilities", "Start", aROOT.Name)
         Dim lKey = aROOT.CreateSubKey(mBC2KeyName, RegistryKeyPermissionCheck.ReadWriteSubTree)
 
         If IsNothing(lKey) = False Then
@@ -92,9 +97,11 @@ Public Class DefaultBrowser
             'end with registered applications
             aROOT.CreateSubKey("SOFTWARE\RegisteredApplications").SetValue(mAppName, mBC2KeyName & "\Capabilities", RegistryValueKind.String)
         End If
+        Logger.AddToLog("DefaultBrowser.CreateCapabilities", "End", aROOT.Name)
     End Sub
 
     Public Shared Sub CreateSPAD(ByVal aROOT As RegistryKey)
+        Logger.AddToLog("DefaultBrowser.CreateSPAD", "Start", aROOT.Name)
         Dim lSubKey As RegistryKey
 
         'Register the canonical name and Register the Display Name, icon
@@ -105,7 +112,7 @@ Public Class DefaultBrowser
         lKey.CreateSubKey("DefaultIcon").SetValue("", """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
 
         'Registering an Open Verb
-        lKey.CreateSubKey("shell\open\command").SetValue("", _
+        lKey.CreateSubKey("shell\open\command").SetValue("",
             """" & Path.Combine(Application.StartupPath, mCanonical) & """", RegistryValueKind.String)
 
         'Registering Installation Information
@@ -117,9 +124,11 @@ Public Class DefaultBrowser
         lSubKey.SetValue("ShowIconsCommand",
             """" & Path.Combine(Application.StartupPath, "Browser Chooser 2.exe") & """ --showicons", RegistryValueKind.String) 'aka not default, show in system menus
         lSubKey.SetValue("IconsVisible", 1, RegistryValueKind.DWord) 'current state - icons shown
+        Logger.AddToLog("DefaultBrowser.CreateSPAD", "End", aROOT.Name)
     End Sub
 
     Public Shared Sub MakeAvailable(ByVal aScope As DefaultBrowser.Scope) 'needs admin - writes to HKLM
+        Logger.AddToLog("DefaultBrowser.MakeAvailable", "Start", aScope)
         'note: Part 1: SPAD this is implemented from documentation found at http://msdn.microsoft.com/en-us/library/windows/desktop/cc144109%28v=vs.85%29.aspx
         If aScope = Scope.sGlobal Then
             CreateSPAD(Registry.LocalMachine)
@@ -141,9 +150,11 @@ Public Class DefaultBrowser
         'broadcast change - this will trigger a notification in Win 8+
         SHChangeNotify(SHChangeNotifyEventID.SHCNE_ASSOCCHANGED, SHChangeNotifyFlags.SHCNF_DWORD Or SHChangeNotifyFlags.SHCNF_FLUSH,
                        IntPtr.Zero, IntPtr.Zero)
+        Logger.AddToLog("DefaultBrowser.MakeAvailable", "End", aScope)
     End Sub
 
     Private Shared Sub DoUserScope(ByVal aMaster As RegistryKey) 'includes windows XP
+        Logger.AddToLog("DefaultBrowser.DoUserScope", "Start", aMaster)
         'If aScope = Settings.Scope.sGlobal Then
         Registry.CurrentUser.CreateSubKey("SOFTWARE\Clients\StartMenuInternet\").DeleteValue("", False)
         'End If
@@ -183,11 +194,11 @@ Public Class DefaultBrowser
 
             If GeneralUtilities.IsRunningXP = True Then
                 'copy our stuff into here - kinds weird XP...
-                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey & "\DefaultIcon", RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("", _
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey & "\DefaultIcon", RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("",
                     """" & Path.Combine(Application.StartupPath, mCanonical) & """,0", RegistryValueKind.String)
 
                 'now copy the open command
-                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey & "\Shell\open\command", RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("", _
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\" & lKey & "\Shell\open\command", RegistryKeyPermissionCheck.ReadWriteSubTree).SetValue("",
                     """" & Path.Combine(Application.StartupPath, mCanonical) & """ ""%1""", RegistryValueKind.String)
             Else
                 Registry.CurrentUser.CreateSubKey("SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\" & lKey & "\UserChoice").SetValue("Progid", mURLAssociations)
@@ -202,9 +213,12 @@ Public Class DefaultBrowser
 
         'create accosiations in user software classes
         CreateAssociations(Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\", True))
+
+        Logger.AddToLog("DefaultBrowser.DoUserScope", "End", aMaster)
     End Sub
 
     Public Shared Sub MakeDefault(ByVal aScope As DefaultBrowser.Scope, Optional ByVal aForce8 As Boolean = False, Optional ByVal aShowMessage As Boolean = True, Optional aDoSingle As String = "", Optional abIsProtocol As Boolean = False)
+        Logger.AddToLog("DefaultBrowser.MakeDefault", "Start", aScope, aForce8, aShowMessage, aDoSingle, abIsProtocol)
         If GeneralUtilities.IsRunningPost8 = False And aForce8 = False Then
             'upto windows 7 - default programs / SPAD
             Dim lMaster As RegistryKey
@@ -307,9 +321,12 @@ Public Class DefaultBrowser
             '    'DoUserScope(Registry.CurrentUser)
             'End If
         End If
+
+        Logger.AddToLog("DefaultBrowser.MakeDefault", "End", aScope, aForce8, aShowMessage, aDoSingle, abIsProtocol)
     End Sub
 
     Public Shared Sub CheckIfIsDefault()
+        Logger.AddToLog("DefaultBrowser.CheckIfIsDefault", "Start")
         'using a com call here to set the file associations
         Dim aa = New WinAPIExtras.ApplicationAssociationRegistration
         Dim iaa = DirectCast(aa, WinAPIExtras.IApplicationAssociationRegistration)
@@ -406,9 +423,12 @@ Public Class DefaultBrowser
                 End If
             End If
         End Try
+
+        Logger.AddToLog("DefaultBrowser.CheckIfIsDefault", "End")
     End Sub
 
     Public Shared Sub RemoveAllKeys(ByVal aScope As DefaultBrowser.Scope)
+        Logger.AddToLog("DefaultBrowser.RemoveAllKeys", "Start", aScope)
         'remove all keys we created undre current scope
         Dim lMaster As RegistryKey
         Dim lClassesRoot As RegistryKey
@@ -430,5 +450,7 @@ Public Class DefaultBrowser
 
         'SPAD
         lMaster.DeleteSubKeyTree(String.Format("SOFTWARE\Clients\StartMenuInternet\{0}", mCanonical))
+
+        Logger.AddToLog("DefaultBrowser.RemoveAllKeys", "Start", aScope)
     End Sub
 End Class

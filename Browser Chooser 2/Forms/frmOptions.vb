@@ -13,6 +13,7 @@ Public Class frmOptions
     Private mLastFileTypeID As Integer
     Private mFocusSettings As frmAccessibilitySettings.FocusSettings
     Private mbDirty As Boolean = False
+    Private mbCanceled As Boolean = False
 
 #Region "Bottom Control Buttons"
     Private Sub cmdHelp_Click(sender As System.Object, e As System.EventArgs) Handles cmdHelp.Click
@@ -24,6 +25,7 @@ Public Class frmOptions
     End Sub
 
     Private Sub cmdCancel_Click(sender As System.Object, e As System.EventArgs) Handles cmdCancel.Click
+        mbCanceled = True
         Me.Close()
     End Sub
 
@@ -119,6 +121,7 @@ Public Class frmOptions
     End Sub
 
     Private Sub cmdSave_Click(sender As System.Object, e As System.EventArgs) Handles cmdSave.Click
+        mbCanceled = False
         DoSave()
     End Sub
 #End Region
@@ -272,7 +275,7 @@ Public Class frmOptions
         End If
     End Sub
     Private Sub frmOptions_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If e.CloseReason = CloseReason.UserClosing Then
+        If e.CloseReason = CloseReason.UserClosing And mbCanceled = False Then
             If mbDirty = True Then
                 Dim lResult As DialogResult = MessageBox.Show("Do you want to save your settings?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
@@ -456,6 +459,7 @@ Public Class frmOptions
 
         'indicate that the screen is NOT dirty and DOES NOT need to be saved
         mbDirty = False
+        mbCanceled = False
     End Sub
 #End Region
 
@@ -648,6 +652,10 @@ Public Class frmOptions
     Private Sub MakeDefault()
         If rbScopeUser.Checked = True Then
             DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser)
+
+            If GeneralUtilities.IsRunningPost8 = True Or GeneralUtilities.IsRunningPost10 = True Then
+                Me.WindowState = FormWindowState.Minimized
+            End If
         Else
             GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
         End If
@@ -664,6 +672,7 @@ Public Class frmOptions
 
     Private Sub cmdAddToDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddToDefault.Click
         AddToDefault()
+        MessageBox.Show("BC2 added to Default Programs", "Added", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub cmdMakeDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdMakeDefault.Click
@@ -826,7 +835,8 @@ Public Class frmOptions
                 Dim lTag As Integer = CInt(lItem.Tag)
                 Dim lOtherTag As Integer = CInt(lstURLs.Items(lIndex - 1).Tag)
                 lstURLs.Items(lIndex).Remove()
-                lstURLs.Items.Insert(lIndex - 1, lItem)
+                lstURLs.Items.Insert(lIndex - 1, lItem).Selected = True
+
 
                 'repeat for the internal list of urls
                 SwapURLS(lTag, lOtherTag)
@@ -1126,6 +1136,7 @@ Public Class frmOptions
     Private Sub cmdRemoveFromDefaultSettings_Click(sender As Object, e As EventArgs) Handles cmdRemoveFromDefaultSettings.Click
         If rbScopeUser.Checked = True Then
             DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
+            MessageBox.Show("BC2 removed from Default Programs", "Added", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
             GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
         End If

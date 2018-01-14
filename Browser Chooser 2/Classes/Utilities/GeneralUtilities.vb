@@ -123,6 +123,7 @@ Public Class GeneralUtilities
 
     Public Shared Function SafeMessagebox(ByVal text As String, ByVal caption As String,
             ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon) As DialogResult
+        Logger.AddToLog("GeneralUtilities.SafeMessagebox", "Start", text, caption)
         If IsAdminMode() = False Then
             Return MessageBox.Show(text, caption, buttons, icon)
         Else
@@ -131,39 +132,52 @@ Public Class GeneralUtilities
     End Function
 
     Public Shared Function IsRunningXP() As Boolean
+        Logger.AddToLog("GeneralUtilities.IsRunningXP", "Start")
         If Environment.OSVersion.Version.Major <= 5 Then
+            Logger.AddToLog("GeneralUtilities.IsRunningXP", "End", True)
             Return True
         Else
+            Logger.AddToLog("GeneralUtilities.IsRunningXP", "End", False)
             Return False
         End If
     End Function
 
     Public Shared Function IsRunningPost8() As Boolean
+        Logger.AddToLog("GeneralUtilities.IsRunningPost8", "Start")
         If JCS.OSVersionInfo.MajorVersion = 6 And JCS.OSVersionInfo.MinorVersion >= 2 Then
+            Logger.AddToLog("GeneralUtilities.IsRunningPost8", "End", True, False)
             Return True
         ElseIf JCS.OSVersionInfo.MajorVersion >= 7 Then
+            Logger.AddToLog("GeneralUtilities.IsRunningPost8", "End", True, True)
             Return True 'does not yet exists, future proffing I guess
         Else
+            Logger.AddToLog("GeneralUtilities.IsRunningPost8", "End", False)
             Return False
         End If
     End Function
 
     'bloody hell MS - why make this so hard? Yet another API that no longer works.
     Public Shared Function IsRunningPost10() As Boolean
+        Logger.AddToLog("GeneralUtilities.IsRunningPost10", "Start")
         If JCS.OSVersionInfo.MajorVersion >= 10 Then
+            Logger.AddToLog("GeneralUtilities.IsRunningPost10", "End", True)
             Return True
         Else
+            Logger.AddToLog("GeneralUtilities.IsRunningPost10", "End", False)
             Return False
         End If
     End Function
 
     Public Shared Function IsAdminMode() As Boolean
+        Logger.AddToLog("GeneralUtilities.IsAdminMode", "Start")
         Dim identity = WindowsIdentity.GetCurrent()
         Dim principal = New WindowsPrincipal(identity)
+        Logger.AddToLog("GeneralUtilities.IsAdminMode", "End", principal.IsInRole(WindowsBuiltInRole.Administrator))
         Return principal.IsInRole(WindowsBuiltInRole.Administrator)
     End Function
 
     Public Shared Function LaunchUserMode(ByVal aCommand As ListOfCommands, ByVal aExtraPart As String, Optional ByVal aAltPath As String = "", Optional ByVal abWait As Boolean = True) As Integer
+        Logger.AddToLog("GeneralUtilities.LaunchUserMode", "Start", aCommand, aExtraPart, aAltPath, abWait)
         Try
             Dim lAdminProc As New ProcessStartInfo
             lAdminProc.WorkingDirectory = Environment.CurrentDirectory
@@ -190,8 +204,11 @@ Public Class GeneralUtilities
                 lProc.WaitForExit() 'this will return a value with success or not
             End If
             frmOptions.TopMost = True
+
+            Logger.AddToLog("GeneralUtilities.LaunchUserMode", "End", lProc.ExitCode)
             Return lProc.ExitCode
         Catch ex As Exception
+            Logger.AddToLog("GeneralUtilities.LaunchUserMode", "End", -1)
             Return -1
         End Try
     End Function
@@ -201,6 +218,7 @@ Public Class GeneralUtilities
     End Function
 
     Public Shared Function LaunchAdminMode(ByVal aCommand As ListOfCommands) As Integer
+        Logger.AddToLog("GeneralUtilities.LaunchAdminMode", "Start", aCommand)
         Try
             Dim lAdminProc As New ProcessStartInfo
             lAdminProc.WorkingDirectory = Environment.CurrentDirectory
@@ -218,8 +236,11 @@ Public Class GeneralUtilities
             Dim lProc As Process = Process.Start(lAdminProc)
             lProc.WaitForExit() 'this will return a value with success or not
             frmOptions.TopMost = True
+
+            Logger.AddToLog("GeneralUtilities.LaunchAdminMode", "End", lProc.ExitCode)
             Return lProc.ExitCode
         Catch ex As Exception
+            Logger.AddToLog("GeneralUtilities.LaunchAdminMode", "End", -1)
             Return -1
         End Try
     End Function
@@ -262,18 +283,22 @@ Public Class GeneralUtilities
 #End Region
 
     Public Shared Function IsAeroEnabled() As Boolean
+        Logger.AddToLog("GeneralUtilities.IsAeroEnabled", "Start")
         Dim AeroState As Long
 
         Try
             DwmIsCompositionEnabled(AeroState)
+            Logger.AddToLog("GeneralUtilities.IsAeroEnabled", "End", CBool(AeroState))
             IsAeroEnabled = CBool(AeroState)
         Catch ex As System.DllNotFoundException
+            Logger.AddToLog("GeneralUtilities.IsAeroEnabled", "End EX", False, ex.Message)
             IsAeroEnabled = False
         End Try
 
     End Function
 
     Public Shared Sub MakeFormGlassy(ByVal aForm As Form)
+        Logger.AddToLog("GeneralUtilities.MakeFormGlassy", "Start", aForm.Text)
         Dim margins As MARGINS = New MARGINS
         margins.cxLeftWidth = -1
         margins.cxRightWidth = -1
@@ -308,15 +333,20 @@ Public Class GeneralUtilities
         'Catch ex As Exception
 
         'End Try
+
+        Logger.AddToLog("GeneralUtilities.MakeFormGlassy", "End", aForm.Text)
     End Sub
 
     Public Shared Function IsIntranetUrl(ByVal url As String) As Boolean
+        Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "Start", url)
         Dim targetUri As Uri = New Uri(url)
         Dim domain As String = targetUri.Authority
 
         If domain.Contains(".") Then
+            Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "End", False)
             Return False
         Else
+            Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "End", True)
             Return True
         End If
     End Function
@@ -338,6 +368,7 @@ Public Class GeneralUtilities
     'End Function
 
     Public Shared Sub doCleanExit()
+        Logger.AddToLog("GeneralUtilities.doCleanExit", "Start")
         Dim lFormsToClose As New List(Of Form)
 
         'build list of forms to close
@@ -353,15 +384,19 @@ Public Class GeneralUtilities
         'End 'not clean, will do for now
         'System.Environment.Exit(0) ' this line needs a security permission
         'sercutiry permissions will be done in Beta 3
+        Logger.AddToLog("GeneralUtilities.doCleanExit", "End")
         Application.Exit()
     End Sub
 
     Public Shared Function GetUniquedID() As Guid
+        Logger.AddToLog("GeneralUtilities.GetUniquedID", "Start")
         Dim lOut As Guid = System.Guid.NewGuid()
 
         If lOut <> Guid.Empty Then
+            Logger.AddToLog("GeneralUtilities.GetUniquedID", "End", lOut)
             Return lOut
         Else
+            Logger.AddToLog("GeneralUtilities.GetUniquedID", "End Error")
             Return Nothing 'error occured
         End If
 
@@ -375,6 +410,7 @@ Public Class GeneralUtilities
     End Structure
 
     Public Shared Function DetermineParts(ByVal aURL As String) As URLParts
+        Logger.AddToLog("GeneralUtilities.GetUniquedID", "DetermineParts", aURL)
         Dim lOut As New URLParts
 
         If InStr(aURL, "://") > 0 Then 'is a protocol
@@ -396,6 +432,7 @@ Public Class GeneralUtilities
             lOut.isProtocol = TriState.UseDefault ' for instances where we can't determine easily
         End If
 
+        Logger.AddToLog("GeneralUtilities.GetUniquedID", "End", lOut.isProtocol, lOut.Protocol, lOut.Extention, lOut.Remainder)
         Return lOut
     End Function
 End Class

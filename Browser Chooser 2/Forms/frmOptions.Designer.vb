@@ -78,10 +78,12 @@ Partial Class frmOptions
         Me.cmdAddFileType = New System.Windows.Forms.Button()
         Me.lstFiletypes = New System.Windows.Forms.ListView()
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabCategories = New System.Windows.Forms.TabPage()
         Me.lstCategories = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tabDisplay = New System.Windows.Forms.TabPage()
+        Me.chkAllowStayOpen = New System.Windows.Forms.CheckBox()
         Me.chkRevealShortURLs = New System.Windows.Forms.CheckBox()
         Me.chkUseAreo = New System.Windows.Forms.CheckBox()
         Me.chkUseAccessibleRendering = New System.Windows.Forms.CheckBox()
@@ -150,8 +152,6 @@ Partial Class frmOptions
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
         Me.treeSettings = New System.Windows.Forms.TreeView()
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.chkAllowStayOpen = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -389,6 +389,7 @@ Partial Class frmOptions
         Me.lstURLs.AllowDrop = True
         Me.lstURLs.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.chURL, Me.chBrowser})
         Me.lstURLs.FullRowSelect = True
+        Me.lstURLs.HideSelection = False
         Me.lstURLs.Location = New System.Drawing.Point(87, 6)
         Me.lstURLs.Name = "lstURLs"
         Me.lstURLs.Size = New System.Drawing.Size(346, 195)
@@ -547,6 +548,11 @@ Partial Class frmOptions
         Me.ColumnHeader2.Text = "Name"
         Me.ColumnHeader2.Width = 109
         '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Extention"
+        Me.ColumnHeader5.Width = 74
+        '
         'tabCategories
         '
         Me.tabCategories.Controls.Add(Me.lstCategories)
@@ -597,6 +603,16 @@ Partial Class frmOptions
         Me.tabDisplay.TabIndex = 9
         Me.tabDisplay.Text = "Display"
         Me.tabDisplay.UseVisualStyleBackColor = True
+        '
+        'chkAllowStayOpen
+        '
+        Me.chkAllowStayOpen.AutoSize = True
+        Me.chkAllowStayOpen.Location = New System.Drawing.Point(6, 49)
+        Me.chkAllowStayOpen.Name = "chkAllowStayOpen"
+        Me.chkAllowStayOpen.Size = New System.Drawing.Size(156, 17)
+        Me.chkAllowStayOpen.TabIndex = 32
+        Me.chkAllowStayOpen.Text = "Allow interface to stay open"
+        Me.chkAllowStayOpen.UseVisualStyleBackColor = True
         '
         'chkRevealShortURLs
         '
@@ -1317,21 +1333,6 @@ Partial Class frmOptions
         Me.treeSettings.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode3, TreeNode6, TreeNode12, TreeNode13})
         Me.treeSettings.Size = New System.Drawing.Size(165, 270)
         Me.treeSettings.TabIndex = 4
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Extention"
-        Me.ColumnHeader5.Width = 74
-        '
-        'chkAllowStayOpen
-        '
-        Me.chkAllowStayOpen.AutoSize = True
-        Me.chkAllowStayOpen.Location = New System.Drawing.Point(6, 49)
-        Me.chkAllowStayOpen.Name = "chkAllowStayOpen"
-        Me.chkAllowStayOpen.Size = New System.Drawing.Size(156, 17)
-        Me.chkAllowStayOpen.TabIndex = 32
-        Me.chkAllowStayOpen.Text = "Allow interface to stay open"
-        Me.chkAllowStayOpen.UseVisualStyleBackColor = True
         '
         'frmOptions
         '

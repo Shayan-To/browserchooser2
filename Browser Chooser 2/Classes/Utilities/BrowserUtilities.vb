@@ -77,10 +77,17 @@ Public Class BrowserUtilities
     Private Shared Function DoLaunch(ByVal aTarget As Browser, ByVal aURL As String, ByVal aTerminate As Boolean) As Boolean
         Logger.AddToLog("BrowserUtilities.DoLaunch", "Start", aTarget.Name, aURL, aTerminate)
         'Dim strParameters As String = ""
-        Dim strBrowser As String = NormalizeTarget(aTarget.Target)
+        Dim strBrowser As String
 
         'hide the main form
         frmMain.Visible = False
+
+        'find the exe, start with supplied path, if not found, try to normalize
+        If My.Computer.FileSystem.FileExists(aTarget.Target) = True Then
+            strBrowser = aTarget.Target
+        Else
+            strBrowser = NormalizeTarget(aTarget.Target)
+        End If
 
         'use windows api to bypass permissions, may be an issue with non-admin accounts
         Dim lInfo As WinAPIs.WIN32_FILE_ATTRIBUTE_DATA
@@ -189,23 +196,23 @@ Public Class BrowserUtilities
     End Sub
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid) As Browser
-        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "Start", aGUID)
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "Start", aGUID.ToString())
         For Each lBrowser As Browser In gSettings.Browsers
             If lBrowser.GUID = aGUID Then
-                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID found", aGUID)
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID found", aGUID.ToString())
                 Return lBrowser
             End If
         Next
 
-        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID not found", aGUID)
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID", "GUID not found", aGUID.ToString())
         Return Nothing
     End Function
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateList As List(Of Browser)) As Browser
-        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "Start", aGUID)
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "Start", aGUID.ToString())
         For Each lBrowser As Browser In aSeperateList
             If lBrowser.GUID = aGUID Then
-                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "GUID found", aGUID)
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID list", "GUID found", aGUID.ToString())
                 Return lBrowser
             End If
         Next
@@ -215,16 +222,16 @@ Public Class BrowserUtilities
     End Function
 
     Public Shared Function GetBrowserByGUID(aGUID As Guid, aSeperateDictionary As Dictionary(Of Integer, Browser)) As Browser
-        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "Start", aGUID)
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "Start", aGUID.ToString())
         For Each lBrowser As KeyValuePair(Of Integer, Browser) In aSeperateDictionary
             If lBrowser.Value.GUID = aGUID Then
 
-                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID found", aGUID)
+                Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID found", aGUID.ToString())
                 Return lBrowser.Value
             End If
         Next
 
-        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID Not found", aGUID)
+        Logger.AddToLog("BrowserUtilities.GetBrowserByGUID Dictionary", "GUID Not found", aGUID.ToString())
         Return Nothing
     End Function
 
