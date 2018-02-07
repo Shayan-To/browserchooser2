@@ -408,7 +408,11 @@ Public Class frmOptions
             mURLs.Add(mURLs.Count, DirectCast(lURL.Clone, URL))
 
             llsiItem = lstURLs.Items.Add(lURL.URL)
-            llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lURL.Guid).Name)
+
+            'if the browser is no longer present, 
+            If Not BrowserUtilities.GetBrowserByGUID(lURL.Guid) Is Nothing Then
+                llsiItem.SubItems.Add(BrowserUtilities.GetBrowserByGUID(lURL.Guid).Name)
+            End If
             llsiItem.Tag = mURLs.Count - 1
         Next
         mLastURLID = mURLs.Count - 1

@@ -334,12 +334,12 @@ Partial Class frmAddEditBrowser
         '
         'nudY
         '
-        Me.nudY.Location = New System.Drawing.Point(159, 19)
+        Me.nudY.Location = New System.Drawing.Point(45, 19)
         Me.nudY.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudY.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudY.Name = "nudY"
         Me.nudY.Size = New System.Drawing.Size(63, 20)
-        Me.nudY.TabIndex = 4
+        Me.nudY.TabIndex = 2
         Me.nudY.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'Label5
@@ -353,12 +353,12 @@ Partial Class frmAddEditBrowser
         '
         'nudX
         '
-        Me.nudX.Location = New System.Drawing.Point(45, 19)
+        Me.nudX.Location = New System.Drawing.Point(171, 20)
         Me.nudX.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudX.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudX.Name = "nudX"
         Me.nudX.Size = New System.Drawing.Size(63, 20)
-        Me.nudX.TabIndex = 2
+        Me.nudX.TabIndex = 4
         Me.nudX.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'Label4

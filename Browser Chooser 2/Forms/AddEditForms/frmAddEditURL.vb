@@ -29,7 +29,9 @@
         'populate screen
         PopulateBrowsers(aBrowsers)
         txtURL.Text = aURL.URL
-        cmbBrowser.Text = BrowserUtilities.GetBrowserByGUID(aURL.Guid).Name
+        If Not BrowserUtilities.GetBrowserByGUID(aURL.Guid) Is Nothing Then
+            cmbBrowser.Text = BrowserUtilities.GetBrowserByGUID(aURL.Guid).Name
+        End If
         chkAutoLoad.Checked = aURL.AutoLoad
         chkShowURL.CheckState = aURL.ShowURL
         nudDelay.Value = aURL.DelayTime

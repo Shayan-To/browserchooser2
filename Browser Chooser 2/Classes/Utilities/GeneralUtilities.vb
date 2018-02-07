@@ -86,11 +86,13 @@ Public Class GeneralUtilities
     Public Shared mFileNames As New Dictionary(Of EmbededDLLs, String) From {{EmbededDLLs.SHDocVw, "Interop.SHDocVw.dll"},
                                                                              {EmbededDLLs.TAFactory_IconPack, "TAFactory.IconPack.dll"},
                                                                              {EmbededDLLs.OSVersionInfo, "OSVersionInfo.dll"},
-                                                                             {EmbededDLLs.SepCombo, "SepCombo.dll"}}
+                                                                             {EmbededDLLs.SepCombo, "SepCombo.dll"},
+                                                                             {EmbededDLLs.XMLSerializer, "Browser Chooser 2.XmlSerializers.dll"}}
     Private Shared mbLoadedDLLs As New Dictionary(Of EmbededDLLs, Boolean) From {{EmbededDLLs.SHDocVw, False},
                                                                              {EmbededDLLs.TAFactory_IconPack, False},
                                                                              {EmbededDLLs.OSVersionInfo, False},
-                                                                             {EmbededDLLs.SepCombo, False}}
+                                                                             {EmbededDLLs.SepCombo, False},
+                                                                             {EmbededDLLs.XMLSerializer, False}}
 
     Public Shared KeyCodeValues As New Dictionary(Of Keys, Integer) From { _
         {Keys.NumPad1, 1}, _
@@ -119,6 +121,7 @@ Public Class GeneralUtilities
         TAFactory_IconPack
         OSVersionInfo
         SepCombo
+        XMLSerializer
     End Enum
 
     Public Shared Function SafeMessagebox(ByVal text As String, ByVal caption As String,
@@ -264,7 +267,17 @@ Public Class GeneralUtilities
                 Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Loading assembly")
                 Dim block As Byte() = New Byte(CInt(stream.Length - 1)) {}
                 stream.Read(block, 0, block.Length)
-                Return Assembly.Load(block)
+
+                'see if this XMlSerializer, extract to disk if yes
+                If name = mFileNames.Item(EmbededDLLs.XMLSerializer) Then
+                    Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Writting assembly to disk")
+                    Dim writeStream As New StreamWriter(mFileNames.Item(EmbededDLLs.XMLSerializer), False)
+                    writeStream.Write(stream)
+                    writeStream.Close()
+                    Return GetType(GeneralUtilities).Assembly
+                Else
+                    Return Assembly.Load(block)
+                End If
             End Using
         Else
             Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Returning Self")

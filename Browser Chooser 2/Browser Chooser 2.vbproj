@@ -59,7 +59,7 @@
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
@@ -73,7 +73,7 @@
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -330,12 +330,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="TAFactory.IconPack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -512,9 +510,7 @@
     <None Include="Resources\world_go.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Interop.SHDocVw.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Interop.SHDocVw.dll" />
     <None Include="Resources\Settings-icon.png" />
     <None Include="Resources\bclogo.ico" />
     <None Include="Resources\bclogo1.ico" />
@@ -613,6 +609,7 @@
     <Content Include="Images\BrowserChooser2.ico" />
     <Content Include="Images\BrowserChooser2.png" />
     <Content Include="Images\BrowserChooser2.psd" />
+    <EmbeddedResource Include="Resources\Browser Chooser 2.XmlSerializers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

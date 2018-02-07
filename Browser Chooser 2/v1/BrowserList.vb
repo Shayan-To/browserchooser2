@@ -1,7 +1,7 @@
 Imports System
 Imports System.Collections.Generic
 Imports System.IO
-Imports System.Xml.Serialization
+Imports System.Runtime.Serialization
 
 Namespace LegacyNS
     Partial Public Class Legacy
@@ -119,29 +119,15 @@ Namespace LegacyNS
                 Return rez
             End Function
 
-            'Public Sub Save(ByVal browserChooserConfigDirectory As String)
-            '    Dim f As New IO.DirectoryInfo(browserChooserConfigDirectory)
-            '    If Not f.Exists Then
-            '        IO.Directory.CreateDirectory(browserChooserConfigDirectory)
-            '    End If
-            '    Dim xmlSerializer As New XmlSerializer(GetType(Legacy.BrowserList))
-
-            '    Using writer As Stream = New FileStream(Path.Combine(browserChooserConfigDirectory, Legacy.Settings.BrowserChooserConfigFileName), FileMode.Create)
-            '        Me.Browsers.Sort()
-            '        xmlSerializer.Serialize(writer, Me)
-            '        writer.Close()
-            '    End Using
-            'End Sub
-
             Public Shared Function Load(ByVal browserChooserConfigDirectory As String) As Legacy.BrowserList
-                Dim serializer As New XmlSerializer(GetType(Legacy.BrowserList))
+                Dim serializer As New DataContractSerializer(GetType(Legacy.BrowserList))
 
                 Dim blist As Legacy.BrowserList
 
                 'Dim configPath As String = Path.Combine(browserChooserConfigDirectory, Legacy.Settings.BrowserChooserConfigFileName)
                 If (File.Exists(browserChooserConfigDirectory)) Then
                     Using writer As Stream = New FileStream(browserChooserConfigDirectory, FileMode.Open)
-                        blist = DirectCast(serializer.Deserialize(writer), Legacy.BrowserList)
+                        blist = DirectCast(serializer.ReadObject(writer), Legacy.BrowserList)
                         writer.Close()
                     End Using
                 Else
