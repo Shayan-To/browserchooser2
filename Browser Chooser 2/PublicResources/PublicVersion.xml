@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <versionInfo>
-  <id>R1</id>
+  <id>R2</id>
   <download><![CDATA[http://browserchooser2.com/app/Browser Chooser 2.exe]]></download>
   <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Relase1</releaseinfo>  
   <details>
@@ -9,12 +9,22 @@
     p.s. I know it does not look great, I need someone to fix it up. Especially some SEO stuff.
 
     New Features:
-    * Setting page reqorked to use a tree view instead of tabs.. Allowed to declutter some screens.
-    * Adds ability to put the URL in the arguments field.
-    * Added ability to hide the auto close check mark. New default is for the checkmark to be hidden. Change changed in settings
-    *Provide uninstallation capability.
-    ** Command line option --uninstall
-    ** Using the UI -> Setting -> Windows Default -> Remove from Default Programs
+    * Setting page
+    ** shortcuts page changed to others
+    * Added logging. note: the log file can get rather large. enable logging only if needed.
+    ** command line option: --log
+    ** in Other setting page: Enabled Logging.
+    * Add an option to Canonicalize URI.
+    ** Settings are in the other options page
+    * Fixed Row/Col begin swapped. (Issue #24 and Issue #12)
+    * Extracts a .dll to same location as BC2 when actived. Use this you are having startup problems. Fixes Issue #27
+    ** currently only a special dll is created
+    ** Command line option:  --extract or --e
+    ** in other setttings page: extract embded DLLs
+    * Changed the registry options to not truncate some URLs.
+    ** Note that this requires a one-time update to the regisry. You will be prompted at first start.
+    * Fix various crashes (Issue #26, Issue#28
+    * Fix edge not always opening correctly. Issue #29
 
     Special thanks to all for testing and proving great feedback!
   </details>
