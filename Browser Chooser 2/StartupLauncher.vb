@@ -60,7 +60,7 @@ Public Class StartupLauncher
         End Get
     End Property
 
-    Private Shared Sub ProcessParts(ByVal aParts As GeneralUtilities.URLParts)
+    Private Shared Sub ProcessParts(ByVal aParts As URLUtilities.URLParts)
         mSupportingBrowsers = New List(Of Guid)
 
         If aParts.isProtocol = TriState.True Then
@@ -104,9 +104,13 @@ Public Class StartupLauncher
     End Sub
 
     Public Shared Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDeletegate As UpdateURL)
-        mURL = aURL
         mDeletegate = aDeletegate
-        Dim lParts As GeneralUtilities.URLParts = DetermineParts(aURL)
+        Dim lParts As URLUtilities.URLParts = URLUtilities.DetermineParts(aURL)
+        If lParts.isProtocol = TriState.True Then
+            mURL = lParts.ToString()
+        Else
+            mURL = aURL 'filename
+        End If
         ProcessParts(lParts)
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
@@ -120,12 +124,15 @@ Public Class StartupLauncher
     End Sub
 
     Public Shared Sub SetURL(ByVal aURL As String, ByVal abUnShorten As Boolean, ByVal aDelay As Integer, ByVal aBrowser As Browser, ByVal aDeletegate As UpdateURL)
-        mURL = aURL
         mDelay = aDelay
         mBrowser = aBrowser
         mDeletegate = aDeletegate
-        Dim lParts As GeneralUtilities.URLParts = DetermineParts(aURL)
-        ProcessParts(lParts)
+        Dim lParts As URLUtilities.URLParts = URLUtilities.DetermineParts(aURL)
+        If lParts.isProtocol = TriState.True Then
+            mURL = lParts.ToString()
+        Else
+            mURL = aURL 'filename
+        End If
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
             'to do
@@ -172,7 +179,15 @@ Public Class StartupLauncher
 
         'clean up and destroy self
         If IsNothing(mDeletegate) = False Then
-            mDeletegate.Invoke(mURL) 'send the new URL message
+            Dim lURL As String
+            Dim lParts As URLUtilities.URLParts = URLUtilities.DetermineParts(mURL)
+            If lParts.isProtocol = TriState.True Then
+                lURL = lParts.ToString()
+            Else
+                lURL = mURL 'filename
+            End If
+
+            mDeletegate.Invoke(lURL) 'send the new URL message
         End If
 
         mWorker = Nothing

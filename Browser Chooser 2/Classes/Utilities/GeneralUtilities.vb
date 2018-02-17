@@ -350,36 +350,6 @@ Public Class GeneralUtilities
         Logger.AddToLog("GeneralUtilities.MakeFormGlassy", "End", aForm.Text)
     End Sub
 
-    Public Shared Function IsIntranetUrl(ByVal url As String) As Boolean
-        Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "Start", url)
-        Dim targetUri As Uri = New Uri(url)
-        Dim domain As String = targetUri.Authority
-
-        If domain.Contains(".") Then
-            Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "End", False)
-            Return False
-        Else
-            Logger.AddToLog("GeneralUtilities.IsIntranetUrl", "End", True)
-            Return True
-        End If
-    End Function
-
-    'Public Function UrlsToString() As String
-    '    If (Urls Is Nothing OrElse Urls.Count = 0) Then
-    '        Return String.Empty
-    '    Else
-    '        Return String.Join(",", Urls.ToArray())
-    '    End If
-    'End Function
-
-    'Public Shared Function StringToUrls(ByVal urlList As String) As List(Of String)
-    '    If (String.IsNullOrEmpty(urlList)) Then
-    '        Return New List(Of String)
-    '    Else
-    '        Return urlList.Split(",").ToList()
-    '    End' If
-    'End Function
-
     Public Shared Sub doCleanExit()
         Logger.AddToLog("GeneralUtilities.doCleanExit", "Start")
         Dim lFormsToClose As New List(Of Form)
@@ -413,39 +383,5 @@ Public Class GeneralUtilities
             Return Nothing 'error occured
         End If
 
-    End Function
-
-    Public Structure URLParts
-        Public isProtocol As TriState
-        Public Protocol As String
-        Public Extention As String
-        Public Remainder As String
-    End Structure
-
-    Public Shared Function DetermineParts(ByVal aURL As String) As URLParts
-        Logger.AddToLog("GeneralUtilities.GetUniquedID", "DetermineParts", aURL)
-        Dim lOut As New URLParts
-
-        If InStr(aURL, "://") > 0 Then 'is a protocol
-            lOut.isProtocol = TriState.True
-            lOut.Protocol = Left(aURL, InStr(aURL, "://") - 1)
-            lOut.Remainder = Mid(aURL, InStr(aURL, "://") + 3)
-        ElseIf InStr(aURL, ".") > 0 Then
-            'file extention
-            lOut.isProtocol = TriState.False
-            lOut.Extention = Mid(aURL, InStrRev(aURL, ".") + 1) 'to be tested
-            'lOut.Remainder = Left(aURL,  )
-
-        ElseIf InStr(aURL, "/") > 0 Then
-            'try domain less
-            lOut.isProtocol = TriState.True
-            lOut.Protocol = "http"
-            lOut.Remainder = aURL
-        Else
-            lOut.isProtocol = TriState.UseDefault ' for instances where we can't determine easily
-        End If
-
-        Logger.AddToLog("GeneralUtilities.GetUniquedID", "End", lOut.isProtocol, lOut.Protocol, lOut.Extention, lOut.Remainder)
-        Return lOut
     End Function
 End Class

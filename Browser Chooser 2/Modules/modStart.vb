@@ -96,22 +96,6 @@ Module modStart
         Logger.AddToLog("modStart.LoadSettings", "End")
     End Sub
 
-    Private Function MatchURLs(ByVal aSource As String, ByVal aTarget As String) As Boolean
-        Logger.AddToLog("modStart.MatchURLs", "Start", aSource, aTarget)
-        'strip http(s):// from urls and strip www from urls
-        Dim lsSource As String = aSource.Replace("http://", "").Replace("https://", "").Replace("www.", "")
-        Dim lsTarget As String = aTarget.Replace("http://", "").Replace("https://", "").Replace("www.", "")
-
-        'perform basic wilcard (regex to come later)
-        If lsTarget Like lsSource Then
-            Logger.AddToLog("modStart.MatchURLs", "End", aSource, aTarget, True)
-            Return True
-        Else
-            Logger.AddToLog("modStart.MatchURLs", "End", aSource, aTarget, False)
-            Return False
-        End If
-    End Function
-
     Public Sub ContinueMain(ByVal aURL As String)
         Logger.AddToLog("modStart.ContinueMain", "Start", aURL)
         'If Settings.LogDebugs = TriState.UseDefault Then
@@ -145,7 +129,7 @@ Module modStart
         If aURL <> "" Then
             'ignore pattern match if no url provided
             For Each lURL As URL In gSettings.URLs
-                If MatchURLs(lURL.URL, aURL) Then
+                If URLUtilities.MatchURLs(lURL.URL, aURL) Then
                     'load that browser
                     If lURL.DelayTime = 0 And lURL.AutoLoad = True Then
                         lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)

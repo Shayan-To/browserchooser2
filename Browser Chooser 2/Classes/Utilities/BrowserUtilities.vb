@@ -97,7 +97,7 @@ Public Class BrowserUtilities
             If Not String.IsNullOrEmpty(aURL) Then
                 If InStr(aTarget.Arguments, "{0}") > 0 Or InStr(aTarget.Arguments, "{1}") > 0 Then
                     'using replacement, new start
-                    Dim lParts As GeneralUtilities.URLParts = GeneralUtilities.DetermineParts(aURL)
+                    Dim lParts As URLUtilities.URLParts = URLUtilities.DetermineParts(aURL)
                     lProcess = Process.Start(strBrowser, String.Format(aTarget.Arguments, lParts.Protocol, lParts.Remainder))
                 Else
                     'no replacement, old start

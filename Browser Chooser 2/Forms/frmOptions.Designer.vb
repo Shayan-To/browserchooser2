@@ -33,9 +33,9 @@ Partial Class frmOptions
         Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Associations", New System.Windows.Forms.TreeNode() {TreeNode4, TreeNode5})
         Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Display")
         Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Grid")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shortcuts")
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Privacy")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Startup")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Privacy")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Startup")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Others")
         Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Settings", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11})
         Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Windows Default")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
@@ -115,7 +115,11 @@ Partial Class frmOptions
         Me.Label2 = New System.Windows.Forms.Label()
         Me.nudHeight = New System.Windows.Forms.NumericUpDown()
         Me.nudWidth = New System.Windows.Forms.NumericUpDown()
-        Me.tabShortcuts = New System.Windows.Forms.TabPage()
+        Me.tabOthers = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.txtCanonicalizeAppend = New System.Windows.Forms.TextBox()
+        Me.chkCanonicalize = New System.Windows.Forms.CheckBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.txtOptionsShortcut = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tabStartup = New System.Windows.Forms.TabPage()
@@ -172,7 +176,8 @@ Partial Class frmOptions
         Me.GroupBox1.SuspendLayout()
         CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabShortcuts.SuspendLayout()
+        Me.tabOthers.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.tabStartup.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.nudYOffset, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -202,7 +207,7 @@ Partial Class frmOptions
         Me.tabSettings.Controls.Add(Me.tabCategories)
         Me.tabSettings.Controls.Add(Me.tabDisplay)
         Me.tabSettings.Controls.Add(Me.tabGrid)
-        Me.tabSettings.Controls.Add(Me.tabShortcuts)
+        Me.tabSettings.Controls.Add(Me.tabOthers)
         Me.tabSettings.Controls.Add(Me.tabStartup)
         Me.tabSettings.Controls.Add(Me.tabPrivacy)
         Me.tabSettings.Controls.Add(Me.tabDefaultBrowser)
@@ -919,16 +924,56 @@ Partial Class frmOptions
         Me.nudWidth.TabIndex = 1
         Me.nudWidth.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
-        'tabShortcuts
+        'tabOthers
         '
-        Me.tabShortcuts.Controls.Add(Me.txtOptionsShortcut)
-        Me.tabShortcuts.Controls.Add(Me.Label4)
-        Me.tabShortcuts.Location = New System.Drawing.Point(4, 22)
-        Me.tabShortcuts.Name = "tabShortcuts"
-        Me.tabShortcuts.Size = New System.Drawing.Size(439, 248)
-        Me.tabShortcuts.TabIndex = 10
-        Me.tabShortcuts.Text = "Shortcuts"
-        Me.tabShortcuts.UseVisualStyleBackColor = True
+        Me.tabOthers.Controls.Add(Me.GroupBox5)
+        Me.tabOthers.Controls.Add(Me.txtOptionsShortcut)
+        Me.tabOthers.Controls.Add(Me.Label4)
+        Me.tabOthers.Location = New System.Drawing.Point(4, 22)
+        Me.tabOthers.Name = "tabOthers"
+        Me.tabOthers.Size = New System.Drawing.Size(439, 248)
+        Me.tabOthers.TabIndex = 10
+        Me.tabOthers.Text = "Others"
+        Me.tabOthers.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.txtCanonicalizeAppend)
+        Me.GroupBox5.Controls.Add(Me.chkCanonicalize)
+        Me.GroupBox5.Controls.Add(Me.Label19)
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 29)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(430, 48)
+        Me.GroupBox5.TabIndex = 22
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Append To / Canonicalize Domain"
+        '
+        'txtCanonicalizeAppend
+        '
+        Me.txtCanonicalizeAppend.Location = New System.Drawing.Point(159, 19)
+        Me.txtCanonicalizeAppend.Name = "txtCanonicalizeAppend"
+        Me.txtCanonicalizeAppend.Size = New System.Drawing.Size(100, 20)
+        Me.txtCanonicalizeAppend.TabIndex = 23
+        '
+        'chkCanonicalize
+        '
+        Me.chkCanonicalize.AutoSize = True
+        Me.chkCanonicalize.BackColor = System.Drawing.SystemColors.Control
+        Me.chkCanonicalize.Location = New System.Drawing.Point(9, 0)
+        Me.chkCanonicalize.Name = "chkCanonicalize"
+        Me.chkCanonicalize.Size = New System.Drawing.Size(189, 17)
+        Me.chkCanonicalize.TabIndex = 22
+        Me.chkCanonicalize.Text = "Append To / Canonicalize Domain"
+        Me.chkCanonicalize.UseVisualStyleBackColor = False
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(6, 22)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(147, 13)
+        Me.Label19.TabIndex = 5
+        Me.Label19.Text = "URI Part to Add (omit first dot)"
         '
         'txtOptionsShortcut
         '
@@ -1316,15 +1361,15 @@ Partial Class frmOptions
         TreeNode8.Name = "ndGrid"
         TreeNode8.Tag = "tabGrid"
         TreeNode8.Text = "Grid"
-        TreeNode9.Name = "ndShortcuts"
-        TreeNode9.Tag = "tabShortcuts"
-        TreeNode9.Text = "Shortcuts"
-        TreeNode10.Name = "ndPrivacy"
-        TreeNode10.Tag = "tabPrivacy"
-        TreeNode10.Text = "Privacy"
-        TreeNode11.Name = "ndStartup"
-        TreeNode11.Tag = "tabStartup"
-        TreeNode11.Text = "Startup"
+        TreeNode9.Name = "ndPrivacy"
+        TreeNode9.Tag = "tabPrivacy"
+        TreeNode9.Text = "Privacy"
+        TreeNode10.Name = "ndStartup"
+        TreeNode10.Tag = "tabStartup"
+        TreeNode10.Text = "Startup"
+        TreeNode11.Name = "ndOthers"
+        TreeNode11.Tag = "tabOthers"
+        TreeNode11.Text = "Others"
         TreeNode12.Name = "ndSettigns"
         TreeNode12.Text = "Settings"
         TreeNode13.Name = "ndDefauls"
@@ -1379,8 +1424,10 @@ Partial Class frmOptions
         Me.GroupBox1.PerformLayout()
         CType(Me.nudHeight, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabShortcuts.ResumeLayout(False)
-        Me.tabShortcuts.PerformLayout()
+        Me.tabOthers.ResumeLayout(False)
+        Me.tabOthers.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.tabStartup.ResumeLayout(False)
         Me.tabStartup.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -1486,7 +1533,7 @@ Partial Class frmOptions
     Friend WithEvents Label2 As Label
     Friend WithEvents nudHeight As NumericUpDown
     Friend WithEvents nudWidth As NumericUpDown
-    Friend WithEvents tabShortcuts As TabPage
+    Friend WithEvents tabOthers As TabPage
     Friend WithEvents txtOptionsShortcut As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents tabStartup As TabPage
@@ -1510,4 +1557,8 @@ Partial Class frmOptions
     Friend WithEvents cmdRemoveFromDefaultSettings As Button
     Friend WithEvents ColumnHeader5 As ColumnHeader
     Friend WithEvents chkAllowStayOpen As CheckBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents chkCanonicalize As CheckBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents txtCanonicalizeAppend As TextBox
 End Class

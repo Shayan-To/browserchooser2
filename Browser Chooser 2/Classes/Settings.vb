@@ -61,6 +61,8 @@ Public Class Settings
     Public OffsetX As Integer = 0
     Public OffsetY As Integer = 0
     Public AllowStayOpen As Boolean = False 'new behaviour in R1
+    Public Canonicalize As Boolean = False 'new behaviour in R2
+    Public CanonicalizeAppendedText As String = "" 'new behavoir in R2
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
     <NonSerialized()> Public Shared LogDebugs As TriState = TriState.UseDefault 'only true if specified by command line

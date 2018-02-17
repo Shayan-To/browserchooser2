@@ -87,6 +87,8 @@ Public Class frmOptions
         gSettings.IconGapHeight = CInt(nudIconGapHeight.Value)
         gSettings.BackgroundColor = pbBackgroundColor.BackColor.ToArgb
         gSettings.IconScale = nudIconScale.Value
+        gSettings.Canonicalize = chkCanonicalize.Checked
+        gSettings.CanonicalizeAppendedText = txtCanonicalizeAppend.Text
 
         Dim lSelectedStartingPosition As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
         If Not lSelectedStartingPosition Is Nothing Then
@@ -222,28 +224,6 @@ Public Class frmOptions
         End If
     End Sub
 #End Region
-
-    '#Region "TabControl Manipulation"
-    '    Private mHiddenTabs As New List(Of TabPage)
-
-    '    Private Sub HideAdvancedPages()
-    '        mHiddenTabs.Add(tabProtocols)
-    '        mHiddenTabs.Add(tabFileTypes)
-    '        mHiddenTabs.Add(tabCategories)
-    '        tabSettings.TabPages.Remove(tabProtocols)
-    '        tabSettings.TabPages.Remove(tabFileTypes)
-    '        tabSettings.TabPages.Remove(tabCategories)
-    '    End Sub
-
-    '    Private Sub ShowAdvancedPages()
-    '        If mHiddenTabs.Count > 0 Then
-    '            tabSettings.TabPages.Insert(2, mHiddenTabs(0))
-    '            tabSettings.TabPages.Insert(3, mHiddenTabs(1))
-    '            tabSettings.TabPages.Insert(4, mHiddenTabs(2))
-    '            mHiddenTabs.Clear()
-    '        End If
-    '    End Sub
-    '#End Region
 
 #Region "Form Events"
     Public Enum SettingsStartPage
@@ -445,6 +425,9 @@ Public Class frmOptions
         cmbStartingPosition.SelectedItem = cmbStartingPosition.Items(gSettings.StartingPosition)
         nudXOffset.Value = gSettings.OffsetX
         nudYOffset.Value = gSettings.OffsetY
+        chkCanonicalize.Checked = gSettings.Canonicalize
+        txtCanonicalizeAppend.Enabled = chkCanonicalize.Checked
+        txtCanonicalizeAppend.Text = gSettings.CanonicalizeAppendedText
 
         'FocusSettings
         mFocusSettings = New frmAccessibilitySettings.FocusSettings
@@ -1144,5 +1127,10 @@ Public Class frmOptions
         Else
             GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeDefault)
         End If
+    End Sub
+
+
+    Private Sub chkCanonicalize_CheckedChanged(sender As Object, e As EventArgs) Handles chkCanonicalize.CheckedChanged
+        txtCanonicalizeAppend.Enabled = chkCanonicalize.Checked
     End Sub
 End Class
