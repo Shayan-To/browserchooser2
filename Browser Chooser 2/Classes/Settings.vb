@@ -63,6 +63,7 @@ Public Class Settings
     Public AllowStayOpen As Boolean = False 'new behaviour in R1
     Public Canonicalize As Boolean = False 'new behaviour in R2
     Public CanonicalizeAppendedText As String = "" 'new behavoir in R2
+    Public EnableLogging As Boolean = False 'new behavior in R2
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
     <NonSerialized()> Public Shared LogDebugs As TriState = TriState.UseDefault 'only true if specified by command line
@@ -225,6 +226,10 @@ Public Class Settings
                     lOut = DirectCast(serializer.Deserialize(reader), Settings)
                     reader.Close()
                 End Using
+
+                If lOut.EnableLogging = True Then
+                    Settings.LogDebugs = TriState.True
+                End If
 
                 'lock width and height to 10 max, 1 min - acts as overflow protection
                 If lOut.Width > 10 Then

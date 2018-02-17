@@ -156,6 +156,7 @@ Partial Class frmOptions
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
         Me.treeSettings = New System.Windows.Forms.TreeView()
+        Me.chkLog = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -926,6 +927,7 @@ Partial Class frmOptions
         '
         'tabOthers
         '
+        Me.tabOthers.Controls.Add(Me.chkLog)
         Me.tabOthers.Controls.Add(Me.GroupBox5)
         Me.tabOthers.Controls.Add(Me.txtOptionsShortcut)
         Me.tabOthers.Controls.Add(Me.Label4)
@@ -1379,6 +1381,17 @@ Partial Class frmOptions
         Me.treeSettings.Size = New System.Drawing.Size(165, 270)
         Me.treeSettings.TabIndex = 4
         '
+        'chkLog
+        '
+        Me.chkLog.AutoSize = True
+        Me.chkLog.BackColor = System.Drawing.Color.Transparent
+        Me.chkLog.Location = New System.Drawing.Point(5, 83)
+        Me.chkLog.Name = "chkLog"
+        Me.chkLog.Size = New System.Drawing.Size(100, 17)
+        Me.chkLog.TabIndex = 24
+        Me.chkLog.Text = "Enable Logging"
+        Me.chkLog.UseVisualStyleBackColor = False
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1561,4 +1574,5 @@ Partial Class frmOptions
     Friend WithEvents chkCanonicalize As CheckBox
     Friend WithEvents Label19 As Label
     Friend WithEvents txtCanonicalizeAppend As TextBox
+    Friend WithEvents chkLog As CheckBox
 End Class

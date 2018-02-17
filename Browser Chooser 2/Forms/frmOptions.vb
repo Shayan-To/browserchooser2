@@ -89,6 +89,7 @@ Public Class frmOptions
         gSettings.IconScale = nudIconScale.Value
         gSettings.Canonicalize = chkCanonicalize.Checked
         gSettings.CanonicalizeAppendedText = txtCanonicalizeAppend.Text
+        gSettings.EnableLogging = chkLog.Checked
 
         Dim lSelectedStartingPosition As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
         If Not lSelectedStartingPosition Is Nothing Then
@@ -428,6 +429,7 @@ Public Class frmOptions
         chkCanonicalize.Checked = gSettings.Canonicalize
         txtCanonicalizeAppend.Enabled = chkCanonicalize.Checked
         txtCanonicalizeAppend.Text = gSettings.CanonicalizeAppendedText
+        chkLog.Checked = gSettings.EnableLogging
 
         'FocusSettings
         mFocusSettings = New frmAccessibilitySettings.FocusSettings
@@ -1132,5 +1134,13 @@ Public Class frmOptions
 
     Private Sub chkCanonicalize_CheckedChanged(sender As Object, e As EventArgs) Handles chkCanonicalize.CheckedChanged
         txtCanonicalizeAppend.Enabled = chkCanonicalize.Checked
+    End Sub
+
+    Private Sub chkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
+        If chkLog.Checked = True Then
+            Settings.LogDebugs = TriState.True
+        Else
+            Settings.LogDebugs = TriState.False
+        End If
     End Sub
 End Class
