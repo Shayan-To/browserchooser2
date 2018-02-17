@@ -3,11 +3,12 @@ Imports System.IO
 
 <Serializable()> _
 Public Class Settings
-    Public Const CURRRENT_FILE_VERSION As Integer = 4 'will be used later for upgrade detection
+    Public Const CURRRENT_FILE_VERSION As Integer = 5 'will be used later for upgrade detection
     '   NOTE: Version 2 adds the protocol and file types - automaticly added
     '   NOTE: Version 3 redoes the protocols and file types, adds accessiblity settings
     '   NOTE: Version 4 redoes the accessiblity settings and mimics v3
     '   NOTE: Several Settings were added in Beta 2 but did not required a version bump.
+    '   NOTE: Version 5 is to check for the registry. If cancel, don't update version
 
     Public Enum AvailableStartingPositions
         CenterScreen
@@ -270,7 +271,7 @@ Public Class Settings
                     If lOut.Seperator = "" Then
                         lOut.Seperator = " - "
                     End If
-                    lOut.FileVersion = CURRRENT_FILE_VERSION
+                    lOut.FileVersion = 4 'force checking of registry below
 
                     'determine if a SR is present, if yes, turn on accessible rendering
                     Dim lResult As Boolean = False
@@ -350,6 +351,15 @@ Public Class Settings
 
                     'save the changes
                     lOut.DoSave(True)
+                End If
+
+                'check if version 4, if yes ask to update registry
+                If lOut.FileVersion = 4 Then
+                    If DefaultBrowser.UpdateUserScope() <> DialogResult.Cancel Then
+                        lOut.FileVersion = CURRRENT_FILE_VERSION
+
+                        lOut.DoSave(True)
+                    End If
                 End If
 
                 Logger.AddToLog("Settings.Load", "End", aPath)

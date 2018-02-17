@@ -153,6 +153,32 @@ Public Class DefaultBrowser
         Logger.AddToLog("DefaultBrowser.MakeAvailable", "End", aScope)
     End Sub
 
+    Public Shared Function UpdateUserScope() As DialogResult
+        Logger.AddToLog("DefaultBrowser.UpdateUserScope", "Start")
+        Dim aROOT As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\", True)
+
+        'no support for XP here. XP code is deprecated and will be removed at some point
+        'we need to update our classes root
+        Dim lNeedsUpdate As Boolean = False
+        Dim lKey = aROOT.OpenSubKey(mFileAssociations, True)
+        Dim lKey2 = aROOT.OpenSubKey(mURLAssociations, True)
+        Dim lSubKey = lKey.OpenSubKey("shell\open\command", True)
+        Dim lSubKey2 = lKey2.OpenSubKey("shell\open\command", True)
+        Dim lAnswer As DialogResult = DialogResult.No
+        If lSubKey.GetValue("").ToString() <> """" & Application.ExecutablePath & """ ""%1""" Or
+            lSubKey2.GetValue("").ToString() <> """" & Application.ExecutablePath & """ ""%1""" Then
+
+            lAnswer = MessageBox.Show("BROSWER CHOOSER 2: The registry settings need updating. Do you want to update registry settings?", "BROSWER CHOOSER 2: Update Registry", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            If lAnswer = DialogResult.Yes Then
+                lKey.CreateSubKey("shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                lKey2.CreateSubKey("shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+            End If
+        End If
+
+        Logger.AddToLog("DefaultBrowser.UpdateUserScope", "End")
+        Return lAnswer 'default is no, no update required. 
+    End Function
+
     Private Shared Sub DoUserScope(ByVal aMaster As RegistryKey) 'includes windows XP
         Logger.AddToLog("DefaultBrowser.DoUserScope", "Start", aMaster)
         'If aScope = Settings.Scope.sGlobal Then
