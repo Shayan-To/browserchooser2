@@ -157,6 +157,7 @@ Partial Class frmOptions
         Me.cdColorDialog = New System.Windows.Forms.ColorDialog()
         Me.treeSettings = New System.Windows.Forms.TreeView()
         Me.chkLog = New System.Windows.Forms.CheckBox()
+        Me.chkExtract = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabSettings.SuspendLayout()
         Me.tabBrowsers.SuspendLayout()
@@ -927,6 +928,7 @@ Partial Class frmOptions
         '
         'tabOthers
         '
+        Me.tabOthers.Controls.Add(Me.chkExtract)
         Me.tabOthers.Controls.Add(Me.chkLog)
         Me.tabOthers.Controls.Add(Me.GroupBox5)
         Me.tabOthers.Controls.Add(Me.txtOptionsShortcut)
@@ -1392,6 +1394,17 @@ Partial Class frmOptions
         Me.chkLog.Text = "Enable Logging"
         Me.chkLog.UseVisualStyleBackColor = False
         '
+        'chkExtract
+        '
+        Me.chkExtract.AutoSize = True
+        Me.chkExtract.BackColor = System.Drawing.Color.Transparent
+        Me.chkExtract.Location = New System.Drawing.Point(5, 106)
+        Me.chkExtract.Name = "chkExtract"
+        Me.chkExtract.Size = New System.Drawing.Size(128, 17)
+        Me.chkExtract.TabIndex = 25
+        Me.chkExtract.Text = "Extract embded DLLs"
+        Me.chkExtract.UseVisualStyleBackColor = False
+        '
         'frmOptions
         '
         Me.AcceptButton = Me.cmdSave
@@ -1575,4 +1588,5 @@ Partial Class frmOptions
     Friend WithEvents Label19 As Label
     Friend WithEvents txtCanonicalizeAppend As TextBox
     Friend WithEvents chkLog As CheckBox
+    Friend WithEvents chkExtract As CheckBox
 End Class

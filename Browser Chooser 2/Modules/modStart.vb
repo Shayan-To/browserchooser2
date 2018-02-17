@@ -15,7 +15,7 @@ Module modStart
     Public Const CurVersionDisplay As String = ""
 #End If
 #Else
-    Public Const CurVersion As String = "R1"
+    Public Const CurVersion As String = "R2"
     Public Const CurVersionDisplay As String = ""
 #End If
 
@@ -184,6 +184,30 @@ Module modStart
         MsgBox("Paused to attach")
 #End If
 
+        'check for log / extract BEFORE anything else
+        If (My.Application.CommandLineArgs.Count > 0) Then
+            For Each cmdLineOption As String In My.Application.CommandLineArgs
+                Logger.AddToLog("modStart.Main", "Start Processing Command Line", cmdLineOption)
+
+                If cmdLineOption.StartsWith("--") Then
+                    Select Case cmdLineOption.ToLower
+                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.LoggingEnabled)
+                            Logger.AddToLog("modStart.ContinueMain", "Enable Logging")
+
+                            'logging
+                            Settings.LogDebugs = TriState.True
+
+                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ExtractDLLs),
+                             GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SExtractDLLs)
+                            Logger.AddToLog("modStart.ContinueMain", "Enable DLL Extraction")
+
+                            'logging
+                            Settings.DoExtractDLLs = True
+                    End Select
+
+                End If
+            Next
+        End If
         Dim lStartup As New StartupLauncher
 
         ' load the WindowsAPICodePack DLLs from the embedded resource allowing us to keep one tidy .exe and no dlls.
@@ -307,14 +331,6 @@ Module modStart
 
                             LoadSettings()
                             CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
-
-
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.LoggingEnabled)
-                            Logger.AddToLog("modStart.ContinueMain", "Enable Logging")
-
-                            'logging
-                            Settings.LogDebugs = TriState.True
-                            lbExit = False
                     End Select
 
                     If lbExit = True Then

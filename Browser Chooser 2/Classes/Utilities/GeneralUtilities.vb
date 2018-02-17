@@ -43,6 +43,9 @@ Public Class GeneralUtilities
         SSettingsDefaultBrowser
         'log where we are
         LoggingEnabled
+        'extract dlls,
+        ExtractDLLs
+        SExtractDLLs
     End Enum
 
     Public Shared AvailableCommands As New Dictionary(Of ListOfCommands, String) From {
@@ -76,7 +79,9 @@ Public Class GeneralUtilities
             {ListOfCommands.SSettingsSettings, "--s:s"},
             {ListOfCommands.SSettingsMoreSettings, "--s:ms"},
             {ListOfCommands.SSettingsDefaultBrowser, "--s:db"},
-            {ListOfCommands.LoggingEnabled, "--log"}
+            {ListOfCommands.LoggingEnabled, "--log"},
+            {ListOfCommands.ExtractDLLs, "--extract"},
+            {ListOfCommands.SExtractDLLs, "--e"}
         }
 
     'NOTE: TAFactory.IconPack.dll comes from http://www.codeproject.com/Articles/32617/Extracting-Icons-from-EXE-DLL-and-Icon-Manipulatio
@@ -270,10 +275,12 @@ Public Class GeneralUtilities
 
                 'see if this XMlSerializer, extract to disk if yes
                 If name = mFileNames.Item(EmbededDLLs.XMLSerializer) Then
-                    Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Writting assembly to disk")
-                    Dim writeStream As New StreamWriter(mFileNames.Item(EmbededDLLs.XMLSerializer), False)
-                    writeStream.Write(stream)
-                    writeStream.Close()
+                    If Settings.DoExtractDLLs = True Then
+                        Logger.AddToLog("GeneralUtilities.SHDocVw_ResolveEventHandler", "Writting assembly to disk")
+                        Dim writeStream As New StreamWriter(mFileNames.Item(EmbededDLLs.XMLSerializer), False)
+                        writeStream.Write(stream)
+                        writeStream.Close()
+                    End If
                     Return GetType(GeneralUtilities).Assembly
                 Else
                     Return Assembly.Load(block)

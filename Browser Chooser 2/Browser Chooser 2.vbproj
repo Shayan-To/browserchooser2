@@ -607,6 +607,12 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)DotNet\sgen.exe" /t:Browser_Chooser_2.Settings /t:Browser_Chooser_2.DetectedBrowsers /a:"$(TargetDir)$(TargetFileName)" /force
+echo Browser Chooser 2.XmlSerializers.dll created
+copy "$(TargetDir)\Browser Chooser 2.XmlSerializers.dll" "$(ProjectDir)Resources" /y
+echo REMEMBER TO COMPILE TWICE TO ENSURE THE DLL IS UP TO DATE</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

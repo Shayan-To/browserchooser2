@@ -90,6 +90,7 @@ Public Class frmOptions
         gSettings.Canonicalize = chkCanonicalize.Checked
         gSettings.CanonicalizeAppendedText = txtCanonicalizeAppend.Text
         gSettings.EnableLogging = chkLog.Checked
+        gSettings.ExtractDLLs = chkExtract.Checked
 
         Dim lSelectedStartingPosition As DisplayDictionary = TryCast(cmbStartingPosition.SelectedItem, DisplayDictionary)
         If Not lSelectedStartingPosition Is Nothing Then
@@ -430,6 +431,7 @@ Public Class frmOptions
         txtCanonicalizeAppend.Enabled = chkCanonicalize.Checked
         txtCanonicalizeAppend.Text = gSettings.CanonicalizeAppendedText
         chkLog.Checked = gSettings.EnableLogging
+        chkExtract.Checked = gSettings.ExtractDLLs
 
         'FocusSettings
         mFocusSettings = New frmAccessibilitySettings.FocusSettings

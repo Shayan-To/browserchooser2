@@ -64,9 +64,11 @@ Public Class Settings
     Public Canonicalize As Boolean = False 'new behaviour in R2
     Public CanonicalizeAppendedText As String = "" 'new behavoir in R2
     Public EnableLogging As Boolean = False 'new behavior in R2
+    Public ExtractDLLs As Boolean = False 'new behavior in R2
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
     <NonSerialized()> Public Shared LogDebugs As TriState = TriState.UseDefault 'only true if specified by command line
+    <NonSerialized()> Public Shared DoExtractDLLs As Boolean = False 'only true if specified by command line
 
     Sub New(ByVal aError As Boolean)
         Logger.AddToLog("Settings.New (With Args)", "Start", aError)
@@ -213,8 +215,21 @@ Public Class Settings
         Logger.AddToLog("Settings.DoSave", "End", OverrideSafeMode)
     End Sub
 
+    Private Shared Sub CheckExtract(aPath As String)
+        Dim configPath As String = Path.Combine(aPath, Settings.BrowserChooserConfigFileName)
+        Dim lConfig() As String = File.ReadAllLines(configPath)
+
+        For Each lSingle As String In lConfig
+            If lSingle.ToLower.Contains("<extractdlls>true</extractdlls>") Then
+                Settings.DoExtractDLLs = True
+                Exit Sub
+            End If
+        Next
+    End Sub
+
     Public Shared Function Load(ByVal aPath As String) As Settings
         Logger.AddToLog("Settings.Load", "Start", aPath)
+        CheckExtract(aPath)
         Dim serializer As New XmlSerializer(GetType(Settings))
         Dim lOut As Settings
 
@@ -229,6 +244,10 @@ Public Class Settings
 
                 If lOut.EnableLogging = True Then
                     Settings.LogDebugs = TriState.True
+                End If
+
+                If lOut.ExtractDLLs = True Then
+                    Settings.DoExtractDLLs = True
                 End If
 
                 'lock width and height to 10 max, 1 min - acts as overflow protection
