@@ -133,6 +133,7 @@ Public Class StartupLauncher
         Else
             mURL = aURL 'filename
         End If
+        ProcessParts(lParts)
 
         If abUnShorten = True And mURL <> "" And lParts.isProtocol = TriState.True Then
             'to do

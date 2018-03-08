@@ -180,7 +180,7 @@ Public Class DefaultBrowser
     End Function
 
     Private Shared Sub DoUserScope(ByVal aMaster As RegistryKey) 'includes windows XP
-        Logger.AddToLog("DefaultBrowser.DoUserScope", "Start", aMaster)
+        Logger.AddToLog("DefaultBrowser.DoUserScope", "Start", aMaster.Name)
         'If aScope = Settings.Scope.sGlobal Then
         Registry.CurrentUser.CreateSubKey("SOFTWARE\Clients\StartMenuInternet\").DeleteValue("", False)
         'End If
@@ -240,7 +240,7 @@ Public Class DefaultBrowser
         'create accosiations in user software classes
         CreateAssociations(Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\", True))
 
-        Logger.AddToLog("DefaultBrowser.DoUserScope", "End", aMaster)
+        Logger.AddToLog("DefaultBrowser.DoUserScope", "End", aMaster.Name)
     End Sub
 
     Public Shared Sub MakeDefault(ByVal aScope As DefaultBrowser.Scope, Optional ByVal aForce8 As Boolean = False, Optional ByVal aShowMessage As Boolean = True, Optional aDoSingle As String = "", Optional abIsProtocol As Boolean = False)
