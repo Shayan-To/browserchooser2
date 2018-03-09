@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <versionInfo>
-  <id>R2</id>
+  <id>R2_1</id>
   <download><![CDATA[http://browserchooser2.com/app/Browser Chooser 2.exe]]></download>
-  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Relase1</releaseinfo>  
+  <releaseinfo>https://bitbucket.org/gmyx/browserchooser2/wiki/Relase2</releaseinfo>  
   <details>
     Source code location: https://bitbucket.org/gmyx/browserchooser2
     Web site: http://browserchooser2.com
     p.s. I know it does not look great, I need someone to fix it up. Especially some SEO stuff.
+    
+    *************************************
+    * Re-release to fix major 2 crashes *
+    * Sorry about the message spam      *
+    *************************************
 
     New Features:
     * Setting page

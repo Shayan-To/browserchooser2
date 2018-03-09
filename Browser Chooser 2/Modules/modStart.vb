@@ -15,7 +15,7 @@ Module modStart
     Public Const CurVersionDisplay As String = ""
 #End If
 #Else
-    Public Const CurVersion As String = "R2"
+    Public Const CurVersion As String = "R2_1"
     Public Const CurVersionDisplay As String = ""
 #End If
 
