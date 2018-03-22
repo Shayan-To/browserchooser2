@@ -218,6 +218,8 @@ Public Class Settings
 
     Private Shared Sub CheckExtract(aPath As String)
         Dim configPath As String = Path.Combine(aPath, Settings.BrowserChooserConfigFileName)
+        If IO.File.Exists(configPath) = False Then Exit Sub
+
         Dim lConfig() As String = File.ReadAllLines(configPath)
 
         For Each lSingle As String In lConfig
