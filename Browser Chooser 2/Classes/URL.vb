@@ -2,11 +2,11 @@
     Implements ICloneable
 
     Private msURL As String
-    Private mBrowser As Browser 'used only for backwards compatibility
     Private mGUID As Guid
     Private mbAutoLoad As Boolean
     Private miDelayTime As Integer 'seconds - if definned delays autoload x seconds
     Private mbShowURL As CheckState 'an override to main setting
+    Private msSearchString As String
 
     Public Property URL() As String
         Get
@@ -14,26 +14,6 @@
         End Get
         Set(ByVal value As String)
             msURL = value
-        End Set
-    End Property
-
-    Public ReadOnly Property Browser_Old() As Browser
-        Get
-            Return mBrowser
-        End Get
-        'Set(ByVal value As Browser)
-        '    mBrowser = value
-        'End Set
-    End Property
-
-    '<Obsolete("Use GUID instead of direct Browser Access", False)> _
-    Public Property Browser() As Browser
-        <Obsolete("Use GUID instead of direct Browser Access", False)> _
-        Get
-            Return Nothing
-        End Get
-        Set(ByVal value As Browser)
-            mGUID = value.GUID
         End Set
     End Property
 
@@ -73,27 +53,17 @@
         End Set
     End Property
 
+    Public Property SearchString As String
+        Get
+            Return msSearchString
+        End Get
+        Set(value As String)
+            msSearchString = value
+        End Set
+    End Property
+
     Public Sub New()
         'required for export / import
-    End Sub
-
-    <Obsolete()> _
-    Public Sub New(asName As String, aBrowser As Browser, abAutoLoad As Boolean, aiDelayTime As Integer, abShowURL As CheckState)
-        msURL = asName
-        mBrowser = aBrowser
-        mbAutoLoad = abAutoLoad
-        miDelayTime = aiDelayTime
-        mbShowURL = abShowURL
-        mGUID = aBrowser.GUID
-    End Sub
-
-    Public Sub New(asName As String, aBrowser As Browser, abAutoLoad As Boolean, aiDelayTime As Integer, abShowURL As CheckState, aGUID As Guid)
-        msURL = asName
-        mBrowser = aBrowser
-        mbAutoLoad = abAutoLoad
-        miDelayTime = aiDelayTime
-        mbShowURL = abShowURL
-        mGUID = aGUID
     End Sub
 
     Public Sub New(asName As String, abAutoLoad As Boolean, aiDelayTime As Integer, abShowURL As CheckState, aGUID As Guid)
@@ -108,11 +78,11 @@
         Dim lOut As New URL
 
         lOut.URL = msURL
-        'lOut.Browser = DirectCast(mBrowser.Clone, Browser)
         lOut.AutoLoad = mbAutoLoad
         lOut.DelayTime = miDelayTime
         lOut.ShowURL = mbShowURL
         lOut.Guid = mGUID
+        lOut.SearchString = msSearchString
 
         Return lOut
 

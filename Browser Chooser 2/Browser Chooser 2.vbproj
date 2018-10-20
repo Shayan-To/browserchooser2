@@ -353,6 +353,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Policy\Policy.vb" />
     <Compile Include="Classes\DefaultBrowser.vb" />
     <Compile Include="Classes\DetectedBrowsers\BrowserDefinition.vb" />
     <Compile Include="Classes\DetectedBrowsers\DetectedBrowsers.vb" />
@@ -360,6 +361,8 @@
     <Compile Include="Classes\FileType.vb" />
     <Compile Include="Classes\IApplicationActivationManager.vb" />
     <Compile Include="Classes\Logger.vb" />
+    <Compile Include="Policy\PolicyMerge.Browser.vb" />
+    <Compile Include="Policy\PolicyMerge.vb" />
     <Compile Include="Classes\Protocol.vb" />
     <Compile Include="Classes\Updater.vb" />
     <Compile Include="Classes\Utilities\URLUtilities.vb" />
@@ -496,6 +499,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Compile Include="Policy\PolicyMerge.URL.vb" />
     <None Include="Resources\world_go.png" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
     Implements IEquatable(Of Browser)
 
     Private mGUID As Guid
-    Private mType As String 'eg. browser, editor, BT, office editor
+    'Private mType As String 'eg. browser, editor, BT, office editor
     Private msName As String
     Private msTarget As String
     Private msImage As String
@@ -110,7 +110,7 @@
         End Set
     End Property
 
-    ' <Obsolete>
+    <Obsolete("X is ambigous. Use Row instead")>
     Public Property PosX() As Integer
         Get
             Return mPosX
@@ -120,7 +120,7 @@
         End Set
     End Property
 
-    ' <Obsolete>
+    <Obsolete("Y is ambigous. Use Col instead")>
     Public Property PosY() As Integer
         Get
             Return mPosY

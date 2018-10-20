@@ -27,45 +27,106 @@ Public Class Settings
         Seperator3 = -3
     End Enum
 
+    Public Enum DefaultField
+        FileVersion
+        IconWidth
+        IconHeight
+        IconGapWidth
+        IconGapHeight
+        IconScale
+        OptionsShortcut
+        DefaultMessage
+        DefaultDelay
+        AutomaticUpdates
+        CheckDefaultOnLaunch
+        AdvancedScreens
+        Seperator
+        UseAreo
+        FocusBoxLineWidth
+        FocusBoxColor
+        UserAgent
+        DownloadDetectionFile
+        BackgroundColor
+        StartingPosition
+        OffsetX
+        OffsetY
+        AllowStayOpen
+        Canonicalize
+        CanonicalizeAppendedText
+        EnableLogging
+        ExtractDLLs
+    End Enum
+    'doing the defaults this way allows me refer to them later
+    <NonSerialized()>
+    Public Defaults As New Dictionary(Of DefaultField, Object) From {
+        {DefaultField.FileVersion, CURRRENT_FILE_VERSION},
+        {DefaultField.IconWidth, 75},
+        {DefaultField.IconHeight, 80},
+        {DefaultField.IconGapWidth, 0},
+        {DefaultField.IconGapHeight, 0},
+        {DefaultField.IconScale, 1D},
+        {DefaultField.OptionsShortcut, "O"c},
+        {DefaultField.DefaultMessage, "Choose a Browser"},
+        {DefaultField.DefaultDelay, 0},
+        {DefaultField.AutomaticUpdates, True},
+        {DefaultField.CheckDefaultOnLaunch, False},
+        {DefaultField.AdvancedScreens, False},
+        {DefaultField.Seperator, " - "},
+        {DefaultField.UseAreo, True},
+        {DefaultField.FocusBoxLineWidth, 1},
+        {DefaultField.FocusBoxColor, Color.Transparent.ToArgb},
+        {DefaultField.UserAgent, "Mozilla/5.0"},
+        {DefaultField.DownloadDetectionFile, True},
+        {DefaultField.BackgroundColor, Color.Transparent.ToArgb},
+        {DefaultField.StartingPosition, AvailableStartingPositions.CenterScreen},
+        {DefaultField.OffsetX, 0},
+        {DefaultField.OffsetY, 0},
+        {DefaultField.AllowStayOpen, False},
+        {DefaultField.Canonicalize, False},
+        {DefaultField.CanonicalizeAppendedText, ""},
+        {DefaultField.EnableLogging, False},
+        {DefaultField.ExtractDLLs, False}
+    }
+
     Public Const BrowserChooserConfigFileName As String = "BrowserChooser2Config.xml"
     Public Browsers As List(Of Browser)
     Public PortableMode As Boolean
     Public ShowURL As Boolean
     Public RevealShortURL As Boolean
-    Public FileVersion As Integer = CURRRENT_FILE_VERSION
+    Public FileVersion As Integer = DirectCast(Defaults(DefaultField.FileVersion), Integer) '  CURRRENT_FILE_VERSION
     Public Protocols As List(Of Protocol)
     Public FileTypes As List(Of FileType)
     Public URLs As List(Of URL)
     Public Width As Integer
     Public Height As Integer
-    Public IconWidth As Integer = 75
-    Public IconHeight As Integer = 80
-    Public IconGapWidth As Integer = 0
-    Public IconGapHeight As Integer = 0
-    Public IconScale As Decimal = 1D
-    Public OptionsShortcut As Char = "O"c
-    Public DefaultMessage As String = "Choose a Browser"
-    Public DefaultDelay As Integer = 0
-    Public AutomaticUpdates As Boolean = True
-    Public CheckDefaultOnLaunch As Boolean = False
-    Public AdvancedScreens As Boolean = False
-    Public Seperator As String = " - "
+    Public IconWidth As Integer = DirectCast(Defaults(DefaultField.IconWidth), Integer)
+    Public IconHeight As Integer = DirectCast(Defaults(DefaultField.IconHeight), Integer)
+    Public IconGapWidth As Integer = DirectCast(Defaults(DefaultField.IconGapWidth), Integer)
+    Public IconGapHeight As Integer = DirectCast(Defaults(DefaultField.IconGapHeight), Integer)
+    Public IconScale As Decimal = DirectCast(Defaults(DefaultField.IconScale), Decimal)
+    Public OptionsShortcut As Char = DirectCast(Defaults(DefaultField.OptionsShortcut), Char)
+    Public DefaultMessage As String = DirectCast(Defaults(DefaultField.DefaultMessage), String)
+    Public DefaultDelay As Integer = DirectCast(Defaults(DefaultField.DefaultDelay), Integer)
+    Public AutomaticUpdates As Boolean = DirectCast(Defaults(DefaultField.AutomaticUpdates), Boolean)
+    Public CheckDefaultOnLaunch As Boolean = DirectCast(Defaults(DefaultField.CheckDefaultOnLaunch), Boolean)
+    Public AdvancedScreens As Boolean = DirectCast(Defaults(DefaultField.AdvancedScreens), Boolean)
+    Public Seperator As String = DirectCast(Defaults(DefaultField.Seperator), String)
     Public AccessibleRendering As Boolean 'true only if a screen reader is detected
     Public ShowFocus As Boolean 'determines if we show the black box around the main screen elements
-    Public UseAreo As Boolean = True ' incase the user prefers not to have the fancy background
-    Public FocusBoxLineWidth As Integer = 1
-    Public FocusBoxColor As Integer = Color.Black.ToArgb
-    Public UserAgent As String = "Mozilla/5.0"
-	Public DownloadDetectionFile As Boolean = True
-    Public BackgroundColor As Integer = Color.Transparent.ToArgb
-    Public StartingPosition As Integer = AvailableStartingPositions.CenterScreen
-    Public OffsetX As Integer = 0
-    Public OffsetY As Integer = 0
-    Public AllowStayOpen As Boolean = False 'new behaviour in R1
-    Public Canonicalize As Boolean = False 'new behaviour in R2
-    Public CanonicalizeAppendedText As String = "" 'new behavoir in R2
-    Public EnableLogging As Boolean = False 'new behavior in R2
-    Public ExtractDLLs As Boolean = False 'new behavior in R2
+    Public UseAreo As Boolean = DirectCast(Defaults(DefaultField.UseAreo), Boolean) ' incase the user prefers not to have the fancy background
+    Public FocusBoxLineWidth As Integer = DirectCast(Defaults(DefaultField.FocusBoxLineWidth), Integer)
+    Public FocusBoxColor As Integer = DirectCast(Defaults(DefaultField.FocusBoxColor), Integer)
+    Public UserAgent As String = DirectCast(Defaults(DefaultField.UserAgent), String)
+    Public DownloadDetectionFile As Boolean = DirectCast(Defaults(DefaultField.DownloadDetectionFile), Boolean)
+    Public BackgroundColor As Integer = DirectCast(Defaults(DefaultField.BackgroundColor), Integer)
+    Public StartingPosition As Integer = DirectCast(Defaults(DefaultField.StartingPosition), Integer)
+    Public OffsetX As Integer = DirectCast(Defaults(DefaultField.OffsetX), Integer)
+    Public OffsetY As Integer = DirectCast(Defaults(DefaultField.OffsetY), Integer)
+    Public AllowStayOpen As Boolean = DirectCast(Defaults(DefaultField.AllowStayOpen), Boolean) 'new behaviour in R1
+    Public Canonicalize As Boolean = DirectCast(Defaults(DefaultField.Canonicalize), Boolean) 'new behaviour in R2
+    Public CanonicalizeAppendedText As String = DirectCast(Defaults(DefaultField.UserAgent), String) 'new behavoir in R2
+    Public EnableLogging As Boolean = DirectCast(Defaults(DefaultField.CanonicalizeAppendedText), Boolean) 'new behavior in R2
+    Public ExtractDLLs As Boolean = DirectCast(Defaults(DefaultField.ExtractDLLs), Boolean) 'new behavior in R2
 
     <NonSerialized()> Public SafeMode As Boolean = False 'only true when the file could not be read - prevents saving
     <NonSerialized()> Public Shared LogDebugs As TriState = TriState.UseDefault 'only true if specified by command line
@@ -172,17 +233,6 @@ Public Class Settings
         Logger.AddToLog("Settings.New (No args)", "End")
     End Sub
 
-    <Obsolete("Should use DoSave instead - it knows about portable mode and such")>
-    Public Sub Save(ByVal aPath As String)
-        Logger.AddToLog("Settings.Save", "Start")
-        If Me.SafeMode = True Then
-            Logger.AddToLog("Settings.Save", "Safe Mode")
-            Exit Sub 'do not save
-        End If
-        IntSave(aPath) 'send to new functions
-        Logger.AddToLog("Settings.Save", "End")
-    End Sub
-
     Private Sub IntSave(ByVal aPath As String)
         Logger.AddToLog("Settings.IntSave", "Start", aPath)
         If Me.SafeMode = True Then
@@ -208,6 +258,7 @@ Public Class Settings
     Public Sub DoSave(ByVal OverrideSafeMode As Boolean)
         Logger.AddToLog("Settings.DoSave", "Start", OverrideSafeMode)
         If Me.SafeMode = True And OverrideSafeMode = False Then Exit Sub 'do not save
+        If Policy.IgnoreSettingsFile = True Then Exit Sub 'do not save, file is disabled
         If Me.PortableMode = True Then
             Me.IntSave(Application.StartupPath)
         Else
@@ -232,6 +283,10 @@ Public Class Settings
 
     Public Shared Function Load(ByVal aPath As String) As Settings
         Logger.AddToLog("Settings.Load", "Start", aPath)
+        If Policy.IgnoreSettingsFile = True Then
+            'basic new - add policy later
+            Return New Settings(False)
+        End If
         CheckExtract(aPath)
         Dim serializer As New XmlSerializer(GetType(Settings))
         Dim lOut As Settings

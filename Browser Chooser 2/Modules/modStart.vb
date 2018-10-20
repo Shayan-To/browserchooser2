@@ -5,6 +5,7 @@ Imports System.Security.Principal
 'Imports Microsoft.WindowsAPICodePack.Taskbar
 
 Module modStart
+    <Obsolete("Use Policy Merge")>
     Public gSettings As Settings
 #If DEBUG = True Then
 #If CONFIG = "Debug Update" Or CONFIG = "Debug Update and Pause" Then
@@ -19,7 +20,9 @@ Module modStart
     Public Const CurVersionDisplay As String = ""
 #End If
 
+    <Obsolete("Should no longer use this function. Go directly to correct screen")>
     Public Sub CheckForMigrateBeforeOptions(aScreen As frmOptions.SettingsStartPage)
+
         Logger.AddToLog("modStart.CheckForMigrateBeforeOptions", "Start", aScreen)
 #If Importer = True Then
         Logger.AddToLog("modStart.CheckForMigrateBeforeOptions", "Migration Enabled", aScreen.ToString)
@@ -52,6 +55,7 @@ Module modStart
         Application.Run(lFormToShow) 'terrible, but it works
     End Sub
 
+    <Obsolete("Should no longer use this function. Go directly to correct screen")>
     Public Sub CheckForMigrateBeforeLaunch()
         Logger.AddToLog("modStart.CheckForMigrateBeforeLaunch", "Start")
 #If Importer = True Then
@@ -108,7 +112,7 @@ Module modStart
         LoadSettings()
 
         'first things first, check for updates
-        If gSettings.AutomaticUpdates = True Then
+        If PolicyMerge.AutomaticUpdates = True Then
             Logger.AddToLog("modStart.ContinueMain", "Automatic Updates Enabled", aURL)
 #If CONFIG = "Debug Update" Or CONFIG = "Debug Update and Pause" Or Not DEBUG Then
             'update desiabled in debug unless debuggin updates
@@ -118,7 +122,7 @@ Module modStart
             Logger.AddToLog("modStart.ContinueMain", "Automatic Updates Disabled", aURL)
         End If
 
-        If gSettings.CheckDefaultOnLaunch = True And GeneralUtilities.IsRunningPost8 = False Then
+        If PolicyMerge.CheckDefaultOnLaunch = True And GeneralUtilities.IsRunningPost8 = False Then
             DefaultBrowser.CheckIfIsDefault()
         End If
 
@@ -128,7 +132,7 @@ Module modStart
 
         If aURL <> "" Then
             'ignore pattern match if no url provided
-            For Each lURL As URL In gSettings.URLs
+            For Each lURL As URL In PolicyMerge.URLs ' gSettings.URLs
                 If URLUtilities.MatchURLs(lURL.URL, aURL) Then
                     'load that browser
                     If lURL.DelayTime = 0 And lURL.AutoLoad = True Then
@@ -137,13 +141,13 @@ Module modStart
 
                     ElseIf lURL.DelayTime = -1 Then
                         'look at system setting
-                        If gSettings.DefaultDelay <= 0 Then
+                        If PolicyMerge.DefaultDelay <= 0 Then
                             lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
                             Exit For
                         Else
                             'launch mainscreen with delay
                             lBrowser = BrowserUtilities.GetBrowserByGUID(lURL.Guid)
-                            lDelay = gSettings.DefaultDelay
+                            lDelay = PolicyMerge.DefaultDelay
                         End If
                     Else
                         'launch mainscreen with delay
@@ -183,9 +187,11 @@ Module modStart
 #If CONFIG = "DebugPauseOnStart" Or CONFIG = "Debug Update and Pause" Then
         MsgBox("Paused to attach")
 #End If
+        'load policies
+        Policy.LoadPolicies()
 
         'check for log / extract BEFORE anything else
-        If (My.Application.CommandLineArgs.Count > 0) Then
+        If (My.Application.CommandLineArgs.Count > 0 And Policy.IgnoreCommandLine = False) Then
             For Each cmdLineOption As String In My.Application.CommandLineArgs
                 Logger.AddToLog("modStart.Main", "Start Processing Command Line", cmdLineOption)
 
@@ -220,136 +226,137 @@ Module modStart
                 Logger.AddToLog("modStart.Main", "Start Processing Command Line", cmdLineOption)
 
                 If cmdLineOption.StartsWith("--") Then
-                    Dim lbExit As Boolean = True
+                    If Policy.IgnoreCommandLine = False Then
+                        Dim lbExit As Boolean = True
 
-                    'special functions
-                    Select Case cmdLineOption.ToLower
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Uninstall) '  "--Uninstall"
-                            Logger.AddToLog("modStart.ContinueMain", "Remove All Keys")
-                            DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Reinstall) '  "--reinstall"
-                            'make default
-                            Logger.AddToLog("modStart.ContinueMain", "Make Default")
-                            DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser) 'will do HKCU only
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.HideIcons) ' "--hideicons"
+                        'special functions
+                        Select Case cmdLineOption.ToLower
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Uninstall) '  "--Uninstall"
+                                Logger.AddToLog("modStart.ContinueMain", "Remove All Keys")
+                                DefaultBrowser.RemoveAllKeys(DefaultBrowser.Scope.sUser)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Reinstall) '  "--reinstall"
+                                'make default
+                                Logger.AddToLog("modStart.ContinueMain", "Make Default")
+                                DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sUser) 'will do HKCU only
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.HideIcons) ' "--hideicons"
                         'undo default, and hide traces
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ShowIcons) '"--showicons"
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ShowIcons) '"--showicons"
                         'do default, but show traces
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FirstRun) '"--firstrun"
-                            're-run the start-up dialogs
-                            'TODO: first run dialog, including addeing IE and co and registering as a browser
-                            Logger.AddToLog("modStart.ContinueMain", "Launch Admin Mode")
-                            GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeAvailable)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadmin) ' "--testadmin"
-                            'debug purposes only
-                            Logger.AddToLog("modStart.ContinueMain", "Test Admin")
-                            Dim lCode As Integer = GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.Testadminint)
-                            MessageBox.Show("ExitCode: " + lCode.ToString)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadminint) '"--testadmin-int"
-                            MessageBox.Show("Admin mode launched")
-                            Environment.ExitCode = 1 'all good
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeAvailable) '"--makeavailable"
-                            Logger.AddToLog("modStart.ContinueMain", "Make Available")
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FirstRun) '"--firstrun"
+                                're-run the start-up dialogs
+                                'TODO: first run dialog, including addeing IE and co and registering as a browser
+                                Logger.AddToLog("modStart.ContinueMain", "Launch Admin Mode")
+                                GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.MakeAvailable)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadmin) ' "--testadmin"
+                                'debug purposes only
+                                Logger.AddToLog("modStart.ContinueMain", "Test Admin")
+                                Dim lCode As Integer = GeneralUtilities.LaunchAdminMode(GeneralUtilities.ListOfCommands.Testadminint)
+                                MessageBox.Show("ExitCode: " + lCode.ToString)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Testadminint) '"--testadmin-int"
+                                MessageBox.Show("Admin mode launched")
+                                Environment.ExitCode = 1 'all good
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeAvailable) '"--makeavailable"
+                                Logger.AddToLog("modStart.ContinueMain", "Make Available")
 #If CONFIG = "Debug Admin" Then
                         MsgBox("Paused to attach")
 #End If
-                            LoadSettings()
-                            DefaultBrowser.MakeAvailable(DefaultBrowser.Scope.sGlobal) ' used by admin mode, so is global
+                                LoadSettings()
+                                DefaultBrowser.MakeAvailable(DefaultBrowser.Scope.sGlobal) ' used by admin mode, so is global
 
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeDefault) ' "--makedefault"
-                            Logger.AddToLog("modStart.ContinueMain", "MakeDefault")
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.MakeDefault) ' "--makedefault"
+                                Logger.AddToLog("modStart.ContinueMain", "MakeDefault")
 #If CONFIG = "Debug Admin" Then
                         MsgBox("Paused to attach")
 #End If
-                            LoadSettings()
-                            DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sGlobal)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ApplyUpdate) ' "--applyupdate"
-                            Logger.AddToLog("modStart.ContinueMain", "ApplyUpdate")
-                            If My.Application.CommandLineArgs.Count > 1 Then
-                                Updater.ApplyUpdate(My.Application.CommandLineArgs.Item(1))
-                            Else
-                                Updater.ApplyUpdate("")
-                            End If
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FinishApplyUpdate) ' "--finishapplyupdate"
-                            Logger.AddToLog("modStart.ContinueMain", "Finish Apply Update")
-                            Updater.FinishApplyUpdate()
-                            lbExit = False
+                                LoadSettings()
+                                DefaultBrowser.MakeDefault(DefaultBrowser.Scope.sGlobal)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.ApplyUpdate) ' "--applyupdate"
+                                Logger.AddToLog("modStart.ContinueMain", "ApplyUpdate")
+                                If My.Application.CommandLineArgs.Count > 1 Then
+                                    Updater.ApplyUpdate(My.Application.CommandLineArgs.Item(1))
+                                Else
+                                    Updater.ApplyUpdate("")
+                                End If
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.FinishApplyUpdate) ' "--finishapplyupdate"
+                                Logger.AddToLog("modStart.ContinueMain", "Finish Apply Update")
+                                Updater.FinishApplyUpdate()
+                                lbExit = False
 #If CONFIG = "BuildDetectionFile" Then
                     Case Utility.AvailableCommands.Item(Utility.ListOfCommands.BuildDetectionFile)
                         DetectedBrowsers.ExportDetection()
                         MessageBox.Show("Detection file exported to ""C:\temp\DetectedBrowsers.xml""", "Browser Chooser 2 - Detection File Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End
 #End If
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings),
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.Settings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsBrowsers)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings / Settings = Browsers")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings / Settings = Browsers")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsBrowsers)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsAutoURLs),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsAutoURLs)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - Auto URLs")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - Auto URLs")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsAutoURLs)
 
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols),
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsProtocols),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsProtocols)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - Protocols")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - Protocols")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsProtocols)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsProtocols)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsFileTypes),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsFileTypes)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - FileTypes")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - FileTypes")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsFileTypes)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsCategories),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsCategories)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - Categories")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - Categories")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsCategories)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsCategories)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsSettings)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsSettings)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsSettings)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsMoreSettings),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsMoreSettings)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - More Settings")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - More Settings")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
-                        Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser),
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsMoreSettings)
+                            Case GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SettingsDefaultBrowser),
                         GeneralUtilities.AvailableCommands.Item(GeneralUtilities.ListOfCommands.SSettingsDefaultBrowser)
-                            Logger.AddToLog("modStart.ContinueMain", "Settings - Default")
+                                Logger.AddToLog("modStart.ContinueMain", "Settings - Default")
 
-                            LoadSettings()
-                            CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
-                    End Select
+                                LoadSettings()
+                                CheckForMigrateBeforeOptions(frmOptions.SettingsStartPage.SettingsDefaultBrowser)
+                        End Select
 
-                    If lbExit = True Then
-                        Logger.AddToLog("modStart.ContinueMain", "Exiting")
-                        Application.Exit()
-                    Else
-                        Logger.AddToLog("modStart.ContinueMain", "Update complete")
-                        'update complete! ready to go!
-                        If My.Application.CommandLineArgs.Count > 1 Then
-                            Logger.AddToLog("modStart.ContinueMain", "Using Last Args")
-                            ContinueMain(My.Application.CommandLineArgs.Last)
+                        If lbExit = True Then
+                            Logger.AddToLog("modStart.ContinueMain", "Exiting")
+                            Application.Exit()
                         Else
-                            Logger.AddToLog("modStart.ContinueMain", "No Args")
-                            ContinueMain("")
+                            Logger.AddToLog("modStart.ContinueMain", "Update complete")
+                            'update complete! ready to go!
+                            If My.Application.CommandLineArgs.Count > 1 Then
+                                Logger.AddToLog("modStart.ContinueMain", "Using Last Args")
+                                ContinueMain(My.Application.CommandLineArgs.Last)
+                            Else
+                                Logger.AddToLog("modStart.ContinueMain", "No Args")
+                                ContinueMain("")
+                            End If
+
+                            Exit For
                         End If
-
-                        Exit For
                     End If
-
                 Else
                     Logger.AddToLog("modStart.ContinueMain", "Only one Arg")
                     ContinueMain(cmdLineOption)
