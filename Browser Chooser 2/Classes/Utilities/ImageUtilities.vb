@@ -9,7 +9,7 @@ Public Class ImageUtilities
         If (Not String.IsNullOrEmpty(BrowserChoice.CustomImagePath)) Then
             'handles absolute or relative paths, 
             'Path.Combine(path1, path2): If path2 contains an absolute path, this method returns path2
-            Dim cImage As FileInfo = New FileInfo(Path.Combine(Application.StartupPath, BrowserChoice.CustomImagePath))
+            Dim cImage As FileInfo = New FileInfo(Path.Combine(Application.StartupPath, BrowserChoice.CustomImagePath.Replace("""", "").Trim()))
             If (cImage.Exists) Then
                 Try
                     Select Case cImage.Extension.ToUpper

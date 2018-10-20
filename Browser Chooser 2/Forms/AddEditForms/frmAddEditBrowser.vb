@@ -183,6 +183,13 @@
         End If
     End Sub
 
+    Private Sub cmdImageBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImageBrowse.Click
+        ofdBrowse.Filter = "Executables(*.exe)|*.exe|Image Files(*.bmp;*.ico;*.jpg;*.gif)|*.bmp;*.ico;*.jpg;*.gif|All files (*.*)|*.*"
+        If ofdBrowse.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            txtImagePath.Text = ofdBrowse.FileName
+        End If
+    End Sub
+
     Private Sub cmbStandard_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbStandard.SelectedIndexChanged
         If cmbStandard.Text <> "(Custom)" Then
             txtImagePath.Enabled = False
@@ -277,7 +284,7 @@
             End If
         Else
             If My.Computer.FileSystem.FileExists(txtImagePath.Text) = True Then
-                lResult = frmIcons.ChooseIcon(cmbTarget.Text, CInt(nudIconIndex.Value))
+                lResult = frmIcons.ChooseIcon(txtImagePath.Text, CInt(nudIconIndex.Value))
             End If
         End If
 
